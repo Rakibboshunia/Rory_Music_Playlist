@@ -4,11 +4,14 @@ const QuizContext = createContext();
 
 export function QuizProvider({ children }) {
   const [answers, setAnswers] = useState({
-    eventType: "",
-    eventDetails: "",
-    genres: [],
-    email: "",
-  });
+  eventType: "",
+  eventDetails: "",
+  genres: [],
+  musicImportance: "",
+  vibe: "",
+  email: "",
+});
+
 
   const updateAnswer = (key, value) => {
     setAnswers((prev) => ({

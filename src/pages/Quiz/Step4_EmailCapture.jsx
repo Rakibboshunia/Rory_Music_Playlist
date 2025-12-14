@@ -20,7 +20,7 @@ export default function Step4_EmailCapture() {
           <span>80% Complete</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full">
-          <div className="h-2 w-[80%] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+          <div className="h-2 w-4/5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export default function Step4_EmailCapture() {
 
           <button
             disabled={!answers.musicImportance}
-            onClick={() => navigate("/quiz/email")}
+            onClick={() => navigate("/quiz/final")}
             className={`px-6 py-2 rounded-full text-white
               ${
                 answers.musicImportance

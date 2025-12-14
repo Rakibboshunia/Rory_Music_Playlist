@@ -1,4 +1,5 @@
 import React from "react";
+import MusicLogo from "../../../assets/img/music-logo.png"
 
 export default function HeroSection() {
   return (
@@ -50,7 +51,7 @@ export default function HeroSection() {
 
         {/* RIGHT SECTION — Tilted Card */}
         <div className="flex justify-center lg:justify-end">
-          <div className="bg-white rounded-3xl shadow-2xl p-6 w-[380px] rotate-3">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 w-112 h-193 rotate-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl">🎵</div>
               
@@ -69,28 +70,56 @@ export default function HeroSection() {
             <p className="text-xs text-gray-400">30 tracks curated for your perfect evening</p>
 
             {/* Track list */}
-            <div className="mt-4 space-y-3">
-              <div className="flex items-center gap-3">
-                <img src="https://via.placeholder.com/45" className="rounded-lg" />
-                <div>
-                  <p className="font-medium text-sm">At Last</p>
-                  <p className="text-xs text-gray-500">Etta James</p>
+            <div className="mt-5 space-y-4">
+              {/* Track item */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={MusicLogo}
+                  alt="track"
+                  className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                />
+
+                <div className="min-w-0">
+                  <p className="font-medium text-sm text-gray-900 truncate">
+                    At Last
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    Etta James
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <img src="https://via.placeholder.com/45" className="rounded-lg" />
-                <div>
-                  <p className="font-medium text-sm">Can't Help Falling in Love</p>
-                  <p className="text-xs text-gray-500">Elvis Presley</p>
+              <div className="flex items-center gap-4">
+                <img
+                  src={MusicLogo}
+                  alt="track"
+                  className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                />
+
+                <div className="min-w-0">
+                  <p className="font-medium text-sm text-gray-900 truncate">
+                    Can't Help Falling in Love
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    Elvis Presley
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <img src="https://via.placeholder.com/45" className="rounded-lg" />
-                <div>
-                  <p className="font-medium text-sm">Wonderful Tonight</p>
-                  <p className="text-xs text-gray-500">Eric Clapton</p>
+              <div className="flex items-center gap-4">
+                <img
+                  src={MusicLogo}
+                  alt="track"
+                  className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                />
+
+                <div className="min-w-0">
+                  <p className="font-medium text-sm text-gray-900 truncate">
+                    Wonderful Tonight
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    Eric Clapton
+                  </p>
                 </div>
               </div>
             </div>
@@ -101,18 +130,35 @@ export default function HeroSection() {
       </div>
 
       {/* BOTTOM CURVE (ADDED HERE) */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
         <svg
-          viewBox="0 0 1440 320"
+          viewBox="0 135 1440 170"
           preserveAspectRatio="none"
-          className="w-full h-[180px]"
+          className="
+            w-full
+            h-[180px]
+            sm:h-[200px]
+            md:h-[260px]
+            lg:h-[275px]
+          "
         >
           <path
             fill="#ffffff"
-            d="M0,256L48,250.7C96,245,192,235,288,224C384,213,480,203,576,202.7C672,203,768,213,864,218.7C960,224,1056,224,1152,224C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          ></path>
+            d="
+              M0,175
+              C200,180 250,198 395,200
+              C600,198 1080,160 1580,225
+              L1440,240
+              L0,800000
+              Z
+            "
+          />
         </svg>
       </div>
+
+
+
+
 
     </section>
   );

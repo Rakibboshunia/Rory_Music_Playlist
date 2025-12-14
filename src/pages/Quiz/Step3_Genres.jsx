@@ -20,10 +20,13 @@ export default function Step3_Genres() {
   return (
     <div className="max-w-xl mx-auto px-6">
       {/* Progress */}
-      <div className="mb-6 text-center">
-        <p className="text-sm text-gray-500">Question 1 of 5</p>
-        <div className="h-2 bg-gray-200 rounded-full mt-2">
-          <div className="h-2 w-1/5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+      <div className="mb-6">
+        <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <span>Question 3 of 5</span>
+          <span>60% Complete</span>
+        </div>
+        <div className="h-2 bg-gray-200 rounded-full">
+          <div className="h-2 w-3/5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
       </div>
 
@@ -56,7 +59,7 @@ export default function Step3_Genres() {
 
         <button
           disabled={!answers.genres.length}
-          onClick={() => navigate("/quiz/email")}
+          onClick={() => navigate("/quiz/importance")}
           className={`px-6 py-2 rounded-full text-white
             ${
               answers.genres.length

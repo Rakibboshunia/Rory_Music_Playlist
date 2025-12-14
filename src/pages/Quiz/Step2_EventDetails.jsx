@@ -14,10 +14,13 @@ export default function Step2_EventDetails() {
   return (
     <div className="max-w-xl mx-auto px-6">
       {/* Progress */}
-      <div className="mb-6 text-center">
-        <p className="text-sm text-gray-500">Question 1 of 5</p>
-        <div className="h-2 bg-gray-200 rounded-full mt-2">
-          <div className="h-2 w-1/5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+      <div className="mb-6">
+        <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <span>Question 2 of 5</span>
+          <span>40% Complete</span>
+        </div>
+        <div className="h-2 bg-gray-200 rounded-full">
+          <div className="h-2 w-2/5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
       </div>
       
