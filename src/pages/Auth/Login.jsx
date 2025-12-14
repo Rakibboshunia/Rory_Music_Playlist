@@ -1,92 +1,185 @@
-import React, { useState } from "react";
-import AuthInput from "./components/AuthInput";
-import GradientButton from "../../components/GradientButton";
-import Divider from "./components/Divider";
-import SocialButton from "./components/SocialButton";
-import { login } from "../../api/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", password: "", remember: false });
-  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+
+  const [showReset, setShowReset] = useState(false);
+  const [step, setStep] = useState(1);
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  async function handleSubmit(e) {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-      await login({ email: form.email, password: form.password });
-      navigate("/"); // adjust: redirect after login
-    } catch (err) {
-      setError(err.message || "Login failed");
-    } finally {
-      setLoading(false);
+    login("demo@email.com");
+    navigate("/");
+  };
+
+  const validatePassword = () => {
+    const specialChar = /[!@#$%^&*]/;
+    if (password.length < 6) {
+      return "Password must be at least 6 characters";
     }
-  }
+    if (!specialChar.test(password)) {
+      return "Password must contain a special character";
+    }
+    if (password !== confirmPassword) {
+      return "Passwords do not match";
+    }
+    return "";
+  };
+
+  const handleResetNext = () => {
+    setError("");
+
+    if (step === 3) {
+      const err = validatePassword();
+      if (err) {
+        setError(err);
+        return;
+      }
+      // future: API call
+      setShowReset(false);
+      setStep(1);
+    } else {
+      setStep(step + 1);
+    }
+  };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-2">Welcome back!</h2>
-      <p className="text-sm text-gray-600 mb-6">Enter your Credentials to access your account</p>
+    <div className="w-full max-w-md mx-auto space-y-6">
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <AuthInput
-          label="Email address"
-          value={form.email}
-          onChange={(v) => setForm((s) => ({ ...s, email: v }))}
-          placeholder="Enter your email"
-          type="email"
-        />
+      {/* HEADER */}
+      <h1 className="text-3xl font-bold text-center mb-2">
+        Welcome back!
+      </h1>
+      <p className="text-gray-500 text-center mb-8">
+        Enter your credentials to access your account
+      </p>
 
+      {/* LOGIN FORM */}
+      <form onSubmit={handleLogin} className="space-y-5">
+
+        {/* Email */}
         <div>
-          <div className="flex justify-between items-center text-sm mb-1">
-            <label className="text-gray-700">Password</label>
-            <Link to="#" className="text-sm text-indigo-600">
-              forgot password
-            </Link>
-          </div>
-          <AuthInput
-            label=""
-            value={form.password}
-            onChange={(v) => setForm((s) => ({ ...s, password: v }))}
-            placeholder="Enter password"
-            type="password"
+          <label className="block text-sm font-medium mb-1">
+            Email Address
+          </label>
+          <input
+            type="email"
+            className="w-full border rounded-lg px-4 py-3"
+            placeholder="Enter your email"
+            required
           />
         </div>
 
-        <div className="flex items-center gap-2 text-sm">
+        {/* Password */}
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Password
+          </label>
           <input
-            id="remember"
-            type="checkbox"
-            checked={form.remember}
-            onChange={(e) => setForm((s) => ({ ...s, remember: e.target.checked }))}
-            className="w-4 h-4 rounded border-gray-300"
+            type="password"
+            className="w-full border rounded-lg px-4 py-3"
+            placeholder="Enter your password"
+            required
           />
-          <label htmlFor="remember" className="text-gray-600">
+        </div>
+
+        {/* Remember + Forgot */}
+        <div className="flex justify-between text-sm">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" />
             Remember for 30 days
           </label>
+
+          <button
+            type="button"
+            onClick={() => setShowReset(true)}
+            className="text-blue-600"
+          >
+            Forgot password?
+          </button>
         </div>
 
-        {error && <div className="text-sm text-red-600">{error}</div>}
-
-        <GradientButton text={loading ? "Logging in..." : "Login"} full type="submit" />
-
-        <Divider label="or" />
-
-        <div className="flex gap-3">
-          <SocialButton provider="google" onClick={() => alert("Google sign in (implement)")} />
-          <SocialButton provider="apple" onClick={() => alert("Apple sign in (implement)")} />
-        </div>
-
-        <div className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <Link to="/auth/signup" className="text-indigo-600 font-medium">
-            Sign Up
-          </Link>
-        </div>
+        <button className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold">
+          Login
+        </button>
       </form>
+
+      <p className="text-sm text-center mt-6">
+        Don’t have an account?{" "}
+        <Link to="/signup" className="text-blue-600 font-medium">
+          Sign Up
+        </Link>
+      </p>
+
+      {/* RESET PASSWORD MODAL */}
+      {showReset && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-sm">
+            <h3 className="text-lg font-semibold mb-4">
+              Reset Password
+            </h3>
+
+            {/* STEP 1 */}
+            {step === 1 && (
+              <input
+                className="w-full border rounded-lg px-4 py-3"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            )}
+
+            {/* STEP 2 */}
+            {step === 2 && (
+              <input
+                className="w-full border rounded-lg px-4 py-3"
+                placeholder="Enter OTP sent to email"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+            )}
+
+            {/* STEP 3 */}
+            {step === 3 && (
+              <div className="space-y-3">
+                <input
+                  type="password"
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="New password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                  type="password"
+                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+            )}
+
+            {error && (
+              <p className="text-red-500 text-sm mt-2">{error}</p>
+            )}
+
+            <button
+              onClick={handleResetNext}
+              className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white"
+            >
+              {step === 3 ? "Change Password" : "Next"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

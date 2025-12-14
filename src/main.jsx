@@ -1,11 +1,14 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/router";
+import { QuizProvider } from "./context/QuizContext";
+import { AuthProvider } from "./context/AuthContext";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <AuthProvider>
+    <QuizProvider>
+      <RouterProvider router={router} />
+    </QuizProvider>
+  </AuthProvider>
 );

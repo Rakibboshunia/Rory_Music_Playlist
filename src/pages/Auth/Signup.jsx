@@ -1,89 +1,90 @@
-import React, { useState } from "react";
-import AuthInput from "./components/AuthInput";
-import GradientButton from "../../components/GradientButton";
-import Divider from "./components/Divider";
-import SocialButton from "./components/SocialButton";
-import { signup } from "../../api/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "", agree: false });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { signup } = useAuth();
 
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-    if (!form.agree) return setError("You must accept terms & policy.");
-    setLoading(true);
-    try {
-      // placeholder api call, replace with real backend
-      await signup({ name: form.name, email: form.email, password: form.password });
-      navigate("/auth/login");
-    } catch (err) {
-      setError(err.message || "Signup failed");
-    } finally {
-      setLoading(false);
-    }
-  }
+    signup("demo@email.com");
+    navigate("/login");
+  };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6">Get Started Now</h2>
+    <div className="w-full max-w-md mx-auto space-y-6">
+      {/* TITLE – TOP CENTER */}
+      <h2 className="text-3xl font-bold mb-8 text-center">
+        Get Started Now
+      </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <AuthInput
-          label="Name"
-          value={form.name}
-          onChange={(v) => setForm((s) => ({ ...s, name: v }))}
-          placeholder="Enter your name"
-        />
-        <AuthInput
-          label="Email address"
-          value={form.email}
-          onChange={(v) => setForm((s) => ({ ...s, email: v }))}
-          placeholder="Enter your email"
-          type="email"
-        />
-        <AuthInput
-          label="Password"
-          value={form.password}
-          onChange={(v) => setForm((s) => ({ ...s, password: v }))}
-          placeholder="Enter password"
-          type="password"
-        />
+      <form onSubmit={handleSubmit} className="space-y-5">
 
-        <div className="flex items-center gap-2 text-sm">
-          <input
-            id="agree"
-            type="checkbox"
-            checked={form.agree}
-            onChange={(e) => setForm((s) => ({ ...s, agree: e.target.checked }))}
-            className="w-4 h-4 rounded border-gray-300"
-          />
-          <label htmlFor="agree" className="text-gray-600">
-            I agree to the <span className="text-indigo-600">terms & policy</span>
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Name
           </label>
+          <input
+            type="text"
+            className="w-full border rounded-lg px-4 py-3"
+            placeholder="Enter your name"
+            required
+          />
         </div>
 
-        {error && <div className="text-sm text-red-600">{error}</div>}
-
-        <GradientButton text={loading ? "Signing up..." : "Signup"} full type="submit" />
-
-        <Divider label="or" />
-
-        <div className="flex gap-3">
-          <SocialButton provider="google" onClick={() => alert("Google sign in (implement)")} />
-          <SocialButton provider="apple" onClick={() => alert("Apple sign in (implement)")} />
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Email Address
+          </label>
+          <input
+            type="email"
+            className="w-full border rounded-lg px-4 py-3"
+            placeholder="Enter your email"
+            required
+          />
         </div>
 
-        <div className="text-center text-sm text-gray-600 mt-4">
+        {/* Password */}
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            className="w-full border rounded-lg px-4 py-3"
+            placeholder="Create a password"
+            required
+          />
+        </div>
+
+        {/* Terms & Policy */}
+        <div className="flex items-start gap-2 text-sm">
+          <input type="checkbox" required className="mt-1" />
+          <span>
+            I agree to the{" "}
+            <span className="text-blue-600 cursor-pointer">
+              Terms & Policy
+            </span>
+          </span>
+        </div>
+
+        {/* SIGN UP BUTTON */}
+        <button
+          type="submit"
+          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium"
+        >
+          Sign Up
+        </button>
+
+        {/* LOGIN LINK */}
+        <p className="text-sm text-center mt-4">
           Have an account?{" "}
-          <Link to="/auth/login" className="text-indigo-600 font-medium">
-            Sign In
+          <Link to="/login" className="text-blue-600 font-medium">
+            Sign in
           </Link>
-        </div>
+        </p>
       </form>
     </div>
   );

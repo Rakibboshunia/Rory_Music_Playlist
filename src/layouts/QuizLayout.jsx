@@ -1,19 +1,18 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import ProgressBar from "../components/ProgressBar";
+
+import AwardsSection from "../pages/home/components/AwardsSection";
+import TestimonialsSection from "../pages/home/components/TestimonialsSection";
+import CTASection from "../pages/home/components/CTASection";
 
 export default function QuizLayout() {
   return (
-    <div className="min-h-screen bg-white px-4 py-10">
-      {/* Optional shared quiz header or progress bar */}
-      
-      <div className="max-w-3xl mx-auto">
-        <ProgressBar />
+    <div className="pt-28 bg-gradient-to-b from-[#F6F4FF] to-white">
+      <Outlet />
 
-        <div className="mt-8">
-          <Outlet />
-        </div>
-      </div>
+      {/* Figma required sections */}
+      <AwardsSection />
+      <TestimonialsSection />
+      <CTASection />
     </div>
   );
 }

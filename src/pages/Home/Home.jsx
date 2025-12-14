@@ -31,8 +31,7 @@ export default function Home() {
         <CTASection />
       </section>
 
-      {/* small footer spacer */}
-      <div className="h-12" />
+
     </div>
   );
 }
