@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import AudioPlayerBar from "./components/AudioPlayerBar";
-
 
 // 🔊 TEMP DEMO TRACKS (API replace later)
 const demoTracks = [
@@ -43,8 +41,6 @@ const demoTracks = [
     audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
   },
 ];
-
-
 
 export default function PlaylistResult() {
   const { answers } = useQuiz();
