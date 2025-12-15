@@ -30,6 +30,7 @@ export default function Step3_Genres() {
         </div>
       </div>
 
+      <div className="bg-white rounded-2xl shadow p-6 space-y-4">
       <h2 className="text-lg font-semibold text-center mb-6">
         Select your preferred genres
       </h2>
@@ -67,8 +68,9 @@ export default function Step3_Genres() {
                 : "bg-gray-300 cursor-not-allowed"
             }`}
         >
-          Next →
-        </button>
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );

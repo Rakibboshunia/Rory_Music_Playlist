@@ -1,27 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../context/QuizContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Step5_FinalQuestion() {
-  const { answers, updateAnswer } = useQuiz();
   const navigate = useNavigate();
+  const { answers, updateAnswer } = useQuiz();
+  const { isAuthenticated } = useAuth();
 
   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const options = ["Chill", "Romantic", "High Energy", "Luxury"];
 
+  // 🔥 FINAL DECISION LOGIC
   const handleComplete = () => {
-    setShowEmailModal(true);
+    if (!isAuthenticated) {
+      setShowEmailModal(true); // guest
+    } else {
+      setShowUpgradeModal(true); // logged in
+    }
   };
 
+  // EMAIL SUBMIT (Guest)
   const submitEmail = (e) => {
     e.preventDefault();
     setLoading(true);
 
     setTimeout(() => {
       navigate("/playlist");
-    }, 1200);
+    }, 1000);
   };
 
   return (
@@ -81,7 +90,7 @@ export default function Step5_FinalQuestion() {
         </div>
       </div>
 
-      {/* 🔥 EMAIL MODAL (STEP-6) */}
+      {/* ================= EMAIL MODAL (Guest) ================= */}
       {showEmailModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className="bg-white rounded-2xl p-6 w-full max-w-md relative">
@@ -99,7 +108,7 @@ export default function Step5_FinalQuestion() {
               <h3 className="text-xl font-semibold">
                 Get your personalised playlist
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500">
                 Pop in your email to unlock your soundtrack
               </p>
             </div>
@@ -114,7 +123,7 @@ export default function Step5_FinalQuestion() {
                 className="w-full border rounded-lg px-4 py-3"
               />
 
-              <label className="flex items-start gap-2 text-xs text-gray-500">
+              <label className="flex gap-2 text-xs text-gray-500">
                 <input type="checkbox" required />
                 I agree to receive my playlist & updates.
               </label>
@@ -131,11 +140,41 @@ export default function Step5_FinalQuestion() {
               >
                 {loading ? "Generating..." : "Reveal My Playlist"}
               </button>
-
-              <p className="text-[11px] text-gray-400 text-center">
-                We respect your privacy. Data is never shared.
-              </p>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= UPGRADE MODAL (Logged in) ================= */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md text-center relative">
+            <button
+              onClick={() => setShowUpgradeModal(false)}
+              className="absolute top-4 right-4 text-gray-400"
+            >
+              ✕
+            </button>
+
+            <h3 className="text-xl font-semibold mb-4">
+              Do you want to upgrade your status?
+            </h3>
+
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => navigate("/playlist")}
+                className="px-6 py-2 rounded-full border"
+              >
+                No
+              </button>
+
+              <button
+                onClick={() => navigate("/upgrade")}
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+              >
+                Yes
+              </button>
+            </div>
           </div>
         </div>
       )}

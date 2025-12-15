@@ -1,15 +1,22 @@
 import React from "react";
 import MusicLogo from "../../../assets/img/music-logo.png"
+import HeroCurve from "../../../assets/img/Container.png";
+
 
 export default function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden pt-32 pb-40"
-      style={{
-        background:
-          "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
-      }}
-    >
+  className="
+    relative overflow-hidden
+    pt-28 sm:pt-32
+    pb-[140px] sm:pb-[180px] md:pb-[220px] lg:pb-[260px]
+  "
+  style={{
+    background:
+      "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
+  }}
+>
+
       {/* Decorative blurred squares */}
       <div className="absolute top-36 right-56 w-20 h-20 rounded-xl border border-white/30 backdrop-blur-md opacity-40"></div>
       <div className="absolute bottom-20 right-28 w-24 h-24 rounded-xl border border-white/30 backdrop-blur-md opacity-40"></div>
@@ -17,7 +24,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         
         {/* LEFT SECTION */}
-        <div className="text-white max-w-xl">
+        <div className="text-white max-w-xl lg:max-w-2xl">
           <h1 className="text-5xl leading-tight font-extrabold">
             What's your night's soundtrack?
           </h1>
@@ -39,19 +46,21 @@ export default function HeroSection() {
 
           {/* Mood Icons */}
           <div className="mt-8 flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-yellow-400"></div>
-              <div className="w-8 h-8 rounded-full bg-pink-400"></div>
-              <div className="w-8 h-8 rounded-full bg-blue-300"></div>
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-yellow-400 border-2 border-white z-10"></div>
+
+              <div className="-ml-2 w-10 h-10 rounded-full bg-pink-400 border-2 border-white z-20"></div>
+
+              <div className="-ml-2 w-10 h-10 rounded-full bg-blue-300 border-2 border-white z-30"></div>
             </div>
 
-            <span className="text-white/80 text-sm">2,500+ playlists created</span>
+            <span className="text-white/80 text-md">2,500+ playlists created</span>
           </div>
         </div>
 
         {/* RIGHT SECTION — Tilted Card */}
         <div className="flex justify-center lg:justify-end">
-          <div className="bg-white rounded-3xl shadow-2xl p-8 w-112 h-193 rotate-4">
+         <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10 h-auto w-[320px] md:w-[380px] lg:w-[400px] rotate-5 md:rotate-5 lg:rotate-5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl">🎵</div>
               
@@ -72,22 +81,17 @@ export default function HeroSection() {
             {/* Track list */}
             <div className="mt-5 space-y-4">
               {/* Track item */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <img
                   src={MusicLogo}
-                  alt="track"
-                  className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                  className="w-[44px] h-[44px] rounded-lg shrink-0"
                 />
-
                 <div className="min-w-0">
-                  <p className="font-medium text-sm text-gray-900 truncate">
-                    At Last
-                  </p>
-                  <p className="text-xs text-gray-500 truncate">
-                    Etta James
-                  </p>
+                  <p className="font-medium text-sm truncate">At Last</p>
+                  <p className="text-xs text-gray-500 truncate">Etta James</p>
                 </div>
               </div>
+
 
               <div className="flex items-center gap-4">
                 <img
@@ -130,34 +134,25 @@ export default function HeroSection() {
       </div>
 
       {/* BOTTOM CURVE (ADDED HERE) */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg
-          viewBox="0 135 1440 170"
-          preserveAspectRatio="none"
-          className="
-            w-full
-            h-[180px]
-            sm:h-[200px]
-            md:h-[260px]
-            lg:h-[275px]
-          "
-        >
-          <path
-            fill="#ffffff"
-            d="
-              M0,175
-              C200,180 250,198 395,200
-              C600,198 1080,160 1580,225
-              L1440,240
-              L0,800000
-              Z
-            "
-          />
-        </svg>
-      </div>
-
-
-
+      <img
+        src={HeroCurve}
+        alt="curve"
+        className="
+          absolute
+          bottom-0
+          left-0
+          w-full
+          z-10
+          pointer-events-none
+          select-none
+          mt-40
+          h-[110px]
+          sm:h-[150px]
+          md:h-[200px]
+          lg:h-[250px]
+          xl:h-[300px]
+        "
+      />
 
 
     </section>

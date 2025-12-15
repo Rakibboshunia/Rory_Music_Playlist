@@ -24,6 +24,7 @@ export default function Step2_EventDetails() {
         </div>
       </div>
       
+      <div className="bg-white rounded-2xl shadow p-6 space-y-4">
       <h2 className="text-lg font-semibold text-center mb-6">
         Tell us about your event size
       </h2>
@@ -61,8 +62,9 @@ export default function Step2_EventDetails() {
                 : "bg-gray-300 cursor-not-allowed"
             }`}
         >
-          Next →
-        </button>
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );

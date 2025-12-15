@@ -2,7 +2,7 @@ import React from "react";
 
 export default function FeaturesSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-25 bg-white">
       <div className="max-w-5xl mx-auto text-center px-6">
         
         {/* TITLE */}
@@ -48,8 +48,8 @@ export default function FeaturesSection() {
       </div>
 
       {/* CTA BUTTON */}
-      <div className="flex justify-center mt-14">
-        <button className="px-10 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2">
+      <div className="flex justify-center mt-15">
+        <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2">
           Find My Soundtrack 🎵
         </button>
       </div>
