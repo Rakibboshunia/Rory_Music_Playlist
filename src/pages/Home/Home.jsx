@@ -1,3 +1,4 @@
+
 import React from "react";
 import HeroSection from "./components/HeroSection";
 import FeaturesSection from "./components/FeaturesSection";
@@ -30,8 +31,7 @@ export default function Home() {
       <section className="mt-16">
         <CTASection />
       </section>
-
-
+      
     </div>
   );
 }
