@@ -1,4 +1,7 @@
 import React from "react";
+import rsvp from "../../assets/img/rsvp.jpg";
+import wedding from "../../assets/img/wedding.jpg";
+import wedding25 from "../../assets/img/wedding25.jpg";
 
 export default function AwardsSection() {
   return (
@@ -20,19 +23,19 @@ export default function AwardsSection() {
 
         {/* Award 1 */}
         <AwardCard
-          img="../../../assets/rsvp.jpg"
+          img={rsvp}
           title="RSVP Awards 2023"
         />
 
         {/* Award 2 */}
         <AwardCard
-          img="../../../assets/wedding.jpg"
+          img={wedding}
           title="Weddingsuppliers Awards 2024"
         />
 
         {/* Award 3 */}
         <AwardCard
-          img="../../../assets/wedding25.jpg"
+          img={wedding25}
           title="Wedding Awards 2025"
         />
       </div>

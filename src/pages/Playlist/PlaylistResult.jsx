@@ -1,89 +1,74 @@
-import { useState } from "react";
-import { useQuiz } from "../../context/QuizContext";
+import React from "react";
+import PlaylistAccordion from "./components/PlaylistAccordion";
+import AudioPlayerBar from "./components/AudioPlayerBar";
+
+// 🔽 existing Home components reuse (NO new file)
+import TestimonialsSection from "../Home/components/TestimonialsSection";
+import CTASection from "../Home/components/CTASection";
+import AwardsSection from "../Home/components/AwardsSection";
 
 export default function PlaylistResult() {
-  const { answers } = useQuiz();
-  const [openId, setOpenId] = useState(null);
-
-  const demoTracks = [
-    {
-      id: 1,
-      title: "At Last",
-      artist: "Etta James",
-      audio:
-        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    },
-    {
-      id: 2,
-      title: "Wonderful Tonight",
-      artist: "Eric Clapton",
-      audio:
-        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    },
-    {
-      id: 3,
-      title: "Can't Help Falling in Love",
-      artist: "Elvis Presley",
-      audio:
-        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    },
-  ];
-
   return (
-    <div className="max-w-4xl mx-auto pt-32 px-6">
-      <h1 className="text-3xl font-bold mb-2">
-        Classic Romance Collection
-      </h1>
+    <div className="bg-gradient-to-b from-[#F6F8FF] to-[#FBF6FF]">
 
-      <p className="text-gray-500 mb-8">
-        {answers.eventType}
-        {answers.musicImportance && ` · ${answers.musicImportance}`}
-        {answers.genres?.length > 0 && ` · ${answers.genres.join(", ")}`}
-      </p>
-      
-      {/* PLAYLIST ACCORDION */}
-      <div className="bg-white rounded-2xl shadow divide-y">
-        {demoTracks.map((track) => {
-          const open = openId === track.id;
+      {/* ===== PLAYLIST AREA ===== */}
+      <div className="min-h-screen py-16">
+        <div className="max-w-3xl mx-auto px-6">
 
-          return (
-            <div key={track.id} className="p-4">
-              <button
-                onClick={() =>
-                  setOpenId(open ? null : track.id)
-                }
-                className="w-full flex justify-between items-center text-left"
-              >
-                <div>
-                  <p className="font-medium">{track.title}</p>
-                  <p className="text-sm text-gray-500">
-                    {track.artist}
-                  </p>
-                </div>
+          {/* TOP BADGE */}
+          <div className="flex justify-center mb-4">
+            <span className="px-4 py-1 text-sm rounded-full bg-white shadow">
+              ✨ Your personalised soundtrack is ready
+            </span>
+          </div>
 
-                <span className="text-xl">
-                  {open ? "−" : "+"}
-                </span>
-              </button>
+          {/* TITLE */}
+          <h1 className="text-4xl font-semibold text-center">
+            Classic Romance Collection
+          </h1>
 
-              {open && (
-                <div className="mt-4">
-                  <audio controls className="w-full">
-                    <source src={track.audio} type="audio/mpeg" />
-                  </audio>
-                </div>
-              )}
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            A sophisticated blend of timeless classics and elegant melodies.
+            Perfect for creating those unforgettable moments.
+          </p>
+
+          {/* HEADER ROW */}
+          <div className="flex items-center justify-between mt-10 mb-4">
+            <div>
+              <h3 className="font-medium">Your Play list</h3>
+              <p className="text-xs text-gray-500">
+                Here's the soundtrack crafted just for your event.
+              </p>
             </div>
-          );
-        })}
+
+            <button className="px-4 py-2 text-sm rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              + Create Play list
+            </button>
+          </div>
+
+          {/* ACCORDION */}
+          <PlaylistAccordion />
+
+          {/* AUDIO PLAYER (GLOBAL) */}
+          <AudioPlayerBar />
+        </div>
       </div>
 
-      {/* UPGRADE CTA */}
-      <div className="mt-10 text-center">
-        <button className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-          Upgrade to Unlock Full Playlist
-        </button>
-      </div>
+      {/* ===== AWARDS (ADDED) ===== */}
+      <section className="mt-24">
+        <AwardsSection />
+      </section>
+
+      {/* ===== TESTIMONIALS (ADDED) ===== */}
+      <section className="mt-24">
+        <TestimonialsSection />
+      </section>
+
+      {/* ===== CTA (ADDED) ===== */}
+      <section className="mt-20 pb-24">
+        <CTASection />
+      </section>
+
     </div>
   );
 }

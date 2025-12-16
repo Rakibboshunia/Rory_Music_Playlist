@@ -2,21 +2,21 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-5 pt-1 pb-10 bg-white">
       <div className="max-w-5xl mx-auto text-center px-6">
         
         {/* Title */}
-        <h2 className="text-4xl font-bold leading-tight">
+        <h2 className="text-5xl font-semibold leading-tight">
           Real Stories. Real Moments. <br /> Real Magic.
         </h2>
 
-        <p className="mt-3 text-gray-500">
+        <p className="mt-3 text-gray-600">
           Personalised playlists that shaped unforgettable celebrations.
         </p>
       </div>
 
       {/* TESTIMONIAL CARDS */}
-      <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="py-5 max-w-7xl mx-auto mt-16 px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         
         <TestimonialCard
           text="Perfectly personalised for our wedding — absolutely loved it!"
@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
 
 function TestimonialCard({ text, img, name, role }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-8 hover:shadow-xl transition border border-gray-100">
+    <div className="bg-white rounded-2xl shadow-md p-10 hover:shadow-2xl transition border border-gray-100">
       
       <div className="flex text-yellow-400 mb-4 text-xl">
         ★★★★★

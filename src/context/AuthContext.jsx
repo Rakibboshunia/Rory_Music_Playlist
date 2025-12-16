@@ -1,32 +1,33 @@
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // null = not logged in
-
-  const signup = (email) => {
-    // future: API call
-    setUser({ email, signedUp: true });
-  };
+  const [user, setUser] = useState(null);
 
   const login = (email) => {
-    setUser({ email, signedUp: true });
+    setUser({ email });
   };
 
-  const logout = () => {
-    setUser(null);
+  const signup = (email) => {
+    setUser({ email });
   };
+
+  const logout = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ user, signup, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated: !!user,
+        login,
+        signup,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
-  return ctx;
-};
+export const useAuth = () => useContext(AuthContext);

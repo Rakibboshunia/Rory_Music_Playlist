@@ -14,7 +14,8 @@ import Step1_EventType from "../pages/Quiz/Step1_EventType";
 import Step2_EventDetails from "../pages/Quiz/Step2_EventDetails";
 import Step3_Genres from "../pages/Quiz/Step3_Genres";
 import Step4_EmailCapture from "../pages/Quiz/Step4_EmailCapture";
-import Step5_Email from "../pages/Quiz/Step5_Email";
+import Step5_FinalQuestion from "../pages/Quiz/Step5_FinalQuestion";
+
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
           { path: "details", element: <Step2_EventDetails /> },
           { path: "genres", element: <Step3_Genres /> },
           { path: "importance", element: <Step4_EmailCapture /> },
-          { path: "email", element: <Step5_Email /> },
+          { path: "final", element: <Step5_FinalQuestion /> },
         ],
       },
 

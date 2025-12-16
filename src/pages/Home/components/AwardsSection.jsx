@@ -1,12 +1,15 @@
 import React from "react";
+import rsvp from "../../../assets/img/rsvp.jpg"
+import wedding from "../../../assets/img/wedding.jpg"
+import wedding25 from "../../../assets/img/wedding25.jpg"
 
 export default function AwardsSection() {
   return (
-    <section className="py-24 bg-[#F4F7FF]">
+    <section className="py-24 bg-[#F4F8FE]">
       <div className="max-w-5xl mx-auto text-center px-6">
 
         {/* Title */}
-        <h2 className="text-4xl font-bold leading-tight">
+        <h2 className="text-5xl font-bold leading-tight">
           Award-Winning <br /> Entertainment Excellence
         </h2>
 
@@ -20,19 +23,19 @@ export default function AwardsSection() {
 
         {/* Award 1 */}
         <AwardCard
-          img="../../../assets/rsvp.jpg"
+          img={rsvp}
           title="RSVP Awards 2023"
         />
 
         {/* Award 2 */}
         <AwardCard
-          img="../../../assets/wedding.jpg"
+          img={wedding}
           title="Weddingsuppliers Awards 2024"
         />
 
         {/* Award 3 */}
         <AwardCard
-          img="../../../assets/wedding25.jpg"
+          img={wedding25}
           title="Wedding Awards 2025"
         />
       </div>
