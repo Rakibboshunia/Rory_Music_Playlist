@@ -5,7 +5,11 @@ export default function FeaturesSection() {
   const navigate = useNavigate();
 
   return (
+<<<<<<< HEAD
     <section className="py-16 sm:py-20 bg-white">
+=======
+    <section className="py-25 bg-white">
+>>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
       <div className="max-w-5xl mx-auto text-center px-6">
         
         {/* TITLE */}
@@ -54,12 +58,18 @@ export default function FeaturesSection() {
         />
       </div>
 
+<<<<<<< HEAD
       {/* CTA */}
       <div className="flex justify-center mt-10">
         <button
           onClick={() => navigate("/quiz")}
           className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2"
         >
+=======
+      {/* CTA BUTTON */}
+      <div className="flex justify-center mt-15">
+        <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2">
+>>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
           Find My Soundtrack 🎵
         </button>
       </div>

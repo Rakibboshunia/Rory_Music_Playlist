@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 import AwardsSection from "../pages/home/components/AwardsSection";
 import TestimonialsSection from "../pages/home/components/TestimonialsSection";
 import CTASection from "../pages/home/components/CTASection";
