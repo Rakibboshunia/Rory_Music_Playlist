@@ -21,7 +21,7 @@ const playlists = [
       },
       {
         id: 3,
-        title: "Just like Heaven",
+        title: "Just Like Heaven",
         artist: "Smithereens",
         src: "/demo/audio2.mp3",
       },
@@ -76,25 +76,25 @@ const playlists = [
     ],
   },
   {
-    title: "Your Play list",
+    title: "Your Playlist",
     subtitle: "Here's the soundtrack crafted just for your event.",
     tracks: [
       {
         id: 1,
-        title: "Careless Whisper",
-        artist: "George Michael",
+        title: "Perfect",
+        artist: "Ed Sheeran",
         src: "/demo/audio1.mp3",
       },
       {
         id: 2,
-        title: "Last Christmas",
-        artist: "Wham!",
+        title: "All of Me",
+        artist: "John Legend",
         src: "/demo/audio1.mp3",
       },
       {
         id: 3,
-        title: "Faith",
-        artist: "George Michael",
+        title: "Thinking Out Loud",
+        artist: "Ed Sheeran",
         src: "/demo/audio1.mp3",
       },
     ],
@@ -102,37 +102,35 @@ const playlists = [
 ];
 
 export default function PlaylistAccordion() {
-  // 🔥 1st playlist open by default
+  // 🔥 First playlist open by default
   const [activeIndex, setActiveIndex] = useState(0);
   const { playTrack } = useAudioPlayer();
 
-  // 🔥 AUTO-PLAY first track when playlist opens
+  // 🔥 Auto-play first track when playlist opens
   useEffect(() => {
     const playlist = playlists[activeIndex];
     if (!playlist || !playlist.tracks.length) return;
 
     playTrack(
-      playlist.tracks[0],   // first track
-      playlist.tracks,      // full playlist
-      activeIndex + 1       // playlistId (matches PlaylistCard index)
+      playlist.tracks[0], // first track
+      playlist.tracks,    // full playlist
+      activeIndex + 1     // playlist id
     );
   }, [activeIndex, playTrack]);
 
-  const handleToggle = (index) => {
-    setActiveIndex(index);
-  };
-
   return (
     <div className="space-y-4">
-      {playlists.map((list, i) => (
+      {playlists.map((playlist, index) => (
         <PlaylistCard
-          key={i}
-          index={i + 1}
-          title={list.title}
-          subtitle={list.subtitle}
-          tracks={list.tracks}
-          isOpen={activeIndex === i}
-          onToggle={() => handleToggle(i)}
+          key={index}
+          index={index + 1}
+          title={playlist.title}
+          subtitle={playlist.subtitle}
+          tracks={playlist.tracks}
+          isOpen={activeIndex === index}
+          onToggle={() =>
+            setActiveIndex(activeIndex === index ? null : index)
+          }
         />
       ))}
     </div>

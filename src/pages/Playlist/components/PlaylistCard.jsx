@@ -3,7 +3,7 @@ import { useAudioPlayer } from "../../../context/AudioPlayerContext";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
 
-// 🔥 COVER IMAGE
+// cover image
 import coverImg from "../../../assets/img/playlist.png";
 
 export default function PlaylistCard({
@@ -19,11 +19,10 @@ export default function PlaylistCard({
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
-
-      {/* 🔽 HEADER (CLICKABLE) */}
+      {/* HEADER */}
       <div
-        className="mb-4 flex items-start justify-between cursor-pointer select-none"
         onClick={onToggle}
+        className="mb-4 flex items-start justify-between cursor-pointer select-none"
       >
         <div>
           <p className="font-medium">
@@ -32,18 +31,16 @@ export default function PlaylistCard({
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 
-        {/* ARROW */}
         <span
-          className={`
-            transition-transform duration-300 ease-in-out
-            ${isOpen ? "rotate-180" : ""}
-          `}
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         >
           ⌄
         </span>
       </div>
 
-      {/* 🔒 ANIMATED ACCORDION CONTENT */}
+      {/* ACCORDION BODY */}
       <div
         className={`
           grid transition-all duration-500 ease-in-out
@@ -51,8 +48,7 @@ export default function PlaylistCard({
         `}
       >
         <div className="overflow-hidden">
-
-          {/* 🎵 COVER IMAGE */}
+          {/* COVER IMAGE */}
           <div className="rounded-xl overflow-hidden">
             <img
               src={coverImg}
@@ -61,10 +57,9 @@ export default function PlaylistCard({
             />
           </div>
 
-          {/* 🔁 BELOW COVER */}
+          {/* PLAYER / STATS */}
           <div className="bg-white">
-
-            {/* 🟣 STATS (active + before play) */}
+            {/* STATS (before play) */}
             {isActive && !isPlaying && (
               <div className="flex justify-between text-center py-4 text-sm text-gray-700">
                 <div>
@@ -72,7 +67,7 @@ export default function PlaylistCard({
                   <p className="text-xs text-gray-400">Tracks</p>
                 </div>
                 <div>
-                  <p className="font-semibold">1h</p>
+                  <p className="font-semibold">~1h</p>
                   <p className="text-xs text-gray-400">Duration</p>
                 </div>
                 <div>
@@ -82,11 +77,11 @@ export default function PlaylistCard({
               </div>
             )}
 
-            {/* 🔵 PLAYER (active + playing) */}
+            {/* PLAYER (while playing) */}
             {isActive && isPlaying && <PlaylistPlayer />}
           </div>
 
-          {/* 🎶 TRACK LIST */}
+          {/* TRACK LIST */}
           <div className="mt-4 space-y-3">
             {tracks.map((track) => (
               <TrackRow
@@ -97,7 +92,6 @@ export default function PlaylistCard({
               />
             ))}
           </div>
-
         </div>
       </div>
     </div>

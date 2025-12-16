@@ -2,13 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function FeaturesSection() {
-
   const navigate = useNavigate();
 
   return (
-    <section className="py-25 bg-white">
+    <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-5xl mx-auto text-center px-6">
-        
         {/* TITLE */}
         <h2 className="text-4xl font-bold leading-tight">
           Your night. Your energy. <br /> Your soundtrack.
@@ -20,9 +18,18 @@ export default function FeaturesSection() {
       </div>
 
       {/* FEATURE CARDS */}
-      <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        {/* CARD 1 */}
+      <div
+        className="
+          max-w-6xl mx-auto
+          mt-10 sm:mt-14
+          px-4 sm:px-6 lg:px-8
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-6 sm:gap-8 lg:gap-10
+        "
+      >
         <FeatureCard
           number="1"
           iconBg="from-pink-500 to-purple-500"
@@ -31,7 +38,6 @@ export default function FeaturesSection() {
           desc="Answer fun questions about your style, energy, and music taste in just 60 seconds."
         />
 
-        {/* CARD 2 */}
         <FeatureCard
           number="2"
           iconBg="from-sky-500 to-blue-500"
@@ -40,7 +46,6 @@ export default function FeaturesSection() {
           desc="Receive an AI-curated soundtrack that matches your vibe and unique vision."
         />
 
-        {/* CARD 3 */}
         <FeatureCard
           number="3"
           iconBg="from-yellow-500 to-orange-500"
@@ -48,13 +53,14 @@ export default function FeaturesSection() {
           title="Bring It to Life"
           desc="Book DJ & SAX® to transform your playlist into an unforgettable live performance."
         />
-
       </div>
 
       {/* CTA BUTTON */}
-      <div className="flex justify-center mt-15">
-        <button onClick={() => navigate("/quiz")}
-        className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow cursor-pointer hover:shadow-2xl transition flex items-center gap-2">
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={() => navigate("/quiz")}
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2 cursor-pointer"
+        >
           Find My Soundtrack 🎵
         </button>
       </div>
@@ -62,19 +68,15 @@ export default function FeaturesSection() {
   );
 }
 
-/* FEATURE CARD COMPONENT */
 function FeatureCard({ number, iconBg, icon, title, desc }) {
   return (
     <div className="relative bg-white p-8 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.10)] transition">
-
-      {/* NUMBER BADGE */}
       <div
         className={`absolute -top-4 left-8 w-8 h-8 rounded-full bg-gradient-to-r ${iconBg} text-white flex items-center justify-center text-sm font-semibold`}
       >
         {number}
       </div>
 
-      {/* ICON BLOCK */}
       <div
         className={`w-12 h-12 rounded-xl bg-gradient-to-r ${iconBg} flex items-center justify-center text-2xl text-white`}
       >
@@ -82,10 +84,7 @@ function FeatureCard({ number, iconBg, icon, title, desc }) {
       </div>
 
       <h3 className="mt-6 text-lg font-semibold">{title}</h3>
-
-      <p className="mt-2 text-gray-500 text-sm leading-relaxed">
-        {desc}
-      </p>
+      <p className="mt-2 text-gray-500 text-sm leading-relaxed">{desc}</p>
     </div>
   );
 }
