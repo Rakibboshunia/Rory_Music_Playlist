@@ -17,8 +17,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300
-        ${solidNavbar ? "bg-white shadow" : "bg-transparent"}`}
+      className={`fixed py-2 top-0 w-full z-50 transition-all duration-300
+        ${solidNavbar ? "bg-[#F4F7FF] shadow" : "bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -31,7 +31,7 @@ export default function Navbar() {
 
         {/* DESKTOP MENU */}
         <div
-          className={`hidden md:flex gap-8 text-sm
+          className={`hidden md:flex gap-10 text-md font-medium
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
           <NavLink to="/">Home</NavLink>
@@ -41,9 +41,9 @@ export default function Navbar() {
         </div>
 
         {/* DESKTOP CTA */}
-        <div className="hidden md:block">
+        <div className="hidden md:block ">
           <button
-            className={`px-5 py-2 rounded-full text-sm transition
+            className={`px-5 py-2 rounded-full text-medium cursor:pointer hover:text-[#AD46FF] transition
               ${
                 solidNavbar
                   ? "bg-blue-600 text-white"
@@ -67,13 +67,13 @@ export default function Navbar() {
       {/* MOBILE DROPDOWN */}
       {menuOpen && (
         <div className="md:hidden bg-white shadow-lg">
-          <div className="flex flex-col gap-4 px-6 py-6 text-gray-700">
+          <div className="flex flex-col gap-4 text-xl font-medium p-8 p-8 text-gray-700">
             <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/quiz">Quiz</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/">Testimonial</NavLink>
 
-            <button className="mt-4 py-2 rounded-full bg-blue-600 text-white">
+            <button className="mt-4 py-2 rounded-full cursor-pointer bg-blue-600 text-white">
               Upgrade for €9
             </button>
           </div>

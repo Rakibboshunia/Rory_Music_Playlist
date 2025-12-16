@@ -3,12 +3,15 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes/router";
 import { QuizProvider } from "./context/QuizContext";
 import { AuthProvider } from "./context/AuthContext";
+import { AudioPlayerProvider } from "./context/AudioPlayerContext"; // ✅ ADD THIS
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <QuizProvider>
-      <RouterProvider router={router} />
+      <AudioPlayerProvider>
+        <RouterProvider router={router} />
+      </AudioPlayerProvider>
     </QuizProvider>
   </AuthProvider>
 );

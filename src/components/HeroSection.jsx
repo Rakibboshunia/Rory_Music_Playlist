@@ -1,21 +1,25 @@
 import React from "react";
-import MusicLogo from "../../../assets/img/music-logo.png"
-import HeroCurve from "../../../assets/img/Container.png";
-
+import MusicLogo from "../assets/img/music-logo.png"
+import HeroCurve from "../assets/img/Container.png";
+import QuizLayout from "../layouts/QuizLayout";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
+
+  const navigate = useNavigate();
+
   return (
     <section
-  className="
-    relative overflow-hidden
-    pt-28 sm:pt-32
-    pb-[140px] sm:pb-[180px] md:pb-[220px] lg:pb-[260px]
-  "
-  style={{
-    background:
-      "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
-  }}
->
+      className="
+        relative overflow-hidden
+        pt-28 sm:pt-32
+        pb-[140px] sm:pb-[180px] md:pb-[220px] lg:pb-[260px]
+      "
+      style={{
+        background:
+          "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
+      }}
+    >
 
       {/* Decorative blurred squares */}
       <div className="absolute top-36 right-56 w-20 h-20 rounded-xl border border-white/30 backdrop-blur-md opacity-40"></div>
@@ -34,12 +38,14 @@ export default function HeroSection() {
           </p>
 
           {/* Buttons */}
-          <div className="mt-8 flex items-center gap-4">
-            <button className="px-8 py-3 bg-white text-blue-700 font-medium rounded-full shadow-lg hover:shadow-xl transition">
+          <div className="mt-8 flex items-center gap-4 ">
+            <button onClick={() => navigate("/quiz")}
+            className="px-8 py-3 bg-white text-blue-700 font-medium rounded-full shadow-lg hover:bg-[#9810FA] hover:text-white transition">
               Start My Quiz →
             </button>
 
-            <button className="px-8 py-3 border border-white/60 text-white rounded-full backdrop-blur-sm hover:bg-white/10 transition">
+            <button onClick={() => navigate("/playlist")}
+            className="px-8 py-3 border border-white/60 text-white font-medium rounded-full backdrop-blur-sm hover:bg-[#155DFC] transition">
               See How It Works
             </button>
           </div>
@@ -47,11 +53,11 @@ export default function HeroSection() {
           {/* Mood Icons */}
           <div className="mt-8 flex items-center gap-3">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-yellow-400 border-2 border-white z-10"></div>
+              <div className="w-10 h-10 rounded-full bg-[#FF8900] border-2 border-white z-10"></div>
 
-              <div className="-ml-2 w-10 h-10 rounded-full bg-pink-400 border-2 border-white z-20"></div>
+              <div className="-ml-2 w-10 h-10 rounded-full bg-[#C27AFF] border-2 border-white z-20"></div>
 
-              <div className="-ml-2 w-10 h-10 rounded-full bg-blue-300 border-2 border-white z-30"></div>
+              <div className="-ml-2 w-10 h-10 rounded-full bg-[#51A2FF] border-2 border-white z-30"></div>
             </div>
 
             <span className="text-white/80 text-md">2,500+ playlists created</span>
@@ -60,7 +66,7 @@ export default function HeroSection() {
 
         {/* RIGHT SECTION — Tilted Card */}
         <div className="flex justify-center lg:justify-end">
-         <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10 h-auto w-[320px] md:w-[380px] lg:w-[400px] rotate-5 md:rotate-5 lg:rotate-5">
+         <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10 h-auto w-[320px] md:w-[380px] lg:w-[400px] rotate-6 md:rotate-6 lg:rotate-6 transition hover:rotate-0">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl">🎵</div>
               
@@ -145,7 +151,7 @@ export default function HeroSection() {
           z-10
           pointer-events-none
           select-none
-          mt-40
+          
           h-[110px]
           sm:h-[150px]
           md:h-[200px]

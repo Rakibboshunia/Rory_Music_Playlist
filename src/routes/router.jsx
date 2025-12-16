@@ -1,15 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import PublicLayout from "../layouts/PublicLayout";
 import QuizLayout from "../layouts/QuizLayout";
 import AuthLayout from "../layouts/AuthLayout";
-
 import Home from "../pages/Home/Home";
 import PlaylistResult from "../pages/Playlist/PlaylistResult";
-
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
-
 import Step1_EventType from "../pages/Quiz/Step1_EventType";
 import Step2_EventDetails from "../pages/Quiz/Step2_EventDetails";
 import Step3_Genres from "../pages/Quiz/Step3_Genres";

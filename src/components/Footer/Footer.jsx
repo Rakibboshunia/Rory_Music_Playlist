@@ -1,25 +1,19 @@
 import { NavLink } from "react-router-dom";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  TwitterIcon,
-} from "lucide-react";
+import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#F7F9FF]">
+    // ✅ CHANGE HERE: pt-56
+    <footer className="bg-[#F7F9FF] pt-10">
       <div className="border-t border-gray-300" />
 
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-
-          {/* LOGO */}
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500" />
             <span className="text-lg font-semibold text-gray-900">Logo</span>
           </div>
 
-          {/* MENU */}
           <div className="flex gap-8 text-sm text-gray-600">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/quiz">Quiz</NavLink>
@@ -27,7 +21,6 @@ export default function Footer() {
             <NavLink to="/">Testimonial</NavLink>
           </div>
 
-          {/* SOCIAL ICONS */}
           <div className="flex gap-3">
             {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
               <a

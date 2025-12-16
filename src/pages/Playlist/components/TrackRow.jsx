@@ -1,24 +1,21 @@
-export default function TrackRow({ track, onPlay }) {
-  return (
-    <div
-      className="flex items-center gap-4 py-3 cursor-pointer hover:bg-gray-50 rounded-lg px-2"
-      onClick={onPlay}
-    >
-      <img
-        src={track.cover}
-        className="w-12 h-12 rounded-lg object-cover"
-      />
+import { useAudioPlayer } from "../../../context/AudioPlayerContext";
 
-      <div className="flex-1 min-w-0">
-        <p className="font-medium text-sm truncate">
-          {track.title}
-        </p>
-        <p className="text-xs text-gray-500 truncate">
-          {track.artist}
-        </p>
+export default function TrackRow({ track, playlist, playlistId }) {
+  const { playTrack } = useAudioPlayer();
+
+  return (
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-sm font-medium">{track.title}</p>
+        <p className="text-xs text-gray-500">{track.artist}</p>
       </div>
 
-      <span className="text-sm text-gray-400">▶</span>
+      <button
+        onClick={() => playTrack(track, playlist, playlistId)}
+        className="w-8 h-8 bg-blue-600 text-white rounded"
+      >
+        ▶
+      </button>
     </div>
   );
 }

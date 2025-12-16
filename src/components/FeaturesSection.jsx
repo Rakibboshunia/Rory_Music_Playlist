@@ -1,6 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FeaturesSection() {
+
+  const navigate = useNavigate();
+
   return (
     <section className="py-25 bg-white">
       <div className="max-w-5xl mx-auto text-center px-6">
@@ -49,7 +53,8 @@ export default function FeaturesSection() {
 
       {/* CTA BUTTON */}
       <div className="flex justify-center mt-15">
-        <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2">
+        <button onClick={() => navigate("/quiz")}
+        className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow cursor-pointer hover:shadow-2xl transition flex items-center gap-2">
           Find My Soundtrack 🎵
         </button>
       </div>

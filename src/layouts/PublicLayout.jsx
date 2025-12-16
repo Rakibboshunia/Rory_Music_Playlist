@@ -8,11 +8,11 @@ export default function PublicLayout() {
     <>
       <Navbar />
 
+      {/* ✅ Footer + CTA same stacking context */}
       <main className="min-h-screen bg-white">
         <Outlet />
+        <Footer />
       </main>
-
-      <Footer />
     </>
   );
 }
