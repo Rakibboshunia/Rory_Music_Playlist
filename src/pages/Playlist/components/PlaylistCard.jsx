@@ -1,9 +1,6 @@
-import React from "react";
 import { useAudioPlayer } from "../../../context/AudioPlayerContext";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
-
-// cover image
 import coverImg from "../../../assets/img/playlist.png";
 
 export default function PlaylistCard({
@@ -14,11 +11,17 @@ export default function PlaylistCard({
   isOpen,
   onToggle,
 }) {
-  const { isPlaying, activePlaylistId } = useAudioPlayer();
-  const isActive = activePlaylistId === index;
+  const {
+    isPlaying,
+    activePlaylistId,
+    currentTrack,
+  } = useAudioPlayer();
+
+  const isActivePlaylist = activePlaylistId === index;
+  const hasSelectedTrack = isActivePlaylist && currentTrack;
 
   return (
-    <div className="bg-white rounded-2xl shadow p-6">
+    <div className="bg-white rounded-2xl shadow p-8">
       {/* HEADER */}
       <div
         onClick={onToggle}
@@ -42,25 +45,24 @@ export default function PlaylistCard({
 
       {/* ACCORDION BODY */}
       <div
-        className={`
-          grid transition-all duration-500 ease-in-out
+        className={`grid transition-all duration-500 ease-in-out
           ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
         `}
       >
-        <div className="overflow-hidden">
-          {/* COVER IMAGE */}
-          <div className="rounded-xl overflow-hidden">
+        <div className="overflow-hidden space-y-6">
+          {/* COVER */}
+          <div className="rounded-xl overflow-hidden ">
             <img
               src={coverImg}
               alt="playlist cover"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-[400px] object-cover"
             />
           </div>
 
           {/* PLAYER / STATS */}
           <div className="bg-white">
-            {/* STATS (before play) */}
-            {isActive && !isPlaying && (
+            {/* STATS (no track selected yet) */}
+            {isActivePlaylist && !currentTrack && (
               <div className="flex justify-between text-center py-4 text-sm text-gray-700">
                 <div>
                   <p className="font-semibold">{tracks.length}</p>
@@ -77,12 +79,12 @@ export default function PlaylistCard({
               </div>
             )}
 
-            {/* PLAYER (while playing) */}
-            {isActive && isPlaying && <PlaylistPlayer />}
+            {/* PLAYER (track selected, play or pause doesn’t matter) */}
+            {hasSelectedTrack && <PlaylistPlayer />}
           </div>
 
           {/* TRACK LIST */}
-          <div className="mt-4 space-y-3">
+          <div className="mt-4 space-y-4">
             {tracks.map((track) => (
               <TrackRow
                 key={track.id}

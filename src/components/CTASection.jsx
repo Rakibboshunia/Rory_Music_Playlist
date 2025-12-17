@@ -25,7 +25,7 @@ export default function CTASection() {
           <div className="mt-8">
             <button
               onClick={() => navigate("/quiz")}
-              className="px-8 py-4 bg-white hover:text-blue-700 hover:bg-[#C24AFF] text-blue-700 font-medium rounded-full shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto"
+              className="px-8 py-4 bg-white hover:text-white hover:bg-[#155DFC] text-blue-700 font-medium rounded-full shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto"
             >
               Start My Quiz Now →
             </button>

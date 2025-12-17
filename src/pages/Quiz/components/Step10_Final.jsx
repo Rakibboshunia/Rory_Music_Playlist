@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuiz } from "../../context/QuizContext";
-import { useAuth } from "../../context/AuthContext";
+import { useQuiz } from "../../../context/QuizContext";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function Step5_FinalQuestion() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function Step5_FinalQuestion() {
       {/* Progress */}
       <div className="mb-6">
         <div className="flex justify-between text-sm text-gray-500 mb-2">
-          <span>Question 5 of 5</span>
+          <span>Question 5 of 10</span>
           <span>100% Complete</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full">
@@ -180,8 +180,4 @@ export default function Step5_FinalQuestion() {
       )}
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec

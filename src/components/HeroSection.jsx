@@ -46,14 +46,14 @@ export default function HeroSection() {
           <div className="mt-8 flex items-center gap-4">
             <button
               onClick={() => navigate("/quiz")}
-              className="px-8 py-3 bg-white text-blue-700 font-medium rounded-full shadow-lg hover:shadow-xl transition"
+              className="px-8 py-3 bg-white text-blue-700 font-medium rounded-full cursor-pointer shadow-lg hover:shadow-xl transition"
             >
               Start My Quiz →
             </button>
 
             <button
               onClick={handleHowItWorks}
-              className="px-8 py-3 border border-white/60 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white/10 transition"
+              className="px-8 py-3 border border-white/60 text-white font-medium rounded-full cursor-pointer backdrop-blur-sm hover:bg-white/10 transition"
             >
               See How It Works
             </button>

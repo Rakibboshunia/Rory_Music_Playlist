@@ -6,16 +6,7 @@ export default function FeaturesSection() {
 
   return (
     <section className="py-16 sm:py-20 bg-white">
-      <div className="max-w-5xl mx-auto text-center px-6">
-        {/* TITLE */}
-        <h2 className="text-4xl font-bold leading-tight">
-          Your night. Your energy. <br /> Your soundtrack.
-        </h2>
-
-        <p className="mt-3 text-gray-500">
-          From vision to reality in three simple steps
-        </p>
-      </div>
+      
 
       {/* FEATURE CARDS */}
       <div
