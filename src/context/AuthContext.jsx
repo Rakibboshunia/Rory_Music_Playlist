@@ -29,9 +29,5 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+export const useAuth = () => useContext(AuthContext);
 
-<<<<<<< HEAD
-export const useAuth = () => useContext(AuthContext);
-=======
-export const useAuth = () => useContext(AuthContext);
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec

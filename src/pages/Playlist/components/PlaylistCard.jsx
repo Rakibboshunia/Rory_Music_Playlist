@@ -1,65 +1,99 @@
-<<<<<<< HEAD
+import React from "react";
+import { useAudioPlayer } from "../../../context/AudioPlayerContext";
+import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
 
-const demoTracks = [
-  { id: 1, title: "At Last", artist: "Etta James", src: "/demo/1.mp3" },
-  { id: 2, title: "Can't Help Falling in Love", artist: "Elvis Presley", src: "/demo/2.mp3" },
-  { id: 3, title: "Wonderful Tonight", artist: "Eric Clapton", src: "/demo/3.mp3" },
-];
+// cover image
+import coverImg from "../../../assets/img/playlist.png";
 
-export default function PlaylistCard({ index, data, open, onToggle }) {
+export default function PlaylistCard({
+  index,
+  title,
+  subtitle,
+  tracks = [],
+  isOpen,
+  onToggle,
+}) {
+  const { isPlaying, activePlaylistId } = useAudioPlayer();
+  const isActive = activePlaylistId === index;
+
   return (
-    <div className="bg-white rounded-2xl shadow">
-      <button
+    <div className="bg-white rounded-2xl shadow p-6">
+      {/* HEADER */}
+      <div
         onClick={onToggle}
-        className="w-full flex justify-between px-6 py-4"
+        className="mb-4 flex items-start justify-between cursor-pointer select-none"
       >
         <div>
-          <p className="font-medium">{index}. {data.title}</p>
-          <p className="text-xs text-gray-500">{data.subtitle}</p>
+          <p className="font-medium">
+            {index}. {title}
+          </p>
+          <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
-        <span>{open ? "⌃" : "⌄"}</span>
-      </button>
 
-      {open && (
-        <div className="px-6 pb-6 space-y-3">
-          {demoTracks.map(track => (
-            <TrackRow
-              key={track.id}
-              track={track}
-              playlist={demoTracks}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-=======
-export default function PlaylistCard({ playlist, isActive, onToggle }) {
-  return (
-    <button
-      onClick={onToggle}
-      className="w-full px-6 py-5 flex justify-between items-center"
-    >
-      <div className="text-left">
-        <h3 className="font-semibold text-lg">
-          {playlist.title}
-        </h3>
-        <p className="text-sm text-gray-500">
-          {playlist.subtitle}
-        </p>
-      </div>
-
-      <div className="flex items-center gap-3">
-        {playlist.locked && (
-          <span className="text-xs bg-gray-200 px-3 py-1 rounded-full">
-            Locked
-          </span>
-        )}
-        <span className="text-xl">
-          {isActive ? "−" : "+"}
+        <span
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        >
+          ⌄
         </span>
       </div>
-    </button>
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
+
+      {/* ACCORDION BODY */}
+      <div
+        className={`
+          grid transition-all duration-500 ease-in-out
+          ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
+        `}
+      >
+        <div className="overflow-hidden">
+          {/* COVER IMAGE */}
+          <div className="rounded-xl overflow-hidden">
+            <img
+              src={coverImg}
+              alt="playlist cover"
+              className="w-full h-[260px] object-cover"
+            />
+          </div>
+
+          {/* PLAYER / STATS */}
+          <div className="bg-white">
+            {/* STATS (before play) */}
+            {isActive && !isPlaying && (
+              <div className="flex justify-between text-center py-4 text-sm text-gray-700">
+                <div>
+                  <p className="font-semibold">{tracks.length}</p>
+                  <p className="text-xs text-gray-400">Tracks</p>
+                </div>
+                <div>
+                  <p className="font-semibold">~1h</p>
+                  <p className="text-xs text-gray-400">Duration</p>
+                </div>
+                <div>
+                  <p className="font-semibold">100%</p>
+                  <p className="text-xs text-gray-400">Your vibe</p>
+                </div>
+              </div>
+            )}
+
+            {/* PLAYER (while playing) */}
+            {isActive && isPlaying && <PlaylistPlayer />}
+          </div>
+
+          {/* TRACK LIST */}
+          <div className="mt-4 space-y-3">
+            {tracks.map((track) => (
+              <TrackRow
+                key={track.id}
+                track={track}
+                playlist={tracks}
+                playlistId={index}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

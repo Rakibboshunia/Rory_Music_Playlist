@@ -3,11 +3,8 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const location = useLocation();
-<<<<<<< HEAD
   const navigate = useNavigate();
 
-=======
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
   const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,7 +17,6 @@ export default function Navbar() {
 
   const solidNavbar = !isHome || scrolled;
 
-  // 🔥 SCROLL HANDLER (NavLink friendly)
   const scrollToTestimonials = () => {
     const el = document.getElementById("testimonials-section");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -31,7 +27,7 @@ export default function Navbar() {
 
     if (!isHome) {
       navigate("/");
-      setTimeout(scrollToTestimonials, 120);
+      setTimeout(scrollToTestimonials, 300);
     } else {
       scrollToTestimonials();
     }
@@ -61,15 +57,11 @@ export default function Navbar() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/quiz">Quiz</NavLink>
           <NavLink to="/playlist">Playlist</NavLink>
-<<<<<<< HEAD
 
           {/* ✅ TESTIMONIAL (NavLink style) */}
           <NavLink to="/" onClick={handleTestimonialClick}>
             Testimonial
           </NavLink>
-=======
-          <NavLink to="/">Testimonial</NavLink>
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
         </div>
 
         {/* DESKTOP CTA */}
@@ -96,26 +88,18 @@ export default function Navbar() {
         </button>
       </div>
 
-<<<<<<< HEAD
       {/* MOBILE MENU */}
-=======
-      {/* MOBILE DROPDOWN */}
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
       {menuOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <div className="flex flex-col gap-4 px-6 py-6 text-gray-700">
             <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/quiz">Quiz</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink>
-<<<<<<< HEAD
 
             {/* ✅ MOBILE TESTIMONIAL */}
             <NavLink to="/" onClick={handleTestimonialClick}>
               Testimonial
             </NavLink>
-=======
-            <NavLink onClick={() => setMenuOpen(false)} to="/">Testimonial</NavLink>
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
 
             <button className="mt-4 py-2 rounded-full bg-blue-600 text-white">
               Upgrade for €9

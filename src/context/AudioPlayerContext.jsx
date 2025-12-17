@@ -1,9 +1,10 @@
 import { createContext, useContext, useRef, useState } from "react";
 
-const AudioPlayerContext = createContext();
+const AudioPlayerContext = createContext(null);
 
 export function AudioPlayerProvider({ children }) {
   const audioRef = useRef(new Audio());
+
   const [currentTrack, setCurrentTrack] = useState(null);
   const [playlist, setPlaylist] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
