@@ -41,7 +41,7 @@ export default function Navbar() {
         ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
     >
       {/* MAIN BAR */}
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
         
         {/* LOGO */}
         <div className="font-semibold text-base">
@@ -52,7 +52,7 @@ export default function Navbar() {
 
         {/* DESKTOP MENU */}
         <div
-          className={`hidden md:flex items-center gap-6 text-sm font-medium
+          className={`hidden md:flex items-center gap-8 text-medium font-medium
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
           <NavLink to="/">Home</NavLink>

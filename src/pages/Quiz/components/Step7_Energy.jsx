@@ -1,57 +1,69 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
-const options = ["Low", "Medium", "High", "Very High"];
+const options = [
+  { label: "70s", value: "70s", score: { N: 20 } },
+  { label: "80s", value: "80s", score: { N: 20 } },
+  { label: "90s", value: "90s", score: { N: 15 } },
+  { label: "00s", value: "00s", score: { N: 10 } },
+  { label: "10s / Now", value: "10s", score: { M: 20 } },
+];
 
 export default function Step7_Energy() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
+  const selected = answers.decades || [];
+
+  const toggle = opt => {
+    const exists = selected.includes(opt.value);
+
+    updateAnswer(
+      "decades",
+      exists
+        ? selected.filter(v => v !== opt.value)
+        : [...selected, opt.value],
+      exists
+        ? {
+            E: -(opt.score.E || 0),
+            M: -(opt.score.M || 0),
+            G: -(opt.score.G || 0),
+            L: -(opt.score.L || 0),
+            N: -(opt.score.N || 0),
+          }
+        : opt.score
+    );
+  };
+
   return (
-    <div className="max-w-xl mx-auto px-6">
-      <div className="mb-6">
-        <div className="flex justify-between text-sm text-gray-500 mb-2">
-          <span>Question 7 of 10</span>
-          <span>70% Complete</span>
-        </div>
-        <div className="h-2 bg-gray-200 rounded-full">
-          <div className="h-2 w-[70%] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-        </div>
-      </div>
+    <div className="max-w-xl mx-auto px-6 shadow-xl py-2 rounded-xl">
+      <h2 className="text-lg font-semibold text-center mb-6">
+        Pick a decade flavour
+      </h2>
 
-      <div className="bg-white rounded-2xl shadow p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-center">
-          How energetic should the night feel?
-        </h2>
+      {options.map(opt => (
+        <button
+          key={opt.value}
+          onClick={() => toggle(opt)}
+          className={`w-full mb-3 h-[52px] rounded-xl border
+            ${
+              selected.includes(opt.value)
+                ? "bg-purple-600 text-white"
+                : "bg-white border-gray-200"
+            }`}
+        >
+          {opt.label}
+        </button>
+      ))}
 
-        {options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => updateAnswer("energy", opt)}
-            className={`w-full h-[52px] rounded-xl border
-              ${
-                answers.energy === opt
-                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                  : "bg-white border-gray-200"
-              }`}
-          >
-            {opt}
-          </button>
-        ))}
-
-        <div className="flex justify-between pt-4">
-          <button onClick={() => navigate(-1)} className="px-6 py-2 border rounded-full">
-            ← Back
-          </button>
-          <button
-            disabled={!answers.energy}
-            onClick={() => navigate("/quiz/tempo")}
-            className={`px-6 py-2 rounded-full text-white
-              ${answers.energy ? "bg-gradient-to-r from-blue-500 to-purple-500" : "bg-gray-300"}`}
-          >
-            Next →
-          </button>
-        </div>
+      <div className="flex justify-center mt-4 pb-6">
+        <button
+          disabled={!selected.length}
+          onClick={() => navigate("/quiz/tempo")}
+          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+        >
+          Next →
+        </button>
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ export default function HeroSection() {
             event playlist.
           </p>
 
-          <div className="mt-6 flex gap-4">
+          <div className="mt-5 flex gap-4">
             <button
               onClick={() => navigate("/quiz")}
               className="px-8 py-3 bg-white text-blue-700 rounded-full shadow-lg"

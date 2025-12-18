@@ -1,77 +1,45 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
-const genresList = ["Pop", "Rock", "Jazz", "Classical", "EDM"];
+const options = [
+  { label: "Champagne tower", value: "champagne", score: { L: 10, M: 5, E: -5 } },
+  { label: "Espresso martinis", value: "espresso", score: { E: 10, M: 10 } },
+  { label: "Craft cocktails", value: "craft", score: { M: 15, G: 5 } },
+  { label: "Pints with pals", value: "pints", score: { N: 15 } },
+  { label: "Rosé on the terrace", value: "rose", score: { G: 10 } },
+];
 
 export default function Step3_Genres() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  const selectedGenres = answers.genres || [];
-
-  const toggleGenre = (genre) => {
-    const exists = selectedGenres.includes(genre);
-    updateAnswer(
-      "genres",
-      exists
-        ? selectedGenres.filter((g) => g !== genre)
-        : [...selectedGenres, genre]
-    );
-  };
-
   return (
-    <div className="max-w-xl mx-auto px-6">
-      <div className="mb-6">
-        <div className="flex justify-between text-sm text-gray-500 mb-2">
-          <span>Question 3 of 10</span>
-          <span>30% Complete</span>
-        </div>
-        <div className="h-2 bg-gray-200 rounded-full">
-          <div className="h-2 w-[30%] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-        </div>
-      </div>
+    <div className="max-w-xl mx-auto px-6 shadow-xl py-2 rounded-xl">
+      <h2 className="text-lg font-semibold text-center mb-6">
+        Pick a drinks moment
+      </h2>
 
-      <div className="bg-white rounded-2xl shadow p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-center mb-6">
-          Select your preferred genres
-        </h2>
+      {options.map(opt => (
+        <button
+          key={opt.value}
+          onClick={() => updateAnswer("drinksMoment", opt.value, opt.score)}
+          className={`w-full mb-3 h-[52px] rounded-xl border
+            ${answers.drinksMoment === opt.value
+              ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+              : "bg-white border-gray-200"}`}
+        >
+          {opt.label}
+        </button>
+      ))}
 
-        {genresList.map((g) => (
-          <button
-            key={g}
-            onClick={() => toggleGenre(g)}
-            className={`w-full mb-3 h-[52px] rounded-xl border transition
-              ${
-                selectedGenres.includes(g)
-                  ? "bg-purple-600 text-white border-transparent"
-                  : "bg-white border-gray-200"
-              }`}
-          >
-            {g}
-          </button>
-        ))}
-
-        <div className="flex justify-between mt-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="px-6 py-2 border rounded-full"
-          >
-            ← Back
-          </button>
-
-          <button
-            disabled={!selectedGenres.length}
-            onClick={() => navigate("/quiz/importance")}
-            className={`px-6 py-2 rounded-full text-white
-              ${
-                selectedGenres.length
-                  ? "bg-gradient-to-r from-blue-500 to-purple-500"
-                  : "bg-gray-300 cursor-not-allowed"
-              }`}
-          >
-            Next →
-          </button>
-        </div>
+      <div className="flex justify-center mt-4 pb-6">
+        <button
+          disabled={!answers.drinksMoment}
+          onClick={() => navigate("/quiz/importance")}
+          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+        >
+          Next →
+        </button>
       </div>
     </div>
   );

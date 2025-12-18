@@ -1,11 +1,10 @@
-import { useAudioPlayer } from "../../../context/AudioPlayerContext";
 import { Play } from "lucide-react";
 
-export default function TrackRow({ track, playlist = [], playlistId }) {
-  const { playTrack } = useAudioPlayer();
-
-  // safety guard
-  const safePlaylist = Array.isArray(playlist) ? playlist : [];
+export default function TrackRow({ track }) {
+  const handlePlay = () => {
+    if (!track.spotifyUrl) return;
+    window.open(track.spotifyUrl, "_blank");
+  };
 
   return (
     <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#F7F8FF] hover:bg-[#EEF0FF] transition">
@@ -15,10 +14,11 @@ export default function TrackRow({ track, playlist = [], playlistId }) {
       </div>
 
       <button
-        onClick={() => playTrack(track, safePlaylist, playlistId)}
-        className="w-8 h-8 rounded bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"
+        onClick={handlePlay}
+        title="Play on Spotify"
+        className="w-8 h-8 rounded bg-green-600 text-white flex items-center justify-center hover:bg-green-700"
       >
-        ▶
+        <Play size={14} />
       </button>
     </div>
   );

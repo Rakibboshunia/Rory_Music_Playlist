@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useAudioPlayer } from "../../../context/AudioPlayerContext";
+import { useState } from "react";
 import PlaylistCard from "./PlaylistCard";
 
 const playlists = [
@@ -8,22 +7,23 @@ const playlists = [
     subtitle: "Upbeat party anthems to ignite the dance floor.",
     tracks: [
       {
-        id: 1,
+        id: "7qEHsqek33rTcFNT9PFqLf",
         title: "Can't Help Falling in Love",
         artist: "Elvis Presley",
-        src: "/demo/audio1.mp3",
+        spotifyUrl: "https://open.spotify.com/track/7qEHsqek33rTcFNT9PFqLf",
       },
       {
-        id: 2,
+        id: "1G391cbiT3v3Cywg8T7DM1",
         title: "At Last",
         artist: "Etta James",
-        src: "/demo/audio2.mp3",
+        spotifyUrl: "https://open.spotify.com/track/1G391cbiT3v3Cywg8T7DM1",
       },
+
       {
-        id: 3,
-        title: "Just Like Heaven",
-        artist: "Smithereens",
-        src: "/demo/audio2.mp3",
+        id: "278019345",
+        title: "All of Me",
+        artist: "John Legend",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
       },
     ],
   },
@@ -32,91 +32,63 @@ const playlists = [
     subtitle: "Smooth tracks for elegant evenings.",
     tracks: [
       {
-        id: 1,
+        id: "5IfBLN9VPPJOwcKmAZhdXe",
         title: "Fly Me to the Moon",
         artist: "Frank Sinatra",
-        src: "/demo/audio1.mp3",
+        spotifyUrl: "https://open.spotify.com/track/5IfBLN9VPPJOwcKmAZhdXe",
       },
+
       {
-        id: 2,
-        title: "The Way You Look Tonight",
-        artist: "Frank Sinatra",
-        src: "/demo/audio1.mp3",
-      },
-      {
-        id: 3,
-        title: "Come Fly with Me",
-        artist: "Frank Sinatra",
-        src: "/demo/audio1.mp3",
-      },
-    ],
-  },
-  {
-    title: "Romantic Sax Vibes",
-    subtitle: "Soft sax melodies for intimate moments.",
-    tracks: [
-      {
-        id: 1,
-        title: "Careless Whisper",
-        artist: "George Michael",
-        src: "/demo/audio1.mp3",
-      },
-      {
-        id: 2,
-        title: "Last Christmas",
-        artist: "Wham!",
-        src: "/demo/audio1.mp3",
-      },
-      {
-        id: 3,
-        title: "Faith",
-        artist: "George Michael",
-        src: "/demo/audio1.mp3",
-      },
-    ],
-  },
-  {
-    title: "Your Playlist",
-    subtitle: "Here's the soundtrack crafted just for your event.",
-    tracks: [
-      {
-        id: 1,
-        title: "Perfect",
-        artist: "Ed Sheeran",
-        src: "/demo/audio1.mp3",
-      },
-      {
-        id: 2,
+        id: "278019345",
         title: "All of Me",
         artist: "John Legend",
-        src: "/demo/audio1.mp3",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
       },
+    ],
+  },
+  {
+    title: "Romantic Evening Vibes",
+    subtitle: "Soft tunes for intimate moments.",
+    tracks: [
       {
-        id: 3,
-        title: "Thinking Out Loud",
-        artist: "Ed Sheeran",
-        src: "/demo/audio1.mp3",
+        id: "278019345",
+        title: "All of Me",
+        artist: "John Legend",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
+      },
+
+      {
+        id: "278019345",
+        title: "All of Me",
+        artist: "John Legend",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
+      },
+
+    ],
+  },
+  {
+    title: "Classic Love Songs",
+    subtitle: "Timeless ballads that define romance.",
+    tracks: [
+      {
+        id: "278019345",
+        title: "All of Me",
+        artist: "John Legend",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
+      },
+
+      {
+        id: "278019345",
+        title: "All of Me",
+        artist: "John Legend",
+        spotifyUrl: "https://open.spotify.com/track/278019345",
       },
     ],
   },
 ];
 
 export default function PlaylistAccordion() {
-  // 🔥 First playlist open by default
   const [activeIndex, setActiveIndex] = useState(0);
-  const { playTrack } = useAudioPlayer();
-
-  // 🔥 Auto-play first track when playlist opens
-  useEffect(() => {
-    const playlist = playlists[activeIndex];
-    if (!playlist || !playlist.tracks.length) return;
-
-    playTrack(
-      playlist.tracks[0], // first track
-      playlist.tracks,    // full playlist
-      activeIndex + 1     // playlist id
-    );
-  }, [activeIndex, playTrack]);
 
   return (
     <div className="space-y-4">
