@@ -1,4 +1,5 @@
 import { useAudioPlayer } from "../../../context/AudioPlayerContext";
+import { Play } from "lucide-react";
 
 export default function TrackRow({ track, playlist = [], playlistId }) {
   const { playTrack } = useAudioPlayer();

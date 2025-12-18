@@ -1,11 +1,11 @@
 import React from "react";
-import rsvp from "../../../assets/img/rsvp.jpg"
-import wedding from "../../../assets/img/wedding.jpg"
-import wedding25 from "../../../assets/img/wedding25.jpg"
+import rsvp from "../assets/img/rsvp.jpg"
+import wedding from "../assets/img/wedding.jpg"
+import wedding25 from "../assets/img/wedding25.jpg"
 
 export default function AwardsSection() {
   return (
-    <section className="py-24 bg-[#F4F8FE]">
+    <section className="py-5 bg-[#F4F8FE]">
       <div className="max-w-5xl mx-auto text-center px-6">
 
         {/* Title */}

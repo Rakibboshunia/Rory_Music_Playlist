@@ -2,8 +2,6 @@ import React from "react";
 import { useAudioPlayer } from "../../../context/AudioPlayerContext";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
-
-// cover image
 import coverImg from "../../../assets/img/playlist.png";
 
 export default function PlaylistCard({
@@ -53,7 +51,7 @@ export default function PlaylistCard({
             <img
               src={coverImg}
               alt="playlist cover"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-[400px] object-cover"
             />
           </div>
 

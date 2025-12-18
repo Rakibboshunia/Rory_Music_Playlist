@@ -5,34 +5,22 @@ export default function FeaturesSection() {
   const navigate = useNavigate();
 
   return (
-<<<<<<< HEAD
     <section className="py-16 sm:py-20 bg-white">
-=======
-    <section className="py-25 bg-white">
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
-      <div className="max-w-5xl mx-auto text-center px-6">
-        
-        {/* TITLE */}
-        <h2 className="text-4xl font-bold leading-tight">
-          Your night. Your energy. <br /> Your soundtrack.
-        </h2>
-
-        <p className="mt-3 text-gray-500">
-          From vision to reality in three simple steps
-        </p>
-      </div>
+      
 
       {/* FEATURE CARDS */}
-      <div className="
-              max-w-6xl mx-auto
-              mt-10 sm:mt-14
-              px-4 sm:px-6 lg:px-8
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              lg:grid-cols-3
-              gap-6 sm:gap-8 lg:gap-10
-            ">
+      <div
+        className="
+          max-w-6xl mx-auto
+          mt-10 sm:mt-14
+          px-4 sm:px-6 lg:px-8
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-6 sm:gap-8 lg:gap-10
+        "
+      >
         <FeatureCard
           number="1"
           iconBg="from-pink-500 to-purple-500"
@@ -58,18 +46,12 @@ export default function FeaturesSection() {
         />
       </div>
 
-<<<<<<< HEAD
-      {/* CTA */}
+      {/* CTA BUTTON */}
       <div className="flex justify-center mt-10">
         <button
           onClick={() => navigate("/quiz")}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2"
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2 cursor-pointer"
         >
-=======
-      {/* CTA BUTTON */}
-      <div className="flex justify-center mt-15">
-        <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-full shadow-md hover:shadow-xl transition flex items-center gap-2">
->>>>>>> bac388b0c04d6916b3aedcfb87cfabc05b1cf7ec
           Find My Soundtrack 🎵
         </button>
       </div>
@@ -80,11 +62,15 @@ export default function FeaturesSection() {
 function FeatureCard({ number, iconBg, icon, title, desc }) {
   return (
     <div className="relative bg-white p-8 rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.10)] transition">
-      <div className={`absolute -top-4 left-8 w-8 h-8 rounded-full bg-gradient-to-r ${iconBg} text-white flex items-center justify-center text-sm font-semibold`}>
+      <div
+        className={`absolute -top-4 left-8 w-8 h-8 rounded-full bg-gradient-to-r ${iconBg} text-white flex items-center justify-center text-sm font-semibold`}
+      >
         {number}
       </div>
 
-      <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${iconBg} flex items-center justify-center text-2xl text-white`}>
+      <div
+        className={`w-12 h-12 rounded-xl bg-gradient-to-r ${iconBg} flex items-center justify-center text-2xl text-white`}
+      >
         {icon}
       </div>
 
