@@ -4,11 +4,11 @@ export default function CTASection() {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white py-10">
+    <section className="bg-white py-16 sm:py-0">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
-          
+
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
+
           <p className="text-sm sm:text-xl opacity-90">
             👥 Join 2,500+ happy clients
           </p>
@@ -25,9 +25,9 @@ export default function CTASection() {
             <button
               onClick={() => navigate("/quiz")}
               className="
-                px-8 py-4
+                px-4 py-3
                 bg-white text-blue-700
-                hover:bg-blue-700 hover:text-white
+                hover:bg-blue-600 hover:text-white
                 font-medium rounded-full
                 shadow-md hover:shadow-lg
                 transition

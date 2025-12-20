@@ -23,9 +23,9 @@ export default function Step4_MusicImportance() {
         <button
           key={opt.value}
           onClick={() => updateAnswer("crowdAge", opt.value, opt.score)}
-          className={`w-full mb-3 h-[52px] rounded-xl border
+          className={`w-full mb-3 h-13 rounded-xl border
             ${answers.crowdAge === opt.value
-              ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+              ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
               : "bg-white border-gray-200"}`}
         >
           {opt.label}
@@ -36,7 +36,7 @@ export default function Step4_MusicImportance() {
         <button
           disabled={!answers.crowdAge}
           onClick={() => navigate("/quiz/vibe")}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
         >
           Next →
         </button>

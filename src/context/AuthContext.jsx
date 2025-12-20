@@ -4,15 +4,47 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [hasAccount, setHasAccount] = useState(false);
 
-  const login = (data) => setUser(data);
-  const logout = () => setUser(null);
+  const isAuthenticated = !!user;
+
+  // ✅ SIGNUP (demo)
+  const signup = (data) => {
+    // data = { name, email, password }
+    setHasAccount(true);
+    console.log("SIGNED UP USER:", data);
+  };
+
+  // ✅ LOGIN (demo)
+  const login = (data) => {
+    // data = { email }
+    setUser({
+      name: "Demo User",
+      email: data.email,
+    });
+    console.log("LOGGED IN USER:", data.email);
+  };
+
+  // ✅ LOGOUT
+  const logout = () => {
+    setUser(null);
+    console.log("USER LOGGED OUT");
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated,
+        hasAccount,
+        signup,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
-export const useAuth = () => useContext(AuthContext);
 
+export const useAuth = () => useContext(AuthContext);

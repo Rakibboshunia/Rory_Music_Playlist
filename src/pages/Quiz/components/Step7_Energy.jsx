@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "70s", value: "70s", score: { N: 20 } },
-  { label: "80s", value: "80s", score: { N: 20 } },
-  { label: "90s", value: "90s", score: { N: 15 } },
-  { label: "00s", value: "00s", score: { N: 10 } },
-  { label: "10s / Now", value: "10s", score: { M: 20 } },
+  { label: "70s", value: "70s" },
+  { label: "80s", value: "80s" },
+  { label: "90s", value: "90s" },
+  { label: "00s", value: "00s" },
+  { label: "10s / Now", value: "10s" },
 ];
 
 export default function Step7_Energy() {
@@ -15,24 +15,17 @@ export default function Step7_Energy() {
 
   const selected = answers.decades || [];
 
-  const toggle = opt => {
-    const exists = selected.includes(opt.value);
+  const toggle = value => {
+    const updated = selected.includes(value)
+      ? selected.filter(v => v !== value)
+      : [...selected, value];
 
-    updateAnswer(
-      "decades",
-      exists
-        ? selected.filter(v => v !== opt.value)
-        : [...selected, opt.value],
-      exists
-        ? {
-            E: -(opt.score.E || 0),
-            M: -(opt.score.M || 0),
-            G: -(opt.score.G || 0),
-            L: -(opt.score.L || 0),
-            N: -(opt.score.N || 0),
-          }
-        : opt.score
-    );
+    updateAnswer("decades", updated);
+  };
+
+  const handleNext = () => {
+    console.log("STEP 7 ANSWER:", answers.decades);
+    navigate("/quiz/tempo");
   };
 
   return (
@@ -44,8 +37,8 @@ export default function Step7_Energy() {
       {options.map(opt => (
         <button
           key={opt.value}
-          onClick={() => toggle(opt)}
-          className={`w-full mb-3 h-[52px] rounded-xl border
+          onClick={() => toggle(opt.value)}
+          className={`w-full mb-3 h-13 rounded-xl border
             ${
               selected.includes(opt.value)
                 ? "bg-purple-600 text-white"
@@ -59,8 +52,8 @@ export default function Step7_Energy() {
       <div className="flex justify-center mt-4 pb-6">
         <button
           disabled={!selected.length}
-          onClick={() => navigate("/quiz/tempo")}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+          onClick={handleNext}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
         >
           Next →
         </button>

@@ -8,7 +8,7 @@ import CTASection from "../../components/CTASection";
 
 export default function PlaylistResult() {
   return (
-    <div className="bg-gradient-to-b from-[#F6F8FF] to-[#FBF6FF]">
+    <div className="bg-linear-to-b from-[#F6F8FF] to-[#FBF6FF]">
       {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pt-10 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -37,11 +37,11 @@ export default function PlaylistResult() {
               </p>
             </div>
 
-            <button className="px-4 py-2 text-xs sm:text-sm rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <button className="px-4 py-2 text-xs sm:text-sm rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white">
               + Create Playlist
             </button>
           </div>
-
+          
           <PlaylistAccordion />
         </div>
       </div>

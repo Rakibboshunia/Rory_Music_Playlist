@@ -7,23 +7,23 @@ const playlists = [
     subtitle: "Upbeat party anthems to ignite the dance floor.",
     tracks: [
       {
-        id: "7qEHsqek33rTcFNT9PFqLf",
+        id: "7qEHsqek333rTcFNT9PFqLf",
         title: "Can't Help Falling in Love",
         artist: "Elvis Presley",
         spotifyUrl: "https://open.spotify.com/track/7qEHsqek33rTcFNT9PFqLf",
       },
       {
-        id: "1G391cbiT3v3Cywg8T7DM1",
+        id: "1G391cbi1T3v3Cywg8T7DM1",
         title: "At Last",
         artist: "Etta James",
         spotifyUrl: "https://open.spotify.com/track/1G391cbiT3v3Cywg8T7DM1",
       },
 
       {
-        id: "278019345",
+        id: "278033193451",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/2781019345",
       },
     ],
   },
@@ -39,10 +39,10 @@ const playlists = [
       },
 
       {
-        id: "278019345",
+        id: "2718019345",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/27801911345",
       },
     ],
   },
@@ -51,17 +51,17 @@ const playlists = [
     subtitle: "Soft tunes for intimate moments.",
     tracks: [
       {
-        id: "278019345",
+        id: "27801933445",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/278101911345",
       },
 
       {
-        id: "278019345",
+        id: "27180179345",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/278019123345",
       },
 
     ],
@@ -71,17 +71,17 @@ const playlists = [
     subtitle: "Timeless ballads that define romance.",
     tracks: [
       {
-        id: "278019345",
+        id: "12780319345",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/27458019345",
       },
 
       {
-        id: "278019345",
+        id: "27801961345",
         title: "All of Me",
         artist: "John Legend",
-        spotifyUrl: "https://open.spotify.com/track/278019345",
+        spotifyUrl: "https://open.spotify.com/track/2780194212345",
       },
     ],
   },

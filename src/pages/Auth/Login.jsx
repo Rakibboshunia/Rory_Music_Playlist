@@ -1,60 +1,47 @@
-
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [showReset, setShowReset] = useState(false);
-  const [step, setStep] = useState(1);
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const handleLogin = async (e) => {
+  e.preventDefault();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    login("demo@email.com");
-    navigate("/");
-  };
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-  const validatePassword = () => {
-    const specialChar = /[!@#$%^&*]/;
-    if (password.length < 6) {
-      return "Password must be at least 6 characters";
-    }
-    if (!specialChar.test(password)) {
-      return "Password must contain a special character";
-    }
-    if (password !== confirmPassword) {
-      return "Passwords do not match";
-    }
-    return "";
-  };
+  try {
+    const result = await axios.post(
+      "http://172.252.13.97:8011/api/v1/auth/users/login",
+      { email, password },
+      { headers: { "Content-Type": "application/json" } }
+    );
 
-  const handleResetNext = () => {
-    setError("");
+    console.log("LOGIN RESPONSE:", result.data);
 
-    if (step === 3) {
-      const err = validatePassword();
-      if (err) {
-        setError(err);
-        return;
-      }
-      // future: API call
-      setShowReset(false);
-      setStep(1);
+    if (result.data.success || result.data.status === "success") {
+      const user =
+        result.data.user || result.data.data?.user || null;
+
+      login(user);
+      toast.success("Login successful!");
+      navigate("/");
     } else {
-      setStep(step + 1);
+      toast.error("Invalid email or password");
     }
-  };
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message || "Login failed. Please try again."
+    );
+  }
+};
+
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
-
       {/* HEADER */}
       <h1 className="text-3xl font-bold text-center mb-2">
         Welcome back!
@@ -65,7 +52,6 @@ export default function Login() {
 
       {/* LOGIN FORM */}
       <form onSubmit={handleLogin} className="space-y-5">
-
         {/* Email */}
         <div>
           <label className="block text-sm font-medium mb-1">
@@ -73,6 +59,7 @@ export default function Login() {
           </label>
           <input
             type="email"
+            name="email"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Enter your email"
             required
@@ -86,101 +73,29 @@ export default function Login() {
           </label>
           <input
             type="password"
+            name="password"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Enter your password"
             required
           />
         </div>
 
-        {/* Remember + Forgot */}
-        <div className="flex justify-between text-sm">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" />
-            Remember for 30 days
-          </label>
-
-          <button
-            type="button"
-            onClick={() => setShowReset(true)}
-            className="text-blue-600"
-          >
-            Forgot password?
-          </button>
-        </div>
-
-        <button className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold">
+        {/* SUBMIT */}
+        <button
+          type="submit"
+          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium"
+        >
           Login
         </button>
       </form>
 
-      <p className="text-sm text-center mt-6">
+      {/* SIGNUP LINK */}
+      <p className="text-md text-center mt-6">
         Don’t have an account?{" "}
         <Link to="/signup" className="text-blue-600 font-medium">
           Sign Up
         </Link>
       </p>
-
-      {/* RESET PASSWORD MODAL */}
-      {showReset && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm">
-            <h3 className="text-lg font-semibold mb-4">
-              Reset Password
-            </h3>
-
-            {/* STEP 1 */}
-            {step === 1 && (
-              <input
-                className="w-full border rounded-lg px-4 py-3"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            )}
-
-            {/* STEP 2 */}
-            {step === 2 && (
-              <input
-                className="w-full border rounded-lg px-4 py-3"
-                placeholder="Enter OTP sent to email"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-            )}
-
-            {/* STEP 3 */}
-            {step === 3 && (
-              <div className="space-y-3">
-                <input
-                  type="password"
-                  className="w-full border rounded-lg px-4 py-3"
-                  placeholder="New password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                  type="password"
-                  className="w-full border rounded-lg px-4 py-3"
-                  placeholder="Confirm password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-            )}
-
-            {error && (
-              <p className="text-red-500 text-sm mt-2">{error}</p>
-            )}
-
-            <button
-              onClick={handleResetNext}
-              className="w-full mt-5 py-3 rounded-lg bg-blue-600 text-white"
-            >
-              {step === 3 ? "Change Password" : "Next"}
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

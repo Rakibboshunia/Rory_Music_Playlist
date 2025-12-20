@@ -5,7 +5,7 @@ import CTASection from "../components/CTASection";
 
 export default function QuizLayout() {
   return (
-    <div className=" bg-gradient-to-b from-[#F6F4FF] to-white min-h-screen">
+    <div className=" bg-linear-to-b from-[#F6F4FF] to-white min-h-screen">
         {/* ===== HEADER ===== */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-10 pb-4 text-center">
           <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold gap-1 leading-tight">

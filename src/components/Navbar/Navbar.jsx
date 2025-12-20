@@ -1,9 +1,11 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext"; // path adjust if needed
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated, hasAccount, logout } = useAuth();
 
   const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -35,6 +37,22 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
+  // 🔐 LOGIN / LOGOUT BUTTON LOGIC
+  const handleAuthClick = () => {
+    setMenuOpen(false);
+
+    if (isAuthenticated) {
+      logout();
+      navigate("/");
+    } else {
+      if (!hasAccount) {
+        navigate("/signup");
+      } else {
+        navigate("/login");
+      }
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300
@@ -44,9 +62,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
         
         {/* LOGO */}
-        <div className="font-semibold text-base">
+        <div className="font-semibold text-2xl">
           <span className={solidNavbar ? "text-gray-900" : "text-white"}>
-            Logo
+            Music
           </span>
         </div>
 
@@ -64,9 +82,10 @@ export default function Navbar() {
         </div>
 
         {/* DESKTOP CTA */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          {/* Upgrade */}
           <button
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition
+            className={`h-10 px-6 rounded-full text-sm font-semibold transition
               ${
                 solidNavbar
                   ? "bg-blue-600 text-white hover:bg-blue-700"
@@ -74,6 +93,19 @@ export default function Navbar() {
               }`}
           >
             Upgrade €9
+          </button>
+
+          {/* Login / Logout */}
+          <button
+            onClick={handleAuthClick}
+            className={`h-10 px-6 rounded-full text-sm font-semibold transition
+              ${
+                solidNavbar
+                  ? "border border-blue-600 text-blue-600 hover:bg-blue-50"
+                  : "border border-white text-white hover:bg-white hover:text-blue-600"
+              }`}
+          >
+            {isAuthenticated ? "Logout" : "Login"}
           </button>
         </div>
 
@@ -89,27 +121,29 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
+        <div className="md:hidden bg-white border-t border-gray-200 hover:text-[#374151]">
           <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
-            <NavLink onClick={() => setMenuOpen(false)} to="/">
-              Home
-            </NavLink>
-            <NavLink onClick={() => setMenuOpen(false)} to="/quiz">
-              Quiz
-            </NavLink>
-            <NavLink onClick={() => setMenuOpen(false)} to="/playlist">
-              Playlist
-            </NavLink>
-            <NavLink to="/" onClick={handleTestimonialClick}>
-              Testimonial
-            </NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/quiz">Quiz</NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink>
+            <NavLink to="/" onClick={handleTestimonialClick}>Testimonial</NavLink>
 
-            <button className="mt-2 py-2 rounded-full bg-blue-600 text-white text-sm">
+            {/* Upgrade */}
+            <button className="h-10 px-6 rounded-full bg-blue-600 text-white text-sm font-semibold">
               Upgrade €9
+            </button>
+
+            {/* Login / Logout */}
+            <button
+              onClick={handleAuthClick}
+              className="h-10 px-6 rounded-full border border-blue-600 text-blue-600 text-sm font-semibold"
+            >
+              {isAuthenticated ? "Logout" : "Login"}
             </button>
           </div>
         </div>
       )}
+
     </nav>
   );
 }

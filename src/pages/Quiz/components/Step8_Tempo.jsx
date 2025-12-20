@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Pop / Disco / Classics", value: "pop", score: { G: 5, N: 10 } },
-  { label: "House / Euphoric vocals", value: "house", score: { G: 30, M: 10 } },
-  { label: "R&B / Hip-Hop throwbacks", value: "rnb", score: { N: 15, E: 10 } },
-  { label: "Indie / Alt party tunes", value: "indie", score: { G: -5, N: 10 } },
-  { label: "Chart / Top 40 only", value: "top40", score: { M: 25, G: 10 } },
+  { label: "Pop / Disco / Classics", value: "pop" },
+  { label: "House / Euphoric vocals", value: "house" },
+  { label: "R&B / Hip-Hop throwbacks", value: "rnb" },
+  { label: "Indie / Alt party tunes", value: "indie" },
+  { label: "Chart / Top 40 only", value: "top40" },
 ];
 
 export default function Step8_Tempo() {
@@ -15,25 +15,22 @@ export default function Step8_Tempo() {
 
   const selected = answers.genreLean || [];
 
-  const toggle = opt => {
-    const exists = selected.includes(opt.value);
+  const toggle = value => {
+    const exists = selected.includes(value);
+
+    // ✅ max 2 selection rule stays
     if (!exists && selected.length === 2) return;
 
-    updateAnswer(
-      "genreLean",
-      exists
-        ? selected.filter(v => v !== opt.value)
-        : [...selected, opt.value],
-      exists
-        ? {
-            E: -(opt.score.E || 0),
-            M: -(opt.score.M || 0),
-            G: -(opt.score.G || 0),
-            L: -(opt.score.L || 0),
-            N: -(opt.score.N || 0),
-          }
-        : opt.score
-    );
+    const updated = exists
+      ? selected.filter(v => v !== value)
+      : [...selected, value];
+
+    updateAnswer("genreLean", updated);
+  };
+
+  const handleNext = () => {
+    console.log("STEP 8 ANSWER:", answers.genreLean);
+    navigate("/quiz/era");
   };
 
   return (
@@ -45,8 +42,8 @@ export default function Step8_Tempo() {
       {options.map(opt => (
         <button
           key={opt.value}
-          onClick={() => toggle(opt)}
-          className={`w-full mb-3 h-[52px] rounded-xl border
+          onClick={() => toggle(opt.value)}
+          className={`w-full mb-3 h-13 rounded-xl border
             ${
               selected.includes(opt.value)
                 ? "bg-purple-600 text-white"
@@ -60,8 +57,8 @@ export default function Step8_Tempo() {
       <div className="flex justify-center mt-4 pb-6">
         <button
           disabled={!selected.length}
-          onClick={() => navigate("/quiz/era")}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+          onClick={handleNext}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
         >
           Next →
         </button>

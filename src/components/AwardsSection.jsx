@@ -6,7 +6,7 @@ import wedding25 from "../assets/img/wedding25.jpg"
 export default function AwardsSection() {
   return (
     <section className="py-5 bg-[#F4F8FE]">
-      <div className="max-w-5xl mx-auto text-center px-6">
+      <div className="max-w-5xl mx-auto text-center pt-8 px-6">
 
         {/* Title */}
         <h2 className="text-5xl font-bold leading-tight">
@@ -41,11 +41,11 @@ export default function AwardsSection() {
       </div>
 
       {/* STATS */}
-      <div className="max-w-4xl mx-auto mt-20 px-6 grid grid-cols-1 md:grid-cols-3 text-center gap-12">
+      <div className="max-w-4xl mx-auto mt-20 px-6 pb-10 grid grid-cols-1 md:grid-cols-3 text-center gap-20">
 
         <Stat number="2,500+" label="Playlists Created" />
         <Stat number="1,000+" label="Events Performed" />
-        <Stat number="5.0 ⭐" label="Google Rating" />
+        <Stat number="5.0⭐" label="Google Rating" />
 
       </div>
     </section>

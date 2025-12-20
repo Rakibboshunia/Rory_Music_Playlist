@@ -2,16 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "ABBA – Gimme! Gimme! Gimme!", value: "abba", score: { N: 20, G: 10 } },
-  { label: "Calvin Harris", value: "calvin", score: { E: 10, G: 15, M: 10 } },
-  { label: "Dua Lipa", value: "dua", score: { M: 15, G: 10 } },
-  { label: "Queen", value: "queen", score: { N: 20, E: 10 } },
-  { label: "Fleetwood Mac", value: "fleetwood", score: { N: 25 } },
+  { label: "ABBA – Gimme! Gimme! Gimme!", value: "abba" },
+  { label: "Calvin Harris", value: "calvin" },
+  { label: "Dua Lipa", value: "dua" },
+  { label: "Queen", value: "queen" },
+  { label: "Fleetwood Mac", value: "fleetwood" },
 ];
 
 export default function Step5_Vibe() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
+
+  const handleNext = () => {
+    console.log("STEP 5 ANSWER:", answers.floorfiller);
+    navigate("/quiz/mood");
+  };
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-2 rounded-xl">
@@ -22,11 +27,13 @@ export default function Step5_Vibe() {
       {options.map(opt => (
         <button
           key={opt.value}
-          onClick={() => updateAnswer("floorfiller", opt.value, opt.score)}
-          className={`w-full mb-3 h-[52px] rounded-xl border
-            ${answers.floorfiller === opt.value
-              ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-              : "bg-white border-gray-200"}`}
+          onClick={() => updateAnswer("floorfiller", opt.value)}
+          className={`w-full mb-3 h-13 rounded-xl border
+            ${
+              answers.floorfiller === opt.value
+                ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
+                : "bg-white border-gray-200"
+            }`}
         >
           {opt.label}
         </button>
@@ -35,8 +42,8 @@ export default function Step5_Vibe() {
       <div className="flex justify-center mt-4 pb-6">
         <button
           disabled={!answers.floorfiller}
-          onClick={() => navigate("/quiz/mood")}
-          className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+          onClick={handleNext}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
         >
           Next →
         </button>

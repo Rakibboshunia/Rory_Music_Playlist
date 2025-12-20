@@ -4,8 +4,9 @@ import router from "./routes/router";
 
 import { QuizProvider } from "./context/QuizContext";
 import { AuthProvider } from "./context/AuthContext";
-import { AudioPlayerProvider } from "./context/AudioPlayerContext"; // ✅ ADD THIS
+import { AudioPlayerProvider } from "./context/AudioPlayerContext"; 
 import "./index.css";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
@@ -14,5 +15,6 @@ createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
       </AudioPlayerProvider>
     </QuizProvider>
+    <Toaster />
   </AuthProvider>
 );

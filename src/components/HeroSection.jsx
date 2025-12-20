@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MusicLogo from "../assets/img/music-logo.png";
+import MusicLogo from "../assets/img/playlist.png";
 import HeroCurve from "../assets/img/Container.png";
 
 export default function HeroSection() {
@@ -13,7 +13,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden pt-32 pb-[180px]"
+      className="relative overflow-hidden pt-28 sm:pt-32 pb-32 sm:pb-44"
       style={{
         background:
           "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
@@ -22,46 +22,72 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* LEFT */}
         <div className="text-white max-w-xl">
-          <h1 className="text-5xl font-extrabold leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
             What's your night's soundtrack?
           </h1>
 
-          <p className="mt-5 text-lg opacity-90">
+          <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
             Take our 60-second vibe quiz and instantly get your personalised
             event playlist.
           </p>
 
-          <div className="mt-5 flex gap-4">
+          {/* ✅ FIXED BUTTONS */}
+          <div className="mt-6 flex gap-3 sm:gap-4 flex-wrap">
             <button
               onClick={() => navigate("/quiz")}
-              className="px-8 py-3 bg-white text-blue-700 rounded-full shadow-lg"
+              className="
+                px-5 py-2
+                sm:px-8 sm:py-3
+                bg-white text-blue-700
+                rounded-full shadow-lg
+                text-sm sm:text-base
+                font-medium
+                transition
+                hover:bg-blue-600 
+                hover:text-white
+                cursor-pointer
+              "
             >
               Start My Quiz →
             </button>
 
             <button
               onClick={handleHowItWorks}
-              className="px-8 py-3 border border-white/60 rounded-full"
+              className="
+                px-5 py-2
+                sm:px-8 sm:py-3
+                border border-white/60
+                rounded-full
+                text-sm sm:text-base
+                font-medium
+                transition
+                hover:bg-white/20
+                hover:border-white
+                cursor-pointer
+              "
             >
               See How It Works
             </button>
           </div>
 
+          {/* SOCIAL PROOF */}
           <div className="mt-8 flex items-center gap-3">
             <div className="flex">
-              <div className="w-10 h-10 rounded-full bg-yellow-400 border-2 border-white"></div>
-              <div className="-ml-2 w-10 h-10 rounded-full bg-[#C27AFF] border-2 border-white"></div>
-              <div className="-ml-2 w-10 h-10 rounded-full bg-[#51A2FF] border-2 border-white"></div>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-yellow-400 border-2 border-white"></div>
+              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#C27AFF] border-2 border-white"></div>
+              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#51A2FF] border-2 border-white"></div>
             </div>
-            <span className="text-white/80">2,500+ playlists created</span>
+            <span className="text-white/80 text-sm sm:text-base">
+              2,500+ playlists created
+            </span>
           </div>
         </div>
 
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 w-[360px] rotate-5 hover:rotate-0 transition">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-[320px] sm:w-90 rotate-5 hover:rotate-0 transition">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white">
+              <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                 🎵
               </div>
               <div>
@@ -70,19 +96,25 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="mt-4 aspect-square rounded-2xl bg-gradient-to-br from-pink-400 to-orange-300 flex items-center justify-center">
-              <span className="text-white text-6xl">🎵</span>
+            <div className="mt-4 aspect-square rounded-2xl bg-linear-to-br from-pink-400 to-orange-300 flex items-center justify-center">
+              <span className="text-white text-8xl">🎵</span>
             </div>
 
-            <h3 className="mt-4 font-semibold">Classic Romance Collection</h3>
+            <h3 className="mt-4 font-semibold">
+              Classic Romance Collection
+            </h3>
             <p className="text-xs text-gray-400">30 tracks curated</p>
 
-            <div className="mt-5 space-y-4">
+            <div className="mt-5 space-y-3">
               {["At Last", "Can't Help Falling in Love", "Wonderful Tonight"].map(
                 (t, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <img src={MusicLogo} className="w-11 h-11 rounded-lg" />
-                    <p className="text-sm font-medium">{t}</p>
+                    <img
+                      src={MusicLogo}
+                      className="w-12 h-10 rounded-lg"
+                      alt=""
+                    />
+                    <p className="text-sm font-medium truncate">{t}</p>
                   </div>
                 )
               )}
@@ -94,7 +126,7 @@ export default function HeroSection() {
       <img
         src={HeroCurve}
         alt="curve"
-        className="absolute bottom-0 left-0 w-full h-[220px]"
+        className="absolute bottom-0 left-0 w-full h-35 sm:h-55 pointer-events-none select-none"
       />
     </section>
   );

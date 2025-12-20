@@ -36,7 +36,7 @@ export default function PlaylistCard({
           <img
             src={coverImg}
             alt="playlist cover"
-            className="w-full h-[400px] object-cover rounded-xl"
+            className="w-full h-100 object-cover rounded-xl"
           />
 
           <PlaylistPlayer />

@@ -33,7 +33,7 @@ export default function QuizPage() {
 
           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+              className="h-2 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
