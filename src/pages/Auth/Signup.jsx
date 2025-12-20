@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function Signup() {
   const navigate = useNavigate();
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
