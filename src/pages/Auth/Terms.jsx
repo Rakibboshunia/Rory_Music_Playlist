@@ -14,19 +14,16 @@ export default function Terms() {
           This is a demo Terms & Policy page. The content here is for
           placeholder purposes only.
         </p>
-
         <p>
           By using this platform, you agree to comply with all applicable
           laws and regulations. You are responsible for maintaining the
           confidentiality of your account credentials.
         </p>
-
         <p>
           We may collect basic user information to improve your experience.
           Your data will never be sold or shared with third parties without
           your consent.
         </p>
-
         <p>
           The service is provided "as is" without warranties of any kind.
           We reserve the right to update these terms at any time.
