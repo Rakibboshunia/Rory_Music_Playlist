@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Absolutely — feature it", value: "sax_feature"},
-  { label: "Nice as an add-on",value: "sax_addon"},
-  { label: "Not essential",value: "no_sax"},
+  { label: "Absolutely — feature it", value: "Absolutely - Feature It" },
+  { label: "Nice as an add-on", value: "Nice as an add-on" },
+  { label: "Not essential", value: "Not essential" },
 ];
 
 export default function Step6_Mood() {
@@ -12,7 +12,7 @@ export default function Step6_Mood() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-    console.log("STEP 6 ANSWER:", answers.sax);
+   
     navigate("/quiz/energy");
   };
 
@@ -41,7 +41,7 @@ export default function Step6_Mood() {
         <button
           disabled={!answers.sax}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

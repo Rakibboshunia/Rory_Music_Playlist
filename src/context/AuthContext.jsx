@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
   const signup = (data) => {
     // data = { name, email, password }
     setHasAccount(true);
-    console.log("SIGNED UP USER:", data);
+    
   };
 
   // ✅ LOGIN (demo)
@@ -22,13 +22,13 @@ export function AuthProvider({ children }) {
       name: "Demo User",
       email: data.email,
     });
-    console.log("LOGGED IN USER:", data.email);
+ 
   };
 
   // ✅ LOGOUT
   const logout = () => {
     setUser(null);
-    console.log("USER LOGGED OUT");
+   
   };
 
   return (

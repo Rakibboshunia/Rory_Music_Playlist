@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Smooth & chic", value: "smooth" },
-  { label: "Warm & lively", value: "warm" },
-  { label: "Up and bouncing", value: "bouncing" },
-  { label: "Lose our minds", value: "wild" },
+  { label: "Smooth & chic", value: "Smooth & chic" },
+  { label: "Warm & lively", value: "Warm & lively" },
+  { label: "Up and bouncing", value: "Up and bouncing" },
+  { label: "Lose our minds", value: "Lose our minds" },
 ];
 
 export default function Step9_Era() {
@@ -13,7 +13,7 @@ export default function Step9_Era() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-    console.log("STEP 9 ANSWER:", answers.lastHour);
+
     navigate("/quiz/final");
   };
 
@@ -23,14 +23,14 @@ export default function Step9_Era() {
         How wild should the last hour be?
       </h2>
 
-      {options.map(opt => (
+      {options.map((opt) => (
         <button
           key={opt.value}
           onClick={() => updateAnswer("lastHour", opt.value)}
           className={`w-full mb-3 h-13 rounded-xl border
             ${
               answers.lastHour === opt.value
-                ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
+                ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
                 : "bg-white border-gray-200"
             }`}
         >
@@ -42,7 +42,7 @@ export default function Step9_Era() {
         <button
           disabled={!answers.lastHour}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

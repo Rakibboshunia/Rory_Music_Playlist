@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Wedding (Evening party)", value: "wedding_evening" },
-  { label: "Wedding (Drinks reception)", value: "wedding_drinks" },
-  { label: "Corporate party / awards", value: "corporate" },
-  { label: "Private party / milestone", value: "private" },
-  { label: "Black-tie gala", value: "black_tie" },
+  { label: "Wedding (Evening party)", value: "Wedding (Evening party)" },
+  { label: "Wedding (Drinks reception)", value: "Wedding (Drinks reception)" },
+  { label: "Corporate party / awards", value: "Corporate party / awards" },
+  { label: "Private party / milestone", value: "Private party / milestone" },
+  { label: "Black-tie gala", value: "Black-tie gala" },
 ];
 
 export default function Step1_EventType() {
@@ -14,7 +14,7 @@ export default function Step1_EventType() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleSubmit = () => {
-    console.log("STEP 1 ANSWER:", answers.eventType);
+    
     navigate("/quiz/details"); 
   };
 
@@ -43,7 +43,7 @@ export default function Step1_EventType() {
         <button
           disabled={!answers.eventType}
           onClick={handleSubmit}
-          className="px-10 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-10 py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50"
         >
           Next →
         </button>

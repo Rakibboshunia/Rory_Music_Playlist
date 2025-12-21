@@ -19,7 +19,7 @@ export default function Login() {
       { headers: { "Content-Type": "application/json" } }
     );
 
-    console.log("LOGIN RESPONSE:", result.data);
+    
 
     if (result.data.success || result.data.status === "success") {
       const user =
@@ -82,7 +82,7 @@ export default function Login() {
         {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium"
+          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer"
         >
           Login
         </button>

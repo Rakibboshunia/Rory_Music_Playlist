@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Elegant & modern", value: "elegant" },
-  { label: "Fun & nostalgic", value: "nostalgic" },
-  { label: "High-energy floorfillers", value: "energy" },
-  { label: "Ibiza sunset & house", value: "ibiza" },
-  { label: "Indie / cool & alternative", value: "indie" },
+  { label: "Elegant & modern", value: "Elegant & modern" },
+  { label: "Fun & nostalgic", value: "Fun & nostalgic" },
+  { label: "High-energy floorfillers", value: "High-energy floorfillers" },
+  { label: "Ibiza sunset & house", value: "Ibiza sunset & house" },
+  { label: "Indie / cool & alternative", value: "Indie / cool & alternative" },
 ];
 
 export default function Step2_EventDetails() {
@@ -14,7 +14,7 @@ export default function Step2_EventDetails() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-    console.log("STEP 2 ANSWER:", answers.overallVibe);
+    
     navigate("/quiz/genres");
   };
 
@@ -43,7 +43,7 @@ export default function Step2_EventDetails() {
         <button
           disabled={!answers.overallVibe}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

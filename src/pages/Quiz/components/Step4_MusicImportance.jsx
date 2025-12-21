@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "18–25", value: "18_25", score: { M: 25, E: 10 } },
-  { label: "26–35", value: "26_35", score: { M: 10, E: 5 } },
-  { label: "36–45", value: "36_45", score: { N: 10 } },
-  { label: "46–60", value: "46_60", score: { N: 20 } },
-  { label: "Mixed ages", value: "mixed", score: { N: 10, E: 5 } },
+  { label: "18–25", value: "18_25",  },
+  { label: "26–35", value: "26_35", },
+  { label: "36–45", value: "36_45", },
+  { label: "46–60", value: "46_60", },
+  { label: "Mixed ages", value: "Mixed Ages", },
 ];
 
 export default function Step4_MusicImportance() {
@@ -36,7 +36,7 @@ export default function Step4_MusicImportance() {
         <button
           disabled={!answers.crowdAge}
           onClick={() => navigate("/quiz/vibe")}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

@@ -1,6 +1,6 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext"; // path adjust if needed
+import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
   const location = useLocation();
@@ -37,7 +37,7 @@ export default function Navbar() {
     setMenuOpen(false);
   };
 
-  // 🔐 LOGIN / LOGOUT BUTTON LOGIC
+  // 🔐 LOGIN / LOGOUT BUTTON LOGIC (UNCHANGED)
   const handleAuthClick = () => {
     setMenuOpen(false);
 
@@ -60,7 +60,7 @@ export default function Navbar() {
     >
       {/* MAIN BAR */}
       <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
-        
+
         {/* LOGO */}
         <div className="font-semibold text-2xl">
           <span className={solidNavbar ? "text-gray-900" : "text-white"}>
@@ -70,13 +70,13 @@ export default function Navbar() {
 
         {/* DESKTOP MENU */}
         <div
-          className={`hidden md:flex items-center gap-8 text-medium font-medium
+          className={`hidden md:flex items-center gap-8 text-medium font-medium 
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/quiz">Quiz</NavLink>
-          <NavLink to="/playlist">Playlist</NavLink>
-          <NavLink to="/" onClick={handleTestimonialClick}>
+          <NavLink to="/" className="hover:text-[#ad3bff]">Home</NavLink>
+          <NavLink to="/quiz" className="hover:text-[#ad3bff]">Quiz</NavLink>
+          <NavLink to="/playlist/:id" className="hover:text-[#ad3bff]">Playlist</NavLink>
+          <NavLink to="/" className="hover:text-[#ad3bff]" onClick={handleTestimonialClick}>
             Testimonial
           </NavLink>
         </div>
@@ -85,24 +85,24 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           {/* Upgrade */}
           <button
-            className={`h-10 px-6 rounded-full text-sm font-semibold transition
+            className={`h-10 px-6 rounded-full cursor-pointer hover:bg-white/85 text-sm font-semibold transition
               ${
                 solidNavbar
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white hover:shadow-lg"
                   : "bg-white text-blue-600 hover:bg-gray-100"
               }`}
           >
             Upgrade €9
           </button>
 
-          {/* Login / Logout */}
+          {/* 🔐 Login / Logout (GREEN / RED BORDER ADDED) */}
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full text-sm font-semibold transition
+            className={`h-10 px-6 rounded-full text-sm font-semibold transition cursor-pointer border-2
               ${
-                solidNavbar
-                  ? "border border-blue-600 text-blue-600 hover:bg-blue-50"
-                  : "border border-white text-white hover:bg-white hover:text-blue-600"
+                isAuthenticated
+                  ? "border-none text-white bg-red-500 hover:bg-red-600"
+                  : "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
               }`}
           >
             {isAuthenticated ? "Logout" : "Login"}
@@ -121,29 +121,33 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 hover:text-[#374151]">
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
           <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
             <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/quiz">Quiz</NavLink>
-            <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink>
+            {/* <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink> */}
             <NavLink to="/" onClick={handleTestimonialClick}>Testimonial</NavLink>
 
             {/* Upgrade */}
-            <button className="h-10 px-6 rounded-full bg-blue-600 text-white text-sm font-semibold">
+            <button className="h-10 px-6 rounded-full bg-blue-500 text-white text-[16px] font-semibold">
               Upgrade €9
             </button>
 
-            {/* Login / Logout */}
+            {/* 🔐 Login / Logout (GREEN / RED BORDER ADDED) */}
             <button
               onClick={handleAuthClick}
-              className="h-10 px-6 rounded-full border border-blue-600 text-blue-600 text-sm font-semibold"
+              className={`h-10 px-6 rounded-full border-2 text-[16px] font-bold transition
+                ${
+                  isAuthenticated
+                    ? "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+                    : "border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                }`}
             >
               {isAuthenticated ? "Logout" : "Login"}
             </button>
           </div>
         </div>
       )}
-
     </nav>
   );
 }

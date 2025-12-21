@@ -8,8 +8,8 @@ export default function TestimonialsSection() {
           SECTION HEADER
       ====================== */}
       <div className="max-w-5xl mx-auto text-center px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-          Real Stories. Real Moments.
+        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+          Real Stories.Real Moments.
           <br className="hidden sm:block" />
           Real Magic.
         </h2>

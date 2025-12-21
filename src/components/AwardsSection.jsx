@@ -1,7 +1,7 @@
 import React from "react";
-import rsvp from "../assets/img/rsvp.jpg"
-import wedding from "../assets/img/wedding.jpg"
-import wedding25 from "../assets/img/wedding25.jpg"
+import rsvp from "../assets/img/rsvp23.jpg"
+import wedding from "../assets/img/winner24.jpg"
+import wedding25 from "../assets/img/winner25.jpg"
 
 export default function AwardsSection() {
   return (
@@ -9,7 +9,7 @@ export default function AwardsSection() {
       <div className="max-w-5xl mx-auto text-center pt-8 px-6">
 
         {/* Title */}
-        <h2 className="text-5xl font-bold leading-tight">
+        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-bold leading-tight">
           Award-Winning <br /> Entertainment Excellence
         </h2>
 
@@ -41,7 +41,7 @@ export default function AwardsSection() {
       </div>
 
       {/* STATS */}
-      <div className="max-w-4xl mx-auto mt-20 px-6 pb-10 grid grid-cols-1 md:grid-cols-3 text-center gap-20">
+      <div className="max-w-3xl mx-auto mt-15 px-6 pb-10 grid grid-cols-1 md:grid-cols-3 text-center gap-20">
 
         <Stat number="2,500+" label="Playlists Created" />
         <Stat number="1,000+" label="Events Performed" />
@@ -66,7 +66,7 @@ function AwardCard({ img, title }) {
 function Stat({ number, label }) {
   return (
     <div>
-      <p className="text-4xl font-bold text-purple-600">{number}</p>
+      <p className="text-4xl font-bold bg-linear-to-r from-[#9810FA] to-[#155DFC] text-transparent bg-clip-text">{number}</p>
       <p className="mt-2 text-gray-600">{label}</p>
     </div>
   );

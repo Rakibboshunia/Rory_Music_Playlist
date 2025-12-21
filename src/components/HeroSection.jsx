@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import MusicLogo from "../assets/img/playlist.png";
 import HeroCurve from "../assets/img/Container.png";
+import { FaMusic } from "react-icons/fa";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function HeroSection() {
       className="relative overflow-hidden pt-28 sm:pt-32 pb-32 sm:pb-44"
       style={{
         background:
-          "linear-gradient(180deg,#316BFF 0%,#5C8CFF 40%,#C99C52 100%)",
+          "linear-gradient(180deg,#1E40AF 0%,#3B82F6 40%,#F59E0B 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -39,12 +40,13 @@ export default function HeroSection() {
                 px-5 py-2
                 sm:px-8 sm:py-3
                 bg-white text-blue-700
-                rounded-full shadow-lg
+                rounded-full
                 text-sm sm:text-base
                 font-medium
-                transition
-                hover:bg-blue-600 
+                shadow-lg
+                hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] 
                 hover:text-white
+                border hover:border-white/80
                 cursor-pointer
               "
             >
@@ -56,13 +58,13 @@ export default function HeroSection() {
               className="
                 px-5 py-2
                 sm:px-8 sm:py-3
-                border border-white/60
+                border border-white/80
                 rounded-full
+                shadow-lg
                 text-sm sm:text-base
                 font-medium
                 transition
-                hover:bg-white/20
-                hover:border-white
+                hover:bg-linear-to-r from-[#9810FA] to-[#155DFC]
                 cursor-pointer
               "
             >
@@ -73,9 +75,9 @@ export default function HeroSection() {
           {/* SOCIAL PROOF */}
           <div className="mt-8 flex items-center gap-3">
             <div className="flex">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-yellow-400 border-2 border-white"></div>
-              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#C27AFF] border-2 border-white"></div>
-              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#51A2FF] border-2 border-white"></div>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-[#FFDF20] to-[#FF8904] border-2 border-white"></div>
+              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-[#FDA5D5] to-[#C27AFF] border-2 border-white"></div>
+              <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-[#7BF1A8] to-[#51A2FF] border-2 border-white"></div>
             </div>
             <span className="text-white/80 text-sm sm:text-base">
               2,500+ playlists created
@@ -88,7 +90,7 @@ export default function HeroSection() {
           <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-[320px] sm:w-90 rotate-5 hover:rotate-0 transition">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white">
-                🎵
+                <FaMusic className="text-white text-xl" />
               </div>
               <div>
                 <p className="text-xs text-gray-400">Your Vibe</p>
@@ -96,8 +98,8 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="mt-4 aspect-square rounded-2xl bg-linear-to-br from-pink-400 to-orange-300 flex items-center justify-center">
-              <span className="text-white text-8xl">🎵</span>
+            <div className="mt-4 aspect-square rounded-2xl bg-linear-to-br from-[#C27AFF] to-[#F59E0B] to-'[#FFB86A]' flex items-center justify-center">
+              <FaMusic className="text-white text-8xl" />
             </div>
 
             <h3 className="mt-4 font-semibold">

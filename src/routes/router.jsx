@@ -41,7 +41,10 @@ const router = createBrowserRouter([
         ],
       },
 
-      { path: "/playlist", element: <PlaylistResult /> },
+      {
+        path: "/playlist/:id",
+        element: <PlaylistResult />,
+      },
     ],
   },
 
@@ -50,7 +53,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/signup", element: <Signup /> },
       { path: "/login", element: <Login /> },
-      { path: "/terms", element: <Terms /> }, // ✅ ADDED
+      { path: "/terms", element: <Terms /> },
     ],
   },
 ]);

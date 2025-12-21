@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Pop / Disco / Classics", value: "pop" },
-  { label: "House / Euphoric vocals", value: "house" },
-  { label: "R&B / Hip-Hop throwbacks", value: "rnb" },
-  { label: "Indie / Alt party tunes", value: "indie" },
-  { label: "Chart / Top 40 only", value: "top40" },
+  { label: "Pop / Disco / Classics", value: "Pop / Disco / Classics" },
+  { label: "House / Euphoric vocals", value: "House / Euphoric vocals" },
+  { label: "R&B / Hip-Hop throwbacks", value: "R&B / Hip-Hop throwbacks" },
+  { label: "Indie / Alt party tunes", value: "Indie / Alt party tunes" },
+  { label: "Chart / Top 40 only", value: "Chart / Top 40 only" },
 ];
 
 export default function Step8_Tempo() {
@@ -29,7 +29,7 @@ export default function Step8_Tempo() {
   };
 
   const handleNext = () => {
-    console.log("STEP 8 ANSWER:", answers.genreLean);
+    
     navigate("/quiz/era");
   };
 
@@ -46,7 +46,7 @@ export default function Step8_Tempo() {
           className={`w-full mb-3 h-13 rounded-xl border
             ${
               selected.includes(opt.value)
-                ? "bg-purple-600 text-white"
+                ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
                 : "bg-white border-gray-200"
             }`}
         >
@@ -58,7 +58,7 @@ export default function Step8_Tempo() {
         <button
           disabled={!selected.length}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

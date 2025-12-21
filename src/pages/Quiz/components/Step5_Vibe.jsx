@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "ABBA – Gimme! Gimme! Gimme!", value: "abba" },
-  { label: "Calvin Harris", value: "calvin" },
-  { label: "Dua Lipa", value: "dua" },
-  { label: "Queen", value: "queen" },
-  { label: "Fleetwood Mac", value: "fleetwood" },
+  { label: "ABBA – Gimme! Gimme! Gimme!", value: "ABBA Gimme! Gimme! Gimme!" },
+  { label: "Calvin Harris", value: "Calvin Harris" },
+  { label: "Dua Lipa", value: "Dua Lipa" },
+  { label: "Queen", value: "Queen" },
+  { label: "Fleetwood Mac", value: "Fleetwood Mac" },
 ];
 
 export default function Step5_Vibe() {
@@ -14,7 +14,7 @@ export default function Step5_Vibe() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-    console.log("STEP 5 ANSWER:", answers.floorfiller);
+   
     navigate("/quiz/mood");
   };
 
@@ -43,7 +43,7 @@ export default function Step5_Vibe() {
         <button
           disabled={!answers.floorfiller}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

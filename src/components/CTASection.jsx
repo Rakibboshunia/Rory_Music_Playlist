@@ -4,7 +4,7 @@ export default function CTASection() {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white py-16 sm:py-0">
+    <section className="bg-white py-10 sm:py-0 pb-18 sm:pb-18">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
@@ -27,10 +27,10 @@ export default function CTASection() {
               className="
                 px-4 py-3
                 bg-white text-blue-700
-                hover:bg-blue-600 hover:text-white
+                hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white
                 font-medium rounded-full
                 shadow-md hover:shadow-lg
-                transition
+                transition cursor-pointer
                 flex items-center justify-center gap-2
                 mx-auto
               "

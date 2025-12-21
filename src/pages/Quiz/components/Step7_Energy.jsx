@@ -24,7 +24,7 @@ export default function Step7_Energy() {
   };
 
   const handleNext = () => {
-    console.log("STEP 7 ANSWER:", answers.decades);
+    
     navigate("/quiz/tempo");
   };
 
@@ -41,7 +41,7 @@ export default function Step7_Energy() {
           className={`w-full mb-3 h-13 rounded-xl border
             ${
               selected.includes(opt.value)
-                ? "bg-purple-600 text-white"
+                ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
                 : "bg-white border-gray-200"
             }`}
         >
@@ -53,7 +53,7 @@ export default function Step7_Energy() {
         <button
           disabled={!selected.length}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

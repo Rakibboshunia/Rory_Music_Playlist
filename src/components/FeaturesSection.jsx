@@ -1,13 +1,17 @@
 import React from "react";
 import { Sparkles, ListMusic, Mic } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function FeaturesSection() {
+
+  const navigate = useNavigate();
+
   return (
     <section className="py-17 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         {/* SECTION TITLE */}
         <div className="text-center mb-18">
-          <h2 className="text-5xl pb-2 font-smibold">
+          <h2 className="text-4xl sm:text-4xl lg:text-5xl pb-2 font-smibold">
             Your night. Your energy.
             <br /> Your soundtrack.
           </h2>
@@ -48,11 +52,8 @@ export default function FeaturesSection() {
 
         <div className="mt-10 text-center">
           <button
-            onClick={() => {
-              const el = document.getElementById("cta-section");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-5 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transition"
+            onClick={() => navigate("/playlists")}
+            className="px-5 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white cursor-pointer rounded-full font-medium shadow hover:shadow-lg transition"
           >
             Find My Soundtrack →
           </button>
@@ -69,13 +70,13 @@ function FeatureCard({ number, title, desc, icon, bg }) {
   return (
     <div className="relative bg-white rounded-2xl shadow-lg p-8 pt-14 hover:shadow-xl transition">
       {/* NUMBER BADGE */}
-      <div className="absolute -top-4 -left-4 w-9 h-9 rounded-full bg-indigo-600 text-white text-sm font-semibold flex items-center justify-center shadow">
+      <div className="absolute -top-4 -left-4 w-9 h-9 rounded-full bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white text-sm font-semibold flex items-center justify-center shadow">
         {number}
       </div>
 
       {/* ICON BADGE (MARKED PART) */}
       <div
-        className={`absolute top-6 left-6 w-10 h-10 rounded-xl bg-gradient-to-br ${bg} text-white flex items-center justify-center shadow-md`}
+        className={`absolute top-6 left-6 w-10 h-10 rounded-xl bg-linear-to-br ${bg} text-white flex items-center justify-center shadow-md`}
       >
         {icon}
       </div>

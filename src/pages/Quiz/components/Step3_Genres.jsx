@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "Champagne tower", value: "champagne" },
-  { label: "Espresso martinis", value: "espresso" },
-  { label: "Craft cocktails", value: "craft" },
-  { label: "Pints with pals", value: "pints" },
-  { label: "Rosé on the terrace", value: "rose" },
+  { label: "Champagne tower", value: "Champagne Tower" },
+  { label: "Espresso martinis", value: "Espresso Martinis" },
+  { label: "Craft cocktails", value: "Craft Cocktails" },
+  { label: "Pints with pals", value: "Pints with Pals" },
+  { label: "Rosé on the terrace", value: "Rosé on the Terrace" },
 ];
 
 export default function Step3_Genres() {
@@ -14,7 +14,7 @@ export default function Step3_Genres() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-    console.log("STEP 3 ANSWER:", answers.drinksMoment);
+    
     navigate("/quiz/importance");
   };
 
@@ -43,7 +43,7 @@ export default function Step3_Genres() {
         <button
           disabled={!answers.drinksMoment}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-blue-500 to-purple-500 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

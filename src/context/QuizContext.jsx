@@ -16,8 +16,7 @@ export const QuizProvider = ({ children }) => {
 
   // ✅ FINAL SUBMIT (console log all answers)
   const submitQuiz = () => {
-    console.log("QUIZ SUBMITTED — ALL ANSWERS:");
-    console.log(answers);
+    
   };
 
   return (
