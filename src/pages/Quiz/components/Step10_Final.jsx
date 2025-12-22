@@ -4,11 +4,14 @@ import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
 import upgradeImg from "../../../assets/img/UpgradePopup.png";
 import toast from "react-hot-toast";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
   const { isAuthenticated } = useAuth();
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
@@ -29,63 +32,112 @@ export default function Step10_Final() {
   /* ======================
      GUEST EMAIL SUBMIT
   ====================== */
- const submitGuestEmail = async (e) => {
-  e.preventDefault();
+  const submitGuestEmail = async (e) => {
+    e.preventDefault();
 
-  const payload = {
-    email,
-    answers: {
-      q1: answers.eventType,
-      q2: answers.overallVibe,
-      q3: answers.drinksMoment,
-      q4: answers.crowdAge,
-      q5: answers.floorfiller,
-      q6: answers.sax,
-      q7: answers.decades,
-      q8: answers.genreLean,
-      q9: answers.lastHour,
-      q10: answers.doNotPlays,
-    },
+    const payload = {
+      email,
+      answers: {
+        q1: answers.eventType,
+        q2: answers.overallVibe,
+        q3: answers.drinksMoment,
+        q4: answers.crowdAge,
+        q5: answers.floorfiller,
+        q6: answers.sax,
+        q7: answers.decades,
+        q8: answers.genreLean,
+        q9: answers.lastHour,
+        q10: answers.doNotPlays,
+      },
+    };
+
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      const data = await response.json();
+
+      toast.success(data.message || "Playlist sent to your email!");
+
+      // ✅ reset + close
+      setShowEmailPopup(false);
+      setEmail("");
+      updateAnswer("doNotPlays", "");
+
+      // ✅ OPTIONAL (recommended)
+      // backend future e playlistId pathabe
+      // navigate(`/playlist/${data.playlistId || "guest-preview"}`);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  try {
-    setLoading(true);
+  /* ======================
+     UPGRADE ACTIONS
+  ====================== */
 
-    const response = await fetch(
-      import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
+  const handleUpgradeYes = () => {
+    window.location.href = "https://checkout.stripe.com/pay/demo-checkout-link";
+  };
 
-    if (!response.ok) {
-      throw new Error("Failed to submit");
+  const handleUpgradeNo = async () => {
+    const payload = {
+      answers: {
+        q1: answers.eventType,
+        q2: answers.overallVibe,
+        q3: answers.drinksMoment,
+        q4: answers.crowdAge,
+        q5: answers.floorfiller,
+        q6: answers.sax,
+        q7: answers.decades,
+        q8: answers.genreLean,
+        q9: answers.lastHour,
+        q10: answers.doNotPlays,
+      },
+      user_type: "free",
+    };
+    const token = Cookies.get("token");
+    try {
+      setIsGenerating(true);
+      const result = await axios.post(
+        import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // 🔥 TOKEN HERE
+          },
+        }
+      );
+
+      toast.success("Playlist is Generated");
+      setShowUpgradePopup(false);
+      navigate("/playlist");
+    } catch (error) {
+      toast.error(error || "Something went wrong");
+    } finally {
+      setIsGenerating(false);
     }
+    // setShowUpgradePopup(false);
 
-    const data = await response.json();
+    // navigate("/playlist/");
+  };
 
-    toast.success(data.message || "Playlist sent to your email!");
-
-    // ✅ reset + close
-    setShowEmailPopup(false);
-    setEmail("");
-    updateAnswer("doNotPlays", "");
-
-    // ✅ OPTIONAL (recommended)
-    // backend future e playlistId pathabe
-    // navigate(`/playlist/${data.playlistId || "guest-preview"}`);
-
-  } catch (error) {
-    toast.error("Something went wrong. Please try again.");
-    console.error(error);
-  } finally {
-    setLoading(false);
-  }
-};
-
-  //   // Additional logic can be added here if needed
   //   const payload = {
   //     email,
   //     answers: {
@@ -244,23 +296,36 @@ export default function Step10_Final() {
             </div>
 
             <h3 className="text-xl font-semibold mb-4">
-              Do you want to upgrade your status?
+              Do you want to upgrade your playlist?
             </h3>
 
             <div className="flex gap-3 justify-center">
-              <button
-                // onClick={() => navigate("/playlist")}
-                className="px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-50 transition cursor-pointer"
-              >
-                No
-              </button>
+              <div className="flex gap-3 justify-center">
+                {!isGenerating ? (
+                  <>
+                    {/* NO BUTTON */}
+                    <button
+                      onClick={handleUpgradeNo}
+                      className="px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-50 transition cursor-pointer"
+                    >
+                      No
+                    </button>
 
-              <button
-                onClick={() => navigate("/upgrade")}
-                className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
-              >
-                Yes
-              </button>
+                    {/* YES BUTTON */}
+                    <button
+                      onClick={handleUpgradeYes}
+                      className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
+                    >
+                      Yes
+                    </button>
+                  </>
+                ) : (
+                  /* LOADING STATE */
+                  <div className="px-6 py-2 rounded-full bg-gray-100 text-gray-600 text-sm font-medium">
+                    Generating playlist…
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

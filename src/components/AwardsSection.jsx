@@ -5,7 +5,7 @@ import wedding25 from "../assets/img/winner25.jpg"
 
 export default function AwardsSection() {
   return (
-    <section className="py-5 bg-[#F4F8FE]">
+    <section className="border-t border-gray-200 py-5 bg-[#F4F8FE]">
       <div className="max-w-5xl mx-auto text-center pt-8 px-6">
 
         {/* Title */}

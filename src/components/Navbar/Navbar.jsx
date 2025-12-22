@@ -1,6 +1,8 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import logo from "../../assets/img/logo2.png";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const location = useLocation();
@@ -42,15 +44,25 @@ export default function Navbar() {
     setMenuOpen(false);
 
     if (isAuthenticated) {
+      Cookies.remove("token", {
+        secure: true,
+        sameSite: "strict",
+      });
+
       logout();
       navigate("/");
     } else {
       if (!hasAccount) {
-        navigate("/signup");
+        navigate("/login");
       } else {
         navigate("/login");
       }
     }
+  };
+
+  // 💳 UPGRADE → STRIPE
+  const handleUpgradeClick = () => {
+    window.location.href = "https://checkout.stripe.com/pay/demo-checkout-link";
   };
 
   return (
@@ -59,13 +71,10 @@ export default function Navbar() {
         ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
     >
       {/* MAIN BAR */}
-      <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
-
+      <div className="max-w-7xl mx-auto px-5 py-2 flex items-center justify-between">
         {/* LOGO */}
         <div className="font-semibold text-2xl">
-          <span className={solidNavbar ? "text-gray-900" : "text-white"}>
-            Music
-          </span>
+          <img src={logo} alt="logo" className="w-15 h-14" />
         </div>
 
         {/* DESKTOP MENU */}
@@ -73,10 +82,24 @@ export default function Navbar() {
           className={`hidden md:flex items-center gap-8 text-medium font-medium 
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
-          <NavLink to="/" className="hover:text-[#ad3bff]">Home</NavLink>
-          <NavLink to="/quiz" className="hover:text-[#ad3bff]">Quiz</NavLink>
-          <NavLink to="/playlist/:id" className="hover:text-[#ad3bff]">Playlist</NavLink>
-          <NavLink to="/" className="hover:text-[#ad3bff]" onClick={handleTestimonialClick}>
+          <NavLink to="/" className="hover:text-[#ad3bff]">
+            Home
+          </NavLink>
+          <NavLink to="/quiz" className="hover:text-[#ad3bff]">
+            Quiz
+          </NavLink>
+
+          {isAuthenticated && (
+            <NavLink to="/playlist" className="hover:text-[#ad3bff]">
+              Playlist
+            </NavLink>
+          )}
+
+          <NavLink
+            to="/"
+            className="hover:text-[#ad3bff]"
+            onClick={handleTestimonialClick}
+          >
             Testimonial
           </NavLink>
         </div>
@@ -85,6 +108,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           {/* Upgrade */}
           <button
+            onClick={handleUpgradeClick}
             className={`h-10 px-6 rounded-full cursor-pointer hover:bg-white/85 text-sm font-semibold transition
               ${
                 solidNavbar
@@ -95,7 +119,7 @@ export default function Navbar() {
             Upgrade €9
           </button>
 
-          {/* 🔐 Login / Logout (GREEN / RED BORDER ADDED) */}
+          {/* LOGIN / LOGOUT */}
           <button
             onClick={handleAuthClick}
             className={`h-10 px-6 rounded-full text-sm font-semibold transition cursor-pointer border-2
@@ -123,24 +147,39 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
           <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
-            <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
-            <NavLink onClick={() => setMenuOpen(false)} to="/quiz">Quiz</NavLink>
-            {/* <NavLink onClick={() => setMenuOpen(false)} to="/playlist">Playlist</NavLink> */}
-            <NavLink to="/" onClick={handleTestimonialClick}>Testimonial</NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/">
+              Home
+            </NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/quiz">
+              Quiz
+            </NavLink>
+
+            {isAuthenticated && (
+              <NavLink onClick={() => setMenuOpen(false)} to="/playlist/demo">
+                Playlist
+              </NavLink>
+            )}
+
+            <NavLink to="/" onClick={handleTestimonialClick}>
+              Testimonial
+            </NavLink>
 
             {/* Upgrade */}
-            <button className="h-10 px-6 rounded-full bg-blue-500 text-white text-[16px] font-semibold">
+            <button
+              onClick={handleUpgradeClick}
+              className="h-10 px-6 rounded-full bg-blue-500 text-white text-[16px] font-semibold"
+            >
               Upgrade €9
             </button>
 
-            {/* 🔐 Login / Logout (GREEN / RED BORDER ADDED) */}
+            {/* LOGIN / LOGOUT */}
             <button
               onClick={handleAuthClick}
               className={`h-10 px-6 rounded-full border-2 text-[16px] font-bold transition
                 ${
                   isAuthenticated
-                    ? "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
-                    : "border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                    ? "border-none text-white bg-red-500 hover:bg-red-600"
+                    : "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
                 }`}
             >
               {isAuthenticated ? "Logout" : "Login"}

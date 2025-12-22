@@ -2,49 +2,54 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  const email = e.target.email.value;
-  const password = e.target.password.value;
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-  try {
-    const result = await axios.post(
-      "http://172.252.13.97:8011/api/v1/auth/users/login",
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
+    try {
+      setLoading(true);
+      const result = await axios.post(
+        "http://172.252.13.97:8011/api/v1/auth/users/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      if (result.data.success || result.data.status === "success") {
+        const user = result.data.user || result.data.data?.user || null;
 
-    
+        Cookies.set("token", result?.data?.data?.token, {
+          expires: 7, // 7 days
+          secure: true,
+          sameSite: "strict",
+        });
 
-    if (result.data.success || result.data.status === "success") {
-      const user =
-        result.data.user || result.data.data?.user || null;
-
-      login(user);
-      toast.success("Login successful!");
-      navigate("/");
-    } else {
-      toast.error("Invalid email or password");
+        login(user);
+        toast.success("Login successful!");
+        navigate("/");
+      } else {
+        toast.error("Invalid email or password");
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message || "Login failed. Please try again."
-    );
-  }
-};
-
+  };
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
       {/* HEADER */}
-      <h1 className="text-3xl font-bold text-center mb-2">
-        Welcome back!
-      </h1>
+      <h1 className="text-3xl font-bold text-center mb-2">Welcome back!</h1>
       <p className="text-gray-500 text-center mb-8">
         Enter your credentials to access your account
       </p>
@@ -67,9 +72,7 @@ export default function Login() {
 
         {/* Password */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Password
-          </label>
+          <label className="block text-sm font-medium mb-1">Password</label>
           <input
             type="password"
             name="password"
@@ -84,7 +87,7 @@ export default function Login() {
           type="submit"
           className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer"
         >
-          Login
+          {loading ? "Logging..." : "Login"}
         </button>
       </form>
 

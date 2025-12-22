@@ -21,7 +21,7 @@ export default function PlaylistCard({
       >
         <div>
           <p className="font-medium">
-            {index}. {title}
+            {index}{title}
           </p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>

@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import logo from "../../assets/img/logo2.png";
 
 export default function Footer() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <footer className="bg-[#F7F9FF]">
       {/* TOP BORDER */}
@@ -13,18 +17,36 @@ export default function Footer() {
           
           {/* LOGO */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500" />
-            <span className="text-lg font-semibold text-gray-900">
-              Logo
-            </span>
+            <img
+              src={logo}
+              alt="logo"
+              className="w-15 h-14"
+            />
           </div>
 
           {/* MENU */}
-          <div className="flex gap-6 text-sm text-gray-600">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/quiz">Quiz</NavLink>
-            <NavLink to="/playlist">Playlist</NavLink>
-            <NavLink to="/">Testimonial</NavLink>
+          <div className="flex gap-6 text-md text-gray-600">
+            <NavLink to="/" className="hover:text-[#153DFC]">
+              Home
+            </NavLink>
+
+            <NavLink to="/quiz" className="hover:text-[#153DFC]">
+              Quiz
+            </NavLink>
+
+            {/* ✅ Playlist ONLY when logged in */}
+            {isAuthenticated && (
+              <NavLink
+                to="/playlist/demo"
+                className="hover:text-[#153DFC]"
+              >
+                Playlist
+              </NavLink>
+            )}
+
+            <NavLink to="/" className="hover:text-[#153DFC]">
+              Testimonial
+            </NavLink>
           </div>
 
           {/* SOCIAL ICONS */}
@@ -47,9 +69,10 @@ export default function Footer() {
         {/* BOTTOM ROW */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
-          <a href="#" className="hover:underline">
+
+          <NavLink to="/terms" className="hover:underline">
             Privacy and Policy
-          </a>
+          </NavLink>
         </div>
       </div>
     </footer>

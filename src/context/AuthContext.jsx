@@ -12,23 +12,21 @@ export function AuthProvider({ children }) {
   const signup = (data) => {
     // data = { name, email, password }
     setHasAccount(true);
-    
   };
 
   // ✅ LOGIN (demo)
   const login = (data) => {
     // data = { email }
     setUser({
-      name: "Demo User",
-      email: data.email,
+      name: data?.name,
+      email: data?.email,
+      id: data?.id,
     });
- 
   };
 
   // ✅ LOGOUT
   const logout = () => {
     setUser(null);
-   
   };
 
   return (

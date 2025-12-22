@@ -17,6 +17,7 @@ import Step7_Energy from "../pages/Quiz/components/Step7_Energy";
 import Step8_Tempo from "../pages/Quiz/components/Step8_Tempo";
 import Step9_Era from "../pages/Quiz/components/Step9_Era";
 import Step10_Final from "../pages/Quiz/components/Step10_Final";
+import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/playlist/:id",
         element: <PlaylistResult />,
+      },
+      {
+        path: "/playlist",
+        element: <UserPlaylistResult />,
       },
     ],
   },

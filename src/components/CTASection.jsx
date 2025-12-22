@@ -4,7 +4,7 @@ export default function CTASection() {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white py-10 sm:py-0 pb-18 sm:pb-18">
+    <section className=" bg-white py-10 sm:py-0 pb-18 sm:pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
