@@ -1,10 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/img/logo2.png";
 
 export default function Footer() {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // same active underline class (already used in Navbar)
+  const linkClass = ({ isActive }) =>
+    isActive ? "active-link active" : "hover:text-[#153DFC]";
 
   return (
     <footer className="bg-[#F7F9FF]">
@@ -15,8 +20,11 @@ export default function Footer() {
         {/* TOP ROW */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
-          {/* LOGO */}
-          <div className="flex items-center gap-3">
+          {/* LOGO (CLICK → HOME + POINTER) */}
+          <div
+            onClick={() => navigate("/")}
+            className="cursor-pointer select-none"
+          >
             <img
               src={logo}
               alt="logo"
@@ -26,24 +34,21 @@ export default function Footer() {
 
           {/* MENU */}
           <div className="flex gap-6 text-md text-gray-600">
-            <NavLink to="/" className="hover:text-[#153DFC]">
+            <NavLink to="/" className={linkClass}>
               Home
             </NavLink>
 
-            <NavLink to="/quiz" className="hover:text-[#153DFC]">
+            <NavLink to="/quiz" className={linkClass}>
               Quiz
             </NavLink>
 
-            {/* ✅ Playlist ONLY when logged in */}
             {isAuthenticated && (
-              <NavLink
-                to="/playlist/demo"
-                className="hover:text-[#153DFC]"
-              >
+              <NavLink to="/playlist/demo" className={linkClass}>
                 Playlist
               </NavLink>
             )}
 
+            {/* scroll-based, not route-based */}
             <NavLink to="/" className="hover:text-[#153DFC]">
               Testimonial
             </NavLink>
@@ -55,7 +60,7 @@ export default function Footer() {
               <a
                 key={i}
                 href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-600  bg-linear-to-r from-[#ba5aff] to-[#5389ff] hover:text-white transition"
               >
                 <Icon size={16} />
               </a>
@@ -70,7 +75,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
 
-          <NavLink to="/terms" className="hover:underline">
+          <NavLink to="/terms" className={linkClass}>
             Privacy and Policy
           </NavLink>
         </div>

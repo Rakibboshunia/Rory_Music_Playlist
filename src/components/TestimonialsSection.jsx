@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className=" border-t pt-10 sm:pt-10 pb-10 sm:pb-32 bg-white">
+    <section className=" border-t border-gray-200 pt-10 sm:pt-10 pb-10 sm:pb-32 bg-white">
       
       {/* ======================
           SECTION HEADER

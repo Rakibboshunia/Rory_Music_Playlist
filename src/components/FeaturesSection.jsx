@@ -7,7 +7,7 @@ export default function FeaturesSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="border-t py-17 bg-white">
+    <section className="border-t border-gray-200 py-17 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         {/* SECTION TITLE */}
         <div className="text-center mb-18">

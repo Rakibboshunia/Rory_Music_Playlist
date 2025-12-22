@@ -3,3 +3,27 @@
 body {
   font-family: 'Arimo', sans-serif;
 }
+
+/* ===== SHARED ACTIVE UNDERLINE (NAVBAR + FOOTER) ===== */
+.active-link {
+  position: relative;
+  color: #9810FA;
+  font-weight: 600;
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: #9810FA;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease-in-out;
+}
+
+.active-link.active::after {
+  transform: scaleX(1);
+}

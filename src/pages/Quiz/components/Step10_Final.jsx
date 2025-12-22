@@ -133,9 +133,6 @@ export default function Step10_Final() {
     } finally {
       setIsGenerating(false);
     }
-    // setShowUpgradePopup(false);
-
-    // navigate("/playlist/");
   };
 
   //   const payload = {
@@ -316,7 +313,7 @@ export default function Step10_Final() {
                       onClick={handleUpgradeYes}
                       className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
                     >
-                      Yes
+                      Upgrade €9
                     </button>
                   </>
                 ) : (

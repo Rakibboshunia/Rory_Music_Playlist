@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, hasAccount, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -28,42 +28,25 @@ export default function Navbar() {
 
   const handleTestimonialClick = (e) => {
     e.preventDefault();
-
-    if (!isHome) {
-      navigate("/");
-      setTimeout(scrollToTestimonials, 300);
-    } else {
-      scrollToTestimonials();
-    }
-
+    navigate("/");
+    setTimeout(scrollToTestimonials, 300);
     setMenuOpen(false);
   };
 
-  // 🔐 LOGIN / LOGOUT BUTTON LOGIC (UNCHANGED)
   const handleAuthClick = () => {
     setMenuOpen(false);
-
     if (isAuthenticated) {
-      Cookies.remove("token", {
-        secure: true,
-        sameSite: "strict",
-      });
-
+      Cookies.remove("token", { secure: true, sameSite: "strict" });
       logout();
       navigate("/");
     } else {
-      if (!hasAccount) {
-        navigate("/login");
-      } else {
-        navigate("/login");
-      }
+      navigate("/login");
     }
   };
 
-  // 💳 UPGRADE → STRIPE
-  const handleUpgradeClick = () => {
-    window.location.href = "https://checkout.stripe.com/pay/demo-checkout-link";
-  };
+  // 🔗 shared active link class (already in your CSS)
+  const linkClass = ({ isActive }) =>
+    isActive ? "active-link active" : "hover:text-[#9810FA]";
 
   return (
     <nav
@@ -72,61 +55,51 @@ export default function Navbar() {
     >
       {/* MAIN BAR */}
       <div className="max-w-7xl mx-auto px-5 py-2 flex items-center justify-between">
-        {/* LOGO */}
-        <div className="font-semibold text-2xl">
-          <img src={logo} alt="logo" className="w-15 h-14" />
+
+        {/* LOGO (CLICK → HOME + POINTER) */}
+        <div
+          onClick={() => navigate("/")}
+          className="cursor-pointer select-none"
+        >
+          <img
+            src={logo}
+            alt="logo"
+            className="w-15 h-14"
+          />
         </div>
 
         {/* DESKTOP MENU */}
         <div
-          className={`hidden md:flex items-center gap-8 text-medium font-medium 
+          className={`hidden md:flex items-center gap-8 font-medium 
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
-          <NavLink to="/" className="hover:text-[#ad3bff]">
-            Home
-          </NavLink>
-          <NavLink to="/quiz" className="hover:text-[#ad3bff]">
-            Quiz
-          </NavLink>
+          <NavLink to="/" className={linkClass}>Home</NavLink>
+          <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
 
           {isAuthenticated && (
-            <NavLink to="/playlist" className="hover:text-[#ad3bff]">
+            <NavLink to="/playlist" className={linkClass}>
               Playlist
             </NavLink>
           )}
 
           <NavLink
             to="/"
-            className="hover:text-[#ad3bff]"
             onClick={handleTestimonialClick}
+            className="hover:text-[#9810FA]"
           >
             Testimonial
           </NavLink>
         </div>
 
         {/* DESKTOP CTA */}
-        <div className="hidden md:flex items-center gap-3">
-          {/* Upgrade */}
-          <button
-            onClick={handleUpgradeClick}
-            className={`h-10 px-6 rounded-full cursor-pointer hover:bg-white/85 text-sm font-semibold transition
-              ${
-                solidNavbar
-                  ? "bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white hover:shadow-lg"
-                  : "bg-white text-blue-600 hover:bg-gray-100"
-              }`}
-          >
-            Upgrade €9
-          </button>
-
-          {/* LOGIN / LOGOUT */}
+        <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full text-sm font-semibold transition cursor-pointer border-2
+            className={`h-10 px-6 rounded-full font-semibold border-2 transition cursor-pointer
               ${
                 isAuthenticated
-                  ? "border-none text-white bg-red-500 hover:bg-red-600"
-                  : "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+                  ? "bg-red-500 text-white hover:bg-red-700 border-none"
+                  : "border-green-500 text-green-500 hover:bg-green-700 hover:text-white"
               }`}
           >
             {isAuthenticated ? "Logout" : "Login"}
@@ -136,8 +109,9 @@ export default function Navbar() {
         {/* MOBILE TOGGLE */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`md:hidden text-xl
-            ${solidNavbar ? "text-gray-900" : "text-white"}`}
+          className={`md:hidden text-xl ${
+            solidNavbar ? "text-gray-900" : "text-white"
+          }`}
         >
           {menuOpen ? "✕" : "☰"}
         </button>
@@ -147,15 +121,20 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
           <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
-            <NavLink onClick={() => setMenuOpen(false)} to="/">
+            <NavLink to="/" onClick={() => setMenuOpen(false)} className={linkClass}>
               Home
             </NavLink>
-            <NavLink onClick={() => setMenuOpen(false)} to="/quiz">
+
+            <NavLink to="/quiz" onClick={() => setMenuOpen(false)} className={linkClass}>
               Quiz
             </NavLink>
 
             {isAuthenticated && (
-              <NavLink onClick={() => setMenuOpen(false)} to="/playlist/demo">
+              <NavLink
+                to="/playlist"
+                onClick={() => setMenuOpen(false)}
+                className={linkClass}
+              >
                 Playlist
               </NavLink>
             )}
@@ -164,22 +143,13 @@ export default function Navbar() {
               Testimonial
             </NavLink>
 
-            {/* Upgrade */}
-            <button
-              onClick={handleUpgradeClick}
-              className="h-10 px-6 rounded-full bg-blue-500 text-white text-[16px] font-semibold"
-            >
-              Upgrade €9
-            </button>
-
-            {/* LOGIN / LOGOUT */}
             <button
               onClick={handleAuthClick}
-              className={`h-10 px-6 rounded-full border-2 text-[16px] font-bold transition
+              className={`mt-2 h-10 rounded-full font-bold border-2
                 ${
                   isAuthenticated
-                    ? "border-none text-white bg-red-500 hover:bg-red-600"
-                    : "border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+                    ? "bg-red-500 text-white hover:bg-red-700 border-none"
+                    : "border-green-500 text-green-500 hover:bg-green-700 hover:text-white"
                 }`}
             >
               {isAuthenticated ? "Logout" : "Login"}
