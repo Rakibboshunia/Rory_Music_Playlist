@@ -8,22 +8,34 @@ import CTASection from "../../components/CTASection";
 export default function Home() {
   return (
     <div className="bg-white text-gray-900">
-      
+
       {/* HERO */}
-      <HeroSection />
+      <section id="hero-section">
+        <HeroSection />
+      </section>
 
-      {/* FEATURES */}
-      <FeaturesSection />
+      {/* QUIZ SECTION (ADDED ID ONLY) */}
+      <section id="quiz-section">
+        <FeaturesSection />
+      </section>
 
-      {/* AWARDS */}
-      <AwardsSection />
+      {/* PLAYLIST SECTION (ADDED ID ONLY) */}
+      <section id="playlist-section">
+        <AwardsSection />
+      </section>
 
       {/* TESTIMONIALS */}
-      <TestimonialsSection />
+      <section
+        id="testimonials-section"
+        className="mt-16 max-w-6xl mx-auto lg:px-5"
+      >
+        <TestimonialsSection />
+      </section>
 
       {/* CTA */}
-      <CTASection />
-
+      <section>
+        <CTASection />
+      </section>
     </div>
   );
 }

@@ -21,20 +21,50 @@ export default function Navbar() {
 
   const solidNavbar = !isHome || scrolled;
 
+  /* ======================
+     SCROLL HELPERS
+  ====================== */
+  const scrollToHero = () => {
+    document
+      .getElementById("hero-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const scrollToTestimonials = () => {
-    const el = document.getElementById("testimonials-section");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("testimonials-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToHero, 300);
+    } else {
+      scrollToHero();
+    }
+
+    setMenuOpen(false);
   };
 
   const handleTestimonialClick = (e) => {
     e.preventDefault();
-    navigate("/");
-    setTimeout(scrollToTestimonials, 300);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToTestimonials, 300);
+    } else {
+      scrollToTestimonials();
+    }
+
     setMenuOpen(false);
   };
 
   const handleAuthClick = () => {
     setMenuOpen(false);
+
     if (isAuthenticated) {
       Cookies.remove("token", { secure: true, sameSite: "strict" });
       logout();
@@ -44,7 +74,6 @@ export default function Navbar() {
     }
   };
 
-  // 🔗 shared active link class (already in your CSS)
   const linkClass = ({ isActive }) =>
     isActive ? "active-link active" : "hover:text-[#9810FA]";
 
@@ -53,28 +82,28 @@ export default function Navbar() {
       className={`fixed top-0 w-full z-50 transition-all duration-300
         ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
     >
-      {/* MAIN BAR */}
-      <div className="max-w-7xl mx-auto px-5 py-2 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
 
-        {/* LOGO (CLICK → HOME + POINTER) */}
+        {/* LOGO → HOME + HERO SCROLL */}
         <div
-          onClick={() => navigate("/")}
+          onClick={handleHomeClick}
           className="cursor-pointer select-none"
         >
-          <img
-            src={logo}
-            alt="logo"
-            className="w-15 h-14"
-          />
+          <img src={logo} alt="logo" className="w-15 h-14" />
         </div>
 
         {/* DESKTOP MENU */}
         <div
-          className={`hidden md:flex items-center gap-8 font-medium 
+          className={`hidden md:flex items-center gap-8 font-medium
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
-          <NavLink to="/" className={linkClass}>Home</NavLink>
-          <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
+          <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
+            Home
+          </NavLink>
+
+          <NavLink to="/quiz" className={linkClass}>
+            Quiz
+          </NavLink>
 
           {isAuthenticated && (
             <NavLink to="/playlist" className={linkClass}>
@@ -91,7 +120,7 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        {/* DESKTOP CTA */}
+        {/* AUTH */}
         <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
@@ -121,7 +150,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
           <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
-            <NavLink to="/" onClick={() => setMenuOpen(false)} className={linkClass}>
+            <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
             </NavLink>
 
@@ -145,7 +174,7 @@ export default function Navbar() {
 
             <button
               onClick={handleAuthClick}
-              className={`mt-2 h-10 rounded-full font-bold border-2
+              className={`mt-2 h-10 rounded-full font-bold border-2 cursor-pointer
                 ${
                   isAuthenticated
                     ? "bg-red-500 text-white hover:bg-red-700 border-none"

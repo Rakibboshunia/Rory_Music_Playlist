@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/img/logo2.png";
@@ -6,61 +6,120 @@ import logo from "../../assets/img/logo2.png";
 export default function Footer() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // same active underline class (already used in Navbar)
   const linkClass = ({ isActive }) =>
     isActive ? "active-link active" : "hover:text-[#153DFC]";
 
+  // ✅ NEW: HERO PAGE SCROLL
+  const scrollToHero = () => {
+    document
+      .getElementById("hero-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // ✅ NEW: TESTIMONIAL PAGE SCROLL
+  const scrollToTestimonials = () => {
+    document
+      .getElementById("testimonials-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // ✅ NEW: QUIZ PAGE SCROLL
+  const scrollToQuizPage = () => {
+    document
+      .getElementById("quiz-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // ✅ NEW: Home → /home + scroll
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToHero, 300);
+    } else {
+      scrollToHero();
+    }
+  };
+
+  // ✅ NEW: Testimonial → /testimonial + scroll
+  const handleTestimonialClick = (e) => {
+    e.preventDefault();
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToTestimonials, 300);
+    } else {
+      scrollToTestimonials();
+    }
+  };
+
+  // ✅ NEW: QUIZ → /quiz + scroll
+  const handleQuizClick = (e) => {
+    e.preventDefault();
+
+    if (location.pathname !== "/quiz") {
+      navigate("/quiz");
+      setTimeout(scrollToQuizPage, 300);
+    } else {
+      scrollToQuizPage();
+    }
+  };
+
   return (
     <footer className="bg-[#F7F9FF]">
-      {/* TOP BORDER */}
       <div className="border-t border-gray-300" />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* TOP ROW */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          {/* LOGO (CLICK → HOME + POINTER) */}
+
+          {/* LOGO → HOME + HERO */}
           <div
-            onClick={() => navigate("/")}
+            onClick={handleHomeClick}
             className="cursor-pointer select-none"
           >
-            <img
-              src={logo}
-              alt="logo"
-              className="w-15 h-14"
-            />
+            <img src={logo} alt="logo" className="w-15 h-14" />
           </div>
 
           {/* MENU */}
           <div className="flex gap-6 text-md text-gray-600">
-            <NavLink to="/" className={linkClass}>
+            <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
             </NavLink>
 
-            <NavLink to="/quiz" className={linkClass}>
+            {/* ✅ QUIZ → QUIZ PAGE + SCROLL */}
+            <NavLink
+              to="/quiz"
+              onClick={handleQuizClick}
+              className={linkClass}
+            >
               Quiz
             </NavLink>
 
             {isAuthenticated && (
-              <NavLink to="/playlist/demo" className={linkClass}>
+              <NavLink to="/playlist" className={linkClass}>
                 Playlist
               </NavLink>
             )}
 
-            {/* scroll-based, not route-based */}
-            <NavLink to="/" className="hover:text-[#153DFC]">
+            <NavLink
+              to="/"
+              onClick={handleTestimonialClick}
+              className="hover:text-[#153DFC]"
+            >
               Testimonial
             </NavLink>
           </div>
 
-          {/* SOCIAL ICONS */}
+          {/* SOCIAL */}
           <div className="flex gap-3">
             {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
               <a
                 key={i}
                 href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-600  bg-linear-to-r from-[#ba5aff] to-[#5389ff] hover:text-white transition"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 text-white bg-linear-to-r from-[#c778ff] to-[#4580ff] hover:text-black transition"
               >
                 <Icon size={16} />
               </a>
@@ -68,11 +127,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* DIVIDER */}
-        <hr className="my-6" />
+        <hr className="my-5" />
 
-        {/* BOTTOM ROW */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-700">
+        <div className="flex justify-between text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
 
           <NavLink to="/terms" className={linkClass}>
