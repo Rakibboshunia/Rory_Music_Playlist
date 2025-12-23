@@ -20,7 +20,7 @@ export default function Login() {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
         { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" } } 
       );
       if (result.data.success || result.data.status === "success") {
         const user = result.data.user || result.data.data?.user || null;
