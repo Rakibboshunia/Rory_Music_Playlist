@@ -36,7 +36,7 @@ export default function PlaylistResult() {
   // console.log("Playlist Data:", playlistData);
 
   return (
-    <div className="bg-linear-to-b from-[#F6F8FF] to-[#FBF6FF]">
+    <div >
       {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pt-10 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

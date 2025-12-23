@@ -9,8 +9,7 @@ export default function PublicLayout() {
   return (
     <>
       <Navbar />
-
-      {/* ✅ Home page = no padding | Other pages = padding */}
+      
       <main
         className={`min-h-screen bg-white ${
           isHome ? "pt-0" : "pt-28"

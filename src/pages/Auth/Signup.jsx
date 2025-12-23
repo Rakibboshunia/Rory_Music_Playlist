@@ -1,10 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Signup() {
   const navigate = useNavigate();
-  
+
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -13,8 +16,9 @@ export default function Signup() {
     const password = e.target.password.value;
 
     try {
+      setLoading(true);
       const res = await axios.post(
-        "http://172.252.13.97:8011/api/v1/auth/users/register",
+        `${import.meta.env.VITE_BACKEND_URL}/auth/users/register`,
         { name, email, password }
       );
 
@@ -24,22 +28,20 @@ export default function Signup() {
       toast.error(
         error.response?.data?.message || "Signup failed. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
       {/* TITLE */}
-      <h2 className="text-3xl font-bold mb-8 text-center">
-        Get Started Now
-      </h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Get Started Now</h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Name
-          </label>
+          <label className="block text-sm font-medium mb-1">Name</label>
           <input
             type="text"
             name="name"
@@ -65,11 +67,9 @@ export default function Signup() {
 
         {/* Password */}
         <div>
-          <label className="block text-sm font-medium mb-1">
-            Password
-          </label>
+          <label className="block text-sm font-medium mb-1">Password</label>
           <input
-            type="password"
+            type="text"
             name="password"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Create a password"
@@ -93,7 +93,7 @@ export default function Signup() {
           type="submit"
           className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer"
         >
-          Sign Up
+          {loading ? "Singing" : "Sign Up"}
         </button>
 
         {/* LOGIN LINK */}

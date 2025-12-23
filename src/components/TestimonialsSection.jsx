@@ -2,15 +2,15 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className=" border-t border-gray-200 pt-10 sm:pt-10 pb-10 sm:pb-32 bg-white">
+    <section className="pt-6 sm:pt-0 pb-10 sm:pb-32 bg-white">
       
       {/* ======================
           SECTION HEADER
       ====================== */}
-      <div className="max-w-5xl mx-auto text-center px-4 sm:px-6">
-        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+      <div className="max-w-5xl mx-auto text-center px-4 sm:px-5">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Real Stories. Real Moments.
-          <br className="hidden sm:block" />
+          <br className="hidden sm:block"/>
           Real Magic.
         </h2>
 

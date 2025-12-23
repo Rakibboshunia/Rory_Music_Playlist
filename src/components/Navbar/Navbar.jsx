@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/img/logo2.png";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const location = useLocation();
@@ -68,6 +69,7 @@ export default function Navbar() {
     if (isAuthenticated) {
       Cookies.remove("token", { secure: true, sameSite: "strict" });
       logout();
+      toast.success("Logged Out");
       navigate("/");
     } else {
       navigate("/login");
@@ -83,12 +85,8 @@ export default function Navbar() {
         ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-
         {/* LOGO → HOME + HERO SCROLL */}
-        <div
-          onClick={handleHomeClick}
-          className="cursor-pointer select-none"
-        >
+        <div onClick={handleHomeClick} className="cursor-pointer select-none">
           <img src={logo} alt="logo" className="w-15 h-14" />
         </div>
 
@@ -124,11 +122,11 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full font-semibold border-2 transition cursor-pointer
+            className={`h-10 px-6 rounded-full font-semibold border-2 cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]
               ${
                 isAuthenticated
                   ? "bg-red-500 text-white hover:bg-red-700 border-none"
-                  : "border-green-500 text-green-500 hover:bg-green-700 hover:text-white"
+                  : "border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
               }`}
           >
             {isAuthenticated ? "Logout" : "Login"}
@@ -154,7 +152,11 @@ export default function Navbar() {
               Home
             </NavLink>
 
-            <NavLink to="/quiz" onClick={() => setMenuOpen(false)} className={linkClass}>
+            <NavLink
+              to="/quiz"
+              onClick={() => setMenuOpen(false)}
+              className={linkClass}
+            >
               Quiz
             </NavLink>
 
@@ -174,11 +176,11 @@ export default function Navbar() {
 
             <button
               onClick={handleAuthClick}
-              className={`mt-2 h-10 rounded-full font-bold border-2 cursor-pointer
+              className={`mt-2 h-10 rounded-full font-bold border-2 cursor-pointer transition-all
                 ${
                   isAuthenticated
                     ? "bg-red-500 text-white hover:bg-red-700 border-none"
-                    : "border-green-500 text-green-500 hover:bg-green-700 hover:text-white"
+                    : "border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
                 }`}
             >
               {isAuthenticated ? "Logout" : "Login"}

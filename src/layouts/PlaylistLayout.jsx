@@ -10,6 +10,7 @@ export default function PlaylistLayout() {
       <div className="max-w-5xl mx-auto py-10">
         <Outlet />
       </div>
+      
     </>
   );
 }

@@ -8,8 +8,7 @@ export default function TrackRow({ track, spotifyUrl }) {
 
   return (
     <a href={spotifyUrl} target="_blank" rel="noopener noreferrer">
-      <div 
-      className="
+      <div className="
       flex items-center 
       justify-between 
       px-4 py-3 mb-4
@@ -20,13 +19,13 @@ export default function TrackRow({ track, spotifyUrl }) {
       ">
         <div className="min-w-0">
           <p className="text-sm font-medium truncate">{track.song}</p>
-          <p className="text-xs text-gray-500 truncate">{track.artist}</p>
+          <p className="text-xs text-gray-600 truncate">{track.artist}</p>
         </div>
 
         <button
           onClick={handlePlay}
           title="Play on Spotify"
-          className="w-8 h-8 rounded bg-green-600 text-white flex items-center justify-center hover:bg-green-700"
+          className="w-8 h-8 rounded bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white flex items-center justify-center cursor-pointer"
         >
           <Play size={18} />
         </button>

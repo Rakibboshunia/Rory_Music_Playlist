@@ -44,6 +44,9 @@ export default function HeroSection() {
                 text-sm sm:text-base
                 font-medium
                 shadow-lg
+                transition-all duration-300 ease-out
+                hover:scale-[1.03] 
+                hover:shadow-xl active:scale-[0.98]
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] 
                 hover:text-white
                 border hover:border-white/80
@@ -63,7 +66,9 @@ export default function HeroSection() {
                 shadow-lg
                 text-sm sm:text-base
                 font-medium
-                transition
+                transition-all duration-300 ease-out
+                hover:scale-[1.03] 
+                hover:shadow-xl active:scale-[0.98]
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC]
                 cursor-pointer
               "

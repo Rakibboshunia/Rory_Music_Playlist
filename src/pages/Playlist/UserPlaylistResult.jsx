@@ -38,17 +38,17 @@ export default function PlaylistResult() {
   // console.log("Playlist Data:", playlistData);
 
   return (
-    <div className="bg-linear-to-b from-[#F6F8FF] to-[#FBF6FF]">
+    <div>
       {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pt-10 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-center mb-3">
-            <span className="px-6 py-2 text-xs sm:text-sm rounded-full bg-white shadow">
+          <div className="flex justify-center mb-5">
+            <span className="px-8 py-2 text-xs sm:text-sm rounded-full bg-white shadow">
               ✨ Your personalised soundtrack is ready
             </span>
           </div>
 
-          <h1 className="text-[400] sm:text-4xl lg:text-5xl font-semibold text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-center">
             Classic Romance Collection
           </h1>
 

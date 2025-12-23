@@ -31,7 +31,7 @@ export function AudioPlayerProvider({ children }) {
 
     // same track → just play
     if (currentTrack?.id === track.id) {
-      return; // 🔥 SAME TRACK হলে কিছুই করবে না
+      return; 
     }
 
 

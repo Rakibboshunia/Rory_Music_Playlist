@@ -29,8 +29,11 @@ export default function CTASection() {
                 bg-white text-blue-700
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white
                 font-medium rounded-full
-                shadow-md hover:shadow-lg
-                transition cursor-pointer
+                shadow-md
+                transition-all duration-300 ease-out
+                hover:scale-[1.03] 
+                hover:shadow-xl active:scale-[0.98]
+                cursor-pointer
                 flex items-center justify-center gap-2
                 mx-auto
               "

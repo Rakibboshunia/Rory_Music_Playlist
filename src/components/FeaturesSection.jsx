@@ -1,10 +1,8 @@
 import React from "react";
 import { Sparkles, ListMusic, Mic } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+
 
 export default function FeaturesSection() {
-  const navigate = useNavigate();
-
   return (
     // ✅ ONLY ADDITION (ID)
     <section
@@ -13,16 +11,19 @@ export default function FeaturesSection() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-18">
-          <h2 className="text-4xl sm:text-4xl lg:text-5xl pb-2 font-smibold">
-            Your night. Your energy.
-            <br /> Your soundtrack.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl pb-2 font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
+            Your Night. Your Energy.
+             <br className="hidden sm:block"/>Your Soundtrack.
           </h2>
           <p className="mt-3 text-gray-600">
             From vision to reality in three simple steps
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-13">
+        <div className="max-w-6xl mx-auto mt-12 sm:mt-16
+          px-4 sm:px-6
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+          gap-6 sm:gap-8">
           <FeatureCard
             number="1"
             title="Discover Your Vibe"
@@ -66,9 +67,7 @@ function FeatureCard({ number, title, desc, icon, bg }) {
       </div>
 
       <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-      <p className="mt-2 text-gray-500 text-sm leading-relaxed">
-        {desc}
-      </p>
+      <p className="mt-2 text-gray-500 text-sm leading-relaxed">{desc}</p>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function Login() {
     try {
       setLoading(true);
       const result = await axios.post(
-        "http://172.252.13.97:8011/api/v1/auth/users/login",
+        `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -74,7 +74,7 @@ export default function Login() {
         <div>
           <label className="block text-sm font-medium mb-1">Password</label>
           <input
-            type="password"
+            type="text"
             name="password"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Enter your password"

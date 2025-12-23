@@ -15,13 +15,11 @@ export default function QuizLayout() {
   }, []);
 
   return (
-    <div
-      id="quiz-section"
-      className="bg-linear-to-b from-[#F6F4FF] to-white min-h-screen"
+    <div id="quiz-section" className="min-h-screen"
     >
       {/* ===== HEADER ===== */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-10 pb-4 text-center">
-        <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold gap-1 leading-tight">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold gap-1 leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Your night. Your energy. <br />Your soundtrack.
         </h1>
         <p className="mt-2">
@@ -30,11 +28,14 @@ export default function QuizLayout() {
       </div>
 
       {/* QUIZ STEP CONTENT */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14">
         <Outlet />
       </div>
+
       <AwardsSection />
+
       <TestimonialsSection />
+
       <CTASection />
     </div>
   );

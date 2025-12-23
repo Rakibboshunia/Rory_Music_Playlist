@@ -20,7 +20,8 @@ export default function PlaylistCard({
         className="mb-4 flex items-start justify-between cursor-pointer select-none"
       >
         <div>
-          <p className="font-medium">
+          <p className="font-medium text-2xl pb-3 bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent duration-300
+          hover:opacity-80">
             {index}{title}
           </p>
           <p className="text-xs text-gray-500">{subtitle}</p>
@@ -47,7 +48,7 @@ export default function PlaylistCard({
           <img
             src={coverImg}
             alt="playlist cover"
-            className="w-full h-100 object-cover rounded-xl"
+            className="w-full h-100 object-cover rounded-xl duration-300 hover:opacity-90 cursor-pointer"
           />
 
           {/* PLAYER */}

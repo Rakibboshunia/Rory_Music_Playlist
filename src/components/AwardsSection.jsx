@@ -9,7 +9,7 @@ export default function AwardsSection() {
       <div className="max-w-5xl mx-auto text-center pt-8 px-6">
 
         {/* Title */}
-        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Award-Winning <br /> Entertainment Excellence
         </h2>
 
@@ -19,7 +19,10 @@ export default function AwardsSection() {
       </div>
 
       {/* AWARDS LIST */}
-      <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-6xl mx-auto mt-12 sm:mt-16
+          px-4 sm:px-6
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+          gap-6 sm:gap-8">
 
         {/* Award 1 */}
         <AwardCard

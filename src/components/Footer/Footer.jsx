@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
 
           {/* MENU */}
-          <div className="flex gap-6 text-md text-gray-600">
+          <div className="flex gap-6 font-medium text-gray-800">
             <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
             </NavLink>
@@ -119,9 +119,11 @@ export default function Footer() {
               <a
                 key={i}
                 href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 text-white bg-linear-to-r from-[#c778ff] to-[#4580ff] hover:text-black transition"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 text-white bg-linear-to-r from-[#bb5cff] to-[#4b84ff] hover:text-black transition-all duration-300 ease-out
+                hover:scale-[1.03] 
+                hover:shadow-xl active:scale-[0.98]"
               >
-                <Icon size={16} />
+                <Icon size={23} />
               </a>
             ))}
           </div>

@@ -18,6 +18,8 @@ import Step8_Tempo from "../pages/Quiz/components/Step8_Tempo";
 import Step9_Era from "../pages/Quiz/components/Step9_Era";
 import Step10_Final from "../pages/Quiz/components/Step10_Final";
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import PaymentCancel from "../pages/Payment/PaymentCancel";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,15 @@ const router = createBrowserRouter([
         path: "/playlist",
         element: <UserPlaylistResult />,
       },
+      {
+        path: "/success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/cancel",
+        element: <PaymentCancel />,
+      },
+
     ],
   },
 

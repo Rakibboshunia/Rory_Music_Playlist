@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
@@ -13,6 +12,7 @@ export default function Step10_Final() {
   const { answers, updateAnswer } = useQuiz();
   const { isAuthenticated } = useAuth();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
@@ -77,9 +77,7 @@ export default function Step10_Final() {
       setEmail("");
       updateAnswer("doNotPlays", "");
 
-      // ✅ OPTIONAL (recommended)
-      // backend future e playlistId pathabe
-      // navigate(`/playlist/${data.playlistId || "guest-preview"}`);
+    
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
       console.error(error);
@@ -92,8 +90,47 @@ export default function Step10_Final() {
      UPGRADE ACTIONS
   ====================== */
 
-  const handleUpgradeYes = () => {
-    window.location.href = "https://checkout.stripe.com/pay/demo-checkout-link";
+  const handleUpgradeYes = async () => {
+    const payload = {
+      answers: {
+        q1: answers.eventType,
+        q2: answers.overallVibe,
+        q3: answers.drinksMoment,
+        q4: answers.crowdAge,
+        q5: answers.floorfiller,
+        q6: answers.sax,
+        q7: answers.decades,
+        q8: answers.genreLean,
+        q9: answers.lastHour,
+        q10: answers.doNotPlays,
+      },
+      user_type: "paid",
+    };
+
+    const token = Cookies.get("token");
+    try {
+      setPaymentLoading(true);
+      const result = await axios.post(
+        import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (result.status == 200) {
+        // console.log(result?.data?.data?.checkoutUrl)
+        window.open(result?.data?.data?.checkoutUrl, "_self");
+      } else {
+        toast.error("Something Went Wrong in Payment Processing");
+      }
+    } catch (error) {
+      toast.error(error?.message || "Something Went Wrong !!");
+    } finally {
+      setPaymentLoading(false);
+    }
   };
 
   const handleUpgradeNo = async () => {
@@ -121,7 +158,7 @@ export default function Step10_Final() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // 🔥 TOKEN HERE
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -135,39 +172,6 @@ export default function Step10_Final() {
       setIsGenerating(false);
     }
   };
-
-  //   const payload = {
-  //     email,
-  //     answers: {
-  //       q1: answers.eventType,
-  //       q2: answers.overallVibe,
-  //       q3: answers.drinksMoment,
-  //       q4: answers.crowdAge,
-  //       q5: answers.floorfiller,
-  //       q6: answers.sax,
-  //       q7: answers.decades,
-  //       q8: answers.genreLean,
-  //       q9: answers.lastHour,
-  //       q10: answers.doNotPlays,
-  //     },
-  //   };
-
-  //   try {
-  //     const response = await fetch(
-  //       import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(payload),
-  //       }
-  //     );
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error("Error submitting guest email:", error);
-  //   }
-  // };
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-10 space-y-6 text-center">
@@ -308,19 +312,23 @@ export default function Step10_Final() {
                     >
                       No
                     </button>
-
-                    {/* YES BUTTON */}
-                    <button
-                      onClick={handleUpgradeYes}
-                      className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
-                    >
-                      Upgrade €9
-                    </button>
                   </>
                 ) : (
                   /* LOADING STATE */
                   <div className="px-6 py-2 rounded-full bg-gray-100 text-gray-600 text-sm font-medium">
                     Generating playlist…
+                  </div>
+                )}
+                {!paymentLoading ? (
+                  <button
+                    onClick={handleUpgradeYes}
+                    className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
+                  >
+                    Upgrade €9
+                  </button>
+                ) : (
+                  <div className="px-6 py-2 rounded-full bg-gray-100 text-gray-600 text-sm font-medium">
+                    Generating Payment Link
                   </div>
                 )}
               </div>
