@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
-import PlaylistAccordion from "./components/PlaylistAccordion";
-
-import AwardsSection from "../../components/AwardsSection";
-import TestimonialsSection from "../../components/TestimonialsSection";
-import CTASection from "../../components/CTASection";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+// Global shared sections
+import PlaylistAccordion from "./components/PlaylistAccordion";
+import AwardsSection from "../../components/AwardsSection";
+import TestimonialsSection from "../../components/TestimonialsSection";
+import CTASection from "../../components/CTASection";
+
+
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
-     const token = Cookies.get("token");
+  const token = Cookies.get("token");
 
   useEffect(() => {
-    const fetchPlaylistData = async () => {
+    if (!token) return;
+
+    const fetchUserPlaylists = async () => {
       try {
-        // const token = Cookies.get("token");
         const response = await axios(
           `${import.meta.env.VITE_BACKEND_URL}/playlists/user/playlist`,
           {
             headers: {
               "Content-Type": "application/json",
-              authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-        console.log(response);
+
         setPlaylistData(response.data?.data);
       } catch (error) {
-        console.error("Error fetching playlist data:", error);
+        console.error("User playlist fetch error:", error);
       }
     };
 
-    fetchPlaylistData();
+    fetchUserPlaylists();
   }, [token]);
-
-  // console.log("Playlist Data:", playlistData);
 
   return (
     <div>
@@ -47,12 +48,10 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          {/* ✅ DYNAMIC TITLE FROM BACKEND */}
           <h1 className="text-[400] sm:text-4xl lg:text-5xl font-semibold text-center">
             {playlistData?.[0]?.title || "Your Custom Playlist"}
           </h1>
 
-          {/* ✅ DYNAMIC DESCRIPTION FROM BACKEND */}
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
             {playlistData?.[0]?.description ||
               "A personalised playlist crafted just for your event."}
@@ -73,8 +72,8 @@ export default function PlaylistResult() {
         </div>
       </div>
 
-          <AwardsSection />
-        <TestimonialsSection />
+      <AwardsSection />
+      <TestimonialsSection />
       <CTASection />
     </div>
   );

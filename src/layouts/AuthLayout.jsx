@@ -3,7 +3,7 @@ import mainlogo from "../assets/img/mainlogo.png";
 
 export default function AuthLayout() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex">
       
       {/* Left Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-10">

@@ -2,10 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import PublicLayout from "../layouts/PublicLayout";
 import QuizLayout from "../layouts/QuizLayout";
 import AuthLayout from "../layouts/AuthLayout";
+
+// Pages
 import Home from "../pages/Home/Home";
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
 import Terms from "../pages/Auth/Terms";
+
+// Quiz steps
 import Step1_EventType from "../pages/Quiz/components/Step1_EventType";
 import Step2_EventDetails from "../pages/Quiz/components/Step2_EventDetails";
 import Step3_Genres from "../pages/Quiz/components/Step3_Genres";
@@ -16,10 +20,14 @@ import Step7_Energy from "../pages/Quiz/components/Step7_Energy";
 import Step8_Tempo from "../pages/Quiz/components/Step8_Tempo";
 import Step9_Era from "../pages/Quiz/components/Step9_Era";
 import Step10_Final from "../pages/Quiz/components/Step10_Final";
+
+// 🎵 Playlist pages (SEPARATED)
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
+import GuestPlaylistResult from "../pages/Playlist/PlaylistResult";
+
+// Payment
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
-import PlaylistResult from "../pages/Playlist/UserPlaylistResult";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +35,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
 
+      /* ================= QUIZ ================= */
       {
         path: "/quiz",
         element: <QuizLayout />,
@@ -44,15 +53,21 @@ const router = createBrowserRouter([
         ],
       },
 
+      /* ================= PLAYLIST ================= */
+
+      // 🔐 Logged-in user → all playlists
       {
-        path: "/playlist/:id",
-        element: <PlaylistResult />,
-      },
-      
-      {
-        path: "/user/playlist",
+        path: "/playlist",
         element: <UserPlaylistResult />,
       },
+
+      // 👤 Guest user → single playlist by ID
+      {
+        path: "/playlist/:id",
+        element: <GuestPlaylistResult />,
+      },
+
+      /* ================= PAYMENT ================= */
       {
         path: "/success",
         element: <PaymentSuccess />,
@@ -61,10 +76,10 @@ const router = createBrowserRouter([
         path: "/cancel",
         element: <PaymentCancel />,
       },
-
     ],
   },
 
+  /* ================= AUTH ================= */
   {
     element: <AuthLayout />,
     children: [

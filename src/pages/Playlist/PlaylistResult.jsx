@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from "react";
-import PlaylistAccordion from "./components/PlaylistAccordion";
-
-// Global shared sections
-import AwardsSection from "../../components/AwardsSection";
-import TestimonialsSection from "../../components/TestimonialsSection";
-import CTASection from "../../components/CTASection";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+// Global shared sections
+import PlaylistAccordion from "./components/PlaylistAccordion";
+import AwardsSection from "../../components/AwardsSection";
+import TestimonialsSection from "../../components/TestimonialsSection";
+import CTASection from "../../components/CTASection";
+
+
+
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
-
   const { id } = useParams();
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchPlaylistData = async () => {
       try {
         const response = await axios(
           `${import.meta.env.VITE_BACKEND_URL}/playlists/guest/playlist/${id}`,
           {
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
           }
         );
+
         setPlaylistData([response.data?.data]);
       } catch (error) {
-        console.error("Error fetching playlist data:", error);
+        console.error("Guest playlist fetch error:", error);
       }
     };
 
     fetchPlaylistData();
   }, [id]);
 
-  // console.log("Playlist Data:", playlistData);
 
   return (
     <div >
@@ -46,14 +47,13 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="text-[400] sm:text-4xl lg:text-5xl font-semibold text-center">
-            Classic Romance Collection
+          <h1 className="sm:text-4xl lg:text-5xl font-semibold text-center">
+            {playlistData?.[0]?.title || "Your Custom Playlist"}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
-            A sophisticated blend of timeless classics and elegant melodies.
-            Perfect for creating those unforgettable moments with soul-stirring
-            vocals and orchestral arrangements that never go out of style
+            {playlistData?.[0]?.description ||
+              "A personalised playlist crafted just for your event."}
           </p>
 
           <div className="flex items-center justify-between mt-8 mb-4">
