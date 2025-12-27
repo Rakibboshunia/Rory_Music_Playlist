@@ -24,21 +24,24 @@ export default function Step7_Energy() {
   };
 
   const handleNext = () => {
-    
     navigate("/quiz/tempo");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-2 rounded-xl">
       <h2 className="text-lg font-semibold text-center mb-6">
-        Pick a decade flavour
+        Pick a decade (Select one or more)
       </h2>
 
       {options.map(opt => (
         <button
           key={opt.value}
           onClick={() => toggle(opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border
+          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
             ${
               selected.includes(opt.value)
                 ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
@@ -49,11 +52,19 @@ export default function Step7_Energy() {
         </button>
       ))}
 
-      <div className="flex justify-center mt-4 pb-6">
+      {/* BACK + NEXT */}
+      <div className="flex justify-between items-center mt-4 pb-6">
+        <button
+          onClick={handleBack}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+        >
+          ← Back
+        </button>
+
         <button
           disabled={!selected.length}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

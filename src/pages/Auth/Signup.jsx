@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function Signup() {
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -35,10 +34,14 @@ export default function Signup() {
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
+
       {/* TITLE */}
-      <h2 className="text-3xl font-bold mb-8 text-center">Get Started Now</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">
+        Get Started Now
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
+
         {/* Name */}
         <div>
           <label className="block text-sm font-medium mb-1">Name</label>
@@ -69,7 +72,7 @@ export default function Signup() {
         <div>
           <label className="block text-sm font-medium mb-1">Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Create a password"
@@ -78,7 +81,7 @@ export default function Signup() {
         </div>
 
         {/* TERMS */}
-        <div className="flex items-start gap-2 text-sm">
+        <div className="flex items-start gap-2 text-sm cursor-pointer">
           <input type="checkbox" required className="mt-1" />
           <span>
             I agree to the{" "}
@@ -91,18 +94,29 @@ export default function Signup() {
         {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer"
+          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition cursor-pointer"
+          disabled={loading}
         >
-          {loading ? "Singing" : "Sign Up"}
+          {loading ? "Signing..." : "Sign Up"}
         </button>
 
-        {/* LOGIN LINK */}
-        <p className="text-md text-center mt-4">
-          Have an account?{" "}
-          <Link to="/login" className="text-blue-600 font-medium">
-            Sign in
-          </Link>
-        </p>
+        {/* BOTTOM LINKS */}
+        <div className="flex justify-between items-center text-sm mt-4">
+          <button
+            onClick={() => navigate("/")}
+            className="text-blue-600 hover:underline cursor-pointer"
+          >
+            ← Back to Home
+          </button>
+
+          <p>
+            Have an account?{" "}
+            <Link to="/login" className="text-blue-600 font-medium hover:underline cursor-pointer">
+              Sign in
+            </Link>
+          </p>
+        </div>
+
       </form>
     </div>
   );

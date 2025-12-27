@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
@@ -13,8 +12,11 @@ export default function Step6_Mood() {
   const { answers, updateAnswer } = useQuiz();
 
   const handleNext = () => {
-   
     navigate("/quiz/energy");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -27,7 +29,7 @@ export default function Step6_Mood() {
         <button
           key={opt.value}
           onClick={() => updateAnswer("sax", opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border
+          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
             ${
               answers.sax === opt.value
                 ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
@@ -38,11 +40,19 @@ export default function Step6_Mood() {
         </button>
       ))}
 
-      <div className="flex justify-center mt-4 pb-6">
+      {/* BACK + NEXT */}
+      <div className="flex justify-between items-center mt-4 pb-6">
+        <button
+          onClick={handleBack}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+        >
+          ← Back
+        </button>
+
         <button
           disabled={!answers.sax}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

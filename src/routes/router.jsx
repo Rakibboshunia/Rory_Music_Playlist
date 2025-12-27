@@ -3,7 +3,6 @@ import PublicLayout from "../layouts/PublicLayout";
 import QuizLayout from "../layouts/QuizLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Home from "../pages/Home/Home";
-import PlaylistResult from "../pages/Playlist/PlaylistResult";
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
 import Terms from "../pages/Auth/Terms";
@@ -20,6 +19,7 @@ import Step10_Final from "../pages/Quiz/components/Step10_Final";
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
+import PlaylistResult from "../pages/Playlist/UserPlaylistResult";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +48,9 @@ const router = createBrowserRouter([
         path: "/playlist/:id",
         element: <PlaylistResult />,
       },
+      
       {
-        path: "/playlist",
+        path: "/user/playlist",
         element: <UserPlaylistResult />,
       },
       {

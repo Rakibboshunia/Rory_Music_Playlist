@@ -17,18 +17,24 @@ export default function Login() {
 
     try {
       setLoading(true);
+
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
         { email, password },
-        { headers: { "Content-Type": "application/json" } } 
+        { headers: { "Content-Type": "application/json" } }
       );
-      if (result.data.success || result.data.status === "success") {
-        const user = result.data.user || result.data.data?.user || null;
 
-        Cookies.set("token", result?.data?.data?.token, {
-          expires: 7, // 7 days
-          secure: true,
-          sameSite: "strict",
+      if (result.data.success || result.data.status === "success") {
+        const user =
+          result.data.user || result.data.data?.user || null;
+
+        const token = result.data?.data?.token;
+
+        // 🔥 FIXED COOKIE (localhost safe)
+        Cookies.set("token", token, {
+          expires: 7,
+          sameSite: "lax",
+          secure: import.meta.env.PROD, // ❗ important
         });
 
         login(user);
@@ -48,15 +54,12 @@ export default function Login() {
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
-      {/* HEADER */}
       <h1 className="text-3xl font-bold text-center mb-2">Welcome back!</h1>
       <p className="text-gray-500 text-center mb-8">
         Enter your credentials to access your account
       </p>
 
-      {/* LOGIN FORM */}
       <form onSubmit={handleLogin} className="space-y-5">
-        {/* Email */}
         <div>
           <label className="block text-sm font-medium mb-1">
             Email Address
@@ -70,11 +73,12 @@ export default function Login() {
           />
         </div>
 
-        {/* Password */}
         <div>
-          <label className="block text-sm font-medium mb-1">Password</label>
+          <label className="block text-sm font-medium mb-1">
+            Password
+          </label>
           <input
-            type="text"
+            type="password"
             name="password"
             className="w-full border rounded-lg px-4 py-3"
             placeholder="Enter your password"
@@ -82,16 +86,14 @@ export default function Login() {
           />
         </div>
 
-        {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer"
+          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 transition"
         >
           {loading ? "Logging..." : "Login"}
         </button>
       </form>
 
-      {/* SIGNUP LINK */}
       <p className="text-md text-center mt-6">
         Don’t have an account?{" "}
         <Link to="/signup" className="text-blue-600 font-medium">

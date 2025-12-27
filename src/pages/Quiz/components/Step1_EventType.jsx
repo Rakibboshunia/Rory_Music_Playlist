@@ -29,7 +29,7 @@ export default function Step1_EventType() {
         <button
           key={opt.value}
           onClick={() => updateAnswer("eventType", opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border
+          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
             ${
               answers.eventType === opt.value
                 ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"

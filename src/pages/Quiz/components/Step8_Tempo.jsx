@@ -18,7 +18,7 @@ export default function Step8_Tempo() {
   const toggle = value => {
     const exists = selected.includes(value);
 
-    // ✅ max 2 selection rule stays
+    // max 2 selection
     if (!exists && selected.length === 2) return;
 
     const updated = exists
@@ -29,8 +29,11 @@ export default function Step8_Tempo() {
   };
 
   const handleNext = () => {
-    
     navigate("/quiz/era");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -43,7 +46,7 @@ export default function Step8_Tempo() {
         <button
           key={opt.value}
           onClick={() => toggle(opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border
+          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
             ${
               selected.includes(opt.value)
                 ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
@@ -54,11 +57,19 @@ export default function Step8_Tempo() {
         </button>
       ))}
 
-      <div className="flex justify-center mt-4 pb-6">
+      {/* BACK + NEXT */}
+      <div className="flex justify-between items-center mt-4 pb-6">
+        <button
+          onClick={handleBack}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+        >
+          ← Back
+        </button>
+
         <button
           disabled={!selected.length}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

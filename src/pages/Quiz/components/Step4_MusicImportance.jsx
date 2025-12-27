@@ -1,18 +1,21 @@
-
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 
 const options = [
-  { label: "18–25", value: "18_25",  },
-  { label: "26–35", value: "26_35", },
-  { label: "36–45", value: "36_45", },
-  { label: "46–60", value: "46_60", },
-  { label: "Mixed ages", value: "Mixed Ages", },
+  { label: "18–25", value: "18_25" },
+  { label: "26–35", value: "26_35" },
+  { label: "36–45", value: "36_45" },
+  { label: "46–60", value: "46_60" },
+  { label: "Mixed ages", value: "Mixed Ages" },
 ];
 
 export default function Step4_MusicImportance() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-2 rounded-xl">
@@ -24,20 +27,30 @@ export default function Step4_MusicImportance() {
         <button
           key={opt.value}
           onClick={() => updateAnswer("crowdAge", opt.value, opt.score)}
-          className={`w-full mb-3 h-13 rounded-xl border
-            ${answers.crowdAge === opt.value
-              ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
-              : "bg-white border-gray-200"}`}
+          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
+            ${
+              answers.crowdAge === opt.value
+                ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
+                : "bg-white border-gray-200"
+            }`}
         >
           {opt.label}
         </button>
       ))}
 
-      <div className="flex justify-center mt-4 pb-6">
+      {/* BACK + NEXT */}
+      <div className="flex justify-between items-center mt-4 pb-6">
+        <button
+          onClick={handleBack}
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+        >
+          ← Back
+        </button>
+
         <button
           disabled={!answers.crowdAge}
           onClick={() => navigate("/quiz/vibe")}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA]  cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
         >
           Next →
         </button>

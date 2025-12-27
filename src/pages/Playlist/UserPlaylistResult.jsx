@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PlaylistAccordion from "./components/PlaylistAccordion";
 
-// Global shared sections
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
@@ -48,14 +47,15 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-center">
-            Classic Romance Collection
+          {/* ✅ DYNAMIC TITLE FROM BACKEND */}
+          <h1 className="text-[400] sm:text-4xl lg:text-5xl font-semibold text-center">
+            {playlistData?.[0]?.title || "Your Custom Playlist"}
           </h1>
 
+          {/* ✅ DYNAMIC DESCRIPTION FROM BACKEND */}
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
-            A sophisticated blend of timeless classics and elegant melodies.
-            Perfect for creating those unforgettable moments with soul-stirring
-            vocals and orchestral arrangements that never go out of style
+            {playlistData?.[0]?.description ||
+              "A personalised playlist crafted just for your event."}
           </p>
 
           <div className="flex items-center justify-between mt-8 mb-4">
@@ -73,8 +73,8 @@ export default function PlaylistResult() {
         </div>
       </div>
 
-      <AwardsSection />
-      <TestimonialsSection />
+          <AwardsSection />
+        <TestimonialsSection />
       <CTASection />
     </div>
   );

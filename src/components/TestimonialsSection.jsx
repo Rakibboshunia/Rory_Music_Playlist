@@ -31,24 +31,24 @@ export default function TestimonialsSection() {
         "
       >
         <TestimonialCard
-          text="Perfectly personalised for our wedding — absolutely loved it!"
+          text="Couldn’t recommend more! The dance floor at our wedding was never empty!!"
           img="https://i.pravatar.cc/80?img=5"
-          name="Sarah M"
-          role="Freshman, UCLA"
+          name="Sarah McCarthy"
+          role="Powerscourt Estate"
         />
 
         <TestimonialCard
-          text="Guests kept dancing all night. This playlist was magic!"
+          text="Absolutely top class, so much fun for our wedding entertainment."
           img="https://i.pravatar.cc/80?img=12"
-          name="Marcus T"
-          role="High School Senior, Texas"
+          name="Denise Callanan"
+          role="Cloughjordan House"
         />
 
         <TestimonialCard
-          text="The easiest way to create the right event energy."
+          text="We honestly couldn’t have asked for a better atmosphere at our wedding!"
           img="https://i.pravatar.cc/80?img=25"
-          name="Priya K"
-          role="Sophomore, MIT"
+          name="Ciara Lynch"
+          role="The Mayson Hotel"
         />
       </div>
     </section>

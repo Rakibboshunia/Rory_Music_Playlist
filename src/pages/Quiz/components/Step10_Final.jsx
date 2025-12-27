@@ -11,13 +11,17 @@ export default function Step10_Final() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
   const { isAuthenticated } = useAuth();
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
-
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   /* ======================
      FINAL SUBMIT HANDLER
@@ -64,23 +68,16 @@ export default function Step10_Final() {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to submit");
-      }
+      if (!response.ok) throw new Error("Failed");
 
       const data = await response.json();
-
       toast.success(data.message || "Playlist sent to your email!");
 
-      // ✅ reset + close
       setShowEmailPopup(false);
       setEmail("");
       updateAnswer("doNotPlays", "");
-
-    
     } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-      console.error(error);
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -107,27 +104,21 @@ export default function Step10_Final() {
       user_type: "paid",
     };
 
-    const token = Cookies.get("token");
     try {
       setPaymentLoading(true);
-      const result = await axios.post(
+      const res = await axios.post(
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
-      if (result.status == 200) {
-        // console.log(result?.data?.data?.checkoutUrl)
-        window.open(result?.data?.data?.checkoutUrl, "_self");
-      } else {
-        toast.error("Something Went Wrong in Payment Processing");
-      }
-    } catch (error) {
-      toast.error(error?.message || "Something Went Wrong !!");
+
+      window.open(res.data?.data?.checkoutUrl, "_self");
+    } catch {
+      toast.error("Something went wrong");
     } finally {
       setPaymentLoading(false);
     }
@@ -149,25 +140,23 @@ export default function Step10_Final() {
       },
       user_type: "free",
     };
-    const token = Cookies.get("token");
+
     try {
       setIsGenerating(true);
-      const result = await axios.post(
+      await axios.post(
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${Cookies.get("token")}`,
           },
         }
       );
 
       toast.success("Playlist is Generated");
-      setShowUpgradePopup(false);
       navigate("/playlist");
-    } catch (error) {
-      toast.error(error || "Something went wrong");
+    } catch {
+      toast.error("Something went wrong");
     } finally {
       setIsGenerating(false);
     }
@@ -175,6 +164,7 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-10 space-y-6 text-center">
+
       <h2 className="text-2xl font-semibold">Your vibe is ready ✨</h2>
 
       <p className="text-gray-500">
@@ -202,13 +192,22 @@ export default function Step10_Final() {
         />
       </div>
 
-      {/* REVEAL BUTTON */}
-      <button
-        onClick={handleComplete}
-        className="mt-4 px-5 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
-      >
-        Submit →
-      </button>
+      {/* BACK + SUBMIT */}
+      <div className="flex justify-between mt-6">
+        <button
+          onClick={handleBack}
+          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+        >
+          ← Back
+        </button>
+
+        <button
+          onClick={handleComplete}
+          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+        >
+          Submit →
+        </button>
+      </div>
 
       {/* =========================
           GUEST EMAIL POPUP
@@ -258,7 +257,7 @@ export default function Step10_Final() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-3 rounded-full text-white
+                className={`w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer
                   ${
                     loading
                       ? "bg-gray-400"
@@ -298,7 +297,7 @@ export default function Step10_Final() {
             </div>
 
             <h3 className="text-xl font-semibold mb-4">
-              Do you want to upgrade your playlist?
+              Upgrade your Playlist with Payment
             </h3>
 
             <div className="flex gap-3 justify-center">
@@ -308,14 +307,16 @@ export default function Step10_Final() {
                     {/* NO BUTTON */}
                     <button
                       onClick={handleUpgradeNo}
-                      className="px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-50 transition cursor-pointer"
+                      className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
                     >
-                      No
+                      Back
                     </button>
                   </>
                 ) : (
                   /* LOADING STATE */
-                  <div className="px-6 py-2 rounded-full bg-gray-100 text-gray-600 text-sm font-medium">
+                  <div 
+                  className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
+                  >
                     Generating playlist…
                   </div>
                 )}
@@ -324,10 +325,12 @@ export default function Step10_Final() {
                     onClick={handleUpgradeYes}
                     className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
                   >
-                    Upgrade €9
+                    Get Premium
                   </button>
                 ) : (
-                  <div className="px-6 py-2 rounded-full bg-gray-100 text-gray-600 text-sm font-medium">
+                  <div 
+                  className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
+                  >
                     Generating Payment Link
                   </div>
                 )}
