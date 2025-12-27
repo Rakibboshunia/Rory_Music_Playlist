@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
@@ -12,19 +12,30 @@ export default function Step10_Final() {
   const { answers, updateAnswer } = useQuiz();
   const { isAuthenticated } = useAuth();
 
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [paymentLoading, setPaymentLoading] = useState(false);
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const handleBack = () => {
-    navigate(-1);
-  };
+  const [activeAction, setActiveAction] = useState(null); 
+  // "back" | "premium" | null
 
   /* ======================
-     FINAL SUBMIT HANDLER
+     BODY SCROLL LOCK
+  ====================== */
+  useEffect(() => {
+    if (activeAction) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [activeAction]);
+
+  /* ======================
+     FINAL SUBMIT
   ====================== */
   const handleComplete = () => {
     if (!isAuthenticated) {
@@ -35,48 +46,23 @@ export default function Step10_Final() {
   };
 
   /* ======================
-     GUEST EMAIL SUBMIT
+     GUEST EMAIL
   ====================== */
   const submitGuestEmail = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      email,
-      answers: {
-        q1: answers.eventType,
-        q2: answers.overallVibe,
-        q3: answers.drinksMoment,
-        q4: answers.crowdAge,
-        q5: answers.floorfiller,
-        q6: answers.sax,
-        q7: answers.decades,
-        q8: answers.genreLean,
-        q9: answers.lastHour,
-        q10: answers.doNotPlays,
-      },
-    };
-
     try {
       setLoading(true);
+      await fetch(import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, answers }),
+      });
 
-      const response = await fetch(
-        import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (!response.ok) throw new Error("Failed");
-
-      const data = await response.json();
-      toast.success(data.message || "Playlist sent to your email!");
-
+      toast.success("Playlist sent!");
       setShowEmailPopup(false);
       setEmail("");
-      updateAnswer("doNotPlays", "");
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
@@ -84,31 +70,18 @@ export default function Step10_Final() {
   };
 
   /* ======================
-     UPGRADE ACTIONS
+     BACK (FREE)
   ====================== */
-
-  const handleUpgradeYes = async () => {
-    const payload = {
-      answers: {
-        q1: answers.eventType,
-        q2: answers.overallVibe,
-        q3: answers.drinksMoment,
-        q4: answers.crowdAge,
-        q5: answers.floorfiller,
-        q6: answers.sax,
-        q7: answers.decades,
-        q8: answers.genreLean,
-        q9: answers.lastHour,
-        q10: answers.doNotPlays,
-      },
-      user_type: "paid",
-    };
+  const handleUpgradeNo = async () => {
+    setActiveAction("back");
 
     try {
-      setPaymentLoading(true);
-      const res = await axios.post(
+      await axios.post(
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
-        payload,
+        {
+          answers,
+          user_type: "free",
+        },
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
@@ -116,36 +89,25 @@ export default function Step10_Final() {
         }
       );
 
-      window.open(res.data?.data?.checkoutUrl, "_self");
+      navigate("/playlist");
     } catch {
-      toast.error("Something went wrong");
-    } finally {
-      setPaymentLoading(false);
+      setActiveAction(null);
     }
   };
 
-  const handleUpgradeNo = async () => {
-    const payload = {
-      answers: {
-        q1: answers.eventType,
-        q2: answers.overallVibe,
-        q3: answers.drinksMoment,
-        q4: answers.crowdAge,
-        q5: answers.floorfiller,
-        q6: answers.sax,
-        q7: answers.decades,
-        q8: answers.genreLean,
-        q9: answers.lastHour,
-        q10: answers.doNotPlays,
-      },
-      user_type: "free",
-    };
+  /* ======================
+     GET PREMIUM
+  ====================== */
+  const handleUpgradeYes = async () => {
+    setActiveAction("premium");
 
     try {
-      setIsGenerating(true);
-      await axios.post(
+      const res = await axios.post(
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
-        payload,
+        {
+          answers,
+          user_type: "paid",
+        },
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
@@ -153,12 +115,9 @@ export default function Step10_Final() {
         }
       );
 
-      toast.success("Playlist is Generated");
-      navigate("/playlist");
+      window.location.href = res.data?.data?.checkoutUrl;
     } catch {
-      toast.error("Something went wrong");
-    } finally {
-      setIsGenerating(false);
+      setActiveAction(null);
     }
   };
 
@@ -171,171 +130,98 @@ export default function Step10_Final() {
         Based on your answers, your night feels like:
       </p>
 
-      {/* ======================
-          Q10 – DO NOT PLAYS
-      ====================== */}
+      {/* DO NOT PLAYS */}
       <div className="bg-[#F6F8FF] rounded-2xl p-5 text-left space-y-2">
         <h3 className="text-base font-semibold text-gray-800">
           Any firm “do-not-plays”?
         </h3>
-
         <p className="text-sm text-gray-500">
           Artists or songs you definitely don’t want to hear.
         </p>
 
         <textarea
           rows={3}
-          placeholder="e.g. Drake, heavy metal, explicit lyrics…"
           value={answers.doNotPlays || ""}
           onChange={(e) => updateAnswer("doNotPlays", e.target.value)}
-          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#155DFC]"
+          placeholder="e.g. Drake, heavy metal..."
+          className="w-full border rounded-xl px-4 py-3 text-sm"
         />
       </div>
 
-      {/* BACK + SUBMIT */}
+      {/* ACTION BUTTONS */}
       <div className="flex justify-between mt-6">
         <button
-          onClick={handleBack}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+          onClick={() => navigate(-1)}
+          className="px-6 py-3 rounded-full bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white"
         >
           ← Back
         </button>
 
         <button
           onClick={handleComplete}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+          className="px-6 py-3 rounded-full bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white"
         >
           Submit →
         </button>
       </div>
 
-      {/* =========================
-          GUEST EMAIL POPUP
-      ========================= */}
-      {showEmailPopup && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-3xl w-full max-w-md p-6 relative shadow-xl">
-            <button
-              onClick={() => setShowEmailPopup(false)}
-              className="absolute top-4 right-4 text-gray-400"
-            >
-              ✕
-            </button>
-
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-12 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-xl">
-                ✉️
-              </div>
-            </div>
-
-            <h3 className="text-xl font-semibold text-center">
-              Get your personalised playlist
-            </h3>
-
-            <p className="text-sm text-gray-500 text-center mt-1 mb-5">
-              Pop in your email to unlock your soundtrack.
-            </p>
-
-            <form onSubmit={submitGuestEmail} className="space-y-4">
-              <input
-                type="email"
-                required
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="w-full border border-gray-200 rounded-full px-5 py-3 text-sm"
-              />
-
-              <label className="flex items-start gap-2 text-xs text-gray-500">
-                <input type="checkbox" required className="mt-1" />
-                <span>
-                  I agree to receive my personalised playlist and occasional
-                  updates from DJ & SAX®. You can unsubscribe anytime.
-                </span>
-              </label>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer
-                  ${
-                    loading
-                      ? "bg-gray-400"
-                      : "bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer"
-                  }`}
-              >
-                {loading ? "Sending..." : "Reveal My Playlist"}
-              </button>
-
-              <p className="text-xs text-gray-500">
-                We respect your privacy. Your data is secure and never shared.
-              </p>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* =========================
-          UPGRADE POPUP (LOGGED USER)
-      ========================= */}
+      {/* =======================
+          UPGRADE POPUP
+      ======================= */}
       {showUpgradePopup && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md text-center relative">
-            <button
-              onClick={() => setShowUpgradePopup(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              ✕
-            </button>
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4 pointer-events-auto">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 text-center relative shadow-xl">
 
-            <div className="w-full flex justify-center mb-4">
-              <img
-                src={upgradeImg}
-                alt="Upgrade illustration"
-                className="w-48 sm:w-56 md:w-60 object-contain"
-              />
-            </div>
+            {/* LOADING STATE */}
+            {activeAction ? (
+              <div className="py-20 flex flex-col items-center gap-4">
+                <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                <p className="text-lg font-semibold text-gray-700">
+                  Generating playlist...
+                </p>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => setShowUpgradePopup(false)}
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
 
-            <h3 className="text-xl font-semibold mb-4">
-              Upgrade your Playlist with Payment
-            </h3>
+                <h3 className="text-xl font-semibold mb-4">
+                  Upgrade your Playlist <br /> with Payment
+                </h3>
 
-            <div className="flex gap-3 justify-center">
-              <div className="flex gap-3 justify-center">
-                {!isGenerating ? (
-                  <>
-                    {/* NO BUTTON */}
-                    <button
-                      onClick={handleUpgradeNo}
-                      className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
-                    >
-                      Back
-                    </button>
-                  </>
-                ) : (
-                  /* LOADING STATE */
-                  <div 
-                  className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
-                  >
-                    Generating playlist…
+                <div className="bg-[#F6F8FF] rounded-xl p-4 flex items-center justify-between mb-6">
+                  <div className="text-left">
+                    <p className="text-sm text-gray-500">Pro Plan</p>
+                    <p className="text-2xl font-bold">$9.00</p>
+                    <p className="text-sm text-blue-600">
+                      For your next 50 Play list
+                    </p>
                   </div>
-                )}
-                {!paymentLoading ? (
+
+                  <img src={upgradeImg} className="w-14" />
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={handleUpgradeNo}
+                    className="w-1/2 py-3 rounded-full border border-blue-500 text-blue-600 hover:bg-blue-50"
+                  >
+                    Back
+                  </button>
+
                   <button
                     onClick={handleUpgradeYes}
-                    className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
+                    className="w-1/2 py-3 rounded-full text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA]"
                   >
                     Get Premium
                   </button>
-                ) : (
-                  <div 
-                  className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:opacity-90 transition cursor-pointer"
-                  >
-                    Generating Payment Link
-                  </div>
-                )}
-              </div>
-            </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

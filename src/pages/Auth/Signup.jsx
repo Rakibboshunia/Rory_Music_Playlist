@@ -82,7 +82,7 @@ export default function Signup() {
 
         {/* TERMS */}
         <div className="flex items-start gap-2 text-sm cursor-pointer">
-          <input type="checkbox" required className="mt-1" />
+          <input type="checkbox" required className="mt-1 " />
           <span>
             I agree to the{" "}
             <Link to="/terms" className="text-blue-600 underline">
