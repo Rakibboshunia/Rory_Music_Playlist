@@ -8,11 +8,14 @@ import toast from "react-hot-toast";
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, loading } = useAuth();
 
   const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // 🔥 WAIT UNTIL AUTH READY
+  if (loading) return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -22,9 +25,6 @@ export default function Navbar() {
 
   const solidNavbar = !isHome || scrolled;
 
-  /* ======================
-     SCROLL HELPERS
-  ====================== */
   const scrollToHero = () => {
     document
       .getElementById("hero-section")
@@ -67,9 +67,9 @@ export default function Navbar() {
     setMenuOpen(false);
 
     if (isAuthenticated) {
-      Cookies.remove("token", { secure: true, sameSite: "strict" });
+      Cookies.remove("token");
       logout();
-      toast.success("Logged Out");
+      toast.success("Logged out");
       navigate("/");
     } else {
       navigate("/login");
@@ -82,10 +82,10 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300
-        ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
+      ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-        {/* LOGO → HOME + HERO SCROLL */}
+        {/* LOGO */}
         <div onClick={handleHomeClick} className="cursor-pointer select-none">
           <img src={logo} alt="logo" className="w-15 h-14" />
         </div>
@@ -93,7 +93,7 @@ export default function Navbar() {
         {/* DESKTOP MENU */}
         <div
           className={`hidden md:flex items-center gap-8 font-medium
-            ${solidNavbar ? "text-gray-700" : "text-white"}`}
+          ${solidNavbar ? "text-gray-700" : "text-white"}`}
         >
           <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
             Home
@@ -109,24 +109,20 @@ export default function Navbar() {
             </NavLink>
           )}
 
-          <NavLink
-            to="/"
-            onClick={handleTestimonialClick}
-            className="hover:text-[#9810FA]"
-          >
+          <NavLink to="/" onClick={handleTestimonialClick}>
             Testimonial
           </NavLink>
         </div>
 
-        {/* AUTH */}
+        {/* AUTH BUTTON */}
         <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full font-semibold border-2 cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]
+            className={`h-10 px-6 rounded-full font-semibold transition-all
               ${
                 isAuthenticated
-                  ? "bg-red-500 text-white hover:bg-red-700 border-none"
-                  : "border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
+                  ? "bg-red-500 text-white hover:bg-red-700"
+                  : "border-2 border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
               }`}
           >
             {isAuthenticated ? "Logout" : "Login"}
@@ -146,26 +142,18 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
-          <div className="flex flex-col gap-3 px-4 py-4 text-sm text-gray-700">
-            <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
+        <div className="md:hidden bg-white border-t shadow-md">
+          <div className="flex flex-col gap-3 px-4 py-4 text-gray-700">
+            <NavLink to="/" onClick={handleHomeClick}>
               Home
             </NavLink>
 
-            <NavLink
-              to="/quiz"
-              onClick={() => setMenuOpen(false)}
-              className={linkClass}
-            >
+            <NavLink to="/quiz" onClick={() => setMenuOpen(false)}>
               Quiz
             </NavLink>
 
             {isAuthenticated && (
-              <NavLink
-                to="/playlist"
-                onClick={() => setMenuOpen(false)}
-                className={linkClass}
-              >
+              <NavLink to="/playlist" onClick={() => setMenuOpen(false)}>
                 Playlist
               </NavLink>
             )}
@@ -176,11 +164,11 @@ export default function Navbar() {
 
             <button
               onClick={handleAuthClick}
-              className={`mt-2 h-10 rounded-full font-bold border-2 cursor-pointer transition-all
+              className={`mt-2 h-10 rounded-full font-bold
                 ${
                   isAuthenticated
-                    ? "bg-red-500 text-white hover:bg-red-700 border-none"
-                    : "border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
+                    ? "bg-red-500 text-white"
+                    : "border-2 border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
                 }`}
             >
               {isAuthenticated ? "Logout" : "Login"}

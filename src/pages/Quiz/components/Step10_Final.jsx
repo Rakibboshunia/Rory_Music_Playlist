@@ -203,7 +203,7 @@ export default function Step10_Final() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] curpsor-pointer"
+                className="w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer"
               >
                 {loading ? "Sending..." : "Reveal My Playlist"}
               </button>

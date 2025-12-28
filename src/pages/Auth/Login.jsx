@@ -9,48 +9,52 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // 👁️ NEW
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const result = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
+    const result = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
+      { email, password },
+      { headers: { "Content-Type": "application/json" } }
+    );
 
-      if (result.data.success || result.data.status === "success") {
-        const user =
-          result.data.user || result.data.data?.user || null;
+    const token = result.data?.data?.token;
 
-        const token = result.data?.data?.token;
-
-        Cookies.set("token", token, {
-          expires: 7,
-          sameSite: "lax",
-          secure: import.meta.env.PROD,
-        });
-
-        login(user);
-        toast.success("Login successful!");
-        navigate("/");
-      } else {
-        toast.error("Invalid email or password");
-      }
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Login failed. Please try again."
-      );
-    } finally {
-      setLoading(false);
+    if (!token) {
+      toast.error("Login failed");
+      return;
     }
-  };
+
+    // ✅ save token
+    Cookies.set("token", token, {
+      expires: 7,
+      sameSite: "lax",
+      secure: import.meta.env.PROD,
+    });
+
+    // ✅ IMPORTANT FIX
+    login({
+      email,
+    });
+
+    toast.success("Login successful!");
+    navigate("/");
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message || "Login failed"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">

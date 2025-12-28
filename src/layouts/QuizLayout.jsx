@@ -40,11 +40,11 @@ export default function QuizLayout() {
 
       {/* ===== HEADER ===== */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
-        <h1 className="text-3xl sm:text-4xl font-semibold bg-gradient-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Your night. Your energy. <br /> Your soundtrack.
         </h1>
 
-        <p className="mt-2 pb-2 text-gray-600">
+        <p className="mt-4 text-gray-600">
           From vision to reality in three simple steps
         </p>
       </div>
@@ -59,7 +59,7 @@ export default function QuizLayout() {
 
           <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <div
-              className="h-2 bg-gradient-to-r from-[#155DFC] to-[#9810FA] transition-all duration-300"
+              className="h-2 bg-linear-to-r from-[#155DFC] to-[#9810FA] transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>

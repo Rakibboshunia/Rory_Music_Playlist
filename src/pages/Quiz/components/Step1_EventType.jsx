@@ -39,7 +39,17 @@ export default function Step1_EventType() {
         </button>
       ))}
 
-      <div className="flex justify-center mt-4 pb-6">
+      {/* 🔽 BUTTONS */}
+      <div className="flex justify-between items-center mt-4 pb-6">
+        {/* Back to Home */}
+        <button
+          onClick={() => navigate("/")}
+          className="px-5 py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50"
+        >
+          ← Back to Home
+        </button>
+
+        {/* Next */}
         <button
           disabled={!answers.eventType}
           onClick={handleSubmit}
