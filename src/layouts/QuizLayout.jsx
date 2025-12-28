@@ -1,41 +1,78 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import AwardsSection from "../components/AwardsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import CTASection from "../components/CTASection";
 
-export default function QuizLayout() {
+const quizSteps = [
+  "/quiz",
+  "/quiz/details",
+  "/quiz/genres",
+  "/quiz/importance",
+  "/quiz/vibe",
+  "/quiz/mood",
+  "/quiz/energy",
+  "/quiz/tempo",
+  "/quiz/era",
+  "/quiz/final",
+];
 
-  // scroll when quiz page loads
+export default function QuizLayout() {
+  const location = useLocation();
+
+  // ✅ Normalize path
+  const cleanPath = location.pathname.replace(/\/$/, "");
+
+  const stepIndex = quizSteps.findIndex(
+    (step) => cleanPath === step
+  );
+
+  const currentStep = stepIndex >= 0 ? stepIndex + 1 : 0;
+  const progressPercent = currentStep * 10;
+
   useEffect(() => {
     const el = document.getElementById("quiz-section");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }, [location.pathname]);
 
   return (
-    <div id="quiz-section" className="min-h-screen"
-    >
+    <div id="quiz-section" className="min-h-screen">
+
       {/* ===== HEADER ===== */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold gap-1 leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
-          Your night. Your energy. <br />Your soundtrack.
+        <h1 className="text-3xl sm:text-4xl font-semibold bg-gradient-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
+          Your night. Your energy. <br /> Your soundtrack.
         </h1>
-        <p className="mt-2">
-          From vision to reality in there simple steps
+
+        <p className="mt-2 pb-2 text-gray-600">
+          From vision to reality in three simple steps
         </p>
       </div>
 
-      {/* QUIZ STEP CONTENT */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14">
+      {/* ===== PROGRESS BAR ===== */}
+      {currentStep > 0 && (
+        <div className="max-w-xl mx-auto px-4 sm:px-6 mb-6">
+          <div className="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Step {currentStep} of 10</span>
+            <span>{progressPercent}%</span>
+          </div>
+
+          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div
+              className="h-2 bg-gradient-to-r from-[#155DFC] to-[#9810FA] transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ===== PAGE CONTENT ===== */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-15">
         <Outlet />
       </div>
 
       <AwardsSection />
-
       <TestimonialsSection />
-
       <CTASection />
     </div>
   );

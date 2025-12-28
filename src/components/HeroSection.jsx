@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MusicLogo from "../assets/img/playlist.png";
 import HeroCurve from "../assets/img/Container.png";
 import { FaMusic } from "react-icons/fa";
+import IphoneLogo from "../assets/img/iphone.png";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -92,7 +93,9 @@ export default function HeroSection() {
 
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-[320px] sm:w-90 rotate-5 hover:rotate-0 transition">
+
+          <img src={IphoneLogo} alt="" />
+          {/* <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-[320px] sm:w-90 rotate-5 hover:rotate-0 transition">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white">
                 <FaMusic className="text-white text-xl" />
@@ -126,7 +129,7 @@ export default function HeroSection() {
                 )
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

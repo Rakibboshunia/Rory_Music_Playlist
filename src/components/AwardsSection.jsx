@@ -21,7 +21,7 @@ export default function AwardsSection() {
       {/* AWARDS LIST */}
       <div className="max-w-6xl mx-auto mt-12 sm:mt-16
           px-4 sm:px-6
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+          grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3
           gap-6 sm:gap-8">
 
         {/* Award 1 */}
@@ -46,17 +46,15 @@ export default function AwardsSection() {
       {/* STATS */}
       <div className="max-w-3xl mx-auto mt-15 px-3 pb-10 grid grid-cols-1 md:grid-cols-3 text-center gap-20">
 
-        <Stat 
-          label="Thousands of bespoke soundtracks created"
-        />
-
-        <Stat 
-          label="Built on real dancefloor data from live celebrations"
-        />
-
-        <Stat 
-          label="⭐ 5.0★ average Google rating from DJ and SAX® clients"
-        />
+        <div>
+          <h2>Thousands of bespoke <br /> soundtracks created</h2>
+        </div>
+        <div>
+          <h2>Built on real dancefloor<br />data from live celebrations</h2>
+        </div>
+        <div>
+          <h2>⭐ 5.0★ average  <br /> Google rating from DJ and SAX® clients</h2>
+        </div>
 
       </div>
           </section>

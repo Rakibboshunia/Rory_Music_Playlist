@@ -41,13 +41,13 @@ export default function PlaylistResult() {
       {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pt-10 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-center mb-3">
+          <div className="flex justify-center mb-3 pb-5">
             <span className="px-6 py-2 text-xs sm:text-sm rounded-full bg-white shadow">
               ✨ Your personalised soundtrack is ready
             </span>
           </div>
 
-          <h1 className="sm:text-4xl lg:text-5xl font-semibold text-center">
+          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
             {playlistData?.[0]?.title || "Your Custom Playlist"}
           </h1>
 

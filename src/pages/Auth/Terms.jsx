@@ -11,213 +11,232 @@ export default function Terms() {
       </h1>
 
       <div className="space-y-6 text-gray-700 text-sm leading-relaxed">
+        <h2>TERMS & CONDITIONS – SOUNDTRACKMYNIGHT.COM <br />
+        Last updated: 27th December 2025</h2>
         <p>
-          Welcome to our platform. By accessing or using this website, quiz system, playlist generation service, or any related features, you agree to comply with and be bound by the following Terms & Conditions. Please read them carefully before using the service.
+           
+          1. INTRODUCTION
+          Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist service operated by DJ and SAX®. These Terms & Conditions govern your use of soundtrackmynight.com and any content or services provided through the website.
+          <br />
 
+          2. DEFINITIONS
+          “Service” means the provision of digital playlists and related content.
+          “Free Content” means playlists or content provided at no charge.
+          “Paid Content” means playlists or upgrades purchased for a one-off fee.
+          “User” means any person accessing the website.
+          <br />
+
+          3. ACCEPTANCE OF TERMS
+          By accessing or using the website, you confirm that you accept these Terms & Conditions.
+          <br />
+
+          4. SCOPE OF SERVICES
+          Soundtrack My Night provides curated digital playlists and music-related content. No live entertainment services are provided directly through this website. Live bookings are governed by separate DJ and SAX® agreements.
+          <br />
+
+          5. ACCESS & USE
+          Access to playlists is provided via email. Users must not share, resell, or commercially exploit playlists without written consent.
+          <br />
+
+          6. FREE CONTENT
+          Free playlists are provided “as is” without warranties. Access may be withdrawn at any time.
+          <br />
+
+          7. PAID CONTENT & FEES
+          Paid playlists are purchased as one-off transactions. Prices are displayed prior to purchase. All fees are non-refundable once access is granted.
+          <br />
+
+          8. INTELLECTUAL PROPERTY
+          All content remains the intellectual property of DJ and SAX®. Users are granted a personal, non-commercial licence only.
+          <br />
+
+          9. LIMITATION OF LIABILITY
+          To the fullest extent permitted by law, we shall not be liable for indirect or consequential losses.
+          <br />
+
+          10. TERMINATION
+          We reserve the right to suspend or terminate access for misuse or breach of these Terms.
+          <br />
+
+          11. FORCE MAJEURE
+          We are not liable for delays or failures beyond our reasonable control.
+          <br />
+
+          12. GOVERNING LAW
+          These Terms are governed by Irish law. Irish courts have exclusive jurisdiction.
+        </p>
+
+        <h2>PRIVACY POLICY – SOUNDTRACKMYNIGHT.COM <br />
+        Last updated: 27th December 2025</h2>
+        <p>
+          
+          Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a digital music and playlist experience operated as part of DJ and SAX®. We are committed to protecting your privacy and processing personal data in accordance with the General Data Protection Regulation (EU) 2016/679 (“GDPR”), the Data Protection Acts 1988–2018, and applicable Irish and EU law.
+          <br />
+
+          1. DATA CONTROLLER
+          The data controller is:
+          DJ and SAX®
+          40 Rahillion Drive
+          Donabate, Co. Dublin, Ireland
+          Email: info@soundtrackmynight.com
+          <br />
+
+          2. PERSONAL DATA WE COLLECT
+          The only personal data we request directly through soundtrackmynight.com is an email address.
+          <br />
+
+          Email addresses are collected when a user:
+          • Requests access to a generated playlist
+          • Accesses gated digital content
+          <br />
+
+          We do not collect phone numbers, postal addresses, or booking information directly through soundtrackmynight.com.
           <br /><br />
 
-          1. Acceptance of Terms
-
-          By creating an account, submitting a quiz, making a payment, or using any feature of this platform, you confirm that you have read, understood, and agreed to these Terms & Conditions.
-          If you do not agree, you must discontinue use of the service immediately.
-
+          3. PURPOSE OF PROCESSING
+          We process your email address for the following purposes:
+          • To deliver access to your playlist or requested content
+          • To communicate with you in relation to Soundtrack My Night
+          • To follow up with relevant information about DJ and SAX® services related to your interest
+          • To improve our services and user experience
           <br /><br />
 
-          2. Description of Service
+          4. RELATIONSHIP WITH DJ AND SAX®
+          Soundtrack My Night is operated as part of DJ and SAX®. Your email address may be used by DJ and SAX® to contact you about related music and entertainment services.
+          <br />
 
-          Our platform provides:
+          This does not constitute a sale or transfer of personal data to a third party, but rather processing within the same business group and service ecosystem.
+          <br />
 
-          * A music preference quiz
-          * AI-assisted playlist recommendations
-          * Spotify-based playlist previews or links
-          * Optional paid upgrades for enhanced features
+          5. DJANDSAX.IE CONTACT FORMS
+          If you choose to submit an enquiry, booking request, or additional personal data through the contact forms on DJandSAX.ie, your data will be processed in accordance with the DJandSAX.ie Privacy Policy.
+          <br />
 
-          The service is intended for **personal, non-commercial use only**.
-
+          Submission of data via DJandSAX.ie constitutes a separate and voluntary action by the user.
           <br /><br />
 
-          3. User Accounts
-
-          * You are responsible for maintaining the confidentiality of your login credentials.
-          * You agree to provide accurate and complete information during signup or guest email submission.
-          * You are fully responsible for all activities conducted under your account.
-
-          We reserve the right to suspend or terminate accounts that violate these terms.
-
+          6. LEGAL BASIS FOR PROCESSING
+          We process personal data on the following lawful bases:
+          • Consent – where you submit your email address to access content
+          • Legitimate interests – to promote relevant services you have expressed interest in
+          • Compliance with legal obligations where applicable
           <br /><br />
 
-          4. Payments & Subscriptions
-
-          * Certain features may require payment through third-party providers (e.g., Stripe).
-          * All payments are processed securely by the payment provider. We do not store card details.
-          * Payments are **non-refundable**, unless explicitly stated otherwise.
-          * If a payment is cancelled or fails, access to premium features will not be granted.
-
+          7. MARKETING COMMUNICATIONS
+          You may receive emails from Soundtrack My Night or DJ and SAX® related to playlists, services, or relevant updates.
+          You may withdraw your consent to receive marketing communications at any time by contacting us at info@soundtrackmynight.com.
           <br /><br />
 
-          5. Spotify Integration Disclaimer
-
-          * This platform is **not affiliated with, endorsed by, or sponsored by Spotify**.
-          * Spotify logos, playlists, and track previews belong to their respective owners.
-          * Playlist results are recommendations only and may vary based on availability or region.
-
+          8. DATA RETENTION
+          We retain email addresses only for as long as necessary to fulfil the purposes outlined in this policy or until you withdraw consent or request deletion, unless a longer retention period is required by law.
           <br /><br />
 
-          6. Intellectual Property
-
-          All content on this platform—including UI design, quiz structure, branding, text, and generated outputs—is protected by intellectual property laws.
-
-          You may not:
-
-          * Copy, redistribute, or resell the service
-          * Reverse-engineer the quiz logic or AI system
-          * Use the platform for commercial redistribution without written permission
-
+          9. DATA SECURITY
+          We implement appropriate technical and organisational measures to protect personal data against unauthorised access, loss, or misuse.
           <br /><br />
 
-          7. AI-Generated Content Disclaimer
+          10. YOUR RIGHTS
+          Under GDPR, you have the right to:
+          • Access your personal data
+          • Request correction of inaccurate data
+          • Request erasure of your data
+          • Restrict or object to processing
+          • Withdraw consent at any time
+          • Lodge a complaint with the Data Protection Commission
+          <br />
 
-          Playlist titles, descriptions, and recommendations may be generated using AI systems.
-
-          * AI outputs are **informational and entertainment-based only**
-          * We do not guarantee accuracy, completeness, or suitability for specific events
-          * Users acknowledge that AI-generated results may vary
-
+          Requests can be made by emailing info@soundtrackmynight.com.
           <br /><br />
 
-          8. Limitation of Liability
+          11. CHANGES TO THIS POLICY
+          We may update this Privacy Policy from time to time. The most current version will always be available on soundtrackmynight.com.
 
-          We are not liable for:
+        </p>
 
-          * Service interruptions or technical issues
-          * Playlist accuracy or music availability
-          * Third-party service failures (Spotify, payment providers)
-          * Any indirect or consequential damages
+        <p>
+          COOKIE POLICY – SOUNDTRACKMYNIGHT.COM
+          Last updated: 27th December 2025
 
-          Use of the service is at your own risk.
+          Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a digital music and playlist service operated as part of DJ and SAX®. This Cookie Policy explains how we use cookies and similar technologies on soundtrackmynight.com in accordance with the General Data Protection Regulation (GDPR) and the European Communities (Electronic Communications Networks and Services) (Privacy and Electronic Communications) Regulations.
 
-          <br /><br />
+          1. WHAT ARE COOKIES?
+          Cookies are small text files placed on your device when you visit a website. They help websites function efficiently, improve user experience, and provide information to website owners.
 
-          9. Termination
+          2. WHY WE USE COOKIES
+          We use cookies to:
+          • Ensure the website functions correctly
+          • Remember user preferences
+          • Analyse website traffic and performance
+          • Support marketing and advertising activities (where consent is given)
 
-          We reserve the right to:
+          3. TYPES OF COOKIES WE USE
 
-          * Suspend or terminate access without prior notice
-          * Remove content or accounts that violate these terms
-          * Modify or discontinue any part of the service at any time
+          a) Strictly Necessary Cookies  
+          These cookies are essential for the operation of the website and cannot be switched off. They include cookies used for security, fraud prevention, and cookie consent management.
 
-          <br /><br />
+          b) Performance & Analytics Cookies  
+          We use analytics services such as Google Analytics to collect information about how visitors use our website. This information is aggregated and anonymised and helps us improve site performance and user experience.
 
-          10. Changes to Terms
+          c) Functional Cookies  
+          These cookies allow the website to remember choices you make, such as preferences or previous interactions, and provide enhanced functionality.
 
-          We may update these Terms & Conditions at any time. Continued use of the platform after updates constitutes acceptance of the revised terms.
+          d) Marketing & Advertising Cookies  
+          With your consent, we may use marketing and advertising cookies, including:
+          • Meta (Facebook) Pixel
+          • Google Ads / Google Remarketing
 
-          <br /><br />
+          These cookies help us deliver relevant advertisements, limit ad repetition, and measure the effectiveness of our marketing campaigns.
 
-          11. Contact Information
+          4. THIRD-PARTY COOKIES & SERVICES
 
-          For questions regarding these Terms,
-          <br /> Please contact us at:
-          📧(test.info@gmail.com)
+          Spotify  
+          To listen to generated playlists, users must log in to their own Spotify account. Spotify may place cookies or use similar technologies in accordance with its own Privacy and Cookie Policies. Soundtrack My Night does not control or access Spotify cookies or user account data.
 
-          </p>
-          ----------------------------------------------------------------------<br /><br /><br />
-          <p>
-            <h1 className="text-xl font-bold mb-6">🔐 Privacy Policy</h1>
+          Google Analytics  
+          Used to analyse website traffic and user behaviour.
 
-          Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information.
+          Meta (Facebook)  
+          Used for advertising, remarketing, and conversion tracking.
 
-          <br /><br />
+          Google Ads  
+          Used for remarketing and advertising measurement.
 
-          1. Information We Collect
+          5. CONSENT
+          When you first visit soundtrackmynight.com, you will be presented with a cookie consent banner. Non-essential cookies will only be placed if you provide explicit consent. You may update or withdraw consent at any time.
 
-          We may collect the following data:
+          6. MANAGING COOKIES
+          You can manage or delete cookies through your browser settings. Please note that disabling cookies may affect website functionality.
 
-          * Name and email address
-          * Quiz responses and music preferences
-          * Payment status (not card details)
-          * Basic technical data (browser, device, IP)
+          7. CHANGES TO THIS POLICY
+          We reserve the right to update this Cookie Policy at any time. Any changes will be posted on this page.
+        </p>
 
-          <br /><br />
+        <p>
+          
+          REFUND POLICY – SOUNDTRACKMYNIGHT.COM
+          Last updated: 27th December 2025
 
-          2. How We Use Your Information
+          Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist service operated as part of DJ and SAX®.
 
-          We use collected data to:
+          1. FREE PLAYLISTS
+          Access to free playlists is provided at no charge and is non-refundable.
 
-          * Generate personalized playlist recommendations
-          * Improve quiz accuracy and user experience
-          * Provide customer support
-          * Process authentication and payments
-          * Send service-related notifications (if applicable)
+          2. PAID PLAYLISTS
+          Paid playlists and any paid upgrades are provided as digital content on a one-off purchase basis.
 
-          <br /><br />
+          By purchasing, you acknowledge that access to digital content is provided immediately and you waive your statutory right to cancel once access is granted.
 
-          3. Data Sharing
+          Accordingly, all payments for paid playlists are non-refundable once access has been provided, except where required by law.
 
-          We do **not** sell or rent your personal data.
+          3. FAILURE TO DELIVER
+          If Soundtrack My Night or DJ and SAX® is unable to provide the purchased digital content, a full refund will be issued to the original payment method.
 
-          We may share limited data with:
+          4. REFUND REQUESTS
+          Any refund-related queries must be submitted in writing to info@soundtrackmynight.com within 14 days of the issue arising.
 
-          * Payment processors (for transaction handling)
-          * Spotify or third-party APIs (for playlist functionality)
-          * Legal authorities, if required by law
+          5. THIRD-PARTY SERVICES
+          Where access to playlists requires use of third-party platforms (such as Spotify), Soundtrack My Night is not responsible for refunds related to third-party service availability.
 
-          <br /><br />
-
-          4. Cookies & Sessions
-
-          We use cookies and session storage to:
-
-          * Maintain login sessions
-          * Remember user preferences
-          * Improve site performance
-
-          You may disable cookies, but some features may not function properly.
-
-          <br /><br />
-
-          5. Data Security
-
-          We implement industry-standard security measures to protect your data.
-          However, no system is 100% secure, and we cannot guarantee absolute security.
-
-          <br /><br />
-
-          6. User Rights
-
-          You have the right to:
-
-          * Request access to your personal data
-          * Request correction or deletion of your data
-          * Withdraw consent where applicable
-
-          Requests can be sent to our support email.
-
-          <br /><br />
-
-          7. Third-Party Links
-
-          Our platform may contain links to third-party services. We are not responsible for their privacy practices or content.
-
-          <br /><br />
-
-          8. Children’s Privacy
-
-          This platform is not intended for users under the age of 13. We do not knowingly collect data from minors.
-
-          <br /><br />
-
-          9. Updates to Privacy Policy
-
-          We may update this Privacy Policy periodically. Changes will be effective upon posting.
-
-          <br /><br />
-
-          10. Contact Us: <br />
-
-          If you have questions about this Privacy Policy,<br />
-          contact:
-          📧(test.info@gmail.com)
         </p>
       </div>
 

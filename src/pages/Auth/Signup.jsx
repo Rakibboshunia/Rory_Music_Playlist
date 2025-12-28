@@ -1,4 +1,3 @@
-
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -7,6 +6,7 @@ import { useState } from "react";
 export default function Signup() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👁️ NEW
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,19 +71,32 @@ export default function Signup() {
 
         {/* Password */}
         <div>
-          <label className="block text-sm font-medium mb-1">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="w-full border rounded-lg px-4 py-3"
-            placeholder="Create a password"
-            required
-          />
+          <label className="block text-sm font-medium mb-1">
+            Password
+          </label>
+
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              className="w-full border rounded-lg px-4 py-3 pr-10"
+              placeholder="Create a password"
+              required
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+            >
+              {showPassword ? "👁️" : "🙈"}
+            </button>
+          </div>
         </div>
 
         {/* TERMS */}
         <div className="flex items-start gap-2 text-sm cursor-pointer">
-          <input type="checkbox" required className="mt-1 " />
+          <input type="checkbox" required className="mt-1" />
           <span>
             I agree to the{" "}
             <Link to="/terms" className="text-blue-600 underline">
@@ -101,7 +114,7 @@ export default function Signup() {
           {loading ? "Signing..." : "Sign Up"}
         </button>
 
-        {/* BOTTOM LINKS */}
+        {/* FOOTER */}
         <div className="flex justify-between items-center text-sm mt-4">
           <button
             onClick={() => navigate("/")}
@@ -112,7 +125,10 @@ export default function Signup() {
 
           <p>
             Have an account?{" "}
-            <Link to="/login" className="text-blue-600 font-medium hover:underline cursor-pointer">
+            <Link
+              to="/login"
+              className="text-blue-600 font-medium hover:underline cursor-pointer"
+            >
               Sign in
             </Link>
           </p>

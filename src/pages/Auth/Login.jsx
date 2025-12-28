@@ -1,4 +1,3 @@
-
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
@@ -10,6 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👁️ NEW
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,11 +31,10 @@ export default function Login() {
 
         const token = result.data?.data?.token;
 
-        // 🔥 FIXED COOKIE (localhost safe)
         Cookies.set("token", token, {
           expires: 7,
           sameSite: "lax",
-          secure: import.meta.env.PROD, // ❗ important
+          secure: import.meta.env.PROD,
         });
 
         login(user);
@@ -61,6 +60,7 @@ export default function Login() {
       </p>
 
       <form onSubmit={handleLogin} className="space-y-5">
+        {/* EMAIL */}
         <div>
           <label className="block text-sm font-medium mb-1">
             Email Address
@@ -74,17 +74,29 @@ export default function Login() {
           />
         </div>
 
+        {/* PASSWORD */}
         <div>
           <label className="block text-sm font-medium mb-1">
             Password
           </label>
-          <input
-            type="password"
-            name="password"
-            className="w-full border rounded-lg px-4 py-3"
-            placeholder="Enter your password"
-            required
-          />
+
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              className="w-full border rounded-lg px-4 py-3 pr-10"
+              placeholder="Enter your password"
+              required
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+            >
+              {showPassword ? "👁️" : "🙈"}
+            </button>
+          </div>
         </div>
 
         <button

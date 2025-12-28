@@ -39,22 +39,6 @@ export default function Step8_Tempo() {
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
 
-      {/* ================= PROGRESS BAR ================= */}
-      <div className="mb-6">
-        <div className="flex justify-between text-xs text-gray-500 mb-1">
-          <span>Step 8 of 10</span>
-          <span>80%</span>
-        </div>
-
-        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-[#155DFC] to-[#9810FA] h-2 rounded-full"
-            style={{ width: "80%" }}
-          />
-        </div>
-      </div>
-      {/* =============================================== */}
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Genre lean (choose up to 2)
       </h2>

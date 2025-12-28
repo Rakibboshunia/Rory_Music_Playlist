@@ -10,7 +10,7 @@ export default function TestimonialsSection() {
       <div className="max-w-5xl mx-auto text-center px-4 sm:px-5">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Real Stories. Real Moments.
-          <br className="hidden sm:block"/>
+          <br />
           Real Magic.
         </h2>
 
