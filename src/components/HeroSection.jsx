@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import HeroCurve from "../assets/img/Container.png";
-import IphoneLogo from "../assets/img/iphone.png";
+import IphoneLogo from "../assets/img/Iphone.png";
 
 export default function HeroSection() {
   const navigate = useNavigate();

@@ -115,18 +115,31 @@ export default function Footer() {
 
           {/* SOCIAL */}
           <div className="flex gap-3">
-            {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
+            {[
+              {
+                icon: FacebookIcon,
+                link: "https://www.facebook.com/@soundtrackmynight",
+              },
+              {
+                icon: InstagramIcon,
+                link: "https://www.instagram.com/@soundtrackmynight",
+              },
+            ].map(({ icon: Icon, link }, i) => (
               <a
                 key={i}
-                href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 text-white bg-linear-to-r from-[#bb5cff] to-[#4b84ff] hover:text-black transition-all duration-300 ease-out
-                hover:scale-[1.03] 
-                hover:shadow-xl active:scale-[0.98]"
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 
+                          text-white bg-linear-to-r from-[#bb5cff] to-[#4b84ff]
+                          hover:text-black transition-all duration-300 ease-out
+                          hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]"
               >
                 <Icon size={23} />
               </a>
             ))}
           </div>
+
         </div>
 
         <hr className="my-5" />
