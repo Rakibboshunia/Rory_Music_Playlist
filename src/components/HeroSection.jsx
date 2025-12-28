@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MusicLogo from "../assets/img/playlist.png";
 import HeroCurve from "../assets/img/Container.png";
-import { FaMusic } from "react-icons/fa";
 import IphoneLogo from "../assets/img/iphone.png";
 
 export default function HeroSection() {
@@ -94,42 +92,8 @@ export default function HeroSection() {
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
 
-          <img src={IphoneLogo} alt="" />
-          {/* <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-[320px] sm:w-90 rotate-5 hover:rotate-0 transition">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-pink-500 rounded-full flex items-center justify-center text-white">
-                <FaMusic className="text-white text-xl" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-400">Your Vibe</p>
-                <p className="font-medium">Elegant & Timeless</p>
-              </div>
-            </div>
-
-            <div className="mt-4 aspect-square rounded-2xl bg-linear-to-br from-[#C27AFF] to-[#F59E0B] to-'[#FFB86A]' flex items-center justify-center">
-              <FaMusic className="text-white text-8xl" />
-            </div>
-
-            <h3 className="mt-4 font-semibold">
-              Classic Romance Collection
-            </h3>
-            <p className="text-xs text-gray-400">30 tracks curated</p>
-
-            <div className="mt-5 space-y-3">
-              {["At Last", "Can't Help Falling in Love", "Wonderful Tonight"].map(
-                (t, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <img
-                      src={MusicLogo}
-                      className="w-12 h-10 rounded-lg"
-                      alt=""
-                    />
-                    <p className="text-sm font-medium truncate">{t}</p>
-                  </div>
-                )
-              )}
-            </div>
-          </div> */}
+          <img src={IphoneLogo} alt="HeroLogo" />
+          
         </div>
       </div>
 
