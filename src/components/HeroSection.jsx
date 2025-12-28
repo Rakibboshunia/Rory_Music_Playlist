@@ -22,13 +22,12 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* LEFT */}
         <div className="text-white max-w-xl">
-          <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
             What's your night's soundtrack?
           </h1>
 
           <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
-            Take our 60-second vibe quiz and instantly get your personalised
-            event playlist.
+            Take our 60-second vibe quiz and instantly get your personalised event playlist — crafted by Ireland's Entertainment Agency of the Year 2025.
           </p>
 
           {/* ✅ FIXED BUTTONS */}
@@ -91,9 +90,19 @@ export default function HeroSection() {
 
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
-
-          <img src={IphoneLogo} alt="HeroLogo" />
-          
+          <img
+            src={IphoneLogo}
+            alt="HeroLogo"
+            className="
+              w-75
+              sm:w-80
+              md:w-100
+              lg:w-110
+              xl:w-120
+              h-auto
+              object-contain
+            "
+          />
         </div>
       </div>
 
@@ -105,3 +114,4 @@ export default function HeroSection() {
     </section>
   );
 }
+

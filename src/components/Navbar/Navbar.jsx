@@ -118,7 +118,7 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full font-semibold transition-all
+            className={`h-10 px-6 rounded-full font-semibold transition-all cursor-pointer
               ${
                 isAuthenticated
                   ? "bg-red-500 text-white hover:bg-red-700"
@@ -132,7 +132,7 @@ export default function Navbar() {
         {/* MOBILE TOGGLE */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`md:hidden text-xl ${
+          className={`md:hidden text-xl cursor-pointer ${
             solidNavbar ? "text-gray-900" : "text-white"
           }`}
         >
@@ -158,17 +158,17 @@ export default function Navbar() {
               </NavLink>
             )}
 
-            <NavLink to="/" onClick={handleTestimonialClick}>
+            <NavLink to="/" onClick={handleTestimonialClick} >
               Testimonial
             </NavLink>
 
             <button
               onClick={handleAuthClick}
-              className={`mt-2 h-10 rounded-full font-bold
+              className={`mt-2 h-10 rounded-full font-bold cursor-pointer
                 ${
                   isAuthenticated
                     ? "bg-red-500 text-white"
-                    : "border-2 border-green-500 text-green-500 hover:bg-green-600 hover:text-white"
+                    : "border-2 border-green-500 text-green-500 hover:bg-green-600 hover:text-white "
                 }`}
             >
               {isAuthenticated ? "Logout" : "Login"}

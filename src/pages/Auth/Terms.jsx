@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 
 export default function Terms() {
@@ -6,246 +5,283 @@ export default function Terms() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Terms & Policy
-      </h1>
 
-      <div className="space-y-6 text-gray-700 text-sm leading-relaxed">
-        <h2>TERMS & CONDITIONS – SOUNDTRACKMYNIGHT.COM <br />
-        Last updated: 27th December 2025</h2>
+      <section class="max-w-4xl mx-auto px-6 py-20 text-gray-700">
+
+  {/* <!-- =========================
+       TERMS & CONDITIONS
+  ========================= --> */}
+  <h3 class="text-3xl sm:text-4xl font-bold text-center mb-4 
+           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+           bg-clip-text text-transparent">
+    TERMS & CONDITIONS
+  </h3>
+
+  <p class="text-center text-sm text-gray-500 mb-12">
+    Last updated: 27th December 2025
+  </p>
+
+  <div class="space-y-10 text-base leading-relaxed">
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">1. Introduction</h3>
+      <p>
+        Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist
+        service operated by DJ and SAX®. These Terms & Conditions govern your
+        use of soundtrackmynight.com and its services.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">2. Definitions</h3>
+      <p><strong>Service:</strong> Digital playlists and related content.</p>
+      <p><strong>Free Content:</strong> Content provided without charge.</p>
+      <p><strong>Paid Content:</strong> Content purchased via one-off payment.</p>
+      <p><strong>User:</strong> Any individual accessing the website.</p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">3. Acceptance of Terms</h3>
+      <p>By using this website, you agree to these Terms & Conditions.</p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">4. Scope of Services</h3>
+      <p>
+        Soundtrack My Night provides digital playlists only. No live services
+        are offered directly through this website.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">5. Access & Use</h3>
+      <p>
+        Playlists are provided via email and must not be shared, resold or
+        redistributed.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">6. Free Content</h3>
+      <p>Free playlists are provided “as is” without warranties.</p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">7. Paid Content & Fees</h3>
+      <p>
+        Paid content is a one-time purchase and non-refundable once access is
+        provided.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">8. Intellectual Property</h3>
+      <p>
+        All content remains the intellectual property of DJ and SAX®.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">9. Limitation of Liability</h3>
+      <p>
+        We are not liable for indirect or consequential losses.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">10. Termination</h3>
+      <p>
+        Access may be suspended for misuse or breach of these terms.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">11. Governing Law</h3>
+      <p>
+        These terms are governed by Irish law.
+      </p>
+    </div>
+
+  </div>
+
+  {/* <!-- =========================
+       COOKIE POLICY
+  ========================= --> */}
+  <div class="mt-24">
+    <h3 class="text-3xl sm:text-4xl font-bold text-center mb-4 
+           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+           bg-clip-text text-transparent">
+      COOKIE POLICY
+    </h3>
+
+    <p class="text-center text-sm text-gray-500 mb-12">
+      Last updated: 27th December 2025
+    </p>
+
+    <div class="space-y-10 text-base leading-relaxed">
+
+      <div>
         <p>
-           
-          1. INTRODUCTION
-          Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist service operated by DJ and SAX®. These Terms & Conditions govern your use of soundtrackmynight.com and any content or services provided through the website.
-          <br />
-
-          2. DEFINITIONS
-          “Service” means the provision of digital playlists and related content.
-          “Free Content” means playlists or content provided at no charge.
-          “Paid Content” means playlists or upgrades purchased for a one-off fee.
-          “User” means any person accessing the website.
-          <br />
-
-          3. ACCEPTANCE OF TERMS
-          By accessing or using the website, you confirm that you accept these Terms & Conditions.
-          <br />
-
-          4. SCOPE OF SERVICES
-          Soundtrack My Night provides curated digital playlists and music-related content. No live entertainment services are provided directly through this website. Live bookings are governed by separate DJ and SAX® agreements.
-          <br />
-
-          5. ACCESS & USE
-          Access to playlists is provided via email. Users must not share, resell, or commercially exploit playlists without written consent.
-          <br />
-
-          6. FREE CONTENT
-          Free playlists are provided “as is” without warranties. Access may be withdrawn at any time.
-          <br />
-
-          7. PAID CONTENT & FEES
-          Paid playlists are purchased as one-off transactions. Prices are displayed prior to purchase. All fees are non-refundable once access is granted.
-          <br />
-
-          8. INTELLECTUAL PROPERTY
-          All content remains the intellectual property of DJ and SAX®. Users are granted a personal, non-commercial licence only.
-          <br />
-
-          9. LIMITATION OF LIABILITY
-          To the fullest extent permitted by law, we shall not be liable for indirect or consequential losses.
-          <br />
-
-          10. TERMINATION
-          We reserve the right to suspend or terminate access for misuse or breach of these Terms.
-          <br />
-
-          11. FORCE MAJEURE
-          We are not liable for delays or failures beyond our reasonable control.
-          <br />
-
-          12. GOVERNING LAW
-          These Terms are governed by Irish law. Irish courts have exclusive jurisdiction.
-        </p>
-
-        <h2>PRIVACY POLICY – SOUNDTRACKMYNIGHT.COM <br />
-        Last updated: 27th December 2025</h2>
-        <p>
-          
-          Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a digital music and playlist experience operated as part of DJ and SAX®. We are committed to protecting your privacy and processing personal data in accordance with the General Data Protection Regulation (EU) 2016/679 (“GDPR”), the Data Protection Acts 1988–2018, and applicable Irish and EU law.
-          <br />
-
-          1. DATA CONTROLLER
-          The data controller is:
-          DJ and SAX®
-          40 Rahillion Drive
-          Donabate, Co. Dublin, Ireland
-          Email: info@soundtrackmynight.com
-          <br />
-
-          2. PERSONAL DATA WE COLLECT
-          The only personal data we request directly through soundtrackmynight.com is an email address.
-          <br />
-
-          Email addresses are collected when a user:
-          • Requests access to a generated playlist
-          • Accesses gated digital content
-          <br />
-
-          We do not collect phone numbers, postal addresses, or booking information directly through soundtrackmynight.com.
-          <br /><br />
-
-          3. PURPOSE OF PROCESSING
-          We process your email address for the following purposes:
-          • To deliver access to your playlist or requested content
-          • To communicate with you in relation to Soundtrack My Night
-          • To follow up with relevant information about DJ and SAX® services related to your interest
-          • To improve our services and user experience
-          <br /><br />
-
-          4. RELATIONSHIP WITH DJ AND SAX®
-          Soundtrack My Night is operated as part of DJ and SAX®. Your email address may be used by DJ and SAX® to contact you about related music and entertainment services.
-          <br />
-
-          This does not constitute a sale or transfer of personal data to a third party, but rather processing within the same business group and service ecosystem.
-          <br />
-
-          5. DJANDSAX.IE CONTACT FORMS
-          If you choose to submit an enquiry, booking request, or additional personal data through the contact forms on DJandSAX.ie, your data will be processed in accordance with the DJandSAX.ie Privacy Policy.
-          <br />
-
-          Submission of data via DJandSAX.ie constitutes a separate and voluntary action by the user.
-          <br /><br />
-
-          6. LEGAL BASIS FOR PROCESSING
-          We process personal data on the following lawful bases:
-          • Consent – where you submit your email address to access content
-          • Legitimate interests – to promote relevant services you have expressed interest in
-          • Compliance with legal obligations where applicable
-          <br /><br />
-
-          7. MARKETING COMMUNICATIONS
-          You may receive emails from Soundtrack My Night or DJ and SAX® related to playlists, services, or relevant updates.
-          You may withdraw your consent to receive marketing communications at any time by contacting us at info@soundtrackmynight.com.
-          <br /><br />
-
-          8. DATA RETENTION
-          We retain email addresses only for as long as necessary to fulfil the purposes outlined in this policy or until you withdraw consent or request deletion, unless a longer retention period is required by law.
-          <br /><br />
-
-          9. DATA SECURITY
-          We implement appropriate technical and organisational measures to protect personal data against unauthorised access, loss, or misuse.
-          <br /><br />
-
-          10. YOUR RIGHTS
-          Under GDPR, you have the right to:
-          • Access your personal data
-          • Request correction of inaccurate data
-          • Request erasure of your data
-          • Restrict or object to processing
-          • Withdraw consent at any time
-          • Lodge a complaint with the Data Protection Commission
-          <br />
-
-          Requests can be made by emailing info@soundtrackmynight.com.
-          <br /><br />
-
-          11. CHANGES TO THIS POLICY
-          We may update this Privacy Policy from time to time. The most current version will always be available on soundtrackmynight.com.
-
-        </p>
-
-        <p>
-          COOKIE POLICY – SOUNDTRACKMYNIGHT.COM
-          Last updated: 27th December 2025
-
-          Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a digital music and playlist service operated as part of DJ and SAX®. This Cookie Policy explains how we use cookies and similar technologies on soundtrackmynight.com in accordance with the General Data Protection Regulation (GDPR) and the European Communities (Electronic Communications Networks and Services) (Privacy and Electronic Communications) Regulations.
-
-          1. WHAT ARE COOKIES?
-          Cookies are small text files placed on your device when you visit a website. They help websites function efficiently, improve user experience, and provide information to website owners.
-
-          2. WHY WE USE COOKIES
-          We use cookies to:
-          • Ensure the website functions correctly
-          • Remember user preferences
-          • Analyse website traffic and performance
-          • Support marketing and advertising activities (where consent is given)
-
-          3. TYPES OF COOKIES WE USE
-
-          a) Strictly Necessary Cookies  
-          These cookies are essential for the operation of the website and cannot be switched off. They include cookies used for security, fraud prevention, and cookie consent management.
-
-          b) Performance & Analytics Cookies  
-          We use analytics services such as Google Analytics to collect information about how visitors use our website. This information is aggregated and anonymised and helps us improve site performance and user experience.
-
-          c) Functional Cookies  
-          These cookies allow the website to remember choices you make, such as preferences or previous interactions, and provide enhanced functionality.
-
-          d) Marketing & Advertising Cookies  
-          With your consent, we may use marketing and advertising cookies, including:
-          • Meta (Facebook) Pixel
-          • Google Ads / Google Remarketing
-
-          These cookies help us deliver relevant advertisements, limit ad repetition, and measure the effectiveness of our marketing campaigns.
-
-          4. THIRD-PARTY COOKIES & SERVICES
-
-          Spotify  
-          To listen to generated playlists, users must log in to their own Spotify account. Spotify may place cookies or use similar technologies in accordance with its own Privacy and Cookie Policies. Soundtrack My Night does not control or access Spotify cookies or user account data.
-
-          Google Analytics  
-          Used to analyse website traffic and user behaviour.
-
-          Meta (Facebook)  
-          Used for advertising, remarketing, and conversion tracking.
-
-          Google Ads  
-          Used for remarketing and advertising measurement.
-
-          5. CONSENT
-          When you first visit soundtrackmynight.com, you will be presented with a cookie consent banner. Non-essential cookies will only be placed if you provide explicit consent. You may update or withdraw consent at any time.
-
-          6. MANAGING COOKIES
-          You can manage or delete cookies through your browser settings. Please note that disabling cookies may affect website functionality.
-
-          7. CHANGES TO THIS POLICY
-          We reserve the right to update this Cookie Policy at any time. Any changes will be posted on this page.
-        </p>
-
-        <p>
-          
-          REFUND POLICY – SOUNDTRACKMYNIGHT.COM
-          Last updated: 27th December 2025
-
-          Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist service operated as part of DJ and SAX®.
-
-          1. FREE PLAYLISTS
-          Access to free playlists is provided at no charge and is non-refundable.
-
-          2. PAID PLAYLISTS
-          Paid playlists and any paid upgrades are provided as digital content on a one-off purchase basis.
-
-          By purchasing, you acknowledge that access to digital content is provided immediately and you waive your statutory right to cancel once access is granted.
-
-          Accordingly, all payments for paid playlists are non-refundable once access has been provided, except where required by law.
-
-          3. FAILURE TO DELIVER
-          If Soundtrack My Night or DJ and SAX® is unable to provide the purchased digital content, a full refund will be issued to the original payment method.
-
-          4. REFUND REQUESTS
-          Any refund-related queries must be submitted in writing to info@soundtrackmynight.com within 14 days of the issue arising.
-
-          5. THIRD-PARTY SERVICES
-          Where access to playlists requires use of third-party platforms (such as Spotify), Soundtrack My Night is not responsible for refunds related to third-party service availability.
-
+          Soundtrack My Night uses cookies to improve website performance,
+          analytics and user experience in compliance with GDPR.
         </p>
       </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">1. Types of Cookies</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Strictly necessary cookies</li>
+          <li>Performance and analytics cookies</li>
+          <li>Functional cookies</li>
+          <li>Marketing & advertising cookies</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">2. Third-Party Services</h3>
+        <p>
+          Includes Google Analytics, Meta (Facebook), Google Ads, and Spotify.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">3. Consent</h3>
+        <p>
+          Non-essential cookies are used only after consent is provided.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">4. Managing Cookies</h3>
+        <p>
+          Cookies can be managed through your browser settings.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* <!-- =========================
+       REFUND POLICY
+  ========================= --> */}
+  <div class="mt-24">
+    <h3 class="text-3xl sm:text-4xl font-bold text-center mb-4 
+           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+           bg-clip-text text-transparent">
+            REFUND POLICY
+    </h3>
+
+
+    <p class="text-center text-sm text-gray-500 mb-12">
+      Last updated: 27th December 2025
+    </p>
+
+    <div class="space-y-10 text-base leading-relaxed">
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">1. Free Playlists</h3>
+        <p>Free playlists are non-refundable.</p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">2. Paid Playlists</h3>
+        <p>
+          Paid playlists are non-refundable once access is provided.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">3. Failure to Deliver</h3>
+        <p>
+          Refunds will be issued if delivery cannot be completed.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">4. Refund Requests</h3>
+        <p>
+          Requests must be sent to <strong>info@soundtrackmynight.com</strong>
+          within 14 days.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">5. Third-Party Services</h3>
+        <p>
+          Refunds related to third-party services are not covered.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* <!-- =========================
+       PRIVACY POLICY
+  ========================= --> */}
+  <div class="mt-24">
+    <h3 class="text-3xl sm:text-4xl font-bold text-center mb-4 
+           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+           bg-clip-text text-transparent">
+      PRIVACY POLICY
+    </h3>
+
+    <p class="text-center text-sm text-gray-500 mb-12">
+      Last updated: 27th December 2025
+    </p>
+
+    <div class="space-y-10 text-base leading-relaxed">
+
+      <div>
+        <p>
+          Soundtrack My Night is committed to protecting your personal data in
+          accordance with GDPR and Irish law.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">1. Personal Data</h3>
+        <p>Email address is the only data collected.</p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">2. Legal Basis</h3>
+        <p>Consent and legitimate interests.</p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">3. Your Rights</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Access your data</li>
+          <li>Correct inaccuracies</li>
+          <li>Request deletion</li>
+          <li>Withdraw consent</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">4. Data Security</h3>
+        <p>
+          We take appropriate technical and organisational measures to protect
+          your data.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-2">5. Policy Updates</h3>
+        <p>
+          Updates to this policy will always be published on this page.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 
       <div className="flex justify-center mt-10">
         <button
           onClick={() => navigate(-1)}
-          className="px-6 py-2 rounded-full bg-blue-600 text-white cursor-pointer hover:bg-blue-700 transition"
+          className="px-6 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:bg-blue-700 transition"
         >
-          Back
+          ← Back to Home
         </button>
       </div>
     </div>

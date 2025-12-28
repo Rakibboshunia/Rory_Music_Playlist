@@ -105,7 +105,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 transition"
+          className="w-full py-3 rounded-lg bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white font-medium cursor-pointer hover:bg-blue-700 transition"
         >
           {loading ? "Logging..." : "Login"}
         </button>
@@ -113,7 +113,7 @@ export default function Login() {
 
       <p className="text-md text-center mt-6">
         Don’t have an account?{" "}
-        <Link to="/signup" className="text-blue-600 font-medium">
+        <Link to="/signup" className="bg-linear-to-r from-[#155DFC] to-[#9810FA] font-medium">
           Sign Up
         </Link>
       </p>

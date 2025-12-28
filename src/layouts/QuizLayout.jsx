@@ -71,9 +71,17 @@ export default function QuizLayout() {
         <Outlet />
       </div>
 
-      <AwardsSection />
-      <TestimonialsSection />
-      <CTASection />
+      <div>
+        <AwardsSection />
+      </div>
+
+      <div className="mt-2">
+        <TestimonialsSection />
+      </div>
+
+      <div>
+        <CTASection />
+      </div>
     </div>
   );
 }

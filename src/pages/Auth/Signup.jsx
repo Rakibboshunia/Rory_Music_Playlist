@@ -108,7 +108,7 @@ export default function Signup() {
         {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition cursor-pointer"
+          className="w-full py-3 rounded-lg bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white font-medium hover:bg-blue-700 transition cursor-pointer"
           disabled={loading}
         >
           {loading ? "Signing..." : "Sign Up"}
@@ -118,7 +118,7 @@ export default function Signup() {
         <div className="flex justify-between items-center text-sm mt-4">
           <button
             onClick={() => navigate("/")}
-            className="text-blue-600 hover:underline cursor-pointer"
+            className="bg-linear-to-r from-[#155DFC] to-[#9810FA] hover:underline cursor-pointer"
           >
             ← Back to Home
           </button>
@@ -127,7 +127,7 @@ export default function Signup() {
             Have an account?{" "}
             <Link
               to="/login"
-              className="text-blue-600 font-medium hover:underline cursor-pointer"
+              className="bg-linear-to-r from-[#155DFC] to-[#9810FA] font-medium hover:underline cursor-pointer"
             >
               Sign in
             </Link>
