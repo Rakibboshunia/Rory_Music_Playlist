@@ -22,13 +22,15 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* LEFT */}
         <div className="text-white max-w-xl">
-          <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-            What's your night's soundtrack?
-          </h1>
+          <div className="pb-10 space-y-4 sm:space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+              What's your night's soundtrack?
+            </h1>
 
-          <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
-            Take our 60-second vibe quiz and instantly get your personalised event playlist — crafted by Ireland's Entertainment Agency of the Year 2025.
-          </p>
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
+              Take our 60-second vibe quiz and instantly get your personalised event playlist — crafted by Ireland's Entertainment Agency of the Year 2025.
+            </p>
+          </div>
 
           {/* ✅ FIXED BUTTONS */}
           <div className="mt-6 flex gap-3 sm:gap-4 flex-wrap">
@@ -76,7 +78,7 @@ export default function HeroSection() {
           </div>
 
           {/* SOCIAL PROOF */}
-          <div className="mt-8 flex items-center gap-3">
+          <div className="pb-15 mt-8 flex items-center gap-3">
             <div className="flex">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-[#FFDF20] to-[#FF8904] border-2 border-white"></div>
               <div className="-ml-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-[#FDA5D5] to-[#C27AFF] border-2 border-white"></div>

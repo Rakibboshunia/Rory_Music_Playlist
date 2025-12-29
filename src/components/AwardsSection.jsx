@@ -5,7 +5,7 @@ import wedding25 from "../assets/img/2025.png"
 
 export default function AwardsSection() {
   return (
-    <section className="border-t border-gray-200 py-5 bg-[#F4F8FE]">
+    <section className="py-5 bg-[#F4F8FE]">
       <div className="max-w-5xl mx-auto text-center pt-8 px-6">
 
         {/* Title */}
@@ -20,7 +20,7 @@ export default function AwardsSection() {
 
       {/* AWARDS LIST */}
       <div className="max-w-6xl mx-auto mt-12 sm:mt-16
-          px-4 sm:px-6
+          px-4 sm:px-6 text-center
           grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3
           gap-6 sm:gap-8">
 
@@ -44,19 +44,38 @@ export default function AwardsSection() {
       </div>
 
       {/* STATS */}
-      <div className="max-w-3xl mx-auto mt-15 px-3 pb-10 grid grid-cols-1 md:grid-cols-3 text-center gap-20">
+            <div className="max-w-5xl mx-auto px-4 py-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
 
-        <div>
-          <h2>Thousands of bespoke <br /> soundtracks created</h2>
-        </div>
-        <div>
-          <h2>Built on real dancefloor<br />data from live celebrations</h2>
-        </div>
-        <div>
-          <h2>⭐ 5.0★ average  <br /> Google rating from DJ and SAX® clients</h2>
-        </div>
+                {/* Item 1 */}
+                <div className="flex flex-col items-center justify-center gap-3">
+                  <span className="text-3xl">🎵</span>
+                  <h2 className="text-base sm:text-lg font-medium leading-snug">
+                    Thousands of bespoke <br />
+                    soundtracks created
+                  </h2>
+                </div>
 
-      </div>
+                {/* Item 2 */}
+                <div className="flex flex-col items-center justify-center gap-3">
+                  <span className="text-3xl">💃</span>
+                  <h2 className="text-base sm:text-lg font-medium leading-snug">
+                    Built on real dancefloor <br />
+                    data from live celebrations
+                  </h2>
+                </div>
+
+                {/* Item 3 */}
+                <div className="flex flex-col items-center justify-center gap-3">
+                  <span className="text-3xl">⭐</span>
+                  <h2 className="text-base sm:text-lg font-medium leading-snug">
+                    5.0★ average Google rating <br />
+                    from DJ and SAX® clients
+                  </h2>
+                </div>
+              </div>
+            </div>
+
           </section>
         );
       }
@@ -75,7 +94,7 @@ export default function AwardsSection() {
       function Stat({ number, label }) {
         return (
           <div>
-            <p className="text-4xl font-bold bg-linear-to-r from-[#9810FA] to-[#155DFC] text-transparent bg-clip-text">{number}</p>
+            <p className="text-4xl font-bold bg-linear-to-r from-[#9810FA] to-[#155DFC] text-transparent bg-clip-text items-center">{number}</p>
             <p className="mt-2 text-gray-600">{label}</p>
           </div>
         );

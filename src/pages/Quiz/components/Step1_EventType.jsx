@@ -44,7 +44,11 @@ export default function Step1_EventType() {
         {/* Back to Home */}
         <button
           onClick={() => navigate("/")}
-          className="px-5 py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50"
+          className="px-5 py-3 rounded-full text-white 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          cursor-pointer disabled:opacity-50 hover:shadow-lg
+          transition-all duration-300 ease-out 
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           ← Back to Home
         </button>
@@ -53,7 +57,11 @@ export default function Step1_EventType() {
         <button
           disabled={!answers.eventType}
           onClick={handleSubmit}
-          className="px-10 py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50"
+          className="px-10 py-3 rounded-full text-white 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          cursor-pointer disabled:opacity-50 hover:shadow-lg
+          transition-all duration-300 ease-out 
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           Next →
         </button>

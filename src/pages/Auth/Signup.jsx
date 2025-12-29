@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Signup() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // 👁️ NEW
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-6">
+    <div className="w-full max-w-xl bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg p-14 space-y-6">
 
       {/* TITLE */}
       <h2 className="text-3xl font-bold mb-8 text-center">
@@ -100,7 +100,7 @@ export default function Signup() {
           <span>
             I agree to the{" "}
             <Link to="/terms" className="text-blue-600 underline">
-              Terms & Policy
+              Terms & Conditions
             </Link>
           </span>
         </div>
@@ -108,7 +108,7 @@ export default function Signup() {
         {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition cursor-pointer"
+          className="w-full py-3 rounded-lg bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-medium transition cursor-pointer disabled:opacity-60"
           disabled={loading}
         >
           {loading ? "Signing..." : "Sign Up"}

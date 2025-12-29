@@ -24,28 +24,25 @@ export default function TestimonialsSection() {
       <div
         className="
           max-w-6xl mx-auto mt-12 sm:mt-16
-          px-4 sm:px-6
+          px-4 sm:px-6 
           grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
           gap-6 sm:gap-8
         "
       >
         <TestimonialCard
           text="Couldn’t recommend more! The dance floor at our wedding was never empty!!"
-          img="https://i.pravatar.cc/80?img=5"
           name="Sarah McCarthy"
           role="Powerscourt Estate"
         />
 
         <TestimonialCard
           text="Absolutely top class, so much fun for our wedding entertainment."
-          img="https://i.pravatar.cc/80?img=12"
           name="Denise Callanan"
           role="Cloughjordan House"
         />
 
         <TestimonialCard
           text="We honestly couldn’t have asked for a better atmosphere at our wedding!"
-          img="https://i.pravatar.cc/80?img=25"
           name="Ciara Lynch"
           role="The Mayson Hotel"
         />
@@ -57,7 +54,7 @@ export default function TestimonialsSection() {
 /* ======================
    SINGLE TESTIMONIAL CARD
 ====================== */
-function TestimonialCard({ text, img, name, role }) {
+function TestimonialCard({ text, name, role }) {
   return (
     <div
       className="
@@ -69,7 +66,7 @@ function TestimonialCard({ text, img, name, role }) {
       "
     >
       {/* Stars */}
-      <div className="flex text-yellow-400 mb-3 text-lg">
+      <div className="flex text-yellow-400 mb-3 text-lg ">
         ★★★★★
       </div>
 
@@ -78,21 +75,14 @@ function TestimonialCard({ text, img, name, role }) {
         {text}
       </p>
 
-      {/* User Info */}
-      <div className="flex items-center gap-4">
-        <img
-          src={img}
-          alt={name}
-          className="w-11 h-11 rounded-full object-cover"
-        />
-        <div>
-          <p className="font-semibold text-gray-800 text-sm">
-            {name}
-          </p>
-          <p className="text-gray-500 text-xs">
-            {role}
-          </p>
-        </div>
+      {/* User Info (NO IMAGE, NO ICON, NO PLACEHOLDER) */}
+      <div className="flex flex-col">
+        <p className="font-semibold text-gray-800 text-sm">
+          {name}
+        </p>
+        <p className="text-gray-500 text-xs">
+          {role}
+        </p>
       </div>
     </div>
   );

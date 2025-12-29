@@ -109,8 +109,8 @@ export default function Navbar() {
             </NavLink>
           )}
 
-          <NavLink to="/" onClick={handleTestimonialClick}>
-            Testimonial
+          <NavLink to="/" onClick={handleTestimonialClick} className="hover:text-[#9810FA]">
+            Testimonials
           </NavLink>
         </div>
 
@@ -118,7 +118,7 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <button
             onClick={handleAuthClick}
-            className={`h-10 px-6 rounded-full font-semibold transition-all cursor-pointer
+            className={`h-10 px-6 rounded-full font-semibold transition-all cursor-pointer 
               ${
                 isAuthenticated
                   ? "bg-red-500 text-white hover:bg-red-700"

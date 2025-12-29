@@ -143,7 +143,11 @@ export default function Step10_Final() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+          className="px-6 py-3 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          text-white cursor-pointer hover:shadow-lg
+          transition-all duration-300 ease-out 
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           ← Back
         </button>
@@ -151,7 +155,11 @@ export default function Step10_Final() {
         <button
           type="button"
           onClick={handleComplete}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+          className="px-6 py-3 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          text-white cursor-pointer hover:shadow-lg
+          transition-all duration-300 ease-out 
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           Submit →
         </button>
@@ -196,7 +204,7 @@ export default function Step10_Final() {
               <label className="flex items-start gap-2 text-xs text-gray-500">
                 <input type="checkbox" required className="mt-1" />
                 <span>
-                  I agree to receive my personalised playlist and occasionalupdates from DJ & SAX®. You can unsubscribe anytime.
+                  I agree to receive my personalised playlist and occasional updates from DJ & SAX®. You can unsubscribe anytime.
                 </span>
               </label>
 
@@ -219,7 +227,7 @@ export default function Step10_Final() {
       {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 text-center relative">
+          <div className="bg-white rounded-2xl w-full max-w-md p-10 text-center relative">
 
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
@@ -232,19 +240,19 @@ export default function Step10_Final() {
               <>
                 <button
                   onClick={() => setShowUpgradePopup(false)}
-                  className="absolute top-4 right-4 text-gray-400 cursor-pointer"
+                  className="absolute top-6 right-6 text-gray-400 cursor-pointer"
                 >
                   ✕
                 </button>
 
-                <h3 className="text-xl font-semibold mb-8">
-                  Upgrade your Playlist <br /> with Payment
-                </h3>
+                <h4 className="text-xl font-semibold mb-8">
+                  Upgrade to Premium Access & Get 50 Track Playlist & Free Wedding Entertainment Planning Guide.
+                </h4>
 
-                <div className="bg-[#F6F8FF] rounded-xl p-4 flex items-center justify-between mb-10">
+                <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
                   <div>
                     <p className="text-sm text-gray-500 text-left">Pro Plan</p>
-                    <p className="text-2xl font-bold text-left">$9.00</p>
+                    <p className="text-2xl font-bold text-left">€9.00</p>
                     <p className="text-sm text-blue-600">
                       For your next 50 playlists
                     </p>
@@ -256,14 +264,23 @@ export default function Step10_Final() {
                 <div className="flex gap-5">
                   <button
                     onClick={handleUpgradeNo}
-                    className="w-1/2 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+                    className="
+                    w-1/2 py-3 rounded-full 
+                    bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+                    text-white cursor-pointer transition-all 
+                    duration-300 ease-out hover:scale-[1.03] 
+                    active:scale-[0.98] hover:shadow-lg"
                   >
-                    Back
+                    No Thanks
                   </button>
 
                   <button
                     onClick={handleUpgradeYes}
-                    className="w-1/2 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer"
+                    className="w-1/2 py-3 rounded-full 
+                    bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+                    text-white cursor-pointer hover:shadow-lg
+                    transition-all duration-300 ease-out 
+                    hover:scale-[1.03] active:scale-[0.98]"
                   >
                     Get Premium
                   </button>

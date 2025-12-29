@@ -47,7 +47,11 @@ export default function Step5_Vibe() {
       <div className="flex justify-between items-center mt-4 pb-6">
         <button
           onClick={handleBack}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          cursor-pointer disabled:opacity-50 text-white
+          transition-all duration-300 ease-out hover:shadow-lg
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           ← Back
         </button>
@@ -55,7 +59,11 @@ export default function Step5_Vibe() {
         <button
           disabled={!answers.floorfiller}
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer disabled:opacity-50 text-white"
+          className="px-8 py-3 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          cursor-pointer disabled:opacity-50 text-white
+          transition-all duration-300 ease-out hover:shadow-lg
+          hover:scale-[1.03] active:scale-[0.98]"
         >
           Next →
         </button>

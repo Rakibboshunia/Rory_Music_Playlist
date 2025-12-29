@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import { FacebookIcon, InstagramIcon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/img/logo2.png";
 
@@ -11,28 +11,28 @@ export default function Footer() {
   const linkClass = ({ isActive }) =>
     isActive ? "active-link active" : "hover:text-[#153DFC]";
 
-  // ✅ NEW: HERO PAGE SCROLL
+  // ✅ HERO SCROLL
   const scrollToHero = () => {
     document
       .getElementById("hero-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ NEW: TESTIMONIAL PAGE SCROLL
+  // ✅ TESTIMONIAL SCROLL
   const scrollToTestimonials = () => {
     document
       .getElementById("testimonials-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ NEW: QUIZ PAGE SCROLL
+  // ✅ QUIZ SCROLL
   const scrollToQuizPage = () => {
     document
       .getElementById("quiz-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ NEW: Home → /home + scroll
+  // ✅ HOME
   const handleHomeClick = (e) => {
     e.preventDefault();
 
@@ -44,7 +44,7 @@ export default function Footer() {
     }
   };
 
-  // ✅ NEW: Testimonial → /testimonial + scroll
+  // ✅ TESTIMONIAL
   const handleTestimonialClick = (e) => {
     e.preventDefault();
 
@@ -56,7 +56,7 @@ export default function Footer() {
     }
   };
 
-  // ✅ NEW: QUIZ → /quiz + scroll
+  // ✅ QUIZ
   const handleQuizClick = (e) => {
     e.preventDefault();
 
@@ -75,12 +75,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-          {/* LOGO → HOME + HERO */}
+          {/* LOGO */}
           <div
             onClick={handleHomeClick}
             className="cursor-pointer select-none"
           >
-            <img src={logo} alt="logo" className="w-15 h-14" />
+            <img src={logo} alt="logo" className="w-13 h-12" />
           </div>
 
           {/* MENU */}
@@ -89,12 +89,7 @@ export default function Footer() {
               Home
             </NavLink>
 
-            {/* ✅ QUIZ → QUIZ PAGE + SCROLL */}
-            <NavLink
-              to="/quiz"
-              onClick={handleQuizClick}
-              className={linkClass}
-            >
+            <NavLink to="/quiz" onClick={handleQuizClick} className={linkClass}>
               Quiz
             </NavLink>
 
@@ -109,7 +104,7 @@ export default function Footer() {
               onClick={handleTestimonialClick}
               className="hover:text-[#153DFC]"
             >
-              Testimonial
+              Testimonials
             </NavLink>
           </div>
 
@@ -118,11 +113,11 @@ export default function Footer() {
             {[
               {
                 icon: FacebookIcon,
-                link: "https://www.facebook.com/@soundtrackmynight",
+                link: "https://www.facebook.com/soundtrackmynight",
               },
               {
                 icon: InstagramIcon,
-                link: "https://www.instagram.com/@soundtrackmynight",
+                link: "https://www.instagram.com/soundtrackmynight",
               },
             ].map(({ icon: Icon, link }, i) => (
               <a
@@ -130,26 +125,40 @@ export default function Footer() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-500 
-                          text-white bg-linear-to-r from-[#bb5cff] to-[#4b84ff]
-                          hover:text-black transition-all duration-300 ease-out
-                          hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]"
+                className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-500 
+                text-white bg-linear-to-r from-[#bb5cff] to-[#4b84ff]
+                hover:text-black transition-all duration-300 ease-out
+                hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]"
               >
-                <Icon size={23} />
+                <Icon size={22} />
               </a>
             ))}
           </div>
-
         </div>
 
         <hr className="my-5" />
 
+        {/* ✅ POLICY LINKS */}
         <div className="flex justify-between text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
 
-          <NavLink to="/terms" className={linkClass}>
-            Privacy and Policy
-          </NavLink>
+          <div className="flex gap-4">
+            <NavLink to="/terms" className={linkClass}>
+              Terms & Conditions
+            </NavLink>
+
+            <NavLink to="/privacy-policy" className={linkClass}>
+              Privacy Policy
+            </NavLink>
+
+            <NavLink to="/cookie-policy" className={linkClass}>
+              Cookie Policy
+            </NavLink>
+
+            <NavLink to="/refund-policy" className={linkClass}>
+              Refund Policy
+            </NavLink>
+          </div>
         </div>
       </div>
     </footer>

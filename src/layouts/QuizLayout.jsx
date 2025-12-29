@@ -20,7 +20,6 @@ const quizSteps = [
 export default function QuizLayout() {
   const location = useLocation();
 
-  // ✅ Normalize path
   const cleanPath = location.pathname.replace(/\/$/, "");
 
   const stepIndex = quizSteps.findIndex(

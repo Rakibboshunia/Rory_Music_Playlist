@@ -7,7 +7,15 @@ import AuthLayout from "../layouts/AuthLayout";
 import Home from "../pages/Home/Home";
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
-import Terms from "../pages/Auth/Terms";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
+import VerifyOTP from "../pages/Auth/VerifyOTP";
+
+// ✅ Policies
+import Terms from "../pages/Policies/Terms";
+import PrivacyPolicy from "../pages/Policies/PrivacyPolicy";
+import CookiePolicy from "../pages/Policies/CookiePolicy";
+import RefundPolicy from "../pages/Policies/RefundPolicy";
 
 // Quiz steps
 import Step1_EventType from "../pages/Quiz/components/Step1_EventType";
@@ -21,11 +29,11 @@ import Step8_Tempo from "../pages/Quiz/components/Step8_Tempo";
 import Step9_Era from "../pages/Quiz/components/Step9_Era";
 import Step10_Final from "../pages/Quiz/components/Step10_Final";
 
-// 🎵 Playlist pages (SEPARATED)
+// 🎵 Playlist
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
 import GuestPlaylistResult from "../pages/Playlist/PlaylistResult";
 
-// Payment
+// 💳 Payment
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
 
@@ -35,7 +43,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
 
-      /* ================= QUIZ ================= */
+      /* ============= QUIZ ============== */
       {
         path: "/quiz",
         element: <QuizLayout />,
@@ -53,21 +61,17 @@ const router = createBrowserRouter([
         ],
       },
 
-      /* ================= PLAYLIST ================= */
-
-      // 🔐 Logged-in user → all playlists
+      /* ============ PLAYLIST =========== */
       {
         path: "/playlist",
         element: <UserPlaylistResult />,
       },
-
-      // 👤 Guest user → single playlist by ID
       {
         path: "/playlist/:id",
         element: <GuestPlaylistResult />,
       },
 
-      /* ================= PAYMENT ================= */
+      /* ============= PAYMENT ============= */
       {
         path: "/success",
         element: <PaymentSuccess />,
@@ -76,16 +80,36 @@ const router = createBrowserRouter([
         path: "/cancel",
         element: <PaymentCancel />,
       },
+
+      /* ============ POLICIES ============= */
+      {
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/cookie-policy",
+        element: <CookiePolicy />,
+      },
+      {
+        path: "/refund-policy",
+        element: <RefundPolicy />,
+      },
     ],
   },
 
-  /* ================= AUTH ================= */
+  /* ============= AUTH ============== */
   {
     element: <AuthLayout />,
     children: [
       { path: "/signup", element: <Signup /> },
       { path: "/login", element: <Login /> },
-      { path: "/terms", element: <Terms /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
+      { path: "/reset-password", element: <ResetPassword /> },
+      { path: "/verify-otp", element: <VerifyOTP /> },
     ],
   },
 ]);
