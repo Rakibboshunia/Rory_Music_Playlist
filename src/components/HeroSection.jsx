@@ -91,16 +91,16 @@ export default function HeroSection() {
         </div>
 
         {/* RIGHT */}
-        <div className="flex justify-center lg:justify-end">
+        <div className="flex justify-center lg:justify-end cursor-pointer">
           <img
             src={IphoneLogo}
             alt="HeroLogo"
             className="
               w-75
-              sm:w-80
-              md:w-100
-              lg:w-110
-              xl:w-120
+              sm:w-90
+              md:w-110
+              lg:w-120
+              xl:w-130
               h-auto
               object-contain
             "
