@@ -1,7 +1,11 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import logo from "../../assets/img/logo2.png";
+
+// 🔥 TWO LOGOS
+import logoHero from "../../assets/img/logo.png";   // hero / dark background
+import logoWhite from "../../assets/img/logo3.png"; // white navbar
+
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
@@ -82,12 +86,20 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300
-      ${solidNavbar ? "bg-[#F4F7FF] shadow-sm" : "bg-transparent"}`}
+      ${solidNavbar ? "bg-[#ffffff] shadow-sm" : "bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-        {/* LOGO */}
-        <div onClick={handleHomeClick} className="cursor-pointer select-none">
-          <img src={logo} alt="logo" className="w-15 h-14" />
+        
+        {/* LOGO (🔥 ONLY THIS PART CHANGED) */}
+        <div
+          onClick={handleHomeClick}
+          className="cursor-pointer select-none w-15 h-15 ml-2 flex items-center justify-center"
+        >
+          <img
+            src={solidNavbar ? logoWhite : logoHero}
+            alt="logo"
+            className="w-15 h-15 scale-260 object-contain transition-all duration-300"
+          />
         </div>
 
         {/* DESKTOP MENU */}
@@ -109,7 +121,11 @@ export default function Navbar() {
             </NavLink>
           )}
 
-          <NavLink to="/" onClick={handleTestimonialClick} className="hover:text-[#9810FA]">
+          <NavLink
+            to="/"
+            onClick={handleTestimonialClick}
+            className="hover:text-[#9810FA]"
+          >
             Testimonials
           </NavLink>
         </div>
@@ -158,7 +174,7 @@ export default function Navbar() {
               </NavLink>
             )}
 
-            <NavLink to="/" onClick={handleTestimonialClick} >
+            <NavLink to="/" onClick={handleTestimonialClick}>
               Testimonial
             </NavLink>
 
