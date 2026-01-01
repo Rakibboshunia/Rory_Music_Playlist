@@ -112,7 +112,8 @@ export default function ResetPassword() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white rounded-lg cursor-pointer transition disabled:opacity-60"
+            className="w-full py-3 bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white rounded-lg cursor-pointer disabled:opacity-60 transition-all duration-300 ease-out
+                hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]"
           >
             {loading ? "Updating..." : "Reset Password"}
           </button>

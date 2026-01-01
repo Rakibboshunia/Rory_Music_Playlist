@@ -2,9 +2,8 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
-// 🔥 TWO LOGOS
-import logoHero from "../../assets/img/logo.png";   // hero / dark background
-import logoWhite from "../../assets/img/logo3.png"; // white navbar
+import logoHero from "../../assets/img/logo.png";  
+import logoWhite from "../../assets/img/logo3.png"; 
 
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
@@ -18,7 +17,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // 🔥 WAIT UNTIL AUTH READY
   if (loading) return null;
 
   useEffect(() => {
@@ -90,15 +88,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
         
-        {/* LOGO (🔥 ONLY THIS PART CHANGED) */}
+        {/* LOGO */}
         <div
           onClick={handleHomeClick}
-          className="cursor-pointer select-none w-15 h-15 ml-2 flex items-center justify-center"
+          className="cursor-pointer select-none w-12 h-13 ml-2 flex items-center justify-center"
         >
           <img
             src={solidNavbar ? logoWhite : logoHero}
             alt="logo"
-            className="w-15 h-15 scale-260 object-contain transition-all duration-300"
+            className="w-15 h-15 scale-300 object-contain transition-all duration-300"
           />
         </div>
 

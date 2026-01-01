@@ -51,8 +51,11 @@ export default function Step10_Final() {
       });
 
       toast.success("Playlist sent!");
+
       setShowEmailPopup(false);
+      setShowUpgradePopup(true); 
       setEmail("");
+
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -61,7 +64,7 @@ export default function Step10_Final() {
   };
 
   /* ======================
-     FREE FLOW
+     Free FLOW
   ====================== */
   const handleUpgradeNo = async () => {
     setIsGenerating(true);
@@ -87,7 +90,7 @@ export default function Step10_Final() {
   };
 
   /* ======================
-     PAID FLOW
+     Upgrade FLOW
   ====================== */
   const handleUpgradeYes = async () => {
     setPaymentLoading(true);
@@ -208,7 +211,7 @@ export default function Step10_Final() {
 
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA]"
+                    className="w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
                   >
                     Reveal My Playlist
                   </button>
@@ -249,8 +252,8 @@ export default function Step10_Final() {
 
                 <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
                   <div>
-                    <p className="text-sm text-gray-500">Pro Plan</p>
-                    <p className="text-2xl font-bold">€9.00</p>
+                    <p className="text-sm text-left text-gray-500">Pro Plan</p>
+                    <p className="text-2xl text-left font-bold">€9.00</p>
                     <p className="text-sm text-blue-600">
                       For your next 50 playlists
                     </p>
@@ -263,7 +266,7 @@ export default function Step10_Final() {
                   <button
                     onClick={() => {
                       if (!Cookies.get("token")) {
-                        navigate("/playlist");
+                        navigate("/");
                       } else {
                         handleUpgradeNo();
                       }

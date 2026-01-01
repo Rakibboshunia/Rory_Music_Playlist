@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FacebookIcon, InstagramIcon } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import logo from "../../assets/img/logo2.png";
+import logo from "../../assets/img/logo3.png";
 
 export default function Footer() {
   const { isAuthenticated } = useAuth();
@@ -72,15 +72,15 @@ export default function Footer() {
     <footer className="bg-[#F7F9FF]">
       <div className="border-t border-gray-300" />
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-7 py-5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
           {/* LOGO */}
           <div
             onClick={handleHomeClick}
-            className="cursor-pointer select-none"
+            className="cursor-pointer select-none flex items-center justify-center"
           >
-            <img src={logo} alt="logo" className="w-13 h-12" />
+            <img src={logo} alt="logo" className="w-12 h-14 scale-300 object-contain transition-all duration-300" />
           </div>
 
           {/* MENU */}
