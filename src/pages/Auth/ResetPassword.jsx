@@ -70,43 +70,54 @@ export default function ResetPassword() {
         </p>
 
         <form onSubmit={handleReset} className="space-y-5">
-
           {/* New Password */}
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="New Password"
-              className="w-full border rounded-lg px-6 py-3 pr-10"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-            >
-              {showPassword ? "👁️" : "🙈"}
-            </button>
+          <div>
+            <label className="text-sm text-gray-800 block mb-1">
+              New Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="New Password"
+                className="w-full border rounded-lg px-6 py-3 pr-12"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+              >
+                {showPassword ? "👁️" : "🙈"}
+              </button>
+            </div>
           </div>
 
           {/* Confirm Password */}
-          <div className="relative">
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              className="w-full border rounded-lg px-6 py-3 pr-10"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() =>
-                setShowConfirmPassword(!showConfirmPassword)
-              }
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-            >
-              {showConfirmPassword ? "👁️" : "🙈"}
-            </button>
+          <div>
+            <label className="text-sm text-gray-800 block mb-1">
+              Confirm Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className="w-full border rounded-lg px-6 py-3 pr-12"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+              >
+                {showConfirmPassword ? "👁️" : "🙈"}
+              </button>
+            </div>
           </div>
 
           <button
