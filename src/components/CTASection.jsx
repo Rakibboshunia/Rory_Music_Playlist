@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import SpotifyLogo from "../assets/img/SpotifyLogo.png"
+import { FiArrowRight } from "react-icons/fi";
 
 export default function CTASection() {
   const navigate = useNavigate();
@@ -6,9 +8,7 @@ export default function CTASection() {
   return (
     <section className=" bg-white py-10 sm:py-0 pb-18 sm:pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-
         <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
-
           <p className="text-sm sm:text-xl opacity-90">
             👥 Join 2,500+ happy clients
           </p>
@@ -28,17 +28,21 @@ export default function CTASection() {
                 px-4 py-3
                 bg-white text-blue-700
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white
-                font-medium rounded-full
-                shadow-md
+                font-medium rounded-full shadow-md
                 transition-all duration-300 ease-out
                 hover:scale-[1.03] 
                 hover:shadow-xl active:scale-[0.98]
-                cursor-pointer
-                flex items-center justify-center gap-2
-                mx-auto
+                cursor-pointer hover:border-white/80
+                flex items-center justify-center mx-auto
               "
             >
-              Start My Quiz Now →
+              <img
+                src={SpotifyLogo}
+                alt="Spotify"
+                className="h-[2.0em] w-auto"
+              />
+             Generate my Spotify playlist
+             <FiArrowRight size={20} />
             </button>
           </div>
 

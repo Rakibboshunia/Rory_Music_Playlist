@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import upgradeImg from "../../../assets/img/DiamondLogo.png";
+import SpotifyLogo from "../../../assets/img/SpotifyLogo.png"
+
 import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
-import upgradeImg from "../../../assets/img/DiamondLogo.png";
+
 import toast from "react-hot-toast";
 import axios from "axios";
 import Cookies from "js-cookie";
+
+import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
@@ -117,7 +123,6 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
-
       <h2 className="text-2xl font-semibold">Your vibe is ready ✨</h2>
       <p className="text-gray-500">
         Based on your answers, your night feels like:
@@ -161,7 +166,6 @@ export default function Step10_Final() {
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 text-center relative">
-
             {emailLoading ? (
               <div className="h-70 flex flex-col items-center justify-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -170,7 +174,7 @@ export default function Step10_Final() {
                 </p>
               </div>
             ) : (
-              <>
+              <div>
                 <button
                   onClick={() => setShowEmailPopup(false)}
                   className="absolute top-4 right-4 text-gray-400 cursor-pointer"
@@ -179,16 +183,16 @@ export default function Step10_Final() {
                 </button>
 
                 <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-xl">
+                  <div className="w-14 h-14 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-4xl">
                     ✉️
                   </div>
                 </div>
 
-                <h3 className="text-xl font-semibold mb-4">
+                <h3 className="text-2xl font-semibold mb-3">
                   Get your personalised playlist
                 </h3>
 
-                <p className="text-sm text-gray-500 mb-5">
+                <p className="text-md text-gray-500 mb-5">
                   Pop in your email to unlock your soundtrack.
                 </p>
 
@@ -202,24 +206,31 @@ export default function Step10_Final() {
                     className="w-full border rounded-full px-4 py-3"
                   />
 
-                  <label className="flex items-start gap-2 text-xs text-gray-500">
+                  <label className="flex items-start gap-1 text-xs text-gray-500">
                     <input type="checkbox" required className="mt-1" />
                     <span>
-                      I agree to receive my personalised playlist and occasional updates from DJ & SAX®. You can unsubscribe anytime.
+                      I agree to receive my personalised playlist by email and to be contacted by DJ & SAX® about my wedding or event. I can unsubscribe at any time.
                     </span>
                   </label>
 
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
+                    className="w-full py-1 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
                   >
-                    Reveal My Playlist
+                    <div className="inline-flex items-center text-xl">
+                      <img
+                        src={SpotifyLogo}
+                        alt="Spotify"
+                        className="h-[2.0em] w-auto"
+                      />
+                        Reveal My Playlist
+                    </div>
                   </button>
                   <p className="text-xs text-gray-500">
-                    We respect your privacy. Your data is secure and never shared.
+                    We’ll only contact you about music, your date, or entertainment planning. No spam.
                   </p>
                 </form>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -228,8 +239,7 @@ export default function Step10_Final() {
       {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-10 text-center relative">
-
+          <div className="bg-white rounded-2xl w-full max-w-xl p-15 text-center relative">
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -246,8 +256,23 @@ export default function Step10_Final() {
                   ✕
                 </button>
 
-                <h4 className="text-xl font-semibold mb-8">
-                  Upgrade to Premium Access & Get 50 Track Playlist & Free Wedding Entertainment Planning Guide.
+                <h2 className="text-2xl font-bold inline-flex items-center">
+                  <img
+                    src={SpotifyLogo}
+                    alt="Spotify"
+                    className="h-[2.0em] w-auto"
+                  />
+                  Your Spotify playlist is ready💃
+                </h2>
+
+                <p className="text-sm text-black/60 ">
+                  We’ve created your personalised Spotify playlist based on your vibe. <br />You can listen now — or unlock the full 3-hour version.
+                </p><br />
+
+                <h4 className="text-md font-semibold mb-8">
+                  ✨Upgrade to the Premium Playlist (€9) PLUS Free Wedding
+                  Entertainment Guide 50 tracks, smoother energy flow, built for
+                  a full dancefloor.
                 </h4>
 
                 <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
@@ -262,7 +287,7 @@ export default function Step10_Final() {
                   <img src={upgradeImg} className="w-14" />
                 </div>
 
-                <div className="flex gap-5">
+                <div className="flex gap-3">
                   <button
                     onClick={() => {
                       if (!Cookies.get("token")) {
@@ -271,9 +296,10 @@ export default function Step10_Final() {
                         handleUpgradeNo();
                       }
                     }}
-                    className=" w-1/2 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg"
+                    className="w-1/2 py-3.5 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
-                    No Thanks
+                    <FiArrowLeft size={20} />
+                    Send Free playlist
                   </button>
 
                   <button
@@ -284,9 +310,10 @@ export default function Step10_Final() {
                         handleUpgradeYes();
                       }
                     }}
-                    className="w-1/2 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
+                    className="w-1/2 py-3.5 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
                   >
-                    Get Premium
+                    Secure Extended Playlist
+                    <FiArrowRight size={20} />
                   </button>
                 </div>
               </>

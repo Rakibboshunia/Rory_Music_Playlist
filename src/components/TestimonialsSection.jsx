@@ -2,19 +2,18 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="pt-6 sm:pt-10 pb-16 sm:pb-32 bg-white">
-      
+    <section className="pt-8 pb-16 sm:pb-30 bg-white">
       {/* ======================
           SECTION HEADER
       ====================== */}
       <div className="max-w-5xl mx-auto text-center px-4 sm:px-5">
-        <h2 className="text-4xl sm:text-5xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
-          Real Stories.<br /> Real Moments.
-          Real Magic.
+        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#155DFC] to-[#9810FA] bg-clip-text text-transparent">
+          Real Stories. Real Moments. <br />
+          Real Magic.🎉
         </h2>
 
         <p className="pt-4 text-gray-600 text-sm sm:text-base">
-          Personalised playlists that shaped unforgettable celebrations.
+          🎶 Personalised playlists that shaped unforgettable celebrations.
         </p>
       </div>
 

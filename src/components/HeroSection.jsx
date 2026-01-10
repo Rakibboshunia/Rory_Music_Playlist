@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import HeroCurve from "../assets/img/Container.png";
 import IphoneLogo from "../assets/img/Iphone.png";
+import SpotifyLogo from "../assets/img/SpotifyLogo.png"
+import { FiArrowRight } from "react-icons/fi";
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -23,27 +25,26 @@ export default function HeroSection() {
         {/* LEFT */}
         <div className="text-white max-w-xl">
           <div className="pb-10 space-y-4 sm:space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-              What's your night's soundtrack?
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-extrabold leading-tight">
+              Get your personalised Spotify playlist in 60 seconds
             </h1>
 
             <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
-              Take our 60-second vibe quiz and instantly get your personalised event playlist — crafted by Ireland's Entertainment Agency of the Year 2025.
+              Answer a few quick questions and we’ll generate a custom Spotify playlist based on your vibe — ready to listen to instantly.
             </p>
           </div>
 
           {/* ✅ FIXED BUTTONS */}
-          <div className="mt-6 flex gap-3 sm:gap-4 flex-wrap">
+          <div className="mt-2 flex gap-5 sm:gap-5 flex-wrap">
             <button
               onClick={() => navigate("/quiz")}
               className="
-                px-5 py-2
-                sm:px-8 sm:py-3
+                px-4 py-2
+                sm:px-4 sm:py-2
                 bg-white text-blue-700
                 rounded-full
                 text-sm sm:text-base
-                font-medium
-                shadow-lg
+                font-medium shadow-lg
                 transition-all duration-300 ease-out
                 hover:scale-[1.03] 
                 hover:shadow-xl active:scale-[0.98]
@@ -51,16 +52,23 @@ export default function HeroSection() {
                 hover:text-white
                 border hover:border-white/80
                 cursor-pointer
+                inline-flex items-center
               "
             >
-              Start My Quiz →
+              <img
+                src={SpotifyLogo}
+                alt="Spotify"
+                className="h-[2.0em] w-auto"
+              />
+              Generate my Spotify playlist
+              <FiArrowRight size={20} />
             </button>
 
             <button
               onClick={handleHowItWorks}
               className="
-                px-5 py-2
-                sm:px-8 sm:py-3
+                px-4 py-2
+                sm:px-4 sm:py-3
                 border border-white/80
                 rounded-full
                 shadow-lg
@@ -71,9 +79,16 @@ export default function HeroSection() {
                 hover:shadow-xl active:scale-[0.98]
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC]
                 cursor-pointer
+                inline-flex items-center
               "
             >
+              <img
+                src={SpotifyLogo}
+                alt="Spotify"
+                className="h-[2.0em] w-auto"
+              />
               See How It Works
+              <FiArrowRight size={20} />
             </button>
           </div>
 
@@ -96,11 +111,11 @@ export default function HeroSection() {
             src={IphoneLogo}
             alt="HeroLogo"
             className="
-              w-75
-              sm:w-90
+              w-85
+              sm:w-100
               md:w-110
-              lg:w-120
-              xl:w-130
+              lg:w-115
+              xl:w-120
               h-auto
               object-contain
             "

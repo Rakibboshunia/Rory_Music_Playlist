@@ -27,7 +27,7 @@ export default function Home() {
       {/* TESTIMONIALS */}
       <section
         id="testimonials-section"
-        className="mt-16 max-w-6xl mx-auto lg:px-5"
+        className="mt-13 max-w-6xl mx-auto lg:px-5"
       >
         <TestimonialsSection />
       </section>
