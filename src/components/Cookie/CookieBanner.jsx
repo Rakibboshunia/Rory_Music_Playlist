@@ -15,7 +15,7 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("cookie_consent", "accepted", { expires: 0 });
+    Cookies.set("cookie_consent", "accepted", { expires: 10 });
     setShow(false);
   };
 
