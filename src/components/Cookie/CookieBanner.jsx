@@ -15,7 +15,7 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("cookie_consent", "accepted", { expires: 7 });
+    Cookies.set("cookie_consent", "accepted", { expires: 0 });
     setShow(false);
   };
 
@@ -43,7 +43,7 @@ export default function CookieBanner() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-4 mt-5">
         <button
           onClick={handleReject}
-          className="w-full md:w-auto px-6 py-3 rounded-full border border-blue-600 text-black text-md hover:bg-linear-to-r from-[#155DFC] hover:text-white hover:scale-[1.03] to-[#9810FA] transition cursor-pointer flex items-center justify-center gap-2"
+          className="w-full md:w-auto px-4 py-2 rounded-full border border-blue-600 text-black text-md hover:bg-linear-to-r from-[#155DFC] hover:text-white hover:scale-[1.03] to-[#9810FA] transition cursor-pointer flex items-center justify-center gap-2"
         >
           <FiXCircle size={20} />
           Reject non-essential cookies
@@ -51,7 +51,7 @@ export default function CookieBanner() {
 
         <button
           onClick={handleAccept}
-          className="w-full md:w-auto px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white text-md hover:scale-[1.03] transition cursor-pointer flex items-center justify-center gap-2"
+          className="w-full md:w-auto px-4 py-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white text-md hover:scale-[1.03] transition cursor-pointer flex items-center justify-center gap-2"
         >
           Accept all cookies
           <FiCheckCircle size={20} />
