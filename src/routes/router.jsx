@@ -36,6 +36,7 @@ import GuestPlaylistResult from "../pages/Playlist/PlaylistResult";
 // 💳 Payment
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
+import PlaylistLayout from "../layouts/PlaylistLayout";
 
 const router = createBrowserRouter([
   {
@@ -64,11 +65,11 @@ const router = createBrowserRouter([
       /* ============ PLAYLIST =========== */
       {
         path: "/playlist",
-        element: <UserPlaylistResult />,
-      },
-      {
-        path: "/playlist/:id",
-        element: <GuestPlaylistResult />,
+        element: <PlaylistLayout />,
+        children: [
+          { index: true, element: <UserPlaylistResult /> },
+          { path: ":id", element: <GuestPlaylistResult /> },
+        ],
       },
 
       /* ============= PAYMENT ============= */

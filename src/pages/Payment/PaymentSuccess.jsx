@@ -5,7 +5,7 @@ export default function PaymentSuccess() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F6F8FF]">
-      <div className="bg-white rounded-2xl shadow-xl p-25 text-center max-w-md w-full">
+      <div className=" bg-white rounded-2xl shadow-xl p-25 text-center max-w-xl w-full">
         <h2 className="text-2xl font-semibold text-green-600">
           Payment Successful 🎉
         </h2>

@@ -19,7 +19,6 @@ export default function PlaylistCard({
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
-      {/* HEADER */}
       <div
         onClick={onToggle}
         className="mb-4 flex items-start justify-between cursor-pointer select-none"
@@ -41,27 +40,23 @@ export default function PlaylistCard({
         </span>
       </div>
 
-      {/* COLLAPSIBLE CONTENT */}
       <div
         className={`grid transition-all duration-500 ease-in-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
         <div className="overflow-hidden">
-          {/* COVER IMAGE */}
+
           <img
             src={coverImg}
             alt="playlist cover"
             className="w-full h-100 object-cover rounded-xl duration-300 hover:opacity-90 cursor-pointer"
           />
 
-          {/* 🔒 PREMIUM ONLY PDF */}
           {isPremium && <PremiumPdfCard />}
 
-          {/* PLAYER */}
           <PlaylistPlayer />
 
-          {/* TRACK LIST */}
           <div className="mt-4 space-y-6">
             {tracks.map((track, idx) => (
               <TrackRow key={idx + 1} track={track} spotifyUrl={spotifyUrl} />

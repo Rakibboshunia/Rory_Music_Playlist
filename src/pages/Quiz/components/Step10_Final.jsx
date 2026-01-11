@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import upgradeImg from "../../../assets/img/DiamondLogo.png";
-import SpotifyLogo from "../../../assets/img/SpotifyLogo.png"
+import SpotifyLogo from "../../../assets/img/SpotifyLogo.png";
 
 import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
@@ -10,12 +10,11 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { FiArrowLeft } from "react-icons/fi";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
-  const { answers, updateAnswer } = useQuiz();
+  const { answers } = useQuiz();
   const { isAuthenticated } = useAuth();
 
   const [showEmailPopup, setShowEmailPopup] = useState(false);
@@ -29,17 +28,17 @@ export default function Step10_Final() {
   const isProcessing = isGenerating || paymentLoading;
 
   /* ======================
-     FINAL SUBMIT
+     AUTO POPUP ON QUIZ END
   ====================== */
-  const handleComplete = () => {
+  useEffect(() => {
     const token = Cookies.get("token");
 
     if (!token) {
-      setShowEmailPopup(true);
+      setShowEmailPopup(true);     // Guest → Email popup
     } else {
-      setShowUpgradePopup(true);
+      setShowUpgradePopup(true);  // Logged user → Payment popup
     }
-  };
+  }, []);
 
   /* ======================
      GUEST EMAIL SUBMIT
@@ -123,44 +122,6 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
-      <h2 className="text-2xl font-semibold">Your vibe is ready ✨</h2>
-      <p className="text-gray-500">
-        Based on your answers, your night feels like:
-      </p>
-
-      {/* DO NOT PLAYS */}
-      <div className="bg-[#F6F8FF] rounded-2xl p-5 text-left space-y-2">
-        <h3 className="text-base font-semibold text-gray-800">
-          Any firm “do-not-plays”?
-        </h3>
-        <p className="text-sm text-gray-500">
-          Artists or songs you definitely don’t want to hear.
-        </p>
-
-        <textarea
-          rows={3}
-          value={answers.doNotPlays || ""}
-          onChange={(e) => updateAnswer("doNotPlays", e.target.value)}
-          className="w-full border rounded-xl px-4 py-3 text-sm"
-        />
-      </div>
-
-      {/* ACTION BUTTONS */}
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
-        >
-          ← Back
-        </button>
-
-        <button
-          onClick={handleComplete}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
-        >
-          Submit →
-        </button>
-      </div>
 
       {/* ================= EMAIL POPUP ================= */}
       {showEmailPopup && (
@@ -239,7 +200,7 @@ export default function Step10_Final() {
       {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl w-full max-w-xl p-15 text-center relative">
+          <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -275,16 +236,16 @@ export default function Step10_Final() {
                   a full dancefloor.
                 </h4>
 
-                <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
+                <div className="bg-[#F6F8FF] rounded-xl p-8 flex items-center justify-between mb-10">
                   <div>
-                    <p className="text-sm text-left text-gray-500">Pro Plan</p>
+                    <p className="text-md text-left text-gray-500">Pro Plan</p>
                     <p className="text-2xl text-left font-bold">€9.00</p>
                     <p className="text-sm text-blue-600">
                       For your next 50 playlists
                     </p>
                   </div>
 
-                  <img src={upgradeImg} className="w-14" />
+                  <img src={upgradeImg} className="w-26" />
                 </div>
 
                 <div className="flex gap-3">
@@ -296,7 +257,7 @@ export default function Step10_Final() {
                         handleUpgradeNo();
                       }
                     }}
-                    className="w-1/2 py-3.5 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
+                    className="w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
                     <FiArrowLeft size={20} />
                     Send Free playlist
@@ -310,7 +271,7 @@ export default function Step10_Final() {
                         handleUpgradeYes();
                       }
                     }}
-                    className="w-1/2 py-3.5 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
+                    className="w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
                   >
                     Secure Extended Playlist
                     <FiArrowRight size={20} />
