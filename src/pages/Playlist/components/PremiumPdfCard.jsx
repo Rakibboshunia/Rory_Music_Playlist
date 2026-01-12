@@ -1,13 +1,16 @@
 import { Download } from "lucide-react";
+import pdfFile from "../../../assets/PDF/Entertainment Guide PDF.pdf";
 
 export default function PremiumPdfCard() {
   return (
     <a
-      href="/pdfs/Entertainment-Guide.pdf"
+      href={pdfFile}
       download
+      target="_blank"
+      rel="noopener noreferrer"
       className="
         flex items-center justify-between
-        px-4 py-3 mt-4 mb-6
+        px-4 py-3 mt-4
         rounded-xl
         border border-[#9810FA]
         bg-white
@@ -17,16 +20,16 @@ export default function PremiumPdfCard() {
       "
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#EEF0FF]">
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg text-xl bg-[#EEF0FF]">
           📄
         </div>
 
-        <p className="text-sm font-medium text-gray-800 ">
-          Download Wedding Guide PDF
+        <p className="text-sm font-medium text-gray-800">
+          Download Wedding Entertainment Guide (PDF)
         </p>
       </div>
 
-      <Download className="text-[#155DFC] cursor-pointer" size={18} />
+      <Download className="border-[#9810FA] text-[#155DFC] border rounded scale-125" size={28} />
     </a>
   );
 }

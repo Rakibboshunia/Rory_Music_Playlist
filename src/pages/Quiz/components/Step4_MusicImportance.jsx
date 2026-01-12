@@ -43,7 +43,7 @@ export default function Step4_MusicImportance() {
       <div className="flex justify-between items-center mt-4 pb-6">
         <button
           onClick={handleBack}
-          className="px-8 py-3 rounded-full 
+          className="px-8 py-2 rounded-full 
           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
           cursor-pointer disabled:opacity-50 text-white
           transition-all duration-300 ease-out hover:shadow-lg
@@ -55,7 +55,7 @@ export default function Step4_MusicImportance() {
         <button
           disabled={!answers.crowdAge}
           onClick={() => navigate("/quiz/vibe")}
-          className="px-8 py-3 rounded-full 
+          className="px-8 py-2 rounded-full 
           bg-linear-to-r from-[#155DFC] to-[#9810FA] 
           cursor-pointer disabled:opacity-50 text-white
           transition-all duration-300 ease-out hover:shadow-lg

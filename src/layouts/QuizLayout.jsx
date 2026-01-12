@@ -25,9 +25,10 @@ export default function QuizLayout() {
   const stepIndex = quizSteps.findIndex(
     (step) => cleanPath === step
   );
-
+  
   const currentStep = stepIndex >= 0 ? stepIndex + 1 : 0;
   const progressPercent = currentStep * 10;
+  const isFinalStep = cleanPath === "/quiz/final";
 
   useEffect(() => {
     const el = document.getElementById("quiz-section");
@@ -36,7 +37,6 @@ export default function QuizLayout() {
 
   return (
     <div id="quiz-section" className="min-h-screen">
-
       {/* ===== HEADER ===== */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
         <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
@@ -49,7 +49,7 @@ export default function QuizLayout() {
       </div>
 
       {/* ===== PROGRESS BAR ===== */}
-      {currentStep > 0 && (
+      {currentStep > 0 && !isFinalStep && (
         <div className="max-w-xl mx-auto px-4 sm:px-6 mb-6">
           <div className="flex justify-between text-xs text-gray-500 mb-1">
             <span>Step {currentStep} of 10</span>

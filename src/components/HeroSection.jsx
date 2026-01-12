@@ -46,7 +46,7 @@ export default function HeroSection() {
                 text-sm sm:text-base
                 font-medium shadow-lg
                 transition-all duration-300 ease-out
-                hover:scale-[1.03] 
+                hover:scale-[1.02] 
                 hover:shadow-xl active:scale-[0.98]
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] 
                 hover:text-white
@@ -75,12 +75,11 @@ export default function HeroSection() {
                 text-sm sm:text-base
                 font-medium
                 transition-all duration-300 ease-out
-                hover:scale-[1.03] 
+                hover:scale-[1.02] 
                 hover:shadow-xl active:scale-[0.98]
                 hover:bg-linear-to-r from-[#9810FA] to-[#155DFC]
                 cursor-pointer
-                inline-flex items-center
-              "
+                inline-flex items-center"
             >
               <img
                 src={SpotifyLogo}
@@ -117,8 +116,7 @@ export default function HeroSection() {
               lg:w-115
               xl:w-120
               h-auto
-              object-contain
-            "
+              object-contain"
           />
         </div>
       </div>

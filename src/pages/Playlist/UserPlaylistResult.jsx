@@ -43,7 +43,7 @@ export default function PlaylistResult() {
       <div className="min-h-screen pb-15">
         <div className="max-w-3xl mx-auto px-4 sm:px-4">
           <div className="flex justify-center mb-2">
-            <span className="px-6 py-2 text-xs sm:text-sm rounded-full bg-white shadow">
+            <span className="px-6 py-3 text-xs sm:text-sm rounded-full bg-white shadow">
               ✨ Your personalised soundtrack is ready
             </span>
           </div>

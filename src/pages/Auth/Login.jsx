@@ -52,25 +52,46 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full max-w-xl bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg p-14 space-y-6">
-      <h1 className="text-3xl font-bold text-center mb-2">
+    <div className="
+      relative
+      w-full max-w-xl
+      bg-white/80 backdrop-blur-xl
+      rounded-[28px]
+      shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
+      p-16
+      space-y-6
+      animate-fade-in
+    ">
+      {/* Soft gradient glow */}
+      <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+
+      <h1 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
         Welcome back!
       </h1>
 
-      <p className="text-gray-500 text-center mb-8">
+      <p className="text-gray-500 text-center mb-10">
         Enter your credentials to access your account
       </p>
 
-      <form onSubmit={handleLogin} className="space-y-5">
+      <form onSubmit={handleLogin} className="space-y-6">
         {/* EMAIL */}
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label className="block text-sm font-medium mb-1 text-gray-700">
             Email Address
           </label>
           <input
             type="email"
             name="email"
-            className="w-full border rounded-lg px-4 py-3"
+            className="
+              w-full
+              rounded-xl
+              border border-gray-200
+              px-5 py-3
+              bg-white
+              focus:outline-none
+              focus:ring-2 focus:ring-[#9810FA]/40
+              transition
+            "
             placeholder="Enter your email"
             required
           />
@@ -78,7 +99,7 @@ export default function Login() {
 
         {/* PASSWORD */}
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label className="block text-sm font-medium mb-1 text-gray-700">
             Password
           </label>
 
@@ -86,7 +107,16 @@ export default function Login() {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              className="w-full border rounded-lg px-4 py-3 pr-10"
+              className="
+                w-full
+                rounded-xl
+                border border-gray-200
+                px-5 py-3 pr-12
+                bg-white
+                focus:outline-none
+                focus:ring-2 focus:ring-[#9810FA]/40
+                transition
+              "
               placeholder="Enter your password"
               required
             />
@@ -94,7 +124,12 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+              className="
+                absolute right-4 top-1/2 -translate-y-1/2
+                text-gray-500
+                hover:scale-110
+                transition
+              "
             >
               {showPassword ? "👁️" : "🙈"}
             </button>
@@ -113,15 +148,28 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-medium transition cursor-pointer disabled:opacity-60"
+          className="
+            w-full
+            py-4
+            rounded-xl
+            bg-linear-to-r from-[#9810FA] to-[#155DFC]
+            text-white
+            font-semibold
+            transition-all duration-300
+            hover:scale-[1.03]
+            hover:shadow-xl
+            active:scale-[0.97]
+            cursor-pointer
+            disabled:opacity-60
+          "
         >
           {loading ? "Logging..." : "Login"}
         </button>
       </form>
 
-      <p className="text-md text-center mt-6">
+      <p className="text-md text-center mt-8 text-gray-600">
         Don’t have an account?{" "}
-        <Link to="/signup" className="text-blue-600 font-medium">
+        <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
           Sign Up
         </Link>
       </p>

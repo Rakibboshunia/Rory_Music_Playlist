@@ -34,44 +34,80 @@ export default function Signup() {
   };
 
   return (
-    <div className="w-full max-w-xl bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl shadow-lg p-14 space-y-6">
+    <div
+      className="
+        relative
+        w-full max-w-xl
+        bg-white/80 backdrop-blur-xl
+        rounded-[28px]
+        shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
+        p-16
+        space-y-6
+        animate-fade-in
+      "
+    >
+      {/* Soft gradient glow */}
+      <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
 
       {/* TITLE */}
-      <h2 className="text-3xl font-bold mb-8 text-center">
+      <h2 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
         Get Started Now
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <p className="text-gray-500 text-center mb-10">
+        Create your account to get started
+      </p>
 
-        {/* Name */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* NAME */}
         <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700">
+            Name
+          </label>
           <input
             type="text"
             name="name"
-            className="w-full border rounded-lg px-4 py-3"
+            className="
+              w-full
+              rounded-xl
+              border border-gray-200
+              px-5 py-3
+              bg-white
+              focus:outline-none
+              focus:ring-2 focus:ring-[#9810FA]/40
+              transition
+            "
             placeholder="Enter your name"
             required
           />
         </div>
 
-        {/* Email */}
+        {/* EMAIL */}
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label className="block text-sm font-medium mb-1 text-gray-700">
             Email Address
           </label>
           <input
             type="email"
             name="email"
-            className="w-full border rounded-lg px-4 py-3"
+            className="
+              w-full
+              rounded-xl
+              border border-gray-200
+              px-5 py-3
+              bg-white
+              focus:outline-none
+              focus:ring-2 focus:ring-[#9810FA]/40
+              transition
+            "
             placeholder="Enter your email"
             required
           />
         </div>
 
-        {/* Password */}
+        {/* PASSWORD */}
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label className="block text-sm font-medium mb-1 text-gray-700">
             Password
           </label>
 
@@ -79,7 +115,16 @@ export default function Signup() {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              className="w-full border rounded-lg px-4 py-3 pr-10"
+              className="
+                w-full
+                rounded-xl
+                border border-gray-200
+                px-5 py-3 pr-12
+                bg-white
+                focus:outline-none
+                focus:ring-2 focus:ring-[#9810FA]/40
+                transition
+              "
               placeholder="Create a password"
               required
             />
@@ -87,7 +132,13 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+              className="
+                absolute right-4 top-1/2 -translate-y-1/2
+                text-gray-500
+                hover:scale-110
+                transition
+                cursor-pointer
+              "
             >
               {showPassword ? "👁️" : "🙈"}
             </button>
@@ -95,8 +146,8 @@ export default function Signup() {
         </div>
 
         {/* TERMS */}
-        <div className="flex items-start gap-2 text-sm cursor-pointer">
-          <input type="checkbox" required className="mt-1" />
+        <div className="flex items-start gap-3 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" required className="mt-1 accent-[#9810FA]" />
           <span>
             I agree to the{" "}
             <Link to="/terms" className="text-blue-600 underline">
@@ -108,33 +159,33 @@ export default function Signup() {
         {/* SUBMIT */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-medium transition cursor-pointer disabled:opacity-60"
+          className="
+            w-full
+            py-4
+            rounded-xl
+            bg-linear-to-r from-[#9810FA] to-[#155DFC]
+            text-white
+            font-semibold
+            transition-all duration-300
+            hover:scale-[1.03]
+            hover:shadow-xl
+            active:scale-[0.97]
+            cursor-pointer
+            disabled:opacity-60
+          "
           disabled={loading}
         >
           {loading ? "Signing..." : "Sign Up"}
         </button>
-
-        {/* FOOTER */}
-        <div className="flex justify-between items-center text-sm mt-4">
-          <button
-            onClick={() => navigate("/")}
-            className="text-blue-600 hover:underline cursor-pointer"
-          >
-            ← Back to Home
-          </button>
-
-          <p>
-            Have an account?{" "}
-            <Link
-              to="/login"
-              className="text-blue-600 font-medium hover:underline cursor-pointer"
-            >
-              Sign in
-            </Link>
-          </p>
-        </div>
-
       </form>
+
+      {/* FOOTER */}
+      <p className="text-md text-center mt-8 text-gray-600">
+        Have an account?{" "}
+        <Link to="/login" className="text-blue-600 font-semibold hover:underline">
+          Sign in
+        </Link>
+      </p>
     </div>
   );
 }

@@ -7,16 +7,16 @@ import CookiePreferencesModal from "../components/Cookie/CookiePreferencesModal"
 
 export default function PlaylistLayout() {
   return (
-    <>
+    <div>
       <Navbar />
 
-      <div className="max-w-5xl mx-auto py-10">
+      <div className="w-full">
         <Outlet />
       </div>
 
       {/* 🍪 Cookie system */}
       <CookieFloatingButton />
       <CookiePreferencesModal />
-    </>
+    </div>
   );
 }

@@ -122,11 +122,10 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
-
       {/* ================= EMAIL POPUP ================= */}
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 text-center relative">
+          <div className="bg-white rounded-2xl w-full max-w-xl p-14 text-center relative">
             {emailLoading ? (
               <div className="h-70 flex flex-col items-center justify-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -137,24 +136,28 @@ export default function Step10_Final() {
             ) : (
               <div>
                 <button
-                  onClick={() => setShowEmailPopup(false)}
+                  onClick={() => {
+                    setShowEmailPopup(false);
+                    navigate("/quiz");
+                  }}
                   className="absolute top-4 right-4 text-gray-400 cursor-pointer"
                 >
                   ✕
                 </button>
 
                 <div className="flex justify-center mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-4xl">
+                  <div className="w-18 h-16 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-5xl">
                     ✉️
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold mb-3">
-                  Get your personalised playlist
+                <h3 className="text-2xl font-semibold mb-4">
+                  🎶 Get your personalised playlist
                 </h3>
 
                 <p className="text-md text-gray-500 mb-5">
-                  Pop in your email to unlock your soundtrack.
+                  📩 Pop in your email to unlock your soundtrack. <br />We’ll send your personalised playlist straight to your inbox.
+
                 </p>
 
                 <form onSubmit={submitGuestEmail} className="space-y-4">
@@ -170,13 +173,15 @@ export default function Step10_Final() {
                   <label className="flex items-start gap-1 text-xs text-gray-500">
                     <input type="checkbox" required className="mt-1" />
                     <span>
-                      I agree to receive my personalised playlist by email and to be contacted by DJ & SAX® about my wedding or event. I can unsubscribe at any time.
+                      I agree to receive my personalised playlist by email and
+                      to be contacted by DJ & SAX® about my wedding or event. I
+                      can unsubscribe at any time.
                     </span>
                   </label>
 
                   <button
                     type="submit"
-                    className="w-full py-1 rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
+                    className="w-full rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
                   >
                     <div className="inline-flex items-center text-xl">
                       <img
@@ -184,11 +189,12 @@ export default function Step10_Final() {
                         alt="Spotify"
                         className="h-[2.0em] w-auto"
                       />
-                        Reveal My Playlist
+                      Reveal My Playlist
                     </div>
                   </button>
                   <p className="text-xs text-gray-500">
-                    We’ll only contact you about music, your date, or entertainment planning. No spam.
+                    We’ll only contact you about music, your date, or
+                    entertainment planning. No spam.
                   </p>
                 </form>
               </div>
@@ -211,7 +217,10 @@ export default function Step10_Final() {
             ) : (
               <>
                 <button
-                  onClick={() => setShowUpgradePopup(false)}
+                  onClick={() => {
+                    setShowUpgradePopup(false);
+                    navigate("/quiz");
+                  }}
                   className="absolute top-6 right-6 text-gray-400 cursor-pointer"
                 >
                   ✕
@@ -227,8 +236,11 @@ export default function Step10_Final() {
                 </h2>
 
                 <p className="text-sm text-black/60 ">
-                  We’ve created your personalised Spotify playlist based on your vibe. <br />You can listen now — or unlock the full 3-hour version.
-                </p><br />
+                  We’ve created your personalised Spotify playlist based on your
+                  vibe. <br />
+                  You can listen now — or unlock the full 3-hour version.
+                </p>
+                <br />
 
                 <h4 className="text-md font-semibold mb-8">
                   ✨Upgrade to the Premium Playlist (€9) PLUS Free Wedding
@@ -248,7 +260,7 @@ export default function Step10_Final() {
                   <img src={upgradeImg} className="w-26" />
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={() => {
                       if (!Cookies.get("token")) {
@@ -257,7 +269,7 @@ export default function Step10_Final() {
                         handleUpgradeNo();
                       }
                     }}
-                    className="w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
+                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
                     <FiArrowLeft size={20} />
                     Send Free playlist
@@ -271,7 +283,7 @@ export default function Step10_Final() {
                         handleUpgradeYes();
                       }
                     }}
-                    className="w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
+                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
                   >
                     Secure Extended Playlist
                     <FiArrowRight size={20} />

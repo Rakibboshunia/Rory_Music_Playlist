@@ -3,7 +3,6 @@ import TrackRow from "./TrackRow";
 import coverImg from "../../../assets/img/playlist.png";
 import { FiChevronDown } from "react-icons/fi";
 import PremiumPdfCard from "./PremiumPdfCard";
-import { useAuth } from "../../../context/AuthContext";
 
 export default function PlaylistCard({
   index,
@@ -13,10 +12,8 @@ export default function PlaylistCard({
   isOpen,
   spotifyUrl,
   onToggle,
+  playlist_type,
 }) {
-  const { user } = useAuth();
-  const isPremium = user?.subscription === "paid";
-
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div
@@ -46,16 +43,15 @@ export default function PlaylistCard({
         }`}
       >
         <div className="overflow-hidden">
-
           <img
             src={coverImg}
             alt="playlist cover"
             className="w-full h-100 object-cover rounded-xl duration-300 hover:opacity-90 cursor-pointer"
           />
 
-          {isPremium && <PremiumPdfCard />}
-
           <PlaylistPlayer />
+
+          {playlist_type=== "premium" && <PremiumPdfCard />}
 
           <div className="mt-4 space-y-6">
             {tracks.map((track, idx) => (
