@@ -26,12 +26,13 @@ export default function HeroSection() {
         <div className="text-white max-w-xl">
           <div className="pb-10 space-y-4 sm:space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-extrabold leading-tight">
-              Get your personalised Spotify playlist in 60 seconds
+              Get your free personalised Spotify playlist in 60 seconds
             </h1>
 
             <p className="mt-4 sm:mt-5 text-base sm:text-lg opacity-90">
               Answer a few quick questions and we’ll generate a custom Spotify playlist based on your vibe — ready to listen to instantly.
             </p>
+            <p>No credit card required • 100% free playlist • Instant results</p>
           </div>
 
           {/* ✅ FIXED BUTTONS */}

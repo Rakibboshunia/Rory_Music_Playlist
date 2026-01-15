@@ -243,17 +243,15 @@ export default function Step10_Final() {
                 <br />
 
                 <h4 className="text-md font-semibold mb-8">
-                  ✨Upgrade to the Premium Playlist (€9) PLUS Free Wedding
-                  Entertainment Guide 50 tracks, smoother energy flow, built for
-                  a full dancefloor.
+                  ✨Upgrade to the Premium 50 track Playlist for only €9 and receive a Free Wedding Entertainment Guide.
                 </h4>
 
                 <div className="bg-[#F6F8FF] rounded-xl p-8 flex items-center justify-between mb-10">
                   <div>
                     <p className="text-md text-left text-gray-500">Pro Plan</p>
-                    <p className="text-2xl text-left font-bold">€9.00</p>
-                    <p className="text-sm text-blue-600">
-                      For your next 50 playlists
+                    <p className="text-4xl text-left font-bold">€9.00</p>
+                    <p className="text-md text-blue-600">
+                      50 Track Playlist
                     </p>
                   </div>
 
@@ -272,7 +270,7 @@ export default function Step10_Final() {
                     className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
                     <FiArrowLeft size={20} />
-                    Send Free playlist
+                    Send Free Playlist
                   </button>
 
                   <button
