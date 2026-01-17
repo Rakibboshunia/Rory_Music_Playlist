@@ -39,7 +39,7 @@ export default function CTASection() {
               <img
                 src={SpotifyLogo}
                 alt="Spotify"
-                className="h-[2.0em] w-auto"
+                className="h-[2.2em] w-auto"
               />
              Generate my Spotify playlist
              <FiArrowRight size={20} />

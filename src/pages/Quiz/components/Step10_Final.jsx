@@ -248,8 +248,7 @@ export default function Step10_Final() {
 
                 <div className="bg-[#F6F8FF] rounded-xl p-8 flex items-center justify-between mb-10">
                   <div>
-                    <p className="text-md text-left text-gray-500">Pro Plan</p>
-                    <p className="text-4xl text-left font-bold">€9.00</p>
+                    <p className="text-4xl text-left font-bold pb-2">€9.00</p>
                     <p className="text-md text-blue-600">
                       50 Track Playlist
                     </p>

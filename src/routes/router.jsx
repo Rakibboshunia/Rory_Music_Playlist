@@ -62,7 +62,6 @@ const router = createBrowserRouter([
         ],
       },
       
-
       /* ============ PLAYLIST =========== */
       {
         path: "/playlist",

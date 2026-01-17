@@ -35,7 +35,7 @@ export default function CookieBanner() {
           relative
           w-full max-w-6xl
           bg-white/80 backdrop-blur-2xl
-          rounded-[32px]
+          rounded-4xl
           border border-black/10
           shadow-[0_40px_120px_-20px_rgba(0,0,0,0.45)]
           p-6 md:p-10
@@ -43,12 +43,12 @@ export default function CookieBanner() {
         "
       >
         {/* PREMIUM GLOW FRAME */}
-        <div className="absolute inset-0 rounded-[32px] bg-linear-to-r from-[#155DFC]/25 via-[#9810FA]/20 to-[#155DFC]/25 blur-3xl -z-10 animate-pulse" />
+        <div className="absolute inset-0 rounded-4xl bg-linear-to-r from-[#155DFC]/25 via-[#9810FA]/20 to-[#155DFC]/25 blur-3xl -z-10 animate-pulse" />
 
         {/* CONTENT */}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
           {/* ICON */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-[#155DFC]/15 to-[#9810FA]/15 flex items-center justify-center shadow-inner">
               <img
                 src={cookie}
