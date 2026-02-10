@@ -28,22 +28,31 @@ export default function Login() {
       );
 
       const token = result.data?.data?.token;
+      const user = result.data?.data?.user;
 
-      if (!token) {
+      if (!token || !user) {
         toast.error("Login failed");
         return;
       }
 
+      // ✅ Store token
       Cookies.set("token", token, {
         expires: 7,
         sameSite: "lax",
         secure: import.meta.env.PROD,
       });
 
-      login({ email });
+      // ✅ Store user + role in AuthContext
+      login({ user });
 
       toast.success("Login successful!");
-      navigate("/");
+
+      // ✅ ROLE BASED REDIRECT
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
     } finally {
@@ -62,7 +71,6 @@ export default function Login() {
       space-y-6
       animate-fade-in
     ">
-      {/* Soft gradient glow */}
       <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
 
       <h1 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
@@ -82,16 +90,7 @@ export default function Login() {
           <input
             type="email"
             name="email"
-            className="
-              w-full
-              rounded-xl
-              border border-gray-200
-              px-5 py-3
-              bg-white
-              focus:outline-none
-              focus:ring-2 focus:ring-[#9810FA]/40
-              transition
-            "
+            className="w-full rounded-xl border px-5 py-3"
             placeholder="Enter your email"
             required
           />
@@ -107,16 +106,7 @@ export default function Login() {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              className="
-                w-full
-                rounded-xl
-                border border-gray-200
-                px-5 py-3 pr-12
-                bg-white
-                focus:outline-none
-                focus:ring-2 focus:ring-[#9810FA]/40
-                transition
-              "
+              className="w-full rounded-xl border px-5 py-3 pr-12"
               placeholder="Enter your password"
               required
             />
@@ -124,18 +114,12 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="
-                absolute right-4 top-1/2 -translate-y-1/2
-                text-gray-500
-                hover:scale-110
-                transition
-              "
+              className="absolute right-4 top-1/2 -translate-y-1/2"
             >
               {showPassword ? "👁️" : "🙈"}
             </button>
           </div>
 
-          {/* Forgot Password */}
           <div className="text-right mt-2">
             <Link
               to="/forgot-password"
@@ -148,20 +132,8 @@ export default function Login() {
 
         <button
           type="submit"
-          className="
-            w-full
-            py-4
-            rounded-xl
-            bg-linear-to-r from-[#9810FA] to-[#155DFC]
-            text-white
-            font-semibold
-            transition-all duration-300
-            hover:scale-[1.03]
-            hover:shadow-xl
-            active:scale-[0.97]
-            cursor-pointer
-            disabled:opacity-60
-          "
+          disabled={loading}
+          className="w-full py-4 rounded-xl bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold"
         >
           {loading ? "Logging..." : "Login"}
         </button>

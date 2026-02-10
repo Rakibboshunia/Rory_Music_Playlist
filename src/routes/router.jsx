@@ -1,23 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
+
+/* ================== LANDING LAYOUTS ================== */
 import PublicLayout from "../layouts/PublicLayout";
 import QuizLayout from "../layouts/QuizLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import PlaylistLayout from "../layouts/PlaylistLayout";
 
-// Pages
+/* ================== LANDING PAGES ================== */
 import Home from "../pages/Home/Home";
+
+/* ================== USER AUTH (ONE AUTH) ================== */
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
 import VerifyOTP from "../pages/Auth/VerifyOTP";
 
-// ✅ Policies
-import Terms from "../pages/Policies/Terms";
-import PrivacyPolicy from "../pages/Policies/PrivacyPolicy";
-import CookiePolicy from "../pages/Policies/CookiePolicy";
-import RefundPolicy from "../pages/Policies/RefundPolicy";
-
-// Quiz steps
+/* ================== QUIZ ================== */
 import Step1_EventType from "../pages/Quiz/components/Step1_EventType";
 import Step2_EventDetails from "../pages/Quiz/components/Step2_EventDetails";
 import Step3_Genres from "../pages/Quiz/components/Step3_Genres";
@@ -29,22 +28,37 @@ import Step8_Tempo from "../pages/Quiz/components/Step8_Tempo";
 import Step9_Era from "../pages/Quiz/components/Step9_Era";
 import Step10_Final from "../pages/Quiz/components/Step10_Final";
 
-// 🎵 Playlist
+/* ================== PLAYLIST ================== */
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
 import GuestPlaylistResult from "../pages/Playlist/PlaylistResult";
 
-// 💳 Payment
+/* ================== PAYMENT ================== */
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
-import PlaylistLayout from "../layouts/PlaylistLayout";
+
+/* ================== POLICIES ================== */
+import Terms from "../pages/Policies/Terms";
+import PrivacyPolicy from "../pages/Policies/PrivacyPolicy";
+import CookiePolicy from "../pages/Policies/CookiePolicy";
+import RefundPolicy from "../pages/Policies/RefundPolicy";
+
+/* ================== ADMIN ================== */
+import DashboardLayout from "../admin/layout/DashboardLayout";
+import AdminHome from "../admin/pages/Home";
+import AdminUsers from "../admin/pages/Users";
+import AdminPlaylists from "../admin/pages/Playlists";
+import AdminProfile from "../admin/pages/Profile";
+
+/* ================== PROTECTED ================== */
+// import AdminProtected from "../admin/components/common/AdminProtected";
 
 const router = createBrowserRouter([
+  /* ============ PUBLIC / LANDING ============ */
   {
     element: <PublicLayout />,
     children: [
       { path: "/", element: <Home /> },
 
-      /* ============= QUIZ ============== */
       {
         path: "/quiz",
         element: <QuizLayout />,
@@ -61,8 +75,7 @@ const router = createBrowserRouter([
           { path: "final", element: <Step10_Final /> },
         ],
       },
-      
-      /* ============ PLAYLIST =========== */
+
       {
         path: "/playlist",
         element: <PlaylistLayout />,
@@ -72,37 +85,17 @@ const router = createBrowserRouter([
         ],
       },
 
-      /* ============= PAYMENT ============= */
-      {
-        path: "/success",
-        element: <PaymentSuccess />,
-      },
-      {
-        path: "/cancel",
-        element: <PaymentCancel />,
-      },
+      { path: "/success", element: <PaymentSuccess /> },
+      { path: "/cancel", element: <PaymentCancel /> },
 
-      /* ============ POLICIES ============= */
-      {
-        path: "/terms",
-        element: <Terms />,
-      },
-      {
-        path: "/privacy-policy",
-        element: <PrivacyPolicy />,
-      },
-      {
-        path: "/cookie-policy",
-        element: <CookiePolicy />,
-      },
-      {
-        path: "/refund-policy",
-        element: <RefundPolicy />,
-      },
+      { path: "/terms", element: <Terms /> },
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
+      { path: "/cookie-policy", element: <CookiePolicy /> },
+      { path: "/refund-policy", element: <RefundPolicy /> },
     ],
   },
 
-  /* ============= AUTH ============== */
+  /* ============ AUTH (USER + ADMIN LOGIN SAME) ============ */
   {
     element: <AuthLayout />,
     children: [
@@ -111,6 +104,22 @@ const router = createBrowserRouter([
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/reset-password", element: <ResetPassword /> },
       { path: "/verify-otp", element: <VerifyOTP /> },
+    ],
+  },
+
+  /* ============ ADMIN DASHBOARD (ROLE BASED) ============ */
+  {
+    path: "/admin",
+    element: (
+      // <AdminProtected>
+        <DashboardLayout />
+      // </AdminProtected>
+    ),
+    children: [
+      { index: true, element: <AdminHome /> },
+      { path: "users", element: <AdminUsers /> },
+      { path: "playlists", element: <AdminPlaylists /> },
+      { path: "profile", element: <AdminProfile /> },
     ],
   },
 ]);
