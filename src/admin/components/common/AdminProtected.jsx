@@ -1,12 +1,20 @@
-// import { Navigate } from "react-router-dom";
-// import { useAuth } from "../../../context/AuthContext";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
-// export default function AdminProtected({ children }) {
-//   const { user } = useAuth();
+export default function AdminProtected({ children }) {
+  const { user, loading } = useAuth();
 
-//   if (!user || user.role !== "admin") {
-//     return <Navigate to="/login" replace />;
-//   }
+  if (loading) return null;
 
-//   return children;
-// }
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  const role = user.userType || user.role;
+
+  if (role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}

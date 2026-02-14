@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import Favicon from "../../../assets/img/favicon.png";
+import Logo from "../../../assets/images/rakib.png"
 
 export default function Header({ onMenuClick }) {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function Header({ onMenuClick }) {
         >
           <div className="h-18 w-18 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
             <img
-              src={user?.avatar}
+              src={user?.avatar || Logo}
               alt="avatar"
               className="h-full w-full object-cover rounded-full"
             />
@@ -64,11 +65,14 @@ export default function Header({ onMenuClick }) {
             <button
               onClick={() => {
                 setOpen(false);
-                navigate("/profile");
+                navigate("/admin/profile");
               }}
               className="flex items-center font-medium gap-2 px-4 py-5 w-full hover:bg-gray-100 cursor-pointer"
             >
-              <Icon icon="material-symbols:person-outline" className="text-2xl" />
+              <Icon
+                icon="material-symbols:person-outline"
+                className="text-2xl"
+              />
               My Profile
             </button>
 

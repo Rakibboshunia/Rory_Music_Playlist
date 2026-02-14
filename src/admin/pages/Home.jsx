@@ -46,7 +46,7 @@ export default function Home() {
         title="Recent Activity"
         actionSlot={
           <button
-            onClick={() => navigate("/playlists")}
+            onClick={() => navigate("/admin/playlists")}
             className="text-md font-bold text-blue-600 hover:underline cursor-pointer"
           >
             View All

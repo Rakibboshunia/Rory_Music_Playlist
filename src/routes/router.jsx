@@ -45,9 +45,10 @@ import RefundPolicy from "../pages/Policies/RefundPolicy";
 /* ================== ADMIN ================== */
 import DashboardLayout from "../admin/layout/DashboardLayout";
 import AdminHome from "../admin/pages/Home";
-import AdminUsers from "../admin/pages/Users";
+import AdminUsers from "../admin/pages/User";
 import AdminPlaylists from "../admin/pages/Playlists";
 import AdminProfile from "../admin/pages/Profile";
+import AdminProtected from "../admin/components/common/AdminProtected";
 
 /* ================== PROTECTED ================== */
 // import AdminProtected from "../admin/components/common/AdminProtected";
@@ -117,7 +118,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <AdminHome /> },
-      { path: "users", element: <AdminUsers /> },
+      { path: "user", element: <AdminUsers /> },
       { path: "playlists", element: <AdminPlaylists /> },
       { path: "profile", element: <AdminProfile /> },
     ],

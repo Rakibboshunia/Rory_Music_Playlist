@@ -8,22 +8,22 @@ export default function Sidebar({ isOpen, onClose }) {
   const navLinks = [
     {
       name: "Dashboard",
-      path: "/",
+      path: "/admin",
       icon: "material-symbols:dashboard-outline",
     },
     {
       name: "Users",
-      path: "/users",
+      path: "/admin/user",
       icon: "material-symbols:group-outline",
     },
     {
       name: "Playlists",
-      path: "/playlists",
+      path: "/admin/playlists",
       icon: "material-symbols:queue-music",
     },
     {
       name: "Profile",
-      path: "/profile",
+      path: "/admin/profile",
       icon: "material-symbols:person-outline",
     },
   ];
@@ -48,7 +48,7 @@ export default function Sidebar({ isOpen, onClose }) {
           {/* Logo */}
           <div className="flex h-24 items-center justify-between px-5 border-b border-gray-200">
             <Link
-              to="/"
+              to="/admin"
               onClick={() => window.innerWidth < 768 && onClose()}
               className="hover:opacity-90 transition"
             >

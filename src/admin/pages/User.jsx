@@ -14,11 +14,11 @@ const initialUsers = [
   { id: 4, email: "john.doe@email.com", date: "Jan 22, 2026", playlists: 2, status: "Free" },
 ];
 
-export default function Users() {
+export default function User() {
   const [users, setUsers] = useState(initialUsers);
   const [search, setSearch] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [statusFilter, setStatusFilter] = useState(""); // "", "Free", "Paid"
+  const [statusFilter, setStatusFilter] = useState("");
 
   const filteredUsers = users.filter(
     (u) =>

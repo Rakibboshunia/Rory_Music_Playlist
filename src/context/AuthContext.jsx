@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
+  /* ================= RESTORE USER ================= */
   useEffect(() => {
     const token = Cookies.get("token");
 
@@ -29,15 +30,12 @@ export function AuthProvider({ children }) {
           }
         );
 
-        const userData =
-          res.data?.user ||
-          res.data?.data?.user ||
-          { token };
+        const userData = res.data?.data?.user || res.data?.user;
 
         setUser(userData);
       } catch (error) {
-        console.warn("Auth restore failed, keeping token");
-        setUser({ token });
+        Cookies.remove("token");
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -46,10 +44,18 @@ export function AuthProvider({ children }) {
     fetchUser();
   }, []);
 
-  const login = (userData) => {
+  /* ================= LOGIN ================= */
+  const login = (userData, token) => {
+    Cookies.set("token", token, {
+      expires: 7,
+      sameSite: "lax",
+      secure: import.meta.env.PROD,
+    });
+
     setUser(userData);
   };
 
+  /* ================= LOGOUT ================= */
   const logout = () => {
     Cookies.remove("token");
     setUser(null);
@@ -59,10 +65,11 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        setUser,      // ✅ IMPORTANT FIX
         isAuthenticated,
         loading,
         login,
-        logout
+        logout,
       }}
     >
       {!loading && children}

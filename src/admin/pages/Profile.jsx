@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -7,19 +7,34 @@ import EditProfileModal from "../components/profile/EditProfileModal";
 import ChangePasswordModal from "../components/profile/ChangePasswordModal";
 import { PrimaryButton } from "../components/common/Buttons";
 
+import Logo from "../../assets/images/rakib.png"
+
 export default function Profile() {
   const { user, setUser } = useAuth();
 
-  const [editOpen, setEditOpen] = useState(false);
-  const [passwordOpen, setPasswordOpen] = useState(false);
-  const [form, setForm] = useState(user);
-
-  const handleSaveProfile = () => {
-    setUser(form);
-    setEditOpen(false);
+  // 🔥 fallback dummy user (dev mode)
+  const defaultUser = {
+    name: "Admin User",
+    email: "admin@gmail.com",
+    avatar: "",
   };
 
-  if (!user) return null;
+  const currentUser = user || defaultUser;
+
+  const [editOpen, setEditOpen] = useState(false);
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  const [form, setForm] = useState(currentUser);
+
+  useEffect(() => {
+    setForm(currentUser);
+  }, [currentUser]);
+
+  const handleSaveProfile = () => {
+    if (setUser) {
+      setUser(form);
+    }
+    setEditOpen(false);
+  };
 
   return (
     <>
@@ -30,7 +45,7 @@ export default function Profile() {
         <div className="relative">
           <div className="h-24 w-24 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
             <img
-              src={user.avatar || "/avatar-placeholder.png"}
+              src={Logo}
               alt="avatar"
               className="h-full w-full object-cover rounded-full"
             />
@@ -72,7 +87,7 @@ export default function Profile() {
             <label className="text-sm text-gray-500">Full Name</label>
             <input
               disabled
-              value={user.name || ""}
+              value={currentUser.name}
               className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
             />
           </div>
@@ -81,7 +96,7 @@ export default function Profile() {
             <label className="text-sm text-gray-500">Email</label>
             <input
               disabled
-              value={user.email || ""}
+              value={currentUser.email}
               className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
             />
           </div>
