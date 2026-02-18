@@ -73,14 +73,15 @@ export default function Sidebar({ isOpen, onClose }) {
               <NavLink
                 key={item.path}
                 to={item.path}
+                end={item.path === "/admin"}
                 onClick={() => window.innerWidth < 768 && onClose()}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-lg px-4 py-4 text-xl transition-colors 
-                  ${
-                    isActive
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                  }`
+                  `flex items-center gap-3 rounded-lg px-4 py-4 text-xl transition-all duration-200
+                    ${
+                      isActive
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    }`
                 }
               >
                 <Icon

@@ -109,20 +109,22 @@ const router = createBrowserRouter([
   },
 
   /* ============ ADMIN DASHBOARD (ROLE BASED) ============ */
-  {
-    path: "/admin",
-    element: (
-      // <AdminProtected>
-        <DashboardLayout />
-      // </AdminProtected>
-    ),
-    children: [
-      { index: true, element: <AdminHome /> },
-      { path: "user", element: <AdminUsers /> },
-      { path: "playlists", element: <AdminPlaylists /> },
-      { path: "profile", element: <AdminProfile /> },
-    ],
-  },
+{
+  path: "/admin",
+  element: <AdminProtected />,
+  children: [
+    {
+      element: <DashboardLayout />,
+      children: [
+        { index: true, element: <AdminHome /> },
+        { path: "user", element: <AdminUsers /> },
+        { path: "playlists", element: <AdminPlaylists /> },
+        { path: "profile", element: <AdminProfile /> },
+      ],
+    },
+  ],
+},
+
 ]);
 
 export default router;

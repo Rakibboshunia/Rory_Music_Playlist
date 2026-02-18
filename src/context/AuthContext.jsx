@@ -19,6 +19,18 @@ export function AuthProvider({ children }) {
       return;
     }
 
+    /* 🔥 DUMMY MODE CHECK */
+    if (token === "dummy-token") {
+      const storedUser = localStorage.getItem("dummyUser");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+      setLoading(false);
+      return;
+    }
+
+    /* ================= REAL API (COMMENTED SAFE) ================= */
+    /*
     const fetchUser = async () => {
       try {
         const res = await axios.get(
@@ -31,7 +43,6 @@ export function AuthProvider({ children }) {
         );
 
         const userData = res.data?.data?.user || res.data?.user;
-
         setUser(userData);
       } catch (error) {
         Cookies.remove("token");
@@ -42,6 +53,9 @@ export function AuthProvider({ children }) {
     };
 
     fetchUser();
+    */
+
+    setLoading(false);
   }, []);
 
   /* ================= LOGIN ================= */
@@ -49,8 +63,13 @@ export function AuthProvider({ children }) {
     Cookies.set("token", token, {
       expires: 7,
       sameSite: "lax",
-      secure: import.meta.env.PROD,
+      secure: false,
     });
+
+    /* 🔥 Store user for dummy refresh */
+    if (token === "dummy-token") {
+      localStorage.setItem("dummyUser", JSON.stringify(userData));
+    }
 
     setUser(userData);
   };
@@ -58,6 +77,7 @@ export function AuthProvider({ children }) {
   /* ================= LOGOUT ================= */
   const logout = () => {
     Cookies.remove("token");
+    localStorage.removeItem("dummyUser");
     setUser(null);
   };
 
@@ -65,7 +85,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        setUser,      // ✅ IMPORTANT FIX
+        setUser,
         isAuthenticated,
         loading,
         login,

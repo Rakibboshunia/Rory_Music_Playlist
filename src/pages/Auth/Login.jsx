@@ -12,63 +12,81 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   /* ================= HANDLE LOGIN ================= */
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value.trim();
+  const email = e.target.email.value.trim();
+  const password = e.target.password.value.trim();
 
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
+  if (!email || !password) {
+    toast.error("Please fill in all fields");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    /* ================= REAL API (COMMENTED) ================= */
+
+    /*
+    const res = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
+      { email, password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const token = res.data?.data?.token;
+    const user = res.data?.data?.user;
+
+    if (!token || !user) {
+      toast.error("Login failed. Invalid response.");
       return;
     }
 
-    try {
-      setLoading(true);
+    login(user, token);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const role = user.userType || user.role;
+    */
 
-      const token = res.data?.data?.token;
-      const user = res.data?.data?.user;
+    /* ================= DUMMY LOGIN ACTIVE ================= */
 
-      if (!token || !user) {
-        toast.error("Login failed. Invalid response.");
-        return;
-      }
+    let fakeUser;
 
-      /* ===== SAVE USER + TOKEN ===== */
-      login(user, token);
-
-      toast.success("Login successful!");
-
-      /* ===== ROLE BASED REDIRECT (FIXED ONLY THIS PART) ===== */
-      const role = user.userType || user.role;
-
-      if (role === "admin") {
-        navigate("/admin", { replace: true });
-      } else {
-        navigate("/", { replace: true });
-      }
-
-    } catch (error) {
-      console.error("Login Error:", error);
-
-      toast.error(
-        error.response?.data?.message ||
-          "Invalid email or password"
-      );
-    } finally {
-      setLoading(false);
+    if (email === "admin@test.com") {
+      fakeUser = {
+        name: "Admin User",
+        email,
+        role: "admin",
+      };
+    } else {
+      fakeUser = {
+        name: "Normal User",
+        email,
+        role: "user",
+      };
     }
-  };
+
+    login(fakeUser, "dummy-token");
+
+    toast.success("Login successful!");
+
+    if (fakeUser.role === "admin") {
+      navigate("/admin", { replace: true });
+    } else {
+      navigate("/", { replace: true });
+    }
+
+  } catch (error) {
+    console.error("Login Error:", error);
+    toast.error("Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   /* ================= UI ================= */
   return (
