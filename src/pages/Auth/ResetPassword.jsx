@@ -2,15 +2,13 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Logo from "../../assets/img/logo3.png"; 
 
-export default function ResetPassword() {
+export default function VerifyOTP() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
   const email = state?.email;
@@ -25,31 +23,24 @@ export default function ResetPassword() {
     );
   }
 
-  const handleReset = async (e) => {
+  const handleVerify = async (e) => {
     e.preventDefault();
 
-    if (!password || !confirmPassword)
-      return toast.error("All fields are required");
-
-    if (password !== confirmPassword)
-      return toast.error("Passwords do not match");
+    if (!otp) return toast.error("Please enter the OTP");
 
     try {
       setLoading(true);
 
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/reset-password`,
-        {
-          email,
-          newPassword: password,
-        }
+        `${import.meta.env.VITE_BACKEND_URL}/auth/users/verify-otp`,
+        { email, otp }
       );
 
       if (res?.data?.success) {
-        toast.success("Password reset successful");
-        navigate("/login");
+        toast.success("OTP verified successfully");
+        navigate("/reset-password", { state: { email } });
       } else {
-        toast.error(res?.data?.message || "Something went wrong");
+        toast.error(res?.data?.message || "Invalid OTP");
       }
     } catch (err) {
       toast.error(err?.response?.data?.message || "Server error");
@@ -60,142 +51,44 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
-      <div
-        className="
-          relative
-          w-full max-w-md
-          bg-white/80 backdrop-blur-xl
-          rounded-[28px]
-          shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
-          p-16
-          space-y-6
-          animate-fade-in
-        "
-      >
-        {/* Soft gradient glow */}
-        <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+      <div className="relative w-full max-w-md bg-white/80 backdrop-blur-xl rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)] p-16 space-y-8 animate-fade-in">
 
-        <h1 className="text-4xl font-extrabold text-center mb-2 text-gray-900">
-          Reset Password
+        <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+
+        {/* ✅ Logo */}
+        <div className="flex justify-center mb-4">
+          <img
+            src={Logo}
+            alt="logo"
+            className="h-20 w-20 scale-[4.5] object-contain"
+          />
+        </div>
+
+        <h1 className="text-3xl font-extrabold text-center text-gray-900">
+          Verify OTP
         </h1>
 
-        <p className="text-gray-500 text-center mb-8">
-          Enter your new password below
+        <p className="text-center text-gray-500">
+          Enter the 6-digit code sent to your email
         </p>
 
-        <form onSubmit={handleReset} className="space-y-6">
-          {/* New Password */}
-          <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
-              New Password
-            </label>
-
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="New Password"
-                className="
-                  w-full
-                  rounded-xl
-                  border border-gray-200
-                  px-5 py-3 pr-12
-                  bg-white
-                  focus:outline-none
-                  focus:ring-2 focus:ring-[#9810FA]/40
-                  transition
-                "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="
-                  absolute right-4 top-1/2 -translate-y-1/2
-                  text-gray-500
-                  hover:scale-110
-                  transition
-                  cursor-pointer
-                "
-              >
-                {showPassword ? "👁️" : "🙈"}
-              </button>
-            </div>
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
-              Confirm Password
-            </label>
-
-            <div className="relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                className="
-                  w-full
-                  rounded-xl
-                  border border-gray-200
-                  px-5 py-3 pr-12
-                  bg-white
-                  focus:outline-none
-                  focus:ring-2 focus:ring-[#9810FA]/40
-                  transition
-                "
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-
-              <button
-                type="button"
-                onClick={() =>
-                  setShowConfirmPassword(!showConfirmPassword)
-                }
-                className="
-                  absolute right-4 top-1/2 -translate-y-1/2
-                  text-gray-500
-                  hover:scale-110
-                  transition
-                  cursor-pointer
-                "
-              >
-                {showConfirmPassword ? "👁️" : "🙈"}
-              </button>
-            </div>
-          </div>
+        <form onSubmit={handleVerify} className="space-y-6">
+          <input
+            type="text"
+            maxLength={6}
+            className="w-full rounded-xl border border-gray-200 px-5 py-4 text-center tracking-widest focus:ring-2 focus:ring-[#9810FA]/40"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+          />
 
           <button
             type="submit"
             disabled={loading}
-            className="
-              w-full
-              py-4
-              rounded-xl
-              bg-linear-to-r from-[#9810FA] to-[#155DFC]
-              text-white
-              font-semibold
-              transition-all duration-300
-              hover:scale-[1.03]
-              hover:shadow-xl
-              active:scale-[0.97]
-              cursor-pointer
-              disabled:opacity-60
-            "
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold"
           >
-            {loading ? "Updating..." : "Reset Password"}
+            {loading ? "Verifying..." : "Verify OTP"}
           </button>
         </form>
-
-        <div className="mt-6 text-center">
-          <button
-            onClick={() => navigate("/login")}
-            className="text-blue-600 hover:underline cursor-pointer text-sm"
-          >
-            ← Back to Login
-          </button>
-        </div>
       </div>
     </div>
   );

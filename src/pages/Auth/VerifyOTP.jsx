@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Logo from "../../assets/img/logo3.png";
 
 export default function VerifyOTP() {
   const { state } = useLocation();
@@ -12,7 +13,6 @@ export default function VerifyOTP() {
 
   const email = state?.email;
 
-  // Safety check
   if (!email) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
@@ -51,20 +51,18 @@ export default function VerifyOTP() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
-      <div
-        className="
-          relative
-          w-full max-w-md
-          bg-white/80 backdrop-blur-xl
-          rounded-[28px]
-          shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
-          p-16
-          space-y-6
-          animate-fade-in
-        "
-      >
-        {/* Soft gradient glow */}
+      <div className="relative w-full max-w-md bg-white/80 backdrop-blur-xl rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)] p-16 space-y-6 animate-fade-in">
+
         <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+
+        {/* Logo */}
+        <div className="flex justify-center mb-4 pb-5">
+          <img
+            src={Logo}
+            alt="logo"
+            className="h-20 w-20 scale-[4.5] object-contain"
+          />
+        </div>
 
         <h1 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
           Verify OTP
@@ -79,18 +77,7 @@ export default function VerifyOTP() {
             type="text"
             maxLength={6}
             placeholder="Enter 6-digit OTP"
-            className="
-              w-full
-              rounded-xl
-              border border-gray-200
-              px-5 py-4
-              text-center
-              tracking-widest
-              bg-white
-              focus:outline-none
-              focus:ring-2 focus:ring-[#9810FA]/40
-              transition
-            "
+            className="w-full rounded-xl border border-gray-200 px-5 py-4 text-center tracking-widest bg-white focus:outline-none focus:ring-2 focus:ring-[#9810FA]/40 transition"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
@@ -98,20 +85,7 @@ export default function VerifyOTP() {
           <button
             type="submit"
             disabled={loading}
-            className="
-              w-full
-              py-4
-              rounded-xl
-              bg-linear-to-r from-[#9810FA] to-[#155DFC]
-              text-white
-              font-semibold
-              transition-all duration-300
-              hover:scale-[1.03]
-              hover:shadow-xl
-              active:scale-[0.97]
-              cursor-pointer
-              disabled:opacity-60
-            "
+            className="w-full py-4 rounded-xl bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold transition-all duration-300 hover:scale-[1.03] hover:shadow-xl active:scale-[0.97] cursor-pointer disabled:opacity-60"
           >
             {loading ? "Verifying..." : "Verify OTP"}
           </button>

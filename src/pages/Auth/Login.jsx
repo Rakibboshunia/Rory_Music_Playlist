@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useState } from "react";
+import Logo from "../../assets/img/logo3.png"
 
 export default function Login() {
   const navigate = useNavigate();
@@ -100,15 +101,22 @@ const handleLogin = async (e) => {
         rounded-[28px]
         shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
         p-10 md:p-16
-        space-y-6
+        space-y-2
         animate-fade-in
       "
     >
-      {/* Gradient Background Glow */}
+
       <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
 
-      {/* Title */}
-      <h1 className="text-3xl font-extrabold text-center text-gray-900">
+      <div className="flex justify-center mb-4 pb-5">
+        <img
+          src={Logo}
+          alt="logo"
+          className="h-20 w-20 scale-[4.5] object-contain"
+        />
+      </div>
+
+      <h1 className="text-3xl pt-4 font-extrabold text-center text-gray-900">
         Welcome Back!
       </h1>
 
@@ -116,9 +124,7 @@ const handleLogin = async (e) => {
         Enter your credentials to access your account
       </p>
 
-      {/* ================= FORM ================= */}
       <form onSubmit={handleLogin} className="space-y-6 mt-6">
-        {/* EMAIL */}
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700">
             Email Address
@@ -207,7 +213,7 @@ const handleLogin = async (e) => {
             font-semibold
             transition
             hover:opacity-90
-            disabled:opacity-60
+            disabled:opacity-60 cursor-pointer
           "
         >
           {loading ? "Logging in..." : "Login"}

@@ -50,6 +50,7 @@ import AdminPlaylists from "../admin/pages/Playlists";
 import AdminProfile from "../admin/pages/Profile";
 import AdminProtected from "../admin/components/common/AdminProtected";
 
+
 /* ================== PROTECTED ================== */
 // import AdminProtected from "../admin/components/common/AdminProtected";
 
@@ -85,6 +86,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <GuestPlaylistResult /> },
         ],
       },
+
 
       { path: "/success", element: <PaymentSuccess /> },
       { path: "/cancel", element: <PaymentCancel /> },

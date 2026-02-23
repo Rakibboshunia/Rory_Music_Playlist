@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Logo from "../../assets/img/logo3.png";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function ForgotPassword() {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/users/forgot-password`,
         { email },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" } },
       );
 
       if (res?.data?.success) {
@@ -45,19 +46,26 @@ export default function ForgotPassword() {
           rounded-[28px]
           shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]
           p-16
-          space-y-6
+          space-y-8
           animate-fade-in
         "
       >
-        {/* Soft gradient glow */}
-        <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+        <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+
+        <div className="flex justify-center mb-4 pb-5">
+          <img
+            src={Logo}
+            alt="logo"
+            className="h-20 w-20 scale-[4.5] object-contain"
+          />
+        </div>
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold text-gray-900">
+          <h1 className="text-3xl pt-5 font-extrabold text-gray-900">
             Forgot your password
           </h1>
-          <p className="text-gray-500 mt-2 text-sm">
+          <p className="text-gray-500 mt-4 text-sm">
             Enter your email address and we’ll send you a verification code.
           </p>
         </div>
@@ -109,13 +117,38 @@ export default function ForgotPassword() {
         </form>
 
         {/* Footer */}
-        <div className="mt-6 text-center text-sm text-gray-600">
-          Remembered your password?{" "}
+        {/* Footer Buttons */}
+        <div className="mt-8 flex justify-between gap-4">
+          {/* Back Button */}
           <button
-            onClick={() => navigate("/login")}
-            className="text-blue-600 font-medium cursor-pointer hover:underline"
+            type="button"
+            onClick={() => navigate("/forgot-password")}
+            className="
+      flex-1
+      rounded-xl
+      font-medium
+      transition
+      cursor-pointer
+      text-purple-500
+    "
           >
-            ← Back to Login
+            ← Back
+          </button>
+
+          {/* Next Button */}
+          <button
+            type="button"
+            onClick={() => navigate("/reset-password", { state: { email } })}
+            className="
+      flex-1
+      rounded-xl
+      font-semibold
+      transition-all duration-300
+      cursor-pointer
+      text-blue-500
+    "
+          >
+            Next →
           </button>
         </div>
       </div>
