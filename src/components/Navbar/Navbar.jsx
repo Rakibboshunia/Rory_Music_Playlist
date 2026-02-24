@@ -2,6 +2,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { FiChevronDown } from "react-icons/fi";
+import { FiSettings, FiLogOut, FiLogIn } from "react-icons/fi";
 
 import SettingsModal from "../../components/SettingsModal";
 
@@ -103,7 +104,6 @@ export default function Navbar() {
         ${solidNavbar ? "bg-[#ffffff] shadow-sm" : "bg-transparent"}`}
       >
         <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-
           {/* LOGO */}
           <div
             onClick={handleHomeClick}
@@ -173,26 +173,27 @@ export default function Navbar() {
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 mt-16 w-40 bg-white shadow-lg rounded-xl py-3 border z-50">
-
+              <div className="absolute right-0 mt-16 w-40 text-lg bg-white shadow-lg rounded-xl py-4 border border-gray-300 z-50">
                 {isAuthenticated && (
                   <button
                     onClick={() => {
                       setShowSettings(true);
                       setProfileOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
-                    Settings
+                    <FiSettings className="text-gray-600" size={18} />
+                    <span>Settings</span>
                   </button>
                 )}
 
                 {isAuthenticated ? (
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 cursor-pointer"
+                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-red-500 hover:bg-gray-100 cursor-pointer"
                   >
-                    Logout
+                    <FiLogOut size={18} />
+                    <span>Logout</span>
                   </button>
                 ) : (
                   <button
@@ -200,9 +201,10 @@ export default function Navbar() {
                       navigate("/login");
                       setProfileOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 text-green-600 hover:bg-gray-100 cursor-pointer"
+                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-green-600 hover:bg-gray-100 cursor-pointer"
                   >
-                    Login
+                    <FiLogIn size={18} />
+                    <span>Login</span>
                   </button>
                 )}
               </div>

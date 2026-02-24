@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
-  /* ================= RESTORE USER ================= */
+  /* ================= RESTORE USER (RELOAD SAFE) ================= */
   useEffect(() => {
     const token = Cookies.get("token");
 
@@ -19,22 +19,21 @@ export function AuthProvider({ children }) {
       return;
     }
 
-    /* 🔥 DUMMY MODE CHECK */
-    if (token === "dummy-token") {
-      const storedUser = localStorage.getItem("dummyUser");
-      if (storedUser) {
+    /* ✅ 1️⃣ Instant restore from localStorage */
+    const storedUser = localStorage.getItem("authUser");
+    if (storedUser) {
+      try {
         setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error("Stored user parse error:", err);
       }
-      setLoading(false);
-      return;
     }
 
-    /* ================= REAL API (COMMENTED SAFE) ================= */
-    /*
-    const fetchUser = async () => {
+    /* ✅ 2️⃣ Verify from backend (but NEVER force logout on fail) */
+    const verifyUser = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/auth/users/me`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -42,20 +41,26 @@ export function AuthProvider({ children }) {
           }
         );
 
-        const userData = res.data?.data?.user || res.data?.user;
-        setUser(userData);
+        const userData =
+          res?.data?.data?.user ||
+          res?.data?.data ||
+          res?.data?.user ||
+          null;
+
+        if (userData) {
+          setUser(userData);
+          localStorage.setItem("authUser", JSON.stringify(userData));
+        }
       } catch (error) {
-        Cookies.remove("token");
-        setUser(null);
+        console.warn("Verification failed. Keeping existing session.");
+        // ❌ DO NOT remove cookie
+        // ❌ DO NOT logout
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUser();
-    */
-
-    setLoading(false);
+    verifyUser();
   }, []);
 
   /* ================= LOGIN ================= */
@@ -63,21 +68,17 @@ export function AuthProvider({ children }) {
     Cookies.set("token", token, {
       expires: 7,
       sameSite: "lax",
-      secure: false,
+      secure: false, // production e true hobe (HTTPS)
     });
 
-    /* 🔥 Store user for dummy refresh */
-    if (token === "dummy-token") {
-      localStorage.setItem("dummyUser", JSON.stringify(userData));
-    }
-
+    localStorage.setItem("authUser", JSON.stringify(userData));
     setUser(userData);
   };
 
   /* ================= LOGOUT ================= */
   const logout = () => {
     Cookies.remove("token");
-    localStorage.removeItem("dummyUser");
+    localStorage.removeItem("authUser");
     setUser(null);
   };
 

@@ -51,9 +51,6 @@ import AdminProfile from "../admin/pages/Profile";
 import AdminProtected from "../admin/components/common/AdminProtected";
 
 
-/* ================== PROTECTED ================== */
-// import AdminProtected from "../admin/components/common/AdminProtected";
-
 const router = createBrowserRouter([
   /* ============ PUBLIC / LANDING ============ */
   {

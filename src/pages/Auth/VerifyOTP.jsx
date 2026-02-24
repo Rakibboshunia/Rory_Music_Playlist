@@ -26,24 +26,41 @@ export default function VerifyOTP() {
   const handleVerify = async (e) => {
     e.preventDefault();
 
-    if (!otp) return toast.error("Please enter the OTP");
+    if (!otp.trim()) {
+      toast.error("Please enter the OTP");
+      return;
+    }
 
     try {
       setLoading(true);
 
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/verify-otp`,
-        { email, otp }
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/verify-otp`,
+        {
+          email,
+          otp: otp.trim(),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (res?.data?.success) {
-        toast.success("OTP verified successfully");
+        toast.success(res.data.message || "OTP verified successfully");
+
+        // Go to reset password page
         navigate("/reset-password", { state: { email } });
       } else {
         toast.error(res?.data?.message || "Invalid OTP");
       }
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Server error");
+      console.error("OTP Verify Error:", err);
+
+      toast.error(
+        err?.response?.data?.message || "Server error"
+      );
     } finally {
       setLoading(false);
     }
@@ -55,7 +72,6 @@ export default function VerifyOTP() {
 
         <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
 
-        {/* Logo */}
         <div className="flex justify-center mb-4 pb-5">
           <img
             src={Logo}
@@ -64,7 +80,7 @@ export default function VerifyOTP() {
           />
         </div>
 
-        <h1 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
+        <h1 className="text-3xl pt-5 font-extrabold text-center mb-2 text-gray-900">
           Verify OTP
         </h1>
 
@@ -85,7 +101,7 @@ export default function VerifyOTP() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-xl bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold transition-all duration-300 hover:scale-[1.03] hover:shadow-xl active:scale-[0.97] cursor-pointer disabled:opacity-60"
+            className="w-full py-4 rounded-xl bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Verifying..." : "Verify OTP"}
           </button>
@@ -94,7 +110,7 @@ export default function VerifyOTP() {
         <div className="mt-6 text-center">
           <button
             onClick={() => navigate("/login")}
-            className="text-blue-600 hover:underline cursor-pointer text-sm"
+            className="text-blue-600 hover:underline text-sm"
           >
             ← Back to Login
           </button>

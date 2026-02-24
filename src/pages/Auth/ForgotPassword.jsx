@@ -12,25 +12,38 @@ export default function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email) return toast.error("Email is required");
+    if (!email.trim()) {
+      toast.error("Email is required");
+      return;
+    }
 
     try {
       setLoading(true);
 
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/forgot-password`,
-        { email },
-        { headers: { "Content-Type": "application/json" } },
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/forgot-password`,
+        { email: email.trim() },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (res?.data?.success) {
-        toast.success(res.data.message);
+        toast.success(res.data.message || "OTP sent successfully");
+
+        // Move to OTP page
         navigate("/verify-otp", { state: { email } });
       } else {
         toast.error(res?.data?.message || "Something went wrong");
       }
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Server error");
+      console.error("Forgot Password Error:", err);
+
+      toast.error(
+        err?.response?.data?.message || "Server error"
+      );
     } finally {
       setLoading(false);
     }
@@ -60,7 +73,6 @@ export default function ForgotPassword() {
           />
         </div>
 
-        {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl pt-5 font-extrabold text-gray-900">
             Forgot your password
@@ -70,7 +82,6 @@ export default function ForgotPassword() {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -79,6 +90,7 @@ export default function ForgotPassword() {
             <input
               type="email"
               placeholder="you@example.com"
+              required
               className="
                 w-full
                 rounded-xl
@@ -99,16 +111,14 @@ export default function ForgotPassword() {
             disabled={loading}
             className="
               w-full
-              py-4
+              py-4 cursor-pointer
               rounded-xl
               bg-linear-to-r from-[#9810FA] to-[#155DFC]
               text-white
               font-semibold
               transition-all duration-300
               hover:scale-[1.03]
-              hover:shadow-xl
               active:scale-[0.97]
-              cursor-pointer
               disabled:opacity-60
             "
           >
@@ -116,37 +126,19 @@ export default function ForgotPassword() {
           </button>
         </form>
 
-        {/* Footer */}
-        {/* Footer Buttons */}
         <div className="mt-8 flex justify-between gap-4">
-          {/* Back Button */}
           <button
             type="button"
-            onClick={() => navigate("/forgot-password")}
-            className="
-      flex-1
-      rounded-xl
-      font-medium
-      transition
-      cursor-pointer
-      text-purple-500
-    "
+            onClick={() => navigate("/login")}
+            className="flex-1 text-purple-500"
           >
             ← Back
           </button>
 
-          {/* Next Button */}
           <button
             type="button"
             onClick={() => navigate("/reset-password", { state: { email } })}
-            className="
-      flex-1
-      rounded-xl
-      font-semibold
-      transition-all duration-300
-      cursor-pointer
-      text-blue-500
-    "
+            className="flex-1 text-blue-500"
           >
             Next →
           </button>

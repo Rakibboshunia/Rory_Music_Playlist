@@ -1,40 +1,76 @@
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { useAuth } from "../../context/AuthContext";
+import axiosInstance from "../../api/axiosInstance";
+import toast from "react-hot-toast";
 
 import PageHeader from "../components/common/PageHeader";
 import EditProfileModal from "../components/profile/EditProfileModal";
 import ChangePasswordModal from "../components/profile/ChangePasswordModal";
 import { PrimaryButton } from "../components/common/Buttons";
 
-import Logo from "../../assets/images/rakib.png"
-
 export default function Profile() {
   const { user, setUser } = useAuth();
 
-  // 🔥 fallback dummy user (dev mode)
-  const defaultUser = {
-    name: "Admin User",
-    email: "admin@gmail.com",
-    avatar: "",
-  };
-
-  const currentUser = user || defaultUser;
-
   const [editOpen, setEditOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);
-  const [form, setForm] = useState(currentUser);
+  const [form, setForm] = useState(user || {});
 
   useEffect(() => {
-    setForm(currentUser);
-  }, [currentUser]);
-
-  const handleSaveProfile = () => {
-    if (setUser) {
-      setUser(form);
+    if (user) {
+      setForm(user);
     }
-    setEditOpen(false);
+  }, [user]);
+
+  /* 🔥 If user not loaded yet */
+  if (!user) {
+    return null;
+  }
+
+  /* ================= SAVE PROFILE ================= */
+  const handleSaveProfile = async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append("name", form.name);
+
+      if (form.profileImage instanceof File) {
+        formData.append("profileImage", form.profileImage);
+      }
+
+      const res = await axiosInstance.patch(
+        "/api/v1/admin/profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (res?.data?.success) {
+        const updatedUser = res.data.data;
+
+        const mergedUser = { ...user, ...updatedUser };
+
+        setUser(mergedUser);
+        localStorage.setItem("authUser", JSON.stringify(mergedUser));
+
+        setEditOpen(false);
+        toast.success("Profile updated successfully");
+      }
+    } catch (error) {
+      console.error("Profile Update Error:", error);
+      toast.error(
+        error?.response?.data?.message || "Profile update failed"
+      );
+    }
   };
+
+  /* 🔥 Cache Busting */
+  const profileImageUrl = user.profileImage
+    ? `${import.meta.env.VITE_BACKEND_URL}${user.profileImage}?t=${Date.now()}`
+    : null;
 
   return (
     <>
@@ -44,16 +80,22 @@ export default function Profile() {
       <div className="flex items-center gap-6 mb-8">
         <div className="relative">
           <div className="h-24 w-24 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-            <img
-              src={Logo}
-              alt="avatar"
-              className="h-full w-full object-cover rounded-full"
-            />
+            {profileImageUrl ? (
+              <img
+                src={profileImageUrl}
+                alt="avatar"
+                className="h-full w-full object-cover rounded-full"
+              />
+            ) : (
+              <span className="text-lg font-semibold text-gray-500">
+                {user.name?.charAt(0)?.toUpperCase()}
+              </span>
+            )}
           </div>
 
           <button
             onClick={() => setEditOpen(true)}
-            className="absolute bottom-1 right-1 bg-white border rounded-full p-1 shadow"
+            className="absolute bottom-1 right-1 bg-white border rounded-full p-1 shadow cursor-pointer"
           >
             <Icon icon="mdi:pencil" />
           </button>
@@ -87,7 +129,7 @@ export default function Profile() {
             <label className="text-sm text-gray-500">Full Name</label>
             <input
               disabled
-              value={currentUser.name}
+              value={user.name}
               className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
             />
           </div>
@@ -96,7 +138,7 @@ export default function Profile() {
             <label className="text-sm text-gray-500">Email</label>
             <input
               disabled
-              value={currentUser.email}
+              value={user.email}
               className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
             />
           </div>

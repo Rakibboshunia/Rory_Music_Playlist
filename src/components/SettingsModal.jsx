@@ -37,14 +37,14 @@ export default function SettingsModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
 
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-8 relative">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-8 relative">
 
         {/* CLOSE BUTTON */}
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 text-gray-500 hover:text-black"
+          className="absolute right-5 top-5 text-gray-500 hover:text-black cursor-pointer"
         >
-          <FiX size={20} />
+          <FiX size={28} />
         </button>
 
         <h2 className="text-2xl font-bold mb-6 text-center">
@@ -58,7 +58,7 @@ export default function SettingsModal({
             onClick={() =>
               setActive(active === "profile" ? "" : "profile")
             }
-            className="w-full flex justify-between items-center px-5 py-4 font-semibold"
+            className="w-full flex justify-between items-center px-5 py-4 font-semibold cursor-pointer"
           >
             Profile Information
             <FiChevronDown
@@ -82,7 +82,7 @@ export default function SettingsModal({
                   className="w-20 h-20 rounded-full object-cover"
                 />
 
-                <label className="cursor-pointer text-sm text-purple-600 font-medium">
+                <label className="cursor-pointer text-sm text-purple-600 font-medium border-2 border-gray-300 rounded-md p-1 hover:text-blue-600 hover:bg-gray-300 transition">
                   Change Photo
                   <input
                     type="file"
@@ -122,7 +122,7 @@ export default function SettingsModal({
             onClick={() =>
               setActive(active === "password" ? "" : "password")
             }
-            className="w-full flex justify-between items-center px-5 py-4 font-semibold"
+            className="w-full flex justify-between items-center px-5 py-4 font-semibold cursor-pointer"
           >
             Change Password
             <FiChevronDown

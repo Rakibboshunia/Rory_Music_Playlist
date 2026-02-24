@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import upgradeImg from "../../../assets/img/DiamondLogo.png";
 import SpotifyLogo from "../../../assets/img/SpotifyLogo.png";
@@ -11,11 +11,46 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import DoNotPlayCard from "../../../components/DoNotPlayCard";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
   const { answers } = useQuiz();
   const { isAuthenticated } = useAuth();
+
+  /* ================= DO NOT PLAY STEP ================= */
+
+  const [step, setStep] = useState(1);
+  const [dontPlaySongs, setDontPlaySongs] = useState([]);
+
+  const handleStep1Next = (values) => {
+    setDontPlaySongs(values);
+    setStep(2);
+  };
+
+  const handleStep2Next = (values) => {
+    const allSongs = [...dontPlaySongs, ...values];
+    setDontPlaySongs(allSongs);
+
+    const token = Cookies.get("token");
+
+    if (!token) {
+      setShowEmailPopup(true);
+    } else {
+      setShowUpgradePopup(true);
+    }
+  };
+
+  const handleStep2Skip = () => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      setShowEmailPopup(true);
+    } else {
+      setShowUpgradePopup(true);
+    }
+  };
+
 
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
@@ -27,22 +62,7 @@ export default function Step10_Final() {
 
   const isProcessing = isGenerating || paymentLoading;
 
-  /* ======================
-     AUTO POPUP ON QUIZ END
-  ====================== */
-  useEffect(() => {
-    const token = Cookies.get("token");
 
-    if (!token) {
-      setShowEmailPopup(true);     // Guest → Email popup
-    } else {
-      setShowUpgradePopup(true);  // Logged user → Payment popup
-    }
-  }, []);
-
-  /* ======================
-     GUEST EMAIL SUBMIT
-  ====================== */
   const submitGuestEmail = async (e) => {
     e.preventDefault();
 
@@ -52,7 +72,7 @@ export default function Step10_Final() {
       await fetch(import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, answers }),
+        body: JSON.stringify({ email, answers, dont_play: dontPlaySongs }),
       });
 
       toast.success("Playlist sent!");
@@ -68,9 +88,7 @@ export default function Step10_Final() {
     }
   };
 
-  /* ======================
-     Free FLOW
-  ====================== */
+
   const handleUpgradeNo = async () => {
     setIsGenerating(true);
 
@@ -79,6 +97,7 @@ export default function Step10_Final() {
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
         {
           answers,
+          dont_play: dontPlaySongs,
           user_type: "free",
         },
         {
@@ -94,9 +113,7 @@ export default function Step10_Final() {
     }
   };
 
-  /* ======================
-     Upgrade FLOW
-  ====================== */
+
   const handleUpgradeYes = async () => {
     setPaymentLoading(true);
 
@@ -105,6 +122,7 @@ export default function Step10_Final() {
         import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
         {
           answers,
+          dont_play: dontPlaySongs,
           user_type: "paid",
         },
         {
@@ -122,7 +140,26 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
-      {/* ================= EMAIL POPUP ================= */}
+
+      {step === 1 && (
+        <DoNotPlayCard
+          title="🎵 Do Not Play"
+          inputCount={1}
+          required={true}
+          onNext={handleStep1Next}
+        />
+      )}
+
+      {step === 2 && (
+        <DoNotPlayCard
+          title="🎵 Do Not Play (Optional)"
+          inputCount={2}
+          required={false}
+          onNext={handleStep2Next}
+          onSkip={handleStep2Skip}
+        />
+      )}
+
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-14 text-center relative">
@@ -203,7 +240,6 @@ export default function Step10_Final() {
         </div>
       )}
 
-      {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">

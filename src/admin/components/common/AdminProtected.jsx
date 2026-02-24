@@ -4,13 +4,29 @@ import { useAuth } from "../../../context/AuthContext";
 export default function AdminProtected() {
   const { user, loading } = useAuth();
 
-  if (loading) return null;
+  /* 🔄 Wait until auth restore finishes */
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-gray-500 text-lg font-medium">
+          Loading dashboard...
+        </div>
+      </div>
+    );
+  }
 
-  const role = user?.userType || user?.role;
+  const role = user?.role || user?.userType;
 
-  if (!user || role !== "admin") {
+  /* 🚫 Not logged in */
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  /* 🚫 Not admin */
+  if (role !== "admin") {
     return <Navigate to="/" replace />;
   }
 
+  /* ✅ Admin allowed */
   return <Outlet />;
 }

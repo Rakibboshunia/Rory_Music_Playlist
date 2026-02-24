@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useState } from "react";
+import Logo from "../../assets/img/logo3.png"
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -11,22 +12,36 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
+
+    if (!name || !email || !password) {
+      toast.error("All fields are required");
+      return;
+    }
 
     try {
       setLoading(true);
+
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/users/register`,
-        { name, email, password }
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/register`,
+        { name, email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      toast.success(res.data?.message || "Signup successful!");
+      toast.success(res?.data?.message || "Signup successful!");
       navigate("/login");
+
     } catch (error) {
+      console.error("Signup Error:", error);
+
       toast.error(
-        error.response?.data?.message || "Signup failed. Please try again."
+        error?.response?.data?.message || "Signup failed. Please try again."
       );
     } finally {
       setLoading(false);
@@ -46,11 +61,15 @@ export default function Signup() {
         animate-fade-in
       "
     >
-      {/* Soft gradient glow */}
       <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
-
-      {/* TITLE */}
-      <h2 className="text-3xl font-extrabold text-center mb-2 text-gray-900">
+      <div className="flex justify-center mb-4 pb-5">
+        <img
+          src={Logo}
+          alt="logo"
+          className="h-20 w-20 scale-[4.5] object-contain"
+        />
+      </div>
+      <h2 className="text-3xl pt-5 font-extrabold text-center mb-2 text-gray-900">
         Get Started Now
       </h2>
 
@@ -59,7 +78,6 @@ export default function Signup() {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* NAME */}
         <div>
           <label className="block text-sm font-medium mb-1 text-gray-700">
             Name
@@ -67,22 +85,12 @@ export default function Signup() {
           <input
             type="text"
             name="name"
-            className="
-              w-full
-              rounded-xl
-              border border-gray-200
-              px-5 py-3
-              bg-white
-              focus:outline-none
-              focus:ring-2 focus:ring-[#9810FA]/40
-              transition
-            "
-            placeholder="Enter your name"
             required
+            className="w-full rounded-xl border border-gray-400 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#9810FA]/40 transition"
+            placeholder="Enter your name"
           />
         </div>
 
-        {/* EMAIL */}
         <div>
           <label className="block text-sm font-medium mb-1 text-gray-700">
             Email Address
@@ -90,22 +98,12 @@ export default function Signup() {
           <input
             type="email"
             name="email"
-            className="
-              w-full
-              rounded-xl
-              border border-gray-200
-              px-5 py-3
-              bg-white
-              focus:outline-none
-              focus:ring-2 focus:ring-[#9810FA]/40
-              transition
-            "
-            placeholder="Enter your email"
             required
+            className="w-full rounded-xl border border-gray-400 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#9810FA]/40 transition"
+            placeholder="Enter your email"
           />
         </div>
 
-        {/* PASSWORD */}
         <div>
           <label className="block text-sm font-medium mb-1 text-gray-700">
             Password
@@ -115,38 +113,22 @@ export default function Signup() {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              className="
-                w-full
-                rounded-xl
-                border border-gray-200
-                px-5 py-3 pr-12
-                bg-white
-                focus:outline-none
-                focus:ring-2 focus:ring-[#9810FA]/40
-                transition
-              "
-              placeholder="Create a password"
               required
+              className="w-full rounded-xl border border-gray-400 px-5 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#9810FA]/40 transition"
+              placeholder="Create a password"
             />
 
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="
-                absolute right-4 top-1/2 -translate-y-1/2
-                text-gray-500
-                hover:scale-110
-                transition
-                cursor-pointer
-              "
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
             >
               {showPassword ? "👁️" : "🙈"}
             </button>
           </div>
         </div>
 
-        {/* TERMS */}
-        <div className="flex items-start gap-3 text-sm text-gray-600 cursor-pointer">
+        <div className="flex items-start gap-3 text-sm text-gray-600">
           <input type="checkbox" required className="mt-1 accent-[#9810FA]" />
           <span>
             I agree to the{" "}
@@ -156,33 +138,29 @@ export default function Signup() {
           </span>
         </div>
 
-        {/* SUBMIT */}
         <button
           type="submit"
+          disabled={loading}
           className="
-            w-full
-            py-4
-            rounded-xl
+            w-full py-4 rounded-xl
             bg-linear-to-r from-[#9810FA] to-[#155DFC]
-            text-white
-            font-semibold
+            text-white font-semibold
             transition-all duration-300
             hover:scale-[1.03]
-            hover:shadow-xl
             active:scale-[0.97]
-            cursor-pointer
             disabled:opacity-60
           "
-          disabled={loading}
         >
           {loading ? "Signing..." : "Sign Up"}
         </button>
       </form>
 
-      {/* FOOTER */}
       <p className="text-md text-center mt-8 text-gray-600">
         Have an account?{" "}
-        <Link to="/login" className="text-blue-600 font-semibold hover:underline">
+        <Link
+          to="/login"
+          className="text-blue-600 font-semibold hover:underline"
+        >
           Sign in
         </Link>
       </p>

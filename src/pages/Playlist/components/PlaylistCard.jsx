@@ -14,6 +14,14 @@ export default function PlaylistCard({
   onToggle,
   playlist_type,
 }) {
+
+  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/your_stripe_payment_link";
+
+  const handleUpgrade = (e) => {
+    e.stopPropagation();
+    window.location.href = STRIPE_PAYMENT_LINK;
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div
@@ -29,10 +37,20 @@ export default function PlaylistCard({
         </div>
 
         <span
-          className={`transition-transform duration-300 ${
+          className={`flex items-center gap-4 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         >
+
+          {playlist_type !== "premium" && (
+            <button
+              onClick={handleUpgrade}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full shadow-sm hover:bg-gray-100 transition-all duration-200"
+            >
+              Upgrade to Premium
+            </button>
+          )}
+
           <FiChevronDown className="text-gray-500 text-xl" />
         </span>
       </div>
@@ -51,7 +69,7 @@ export default function PlaylistCard({
 
           <PlaylistPlayer />
 
-          {playlist_type=== "premium" && <PremiumPdfCard />}
+          {playlist_type === "premium" && <PremiumPdfCard />}
 
           <div className="mt-4 space-y-6">
             {tracks.map((track, idx) => (

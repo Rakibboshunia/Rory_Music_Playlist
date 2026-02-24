@@ -17,9 +17,6 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      {/* ======================
-          TESTIMONIAL CARDS
-      ====================== */}
       <div
         className="
           max-w-6xl mx-auto mt-12 sm:mt-16

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import PageHeader from "../components/common/PageHeader";
 import StatsCard from "../components/common/StatsCard";
 import TableWrapper from "../components/common/TableWrapper";
@@ -7,23 +8,74 @@ import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
 import DeleteAction from "../components/common/DeleteAction";
 
-const stats = [
-  { icon: "mdi:account-group", value: "2,847", label: "Total Users", trend: "+12%" },
-  { icon: "mdi:music-note", value: "1,392", label: "Total Playlists", trend: "+8%" },
-  { icon: "mdi:credit-card", value: "643", label: "Paid Users", trend: "+23%" },
-  { icon: "mdi:account", value: "2,204", label: "Free Users", trend: "+5%" },
-];
-
-const initialActivities = [
-  { id: 1, email: "rakibul@example.com", title: "Groovy Sunset Vibes", type: "Free", date: "15 mins ago" },
-  { id: 2, email: "sarah@example.com", title: "Classic Jazz for Sunday", type: "Paid", date: "30 mins ago" },
-  { id: 3, email: "david@example.com", title: "Energetic Workout Mix", type: "Free", date: "1 hour ago" },
-  { id: 4, email: "emma@example.com", title: "Chill Vibes After Work", type: "Paid", date: "2 hours ago" },
-];
-
 export default function Home() {
   const navigate = useNavigate();
-  const [activities, setActivities] = useState(initialActivities);
+
+  const [stats, setStats] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  const fetchDashboard = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/dashboard`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = res?.data?.data;
+
+      if (!data) return;
+
+      // Map stats
+      setStats([
+        {
+          icon: "mdi:account-group",
+          value: data.totals.totalUsers,
+          label: "Total Users",
+        },
+        {
+          icon: "mdi:music-note",
+          value: data.totals.totalPlaylists,
+          label: "Total Playlists",
+        },
+        {
+          icon: "mdi:credit-card",
+          value: data.totals.paidUsers,
+          label: "Paid Users",
+        },
+        {
+          icon: "mdi:account",
+          value: data.totals.freeUsers,
+          label: "Free Users",
+        },
+      ]);
+
+      // Map activities
+      const formattedActivities = data.recentActivity.map((item, index) => ({
+        id: index,
+        email: item.user,
+        title: item.playlistTitle,
+        type: item.type,
+        date: new Date(item.date).toLocaleString(),
+      }));
+
+      setActivities(formattedActivities);
+    } catch (error) {
+      console.error("Dashboard Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDelete = (id) => {
     setActivities((prev) => prev.filter((item) => item.id !== id));

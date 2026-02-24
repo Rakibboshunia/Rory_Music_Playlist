@@ -3,7 +3,6 @@ import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import Favicon from "../../../assets/img/favicon.png";
-import Logo from "../../../assets/images/rakib.png"
 
 export default function Header({ onMenuClick }) {
   const [open, setOpen] = useState(false);
@@ -21,8 +20,13 @@ export default function Header({ onMenuClick }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const profileImageUrl =
+    user?.profileImage
+      ? `${import.meta.env.VITE_BACKEND_URL}${user.profileImage}?t=${Date.now()}`
+      : null;
+
   return (
-    <header className="sticky top-0 z-10 flex h-24 w-full items-center justify-between bg-white border-b-0 shadow px-4 md:px-6">
+    <header className="sticky top-0 z-10 flex h-24 w-full items-center justify-between bg-white shadow px-4 md:px-6">
       <button
         onClick={onMenuClick}
         className="rounded-md p-1 hover:bg-gray-100 md:hidden"
@@ -44,12 +48,18 @@ export default function Header({ onMenuClick }) {
           onClick={() => setOpen(!open)}
           className="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded-lg cursor-pointer transition"
         >
-          <div className="h-18 w-18 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-            <img
-              src={user?.avatar || Logo}
-              alt="avatar"
-              className="h-full w-full object-cover rounded-full"
-            />
+          <div className="h-12 w-12 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+            {profileImageUrl ? (
+              <img
+                src={profileImageUrl}
+                alt="avatar"
+                className="h-full w-full object-cover rounded-full"
+              />
+            ) : (
+              <span className="text-gray-500 text-sm font-semibold">
+                {user?.name?.charAt(0)?.toUpperCase() || "A"}
+              </span>
+            )}
           </div>
 
           <div className="hidden lg:flex flex-col text-left">
@@ -69,10 +79,7 @@ export default function Header({ onMenuClick }) {
               }}
               className="flex items-center font-medium gap-2 px-4 py-5 w-full hover:bg-gray-100 cursor-pointer"
             >
-              <Icon
-                icon="material-symbols:person-outline"
-                className="text-2xl"
-              />
+              <Icon icon="material-symbols:person-outline" className="text-2xl" />
               My Profile
             </button>
 

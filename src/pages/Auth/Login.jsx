@@ -1,9 +1,9 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { useState } from "react";
-import Logo from "../../assets/img/logo3.png"
+import axios from "axios";
+import Logo from "../../assets/img/logo3.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,84 +12,59 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  /* ================= HANDLE LOGIN ================= */
-const handleLogin = async (e) => {
-  e.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  const email = e.target.email.value.trim();
-  const password = e.target.password.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
 
-  if (!email || !password) {
-    toast.error("Please fill in all fields");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    /* ================= REAL API (COMMENTED) ================= */
-
-    /*
-    const res = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/auth/users/login`,
-      { email, password },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const token = res.data?.data?.token;
-    const user = res.data?.data?.user;
-
-    if (!token || !user) {
-      toast.error("Login failed. Invalid response.");
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
       return;
     }
 
-    login(user, token);
+    try {
+      setLoading(true);
 
-    const role = user.userType || user.role;
-    */
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`,
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    /* ================= DUMMY LOGIN ACTIVE ================= */
+      const token = res?.data?.data?.token;
+      const user = res?.data?.data?.user;
 
-    let fakeUser;
+      if (!token || !user) {
+        toast.error("Login failed. Invalid server response.");
+        return;
+      }
 
-    if (email === "admin@test.com") {
-      fakeUser = {
-        name: "Admin User",
-        email,
-        role: "admin",
-      };
-    } else {
-      fakeUser = {
-        name: "Normal User",
-        email,
-        role: "user",
-      };
+      localStorage.setItem("token", token);
+      login(user, token);
+      toast.success(res?.data?.message || "Login successful!");
+
+      if (user.role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+
+    } catch (error) {
+      console.error("Login Error:", error);
+
+      toast.error(
+        error?.response?.data?.message || "Login failed"
+      );
+    } finally {
+      setLoading(false);
     }
+  };
 
-    login(fakeUser, "dummy-token");
-
-    toast.success("Login successful!");
-
-    if (fakeUser.role === "admin") {
-      navigate("/admin", { replace: true });
-    } else {
-      navigate("/", { replace: true });
-    }
-
-  } catch (error) {
-    console.error("Login Error:", error);
-    toast.error("Login failed");
-  } finally {
-    setLoading(false);
-  }
-};
-
-  /* ================= UI ================= */
   return (
     <div
       className="
@@ -105,7 +80,6 @@ const handleLogin = async (e) => {
         animate-fade-in
       "
     >
-
       <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
 
       <div className="flex justify-center mb-4 pb-5">
@@ -150,7 +124,6 @@ const handleLogin = async (e) => {
           />
         </div>
 
-        {/* PASSWORD */}
         <div>
           <label className="block text-sm font-medium mb-2 text-gray-700">
             Password
@@ -177,7 +150,6 @@ const handleLogin = async (e) => {
               "
             />
 
-            {/* TOGGLE BUTTON */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -187,7 +159,6 @@ const handleLogin = async (e) => {
             </button>
           </div>
 
-          {/* FORGOT PASSWORD */}
           <div className="text-right mt-2">
             <Link
               to="/forgot-password"
@@ -198,7 +169,6 @@ const handleLogin = async (e) => {
           </div>
         </div>
 
-        {/* LOGIN BUTTON */}
         <button
           type="submit"
           disabled={loading}
@@ -220,7 +190,6 @@ const handleLogin = async (e) => {
         </button>
       </form>
 
-      {/* SIGNUP LINK */}
       <p className="text-md text-center mt-8 text-gray-600">
         Don’t have an account?{" "}
         <Link
