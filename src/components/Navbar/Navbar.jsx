@@ -116,7 +116,6 @@ export default function Navbar() {
             />
           </div>
 
-          {/* DESKTOP MENU */}
           <div
             className={`hidden md:flex items-center gap-8 font-medium
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
@@ -144,13 +143,12 @@ export default function Navbar() {
             </NavLink>
           </div>
 
-          {/* PROFILE DROPDOWN */}
           <div className="hidden md:flex relative">
             <button
               onClick={() => setProfileOpen(!profileOpen)}
               className="flex items-center gap-2 cursor-pointer"
             >
-              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-500 shadow-md">
+              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-purple-500 shadow-md">
                 {profile.image ? (
                   <img
                     src={profile.image}
@@ -211,7 +209,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* MOBILE TOGGLE */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden text-xl cursor-pointer ${
@@ -222,7 +219,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* MOBILE MENU */}
         {menuOpen && (
           <div className="md:hidden bg-white border-t shadow-md">
             <div className="flex flex-col gap-3 px-4 py-4 text-gray-700">
@@ -244,7 +240,6 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* SETTINGS MODAL */}
       <SettingsModal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}

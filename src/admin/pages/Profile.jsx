@@ -22,12 +22,11 @@ export default function Profile() {
     }
   }, [user]);
 
-  /* 🔥 If user not loaded yet */
+
   if (!user) {
     return null;
   }
 
-  /* ================= SAVE PROFILE ================= */
   const handleSaveProfile = async () => {
     try {
       const formData = new FormData();
@@ -67,7 +66,6 @@ export default function Profile() {
     }
   };
 
-  /* 🔥 Cache Busting */
   const profileImageUrl = user.profileImage
     ? `${import.meta.env.VITE_BACKEND_URL}${user.profileImage}?t=${Date.now()}`
     : null;

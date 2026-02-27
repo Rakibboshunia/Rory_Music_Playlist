@@ -17,6 +17,8 @@ export default function SettingsModal({
     confirmPassword: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
 
   /* ================= IMAGE CHANGE ================= */
@@ -34,12 +36,27 @@ export default function SettingsModal({
     reader.readAsDataURL(file);
   };
 
+  /* ================= SAVE HANDLER ================= */
+  const handleSaveChanges = async () => {
+    try {
+      setLoading(true);
+
+      // 🔥 Future API call এখানে যাবে
+      await new Promise((resolve) => setTimeout(resolve, 1200)); // demo loading
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
 
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-8 relative">
 
-        {/* CLOSE BUTTON */}
         <button
           onClick={onClose}
           className="absolute right-5 top-5 text-gray-500 hover:text-black cursor-pointer"
@@ -51,9 +68,8 @@ export default function SettingsModal({
           Profile Settings
         </h2>
 
-        {/* ================= PROFILE ACCORDION ================= */}
+        {/* PROFILE SECTION */}
         <div className="border border-gray-300 rounded-xl mb-4 overflow-hidden">
-
           <button
             onClick={() =>
               setActive(active === "profile" ? "" : "profile")
@@ -71,7 +87,6 @@ export default function SettingsModal({
           {active === "profile" && (
             <div className="px-5 pb-6 space-y-5">
 
-              {/* PROFILE IMAGE */}
               <div className="flex items-center gap-4">
                 <img
                   src={
@@ -93,7 +108,6 @@ export default function SettingsModal({
                 </label>
               </div>
 
-              {/* FULL NAME */}
               <InputField
                 label="Full Name"
                 value={profile.fullName}
@@ -105,7 +119,6 @@ export default function SettingsModal({
                 }
               />
 
-              {/* EMAIL */}
               <InputField
                 label="Email"
                 value={profile.email}
@@ -115,9 +128,8 @@ export default function SettingsModal({
           )}
         </div>
 
-        {/* ================= PASSWORD ACCORDION ================= */}
+        {/* PASSWORD SECTION */}
         <div className="border border-gray-300 rounded-xl overflow-hidden">
-
           <button
             onClick={() =>
               setActive(active === "password" ? "" : "password")
@@ -134,7 +146,6 @@ export default function SettingsModal({
 
           {active === "password" && (
             <div className="px-5 pb-6 space-y-5">
-
               <PasswordField
                 label="Current Password"
                 placeholder="Enter current password"
@@ -158,28 +169,22 @@ export default function SettingsModal({
                   })
                 }
               />
-
-              <PasswordField
-                label="Confirm Password"
-                placeholder="Confirm new password"
-                value={passwords.confirmPassword}
-                onChange={(e) =>
-                  setPasswords({
-                    ...passwords,
-                    confirmPassword: e.target.value,
-                  })
-                }
-              />
             </div>
           )}
         </div>
 
         {/* SAVE BUTTON */}
         <button
-          onClick={onClose}
-          className="w-full mt-6 bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition cursor-pointer"
+          onClick={handleSaveChanges}
+          disabled={loading}
+          className={`w-full mt-6 py-3 rounded-xl font-semibold transition cursor-pointer
+            ${
+              loading
+                ? "bg-gray-400 text-white cursor-not-allowed"
+                : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white hover:opacity-90"
+            }`}
         >
-          Save Changes
+          {loading ? "Saving Changes..." : "Save Changes"}
         </button>
 
       </div>

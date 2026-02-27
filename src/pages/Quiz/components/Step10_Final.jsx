@@ -18,10 +18,14 @@ export default function Step10_Final() {
   const { answers } = useQuiz();
   const { isAuthenticated } = useAuth();
 
-  /* ================= DO NOT PLAY STEP ================= */
 
   const [step, setStep] = useState(1);
   const [dontPlaySongs, setDontPlaySongs] = useState([]);
+
+
+  const handlePrevStep = () => {
+    navigate("/quiz/era"); 
+  };
 
   const handleStep1Next = (values) => {
     setDontPlaySongs(values);
@@ -52,6 +56,21 @@ export default function Step10_Final() {
   };
 
 
+  const formatDontPlay = () => {
+    const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
+
+    if (filled.length === 0) return {};
+
+    if (filled.length === 1) {
+      return { q10: filled[0] };
+    }
+
+    return {
+      q10: filled[0],
+      q11: filled.slice(1),
+    };
+  };
+
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -62,23 +81,26 @@ export default function Step10_Final() {
 
   const isProcessing = isGenerating || paymentLoading;
 
-
   const submitGuestEmail = async (e) => {
     e.preventDefault();
 
     try {
       setEmailLoading(true);
 
-      await fetch(import.meta.env.VITE_BACKEND_URL + "/quiz/guest/submit", {
+      await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/guest/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, answers, dont_play: dontPlaySongs }),
+        body: JSON.stringify({
+          email,
+          answers,
+          dont_play: formatDontPlay(), 
+        }),
       });
 
       toast.success("Playlist sent!");
 
       setShowEmailPopup(false);
-      setShowUpgradePopup(true); 
+      setShowUpgradePopup(true);
       setEmail("");
 
     } catch {
@@ -88,16 +110,15 @@ export default function Step10_Final() {
     }
   };
 
-
   const handleUpgradeNo = async () => {
     setIsGenerating(true);
 
     try {
       await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
+        import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/user/submit",
         {
           answers,
-          dont_play: dontPlaySongs,
+          dont_play: formatDontPlay(),
           user_type: "free",
         },
         {
@@ -113,16 +134,15 @@ export default function Step10_Final() {
     }
   };
 
-
   const handleUpgradeYes = async () => {
     setPaymentLoading(true);
-
+console.log(answers)
     try {
       const res = await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/quiz/user/submit",
+        import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/user/submit",
         {
           answers,
-          dont_play: dontPlaySongs,
+          dont_play: formatDontPlay(),
           user_type: "paid",
         },
         {
@@ -144,17 +164,9 @@ export default function Step10_Final() {
       {step === 1 && (
         <DoNotPlayCard
           title="🎵 Do Not Play"
-          inputCount={1}
-          required={true}
-          onNext={handleStep1Next}
-        />
-      )}
-
-      {step === 2 && (
-        <DoNotPlayCard
-          title="🎵 Do Not Play (Optional)"
-          inputCount={2}
+          inputCount={3}
           required={false}
+          onBack={handlePrevStep}   
           onNext={handleStep2Next}
           onSkip={handleStep2Skip}
         />

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// Global shared sections
 import PlaylistAccordion from "./components/PlaylistAccordion";
+import PlaylistToggle from "./components/PlaylistToggle"; 
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 
-
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
+  const [playlistMode, setPlaylistMode] = useState("free"); 
   const token = Cookies.get("token");
 
   useEffect(() => {
@@ -28,7 +28,15 @@ export default function PlaylistResult() {
           }
         );
 
-        setPlaylistData(response.data?.data);
+        const data = response.data?.data || [];
+        setPlaylistData(data);
+
+        const hasPremium = data.some(
+          (playlist) => playlist.playlist_type === "premium"
+        );
+
+        setPlaylistMode(hasPremium ? "premium" : "free");
+
       } catch (error) {
         console.error("User playlist fetch error:", error);
       }
@@ -37,11 +45,15 @@ export default function PlaylistResult() {
     fetchUserPlaylists();
   }, [token]);
 
+  const hasPremium = playlistData?.some(
+    (playlist) => playlist.playlist_type === "premium"
+  );
+
   return (
     <div>
-      {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pb-15">
         <div className="max-w-3xl mx-auto px-4 sm:px-4">
+
           <div className="flex justify-center mb-2">
             <span className="px-6 py-3 text-xs sm:text-sm rounded-full bg-white shadow">
               ✨ Your personalised soundtrack is ready
@@ -57,6 +69,12 @@ export default function PlaylistResult() {
               "A personalised playlist crafted just for your event."}
           </p>
 
+          <PlaylistToggle
+            playlistMode={playlistMode}
+            setPlaylistMode={setPlaylistMode}
+            hasPremium={hasPremium}
+          />
+
           <div className="flex items-center justify-between mt-8 mb-4">
             <div>
               <h3 className="font-medium text-sm sm:text-base">
@@ -68,7 +86,14 @@ export default function PlaylistResult() {
             </div>
           </div>
 
-          <PlaylistAccordion playlistData={playlistData} />
+          <PlaylistAccordion
+            playlistData={
+              playlistData?.filter(
+                (playlist) => playlist.playlist_type === playlistMode
+              )
+            }
+          />
+
         </div>
       </div>
 

@@ -49,7 +49,7 @@ export default function QuizLayout() {
       </div>
 
       {/* ===== PROGRESS BAR ===== */}
-      {currentStep > 0 && !isFinalStep && (
+      {currentStep > 0 && (
         <div className="max-w-xl mx-auto px-4 sm:px-6 mb-6">
           <div className="flex justify-between text-xs text-gray-500 mb-1">
             <span>Step {currentStep} of 10</span>

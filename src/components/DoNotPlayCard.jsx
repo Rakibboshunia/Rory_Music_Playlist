@@ -1,5 +1,5 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { FiArrowLeft, FiArrowRight, FiSkipForward } from "react-icons/fi";
 import InputField from "../components/InputField";
 
 export default function DoNotPlayCard({
@@ -8,6 +8,7 @@ export default function DoNotPlayCard({
   required = false,
   onNext,
   onSkip,
+  onBack,
 }) {
   const [values, setValues] = useState(Array(inputCount).fill(""));
 
@@ -17,27 +18,44 @@ export default function DoNotPlayCard({
     setValues(updated);
   };
 
-  const handleNext = () => {
+  const handleBack = () => {
     if (required && !values[0].trim()) {
-      toast.error("Please fill the required field.");
       return;
     }
 
-    onNext(values);
+    if (onBack) {
+      onBack(values);
+    }
+  };
+
+  const handleNext = () => {
+    if (required && !values[0].trim()) {
+      return;
+    }
+
+    if (onNext) {
+      onNext(values);
+    }
+  };
+
+  const handleSkip = () => {
+    if (onSkip) {
+      onSkip(values);
+    }
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6 text-center">
+    <div className=" rounded-2xl shadow-xl p-10 space-y-6 text-center">
       <h2 className="text-2xl font-bold">{title}</h2>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {values.map((val, index) => (
           <InputField
             key={index}
             placeholder={
               index === 0 && required
                 ? "Required singer..."
-                : "Required singer ..."
+                : "Enter singer..."
             }
             value={val}
             onChange={(e) => handleChange(index, e.target.value)}
@@ -45,21 +63,37 @@ export default function DoNotPlayCard({
         ))}
       </div>
 
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-4 justify-center flex-wrap">
         {!required && (
           <button
-            onClick={() => onSkip(values)}
-            className="px-8 py-3 rounded-full border border-gray-300 cursor-pointer hover:bg-linear-to-r from-[#155DFC] to-[#9810FA] hover:text-white transition-all"
+            onClick={handleSkip}
+            className="flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 
+            cursor-pointer hover:bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+            hover:text-white transition-all"
           >
+            <FiSkipForward size={18} />
             Skip
           </button>
         )}
 
         <button
+          onClick={handleBack}
+          className="flex items-center gap-2 px-5 py-2 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          text-white cursor-pointer hover:shadow-2xl transition-all"
+        >
+          <FiArrowLeft size={18} />
+          Back
+        </button>
+
+        <button
           onClick={handleNext}
-          className="px-8 py-3 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-2xl"
+          className="flex items-center gap-2 px-5 py-2 rounded-full 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
+          text-white cursor-pointer hover:shadow-2xl transition-all"
         >
           Next
+          <FiArrowRight size={18} />
         </button>
       </div>
     </div>
