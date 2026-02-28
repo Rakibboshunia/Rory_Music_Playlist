@@ -2,8 +2,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import axios from "axios";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import Logo from "../../assets/img/logo3.png";
+import { loginApi } from "../../api/authApi";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,15 +27,7 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`,
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await loginApi({ email, password });
 
       const token = res?.data?.data?.token;
       const user = res?.data?.data?.user;
@@ -153,9 +146,9 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#9810FA] transition"
             >
-              {showPassword ? "👁️" : "🙈"}
+              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
             </button>
           </div>
 

@@ -1,33 +1,21 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 import PlaylistAccordion from "./components/PlaylistAccordion";
-import PlaylistToggle from "./components/PlaylistToggle"; 
+import PlaylistToggle from "./components/PlaylistToggle";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 
+import { getUserPlaylistsApi } from "../../api/playlistApi";
+
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
-  const [playlistMode, setPlaylistMode] = useState("free"); 
-  const token = Cookies.get("token");
+  const [playlistMode, setPlaylistMode] = useState("free");
 
   useEffect(() => {
-    if (!token) return;
-
     const fetchUserPlaylists = async () => {
       try {
-        const response = await axios(
-          `${import.meta.env.VITE_BACKEND_URL}/playlists/user/playlist`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
+        const response = await getUserPlaylistsApi();
         const data = response.data?.data || [];
         setPlaylistData(data);
 
@@ -36,14 +24,13 @@ export default function PlaylistResult() {
         );
 
         setPlaylistMode(hasPremium ? "premium" : "free");
-
       } catch (error) {
         console.error("User playlist fetch error:", error);
       }
     };
 
     fetchUserPlaylists();
-  }, [token]);
+  }, []);
 
   const hasPremium = playlistData?.some(
     (playlist) => playlist.playlist_type === "premium"
@@ -60,7 +47,7 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="pb-2 text-[400] sm:text-4xl lg:text-5xl font-semibold text-center">
+          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
             {playlistData?.[0]?.title || "Your Custom Playlist"}
           </h1>
 
@@ -75,17 +62,6 @@ export default function PlaylistResult() {
             hasPremium={hasPremium}
           />
 
-          <div className="flex items-center justify-between mt-8 mb-4">
-            <div>
-              <h3 className="font-medium text-sm sm:text-base">
-                Your Playlist
-              </h3>
-              <p className="text-xs text-gray-500">
-                Here's the soundtrack crafted just for your event.
-              </p>
-            </div>
-          </div>
-
           <PlaylistAccordion
             playlistData={
               playlistData?.filter(
@@ -93,7 +69,6 @@ export default function PlaylistResult() {
               )
             }
           />
-
         </div>
       </div>
 

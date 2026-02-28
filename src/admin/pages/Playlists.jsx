@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
+
 import PageHeader from "../components/common/PageHeader";
 import SearchBar from "../components/common/SearchBar";
 import TableWrapper from "../components/common/TableWrapper";
@@ -8,6 +8,11 @@ import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
 import DeleteAction from "../components/common/DeleteAction";
 import FilterDropdown from "../components/common/FilterDropdown";
+
+import {
+  getAdminPlaylistsApi,
+  deleteAdminPlaylistApi,
+} from "../../api/adminApi";
 
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
@@ -22,20 +27,11 @@ export default function Playlists() {
 
   const fetchPlaylists = async () => {
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/playlists`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await getAdminPlaylistsApi();
 
       const apiData = res?.data?.data || [];
 
-      const formatted = apiData.map((p, index) => ({
+      const formatted = apiData.map((p) => ({
         id: p.playlistId,
         user: p.user,
         title: p.playlistTitle,
@@ -60,23 +56,14 @@ export default function Playlists() {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/playlists/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await deleteAdminPlaylistApi(id);
 
       if (res?.data?.success) {
         toast.success(res.data.message || "Playlist deleted");
 
         setPlaylists((prev) => prev.filter((p) => p.id !== id));
       } else {
-        toast.error("Delete failed");
+        toast.error(res?.data?.message || "Delete failed");
       }
     } catch (error) {
       console.error("Delete Playlist Error:", error);

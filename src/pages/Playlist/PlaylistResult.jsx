@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 import PlaylistAccordion from "./components/PlaylistAccordion";
-import PlaylistToggle from "./components/PlaylistToggle"; 
-
+import PlaylistToggle from "./components/PlaylistToggle";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
+
+import { getGuestPlaylistApi } from "../../api/playlistApi";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
@@ -19,17 +19,9 @@ export default function PlaylistResult() {
 
     const fetchPlaylistData = async () => {
       try {
-        const response = await axios(
-          `${import.meta.env.VITE_BACKEND_URL}/playlists/guest/playlist/${id}`,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
+        const response = await getGuestPlaylistApi(id);
         const data = response.data?.data;
-
         setPlaylistData([data]);
-
       } catch (error) {
         console.error("Guest playlist fetch error:", error);
       }
@@ -66,17 +58,6 @@ export default function PlaylistResult() {
             hasPremium={hasPremium}
           />
 
-          <div className="flex items-center justify-between mt-8 mb-4">
-            <div>
-              <h3 className="font-medium text-sm sm:text-base">
-                Your Playlist
-              </h3>
-              <p className="text-xs text-gray-500">
-                Here's the soundtrack crafted just for your event.
-              </p>
-            </div>
-          </div>
-
           <PlaylistAccordion
             playlistData={
               playlistData?.filter(
@@ -84,7 +65,6 @@ export default function PlaylistResult() {
               )
             }
           />
-
         </div>
       </div>
 

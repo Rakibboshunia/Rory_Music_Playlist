@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import Logo from "../../assets/img/logo3.png";
+import { resetPasswordApi } from "../../api/authApi";
 
 export default function ResetPassword() {
   const { state } = useLocation();
@@ -34,18 +35,10 @@ export default function ResetPassword() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/reset-password`,
-        {
-          email,
-          newPassword: newPassword.trim(),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await resetPasswordApi({
+        email,
+        newPassword: newPassword.trim(),
+      });
 
       if (res?.data?.success) {
         toast.success(res.data.message || "Password reset successfully");
@@ -87,7 +80,6 @@ export default function ResetPassword() {
 
         <form onSubmit={handleReset} className="space-y-6">
 
-          {/* Email */}
           <input
             type="email"
             value={email}
@@ -95,7 +87,6 @@ export default function ResetPassword() {
             className="w-full rounded-xl border border-gray-300 px-5 py-4 bg-gray-100"
           />
 
-          {/* Password Field */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -108,16 +99,16 @@ export default function ResetPassword() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#9810FA] transition"
             >
-              {showPassword ? "👁️" : "🙈"}
+              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
             </button>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-xl bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold disabled:opacity-60 cursor-pointer"
+            className="w-full py-4 rounded-xl bg-linear-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Updating..." : "Update Password"}
           </button>

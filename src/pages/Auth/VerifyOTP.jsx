@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import Logo from "../../assets/img/logo3.png";
+import { verifyOtpApi } from "../../api/authApi";
 
 export default function VerifyOTP() {
   const { state } = useLocation();
@@ -34,23 +34,14 @@ export default function VerifyOTP() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/verify-otp`,
-        {
-          email,
-          otp: otp.trim(),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await verifyOtpApi({
+        email,
+        otp: otp.trim(),
+      });
 
       if (res?.data?.success) {
         toast.success(res.data.message || "OTP verified successfully");
 
-        // Go to reset password page
         navigate("/reset-password", { state: { email } });
       } else {
         toast.error(res?.data?.message || "Invalid OTP");

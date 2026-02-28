@@ -7,38 +7,41 @@ import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
 
 import toast from "react-hot-toast";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import DoNotPlayCard from "../../../components/DoNotPlayCard";
+
+import {
+  submitGuestQuizApi,
+  submitUserQuizApi,
+} from "../../../api/quizApi";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
   const { answers } = useQuiz();
   const { isAuthenticated } = useAuth();
 
-
   const [step, setStep] = useState(1);
   const [dontPlaySongs, setDontPlaySongs] = useState([]);
 
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
+  const [showUpgradePopup, setShowUpgradePopup] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
+
+  const isProcessing = isGenerating || paymentLoading;
 
   const handlePrevStep = () => {
-    navigate("/quiz/era"); 
-  };
-
-  const handleStep1Next = (values) => {
-    setDontPlaySongs(values);
-    setStep(2);
+    navigate("/quiz/era");
   };
 
   const handleStep2Next = (values) => {
-    const allSongs = [...dontPlaySongs, ...values];
-    setDontPlaySongs(allSongs);
+    setDontPlaySongs(values);
 
-    const token = Cookies.get("token");
-
-    if (!token) {
+    if (!isAuthenticated) {
       setShowEmailPopup(true);
     } else {
       setShowUpgradePopup(true);
@@ -46,15 +49,12 @@ export default function Step10_Final() {
   };
 
   const handleStep2Skip = () => {
-    const token = Cookies.get("token");
-
-    if (!token) {
+    if (!isAuthenticated) {
       setShowEmailPopup(true);
     } else {
       setShowUpgradePopup(true);
     }
   };
-
 
   const formatDontPlay = () => {
     const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
@@ -71,30 +71,16 @@ export default function Step10_Final() {
     };
   };
 
-  const [showEmailPopup, setShowEmailPopup] = useState(false);
-  const [showUpgradePopup, setShowUpgradePopup] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const [emailLoading, setEmailLoading] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [paymentLoading, setPaymentLoading] = useState(false);
-
-  const isProcessing = isGenerating || paymentLoading;
-
   const submitGuestEmail = async (e) => {
     e.preventDefault();
 
     try {
       setEmailLoading(true);
 
-      await fetch(import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/guest/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          answers,
-          dont_play: formatDontPlay(), 
-        }),
+      await submitGuestQuizApi({
+        email,
+        answers,
+        dont_play: formatDontPlay(),
       });
 
       toast.success("Playlist sent!");
@@ -102,7 +88,6 @@ export default function Step10_Final() {
       setShowEmailPopup(false);
       setShowUpgradePopup(true);
       setEmail("");
-
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -114,19 +99,11 @@ export default function Step10_Final() {
     setIsGenerating(true);
 
     try {
-      await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/user/submit",
-        {
-          answers,
-          dont_play: formatDontPlay(),
-          user_type: "free",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        }
-      );
+      await submitUserQuizApi({
+        answers,
+        dont_play: formatDontPlay(),
+        user_type: "free",
+      });
 
       navigate("/playlist");
     } catch {
@@ -136,21 +113,13 @@ export default function Step10_Final() {
 
   const handleUpgradeYes = async () => {
     setPaymentLoading(true);
-console.log(answers)
+
     try {
-      const res = await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/api/v1/quiz/user/submit",
-        {
-          answers,
-          dont_play: formatDontPlay(),
-          user_type: "paid",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        }
-      );
+      const res = await submitUserQuizApi({
+        answers,
+        dont_play: formatDontPlay(),
+        user_type: "paid",
+      });
 
       window.location.href = res.data?.data?.checkoutUrl;
     } catch {
@@ -166,7 +135,7 @@ console.log(answers)
           title="🎵 Do Not Play"
           inputCount={3}
           required={false}
-          onBack={handlePrevStep}   
+          onBack={handlePrevStep}
           onNext={handleStep2Next}
           onSkip={handleStep2Skip}
         />
@@ -175,6 +144,7 @@ console.log(answers)
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-14 text-center relative">
+
             {emailLoading ? (
               <div className="h-70 flex flex-col items-center justify-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -183,7 +153,7 @@ console.log(answers)
                 </p>
               </div>
             ) : (
-              <div>
+              <>
                 <button
                   onClick={() => {
                     setShowEmailPopup(false);
@@ -205,8 +175,8 @@ console.log(answers)
                 </h3>
 
                 <p className="text-md text-gray-500 mb-5">
-                  📩 Pop in your email to unlock your soundtrack. <br />We’ll send your personalised playlist straight to your inbox.
-
+                  📩 Pop in your email to unlock your soundtrack. <br />
+                  We’ll send your personalised playlist straight to your inbox.
                 </p>
 
                 <form onSubmit={submitGuestEmail} className="space-y-4">
@@ -223,8 +193,8 @@ console.log(answers)
                     <input type="checkbox" required className="mt-1" />
                     <span>
                       I agree to receive my personalised playlist by email and
-                      to be contacted by DJ & SAX® about my wedding or event. I
-                      can unsubscribe at any time.
+                      to be contacted by DJ & SAX® about my wedding or event.
+                      I can unsubscribe at any time.
                     </span>
                   </label>
 
@@ -241,12 +211,8 @@ console.log(answers)
                       Reveal My Playlist
                     </div>
                   </button>
-                  <p className="text-xs text-gray-500">
-                    We’ll only contact you about music, your date, or
-                    entertainment planning. No spam.
-                  </p>
                 </form>
-              </div>
+              </>
             )}
           </div>
         </div>
@@ -255,6 +221,7 @@ console.log(answers)
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">
+
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -280,26 +247,25 @@ console.log(answers)
                     alt="Spotify"
                     className="h-[2.0em] w-auto"
                   />
-                  Your Spotify playlist is ready💃
+                  Your Spotify playlist is ready 💃
                 </h2>
 
-                <p className="text-sm text-black/60 ">
+                <p className="text-sm text-black/60">
                   We’ve created your personalised Spotify playlist based on your
                   vibe. <br />
                   You can listen now — or unlock the full 3-hour version.
                 </p>
+
                 <br />
 
                 <h4 className="text-md font-semibold mb-8">
-                  ✨Upgrade to the Premium 50 track Playlist for only €9 and receive a Free Wedding Entertainment Guide.
+                  ✨ Upgrade to the Premium 50 track Playlist for only €9 and receive a Free Wedding Entertainment Guide.
                 </h4>
 
                 <div className="bg-[#F6F8FF] rounded-xl p-8 flex items-center justify-between mb-10">
                   <div>
                     <p className="text-4xl text-left font-bold pb-2">€9.00</p>
-                    <p className="text-md text-blue-600">
-                      50 Track Playlist
-                    </p>
+                    <p className="text-md text-blue-600">50 Track Playlist</p>
                   </div>
 
                   <img src={upgradeImg} className="w-26" />
@@ -307,28 +273,16 @@ console.log(answers)
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
-                    onClick={() => {
-                      if (!Cookies.get("token")) {
-                        navigate("/");
-                      } else {
-                        handleUpgradeNo();
-                      }
-                    }}
-                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
+                    onClick={handleUpgradeNo}
+                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
                     <FiArrowLeft size={20} />
                     Send Free Playlist
                   </button>
 
                   <button
-                    onClick={() => {
-                      if (!Cookies.get("token")) {
-                        navigate("/login");
-                      } else {
-                        handleUpgradeYes();
-                      }
-                    }}
-                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
+                    onClick={handleUpgradeYes}
+                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
                   >
                     Secure Extended Playlist
                     <FiArrowRight size={20} />

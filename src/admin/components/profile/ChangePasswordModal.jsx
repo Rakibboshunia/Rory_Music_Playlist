@@ -2,8 +2,8 @@ import { useState } from "react";
 import Modal from "../common/Modal";
 import FormInput from "../common/FormInput";
 import { PrimaryButton, OutlineButton } from "../common/Buttons";
-import axiosInstance from "../../../api/axiosInstance";
 import toast from "react-hot-toast";
+import { changeAdminPasswordApi } from "../../../api/adminApi";
 
 export default function ChangePasswordModal({ open, onClose }) {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -18,24 +18,19 @@ export default function ChangePasswordModal({ open, onClose }) {
     try {
       setLoading(true);
 
-      const res = await axiosInstance.patch(
-        "/api/v1/admin/change-password",
-        {
-          currentPassword,
-          newPassword,
-        }
-      );
+      const res = await changeAdminPasswordApi({
+        currentPassword,
+        newPassword,
+      });
 
       if (res?.data?.success) {
-        toast.success("Password updated successfully");
+        toast.success(res.data.message || "Password updated successfully");
 
         setCurrentPassword("");
         setNewPassword("");
-
         onClose();
       }
     } catch (error) {
-      console.error(error);
       toast.error(
         error?.response?.data?.message || "Password change failed"
       );

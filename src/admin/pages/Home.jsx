@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import PageHeader from "../components/common/PageHeader";
 import StatsCard from "../components/common/StatsCard";
 import TableWrapper from "../components/common/TableWrapper";
 import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
-import DeleteAction from "../components/common/DeleteAction";
+
+import { getAdminDashboardApi } from "../../api/adminApi";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,22 +22,11 @@ export default function Home() {
 
   const fetchDashboard = async () => {
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/dashboard`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
+      const res = await getAdminDashboardApi();
       const data = res?.data?.data;
 
       if (!data) return;
 
-      // Map stats
       setStats([
         {
           icon: "mdi:account-group",
@@ -60,7 +50,6 @@ export default function Home() {
         },
       ]);
 
-      // Map activities
       const formattedActivities = data.recentActivity.map((item, index) => ({
         id: index,
         email: item.user,
@@ -75,10 +64,6 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleDelete = (id) => {
-    setActivities((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -106,7 +91,7 @@ export default function Home() {
         }
       >
         <Table
-          columns={["User", "Playlist Title", "Type", "Date", "Action"]}
+          columns={["User", "Playlist Title", "Type", "Date"]}
           data={activities}
           renderRow={(item) => (
             <>
@@ -116,9 +101,6 @@ export default function Home() {
                 <Badge type={item.type} />
               </td>
               <td className="px-6 py-6 text-gray-500">{item.date}</td>
-              <td className="px-6 py-6">
-                <DeleteAction onDelete={() => handleDelete(item.id)} />
-              </td>
             </>
           )}
         />

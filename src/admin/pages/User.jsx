@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
+
 import PageHeader from "../components/common/PageHeader";
 import SearchBar from "../components/common/SearchBar";
 import TableWrapper from "../components/common/TableWrapper";
@@ -8,6 +8,11 @@ import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
 import DeleteAction from "../components/common/DeleteAction";
 import FilterDropdown from "../components/common/FilterDropdown";
+
+import {
+  getAdminUsersApi,
+  deleteAdminUserApi,
+} from "../../api/adminApi";
 
 export default function User() {
   const [users, setUsers] = useState([]);
@@ -22,16 +27,7 @@ export default function User() {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/users`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await getAdminUsersApi();
 
       const apiUsers = res?.data?.data || [];
 
@@ -62,21 +58,11 @@ export default function User() {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/users/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await deleteAdminUserApi(id);
 
       if (res?.data?.success) {
         toast.success(res.data.message || "User deleted successfully");
 
-        // Remove from UI instantly
         setUsers((prev) => prev.filter((u) => u.id !== id));
       } else {
         toast.error(res?.data?.message || "Delete failed");

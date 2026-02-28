@@ -1,8 +1,9 @@
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { useState } from "react";
-import Logo from "../../assets/img/logo3.png"
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import Logo from "../../assets/img/logo3.png";
+import { registerApi } from "../../api/authApi";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -24,15 +25,7 @@ export default function Signup() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/register`,
-        { name, email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await registerApi({ name, email, password });
 
       toast.success(res?.data?.message || "Signup successful!");
       navigate("/login");
@@ -62,6 +55,7 @@ export default function Signup() {
       "
     >
       <div className="absolute inset-0 rounded-[28px] bg-linear-to-br from-[#9810FA]/15 to-[#155DFC]/15 blur-2xl -z-10" />
+
       <div className="flex justify-center mb-4 pb-5">
         <img
           src={Logo}
@@ -69,6 +63,7 @@ export default function Signup() {
           className="h-20 w-20 scale-[4.5] object-contain"
         />
       </div>
+
       <h2 className="text-3xl pt-5 font-extrabold text-center mb-2 text-gray-900">
         Get Started Now
       </h2>
@@ -121,9 +116,9 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#9810FA] transition"
             >
-              {showPassword ? "👁️" : "🙈"}
+              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
             </button>
           </div>
         </div>

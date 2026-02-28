@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import Logo from "../../assets/img/logo3.png";
+import { forgotPasswordApi } from "../../api/authApi";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -20,20 +20,13 @@ export default function ForgotPassword() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/forgot-password`,
-        { email: email.trim() },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await forgotPasswordApi({
+        email: email.trim(),
+      });
 
       if (res?.data?.success) {
         toast.success(res.data.message || "OTP sent successfully");
 
-        // Move to OTP page
         navigate("/verify-otp", { state: { email } });
       } else {
         toast.error(res?.data?.message || "Something went wrong");
