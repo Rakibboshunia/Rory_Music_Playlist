@@ -24,6 +24,7 @@ export default function FormInput({ label, type = "text", ...props }) {
             pr-10
             outline-none
             border
+            bg-white
             border-gray-300
             focus:border-blue-500
             focus:ring-1

@@ -13,6 +13,8 @@ export default function Step1_EventType() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
+  console.log(answers)
+
   const handleSubmit = () => {
     navigate("/quiz/details");
   };

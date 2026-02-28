@@ -7,15 +7,16 @@ export default function StatsCard({ icon, value, label, trend }) {
       <div
         className="
           bg-white rounded-2xl
-          p-4 sm:p-5 md:p-6
+          p-4 sm:p-3 md:p-4
           flex flex-col justify-between
-          h-full
+          h-full cursor-pointer
           shadow-md
           transition hover:shadow-lg
+          border border-gray-200
         "
       >
         {/* Top Row */}
-        <div className="flex items-center justify-between">
+        <div className=" flex items-center justify-between">
           
           {/* Icon */}
           <div className="h-9 w-9 sm:h-11 sm:w-11 md:h-12 md:w-12 rounded-xl bg-gray-100 flex items-center justify-center">

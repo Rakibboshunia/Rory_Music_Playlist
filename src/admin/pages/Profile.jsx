@@ -91,7 +91,7 @@ export default function Profile() {
         </div>
 
         <PrimaryButton
-          className="flex items-center gap-2 px-4 py-2 rounded-xl cursor-pointer hover:bg-red-100 transition shadow border border-gray-300"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl cursor-pointer hover:bg-gray-200 transition border border-gray-300"
           onClick={() => setPasswordOpen(true)}
         >
           <Icon icon="mdi:lock-outline" />
@@ -104,7 +104,7 @@ export default function Profile() {
           <h3 className="font-semibold text-lg">Profile Information</h3>
 
           <PrimaryButton
-            className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl hover:bg-blue-100 transition shadow border border-gray-300"
+            className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl hover:bg-gray-200 transition border border-gray-300"
             onClick={() => setEditOpen(true)}
           >
             <Icon icon="mdi:pencil-outline" />
@@ -118,7 +118,7 @@ export default function Profile() {
             <input
               disabled
               value={user.name}
-              className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
+              className="w-full mt-1 rounded-lg px-4 py-2 bg-white border border-gray-300"
             />
           </div>
 
@@ -127,7 +127,7 @@ export default function Profile() {
             <input
               disabled
               value={user.email}
-              className="w-full mt-1 rounded-lg px-4 py-2 bg-gray-50 shadow"
+              className="w-full mt-1 rounded-lg px-4 py-2 bg-white border border-gray-300"
             />
           </div>
         </div>

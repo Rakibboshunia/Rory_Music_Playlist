@@ -1,9 +1,9 @@
 import { FiChevronDown } from "react-icons/fi";
+import { useAuth } from "../../../context/AuthContext";
 import coverImg from "../../../assets/img/playlist.png";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
 import PremiumPdfCard from "./PremiumPdfCard";
-
 import { upgradePlaylistApi } from "../../../api/playlistApi";
 
 export default function PlaylistCard({
@@ -18,6 +18,8 @@ export default function PlaylistCard({
   _id,
 }) {
 
+  const { user } = useAuth();
+
   const handleUpgrade = async (e) => {
     e.stopPropagation();
 
@@ -27,7 +29,10 @@ export default function PlaylistCard({
         playlistId: _id,
       });
 
-      window.location.href = res.data?.data?.checkoutUrl;
+      const checkoutUrl = res?.data?.data?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
     } catch (err) {
       console.error("Upgrade error:", err);
     }
@@ -36,34 +41,40 @@ export default function PlaylistCard({
   return (
     <div className="bg-white rounded-2xl shadow p-6">
 
+      {/* Header Section */}
       <div className="mb-4 flex items-start justify-between">
 
+        {/* Title Section */}
         <div onClick={onToggle} className="cursor-pointer flex-1">
           <p className="font-medium text-2xl">{title}</p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 
+        {/* Right Side Controls */}
         <div className="flex items-center gap-4">
 
-          {playlist_type !== "premium" && (
+          {/* Show only for FREE users */}
+          {user?.role === "free" && playlist_type !== "premium" && (
             <button
               onClick={handleUpgrade}
-              className="px-4 py-2 text-sm bg-white border rounded-full hover:bg-gray-100"
+              className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition"
             >
               Upgrade to Premium
             </button>
           )}
 
+          {/* Toggle Arrow */}
           <button
             onClick={onToggle}
             className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
           >
-            <FiChevronDown />
+            <FiChevronDown size={20} />
           </button>
 
         </div>
       </div>
 
+      {/* Expanded Content */}
       {isOpen && (
         <div>
           <img
@@ -74,6 +85,7 @@ export default function PlaylistCard({
 
           <PlaylistPlayer spotifyUrl={spotifyUrl} />
 
+          {/* Premium Only PDF */}
           {playlist_type === "premium" && <PremiumPdfCard />}
 
           <div className="mt-4 space-y-4">
