@@ -1,21 +1,18 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { FiChevronDown } from "react-icons/fi";
-import { FiSettings, FiLogOut, FiLogIn } from "react-icons/fi";
+import { FiChevronDown, FiSettings, FiLogOut, FiLogIn } from "react-icons/fi";
 
 import SettingsModal from "../../components/SettingsModal";
 
 import logoHero from "../../assets/img/logo.png";
 import logoWhite from "../../assets/img/logo3.png";
-
-import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, logout, loading } = useAuth();
+  const { user, isAuthenticated, logout, loading } = useAuth();
 
   const isHome = location.pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -23,25 +20,8 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
-  /* ================= PROFILE (LocalStorage Sync) ================= */
-  const [profile, setProfile] = useState(() => {
-    const saved = localStorage.getItem("profile");
-    return saved
-      ? JSON.parse(saved)
-      : {
-          fullName: "Jay Hargudson",
-          email: "rory@gmail.com",
-          image: null,
-        };
-  });
-
-  useEffect(() => {
-    localStorage.setItem("profile", JSON.stringify(profile));
-  }, [profile]);
-
   if (loading) return null;
 
-  /* ================= SCROLL EFFECT ================= */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
@@ -50,45 +30,8 @@ export default function Navbar() {
 
   const solidNavbar = !isHome || scrolled;
 
-  /* ================= NAVIGATION ================= */
-
-  const scrollToHero = () => {
-    document
-      .getElementById("hero-section")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToTestimonials = () => {
-    document
-      .getElementById("testimonials-section")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleHomeClick = (e) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(scrollToHero, 300);
-    } else {
-      scrollToHero();
-    }
-    setMenuOpen(false);
-  };
-
-  const handleTestimonialClick = (e) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(scrollToTestimonials, 300);
-    } else {
-      scrollToTestimonials();
-    }
-    setMenuOpen(false);
-  };
-
   const handleLogout = () => {
-    Cookies.remove("token");
-    logout();
+    logout(); // only context logout
     toast.success("Logged out");
     navigate("/login");
     setProfileOpen(false);
@@ -104,9 +47,10 @@ export default function Navbar() {
         ${solidNavbar ? "bg-[#ffffff] shadow-sm" : "bg-transparent"}`}
       >
         <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+          
           {/* LOGO */}
           <div
-            onClick={handleHomeClick}
+            onClick={() => navigate("/")}
             className="cursor-pointer select-none w-12 h-13 ml-2 flex items-center justify-center"
           >
             <img
@@ -116,11 +60,12 @@ export default function Navbar() {
             />
           </div>
 
+          {/* NAV LINKS */}
           <div
             className={`hidden md:flex items-center gap-8 font-medium
             ${solidNavbar ? "text-gray-700" : "text-white"}`}
           >
-            <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
+            <NavLink to="/" className={linkClass}>
               Home
             </NavLink>
 
@@ -134,30 +79,27 @@ export default function Navbar() {
               </NavLink>
             )}
 
-            <NavLink
-              to="/"
-              onClick={handleTestimonialClick}
-              className="hover:text-[#9810FA]"
-            >
+            <NavLink to="/" className="hover:text-[#9810FA]">
               Testimonials
             </NavLink>
           </div>
 
+          {/* PROFILE */}
           <div className="hidden md:flex relative">
             <button
               onClick={() => setProfileOpen(!profileOpen)}
               className="flex items-center gap-2 cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-purple-500 shadow-md">
-                {profile.image ? (
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500 shadow-md">
+                {user?.profileImage ? (
                   <img
-                    src={profile.image}
+                    src={`${import.meta.env.VITE_BACKEND_URL}${user.profileImage}`}
                     alt="profile"
                     className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white text-lg">
-                    👤
+                    {user?.name?.charAt(0)?.toUpperCase() || "👤"}
                   </div>
                 )}
               </div>
@@ -171,80 +113,46 @@ export default function Navbar() {
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 mt-16 w-40 text-lg bg-white shadow-lg rounded-xl py-4 border border-gray-300 z-50">
-                {isAuthenticated && (
-                  <button
-                    onClick={() => {
-                      setShowSettings(true);
-                      setProfileOpen(false);
-                    }}
-                    className="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
-                    <FiSettings className="text-gray-600" size={18} />
-                    <span>Settings</span>
-                  </button>
-                )}
-
+              <div className="absolute right-0 mt-14 w-40 text-lg bg-white shadow-lg rounded-xl py-4 border border-gray-300 z-50">
                 {isAuthenticated ? (
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-red-500 hover:bg-gray-100 cursor-pointer"
-                  >
-                    <FiLogOut size={18} />
-                    <span>Logout</span>
-                  </button>
+                  <>
+                    <button
+                      onClick={() => {
+                        setShowSettings(true);
+                        setProfileOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100"
+                    >
+                      <FiSettings size={18} />
+                      Settings
+                    </button>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                    >
+                      <FiLogOut size={18} />
+                      Logout
+                    </button>
+                  </>
                 ) : (
                   <button
-                    onClick={() => {
-                      navigate("/login");
-                      setProfileOpen(false);
-                    }}
-                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-green-600 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => navigate("/login")}
+                    className="w-full flex items-center gap-2 text-left px-4 py-2 text-green-600 hover:bg-gray-100"
                   >
                     <FiLogIn size={18} />
-                    <span>Login</span>
+                    Login
                   </button>
                 )}
               </div>
             )}
           </div>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`md:hidden text-xl cursor-pointer ${
-              solidNavbar ? "text-gray-900" : "text-white"
-            }`}
-          >
-            {menuOpen ? "✕" : "☰"}
-          </button>
         </div>
-
-        {menuOpen && (
-          <div className="md:hidden bg-white border-t shadow-md">
-            <div className="flex flex-col gap-3 px-4 py-4 text-gray-700">
-              <NavLink to="/" onClick={handleHomeClick}>
-                Home
-              </NavLink>
-
-              <NavLink to="/quiz" onClick={() => setMenuOpen(false)}>
-                Quiz
-              </NavLink>
-
-              {isAuthenticated && (
-                <NavLink to="/playlist" onClick={() => setMenuOpen(false)}>
-                  Playlist
-                </NavLink>
-              )}
-            </div>
-          </div>
-        )}
       </nav>
 
       <SettingsModal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
-        profile={profile}
-        setProfile={setProfile}
       />
     </>
   );

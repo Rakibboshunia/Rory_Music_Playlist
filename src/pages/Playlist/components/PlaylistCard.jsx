@@ -41,19 +41,15 @@ export default function PlaylistCard({
   return (
     <div className="bg-white rounded-2xl shadow p-6">
 
-      {/* Header Section */}
       <div className="mb-4 flex items-start justify-between">
 
-        {/* Title Section */}
         <div onClick={onToggle} className="cursor-pointer flex-1">
           <p className="font-medium text-2xl">{title}</p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 
-        {/* Right Side Controls */}
         <div className="flex items-center gap-4">
 
-          {/* Show only for FREE users */}
           {user?.role === "free" && playlist_type !== "premium" && (
             <button
               onClick={handleUpgrade}
@@ -63,7 +59,6 @@ export default function PlaylistCard({
             </button>
           )}
 
-          {/* Toggle Arrow */}
           <button
             onClick={onToggle}
             className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
@@ -74,7 +69,6 @@ export default function PlaylistCard({
         </div>
       </div>
 
-      {/* Expanded Content */}
       {isOpen && (
         <div>
           <img
@@ -85,7 +79,6 @@ export default function PlaylistCard({
 
           <PlaylistPlayer spotifyUrl={spotifyUrl} />
 
-          {/* Premium Only PDF */}
           {playlist_type === "premium" && <PremiumPdfCard />}
 
           <div className="mt-4 space-y-4">
