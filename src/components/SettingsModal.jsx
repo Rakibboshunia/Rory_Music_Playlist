@@ -35,7 +35,7 @@ export default function SettingsModal({ isOpen, onClose }) {
     });
   };
 
-  /* ================= SAVE PROFILE ================= */
+  /* ================= UPDATE PROFILE ================= */
   const handleSaveChanges = async () => {
     try {
       setLoading(true);
@@ -48,13 +48,13 @@ export default function SettingsModal({ isOpen, onClose }) {
       }
 
       const res = await axiosInstance.patch(
-        "/api/v1/admin/profile",
+        "/api/v1/auth/update-profile",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
       if (res?.data?.success) {
@@ -69,9 +69,31 @@ export default function SettingsModal({ isOpen, onClose }) {
         onClose();
       }
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Profile update failed"
-      );
+      toast.error(error?.response?.data?.message || "Profile update failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= CHANGE PASSWORD ================= */
+  const handleChangePassword = async () => {
+    try {
+      setLoading(true);
+
+      const res = await axiosInstance.patch("/api/v1/auth/change-password", {
+        currentPassword: passwords.currentPassword,
+        newPassword: passwords.newPassword,
+      });
+
+      if (res?.data?.success) {
+        toast.success("Password changed successfully");
+        setPasswords({
+          currentPassword: "",
+          newPassword: "",
+        });
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Password change failed");
     } finally {
       setLoading(false);
     }
@@ -91,12 +113,10 @@ export default function SettingsModal({ isOpen, onClose }) {
           Profile Settings
         </h2>
 
-        {/* PROFILE SECTION */}
+        {/* ================= PROFILE SECTION ================= */}
         <div className="border border-gray-300 rounded-xl mb-4 overflow-hidden">
           <button
-            onClick={() =>
-              setActive(active === "profile" ? "" : "profile")
-            }
+            onClick={() => setActive(active === "profile" ? "" : "profile")}
             className="w-full flex justify-between items-center px-5 py-4 font-semibold"
           >
             Profile Information
@@ -134,32 +154,79 @@ export default function SettingsModal({ isOpen, onClose }) {
               <InputField
                 label="Full Name"
                 value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
               />
 
-              <InputField
-                label="Email"
-                value={user.email}
-                disabled
-              />
-            </div>
-          )}
-        </div>
+              <InputField label="Email" value={user.email} disabled />
 
-        <button
-          onClick={handleSaveChanges}
-          disabled={loading}
-          className={`w-full mt-6 py-3 rounded-xl font-semibold transition
+              {/* ================= SAVE PROFILE BUTTON ================= */}
+              <button
+                onClick={handleSaveChanges}
+                disabled={loading}
+                className={`w-full mt-4 py-3 rounded-xl font-semibold transition cursor-pointer
             ${
               loading
                 ? "bg-gray-400 text-white"
                 : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white"
             }`}
-        >
-          {loading ? "Saving Changes..." : "Save Changes"}
-        </button>
+              >
+                {loading ? "Saving Changes..." : "Save Changes"}
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ================= PASSWORD SECTION ================= */}
+        <div className="border border-gray-300 rounded-xl mb-4 overflow-hidden">
+          <button
+            onClick={() => setActive(active === "password" ? "" : "password")}
+            className="w-full flex justify-between items-center px-5 py-4 font-semibold"
+          >
+            Change Password
+            <FiChevronDown
+              className={`transition-transform ${
+                active === "password" ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {active === "password" && (
+            <div className="px-5 pb-6 space-y-5">
+              <PasswordField
+                label="Current Password"
+                placeholder="Enter current password"
+                value={passwords.currentPassword}
+                onChange={(e) =>
+                  setPasswords({
+                    ...passwords,
+                    currentPassword: e.target.value,
+                  })
+                }
+              />
+
+              <PasswordField
+                label="New Password"
+                placeholder="Enter new password"
+                value={passwords.newPassword}
+                onChange={(e) =>
+                  setPasswords({
+                    ...passwords,
+                    newPassword: e.target.value,
+                  })
+                }
+              />
+
+              <button
+                onClick={handleChangePassword}
+                disabled={loading}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold cursor-pointer transition
+                disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {loading ? "Updating..." : "Update Password"}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
