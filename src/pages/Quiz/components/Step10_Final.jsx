@@ -113,7 +113,7 @@ export default function Step10_Final() {
     }
   };
 
-  /* ================= EXTENDED BUTTON ================= */
+  /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
     setShowUpgradePopup(false);
 

@@ -185,7 +185,7 @@ export default function SettingsModal({ isOpen, onClose }) {
           ${
             loading
               ? "bg-gray-400"
-              : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
+              : "bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
           }`}
               >
                 {loading ? "Saving Changes..." : "Save Changes"}
@@ -257,7 +257,7 @@ export default function SettingsModal({ isOpen, onClose }) {
           ${
             loading
               ? "bg-gray-400"
-              : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
+              : "bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
           }`}
               >
                 {loading ? "Updating..." : "Update Password"}

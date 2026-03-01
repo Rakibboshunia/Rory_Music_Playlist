@@ -12,7 +12,7 @@ export default function PlaylistToggle({
         {/* FREE */}
         <button
           onClick={() => setPlaylistMode("free")}
-          className={`flex-1 py-2 text-sm rounded-full transition-all duration-300 ${
+          className={`flex-1 py-2 text-sm rounded-full transition-all duration-300 cursor-pointer ${
             playlistMode === "free"
               ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
               : "text-gray-600"

@@ -84,7 +84,7 @@ export default function Navbar() {
             <img
               src={solidNavbar ? logoWhite : logoHero}
               alt="logo"
-              className="w-14 h-14 scale-[2.8] object-contain"
+              className="w-14 h-14 scale-[2.7] object-contain"
             />
           </div>
 
@@ -112,7 +112,7 @@ export default function Navbar() {
               // Guest → Login Button
               <button
                 onClick={() => navigate("/login")}
-                className="px-5 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 border-2 border-green-300 transition cursor-pointer"
+                className="px-5 py-2 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full hover:shadow-2xl border-2 border-green-300 transition-all shadow-2xl cursor-pointer"
               >
                 Login
               </button>
@@ -123,7 +123,7 @@ export default function Navbar() {
                   onClick={() => setProfileOpen(!profileOpen)}
                   className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-gray-100 transition cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold shadow">
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold shadow">
                     {user?.profileImage ? (
                       <img
                         src={`${import.meta.env.VITE_BACKEND_URL}${user.profileImage}`}

@@ -46,6 +46,7 @@ import AdminUsers from "../admin/pages/User";
 import AdminPlaylists from "../admin/pages/Playlists";
 import AdminProfile from "../admin/pages/Profile";
 import AdminProtected from "../admin/components/common/AdminProtected";
+import PlaylistResult from "../pages/Playlist/PlaylistResult";
 
 const router = createBrowserRouter([
   /* ================= PUBLIC ================= */
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
         path: "/playlist",
         element: <PlaylistLayout />,
         children: [
+          { path: ":id", element: <PlaylistResult /> },
           { index: true, element: <UserPlaylistResult /> },
         ],
       },
@@ -104,7 +106,7 @@ const router = createBrowserRouter([
   /* ================= ADMIN (PROTECTED) ================= */
   {
     path: "/admin",
-    element: <AdminProtected />,  // 🔒 Only this is protected
+    element: <AdminProtected />, // 🔒 Only this is protected
     children: [
       {
         element: <DashboardLayout />,
