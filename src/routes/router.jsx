@@ -1,15 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 
-/* ================== LANDING LAYOUTS ================== */
+/* ================== LAYOUTS ================== */
 import PublicLayout from "../layouts/PublicLayout";
 import QuizLayout from "../layouts/QuizLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import PlaylistLayout from "../layouts/PlaylistLayout";
 
-/* ================== LANDING PAGES ================== */
+/* ================== PAGES ================== */
 import Home from "../pages/Home/Home";
-
-/* ================== USER AUTH (ONE AUTH) ================== */
 import Signup from "../pages/Auth/Signup";
 import Login from "../pages/Auth/Login";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
@@ -30,7 +28,6 @@ import Step10_Final from "../pages/Quiz/components/Step10_Final";
 
 /* ================== PLAYLIST ================== */
 import UserPlaylistResult from "../pages/Playlist/UserPlaylistResult";
-import GuestPlaylistResult from "../pages/Playlist/PlaylistResult";
 
 /* ================== PAYMENT ================== */
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
@@ -50,9 +47,8 @@ import AdminPlaylists from "../admin/pages/Playlists";
 import AdminProfile from "../admin/pages/Profile";
 import AdminProtected from "../admin/components/common/AdminProtected";
 
-
 const router = createBrowserRouter([
-  /* ============ PUBLIC / LANDING ============ */
+  /* ================= PUBLIC ================= */
   {
     element: <PublicLayout />,
     children: [
@@ -80,10 +76,8 @@ const router = createBrowserRouter([
         element: <PlaylistLayout />,
         children: [
           { index: true, element: <UserPlaylistResult /> },
-          { path: ":id", element: <GuestPlaylistResult /> },
         ],
       },
-
 
       { path: "/success", element: <PaymentSuccess /> },
       { path: "/cancel", element: <PaymentCancel /> },
@@ -95,7 +89,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  /* ============ AUTH (USER + ADMIN LOGIN SAME) ============ */
+  /* ================= AUTH ================= */
   {
     element: <AuthLayout />,
     children: [
@@ -107,23 +101,22 @@ const router = createBrowserRouter([
     ],
   },
 
-  /* ============ ADMIN DASHBOARD (ROLE BASED) ============ */
-{
-  path: "/admin",
-  element: <AdminProtected />,
-  children: [
-    {
-      element: <DashboardLayout />,
-      children: [
-        { index: true, element: <AdminHome /> },
-        { path: "user", element: <AdminUsers /> },
-        { path: "playlists", element: <AdminPlaylists /> },
-        { path: "profile", element: <AdminProfile /> },
-      ],
-    },
-  ],
-},
-
+  /* ================= ADMIN (PROTECTED) ================= */
+  {
+    path: "/admin",
+    element: <AdminProtected />,  // 🔒 Only this is protected
+    children: [
+      {
+        element: <DashboardLayout />,
+        children: [
+          { index: true, element: <AdminHome /> },
+          { path: "user", element: <AdminUsers /> },
+          { path: "playlists", element: <AdminPlaylists /> },
+          { path: "profile", element: <AdminProfile /> },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default router;

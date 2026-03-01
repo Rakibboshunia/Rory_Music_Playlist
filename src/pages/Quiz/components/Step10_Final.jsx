@@ -21,9 +21,7 @@ export default function Step10_Final() {
   const { answers } = useQuiz();
   const { isAuthenticated } = useAuth();
 
-  const [step, setStep] = useState(1);
   const [dontPlaySongs, setDontPlaySongs] = useState([]);
-
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,95 +32,114 @@ export default function Step10_Final() {
 
   const isProcessing = isGenerating || paymentLoading;
 
-  const handlePrevStep = () => {
-    navigate("/quiz/era");
-  };
-
-  const handleStep2Next = (values) => {
-    setDontPlaySongs(values);
-
-    if (!isAuthenticated) {
-      setShowEmailPopup(true);
-    } else {
-      setShowUpgradePopup(true);
-    }
-  };
-
-  const handleStep2Skip = () => {
-    if (!isAuthenticated) {
-      setShowEmailPopup(true);
-    } else {
-      setShowUpgradePopup(true);
-    }
-  };
-
-  const formatDontPlay = () => {
-    const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
-
-    if (filled.length === 0) return {};
-
-    if (filled.length === 1) {
-      return { q10: filled[0] };
-    }
-
+  const formatAnswers = () => {
     return {
-      q10: filled[0],
-      q11: filled.slice(1),
+      q1: answers.eventType,
+      q2: answers.overallVibe,
+      q3: answers.genreFlow,
+      q4: answers.decades,
+      q5: answers.crowdAge,
+      q6: answers.drinksMoment,
+      q7: answers.lastHour,
+      q8: answers.floorFiller,
+      q9: answers.sax,
     };
   };
 
+  const DontPlay = () => {
+    const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
+
+    if (filled.length === 0) return {};
+    if (filled.length === 1) return { q10: filled[0] };
+
+    return {
+      q10: filled.slice(1),
+      q11: filled[0],
+    };
+  };
+
+  /* ================= GUEST SUBMIT ================= */
   const submitGuestEmail = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      email,
+      answers: formatAnswers(),
+      dont_play: DontPlay(),
+    };
 
     try {
       setEmailLoading(true);
 
-      await submitGuestQuizApi({
-        email,
-        answers,
-        dont_play: formatDontPlay(),
-      });
+      await submitGuestQuizApi(payload);
 
       toast.success("Playlist sent!");
-
       setShowEmailPopup(false);
       setShowUpgradePopup(true);
       setEmail("");
-    } catch {
+    } catch (err) {
       toast.error("Something went wrong");
     } finally {
       setEmailLoading(false);
     }
   };
 
+  /* ================= FREE BUTTON ================= */
   const handleUpgradeNo = async () => {
-    setIsGenerating(true);
+    setShowUpgradePopup(false);
 
+    // Guest → Go Home
+    if (!isAuthenticated) {
+      navigate("/");
+      return;
+    }
+
+    // Logged → Generate Free Playlist
     try {
-      await submitUserQuizApi({
-        answers,
-        dont_play: formatDontPlay(),
-        user_type: "free",
-      });
+      setIsGenerating(true);
 
+      const payload = {
+        answers: formatAnswers(),
+        dont_play: DontPlay(),
+        user_type: "free",
+      };
+
+      await submitUserQuizApi(payload);
       navigate("/playlist");
-    } catch {
+    } catch (err) {
+      console.error("Free Submit Error:", err?.response || err);
+    } finally {
       setIsGenerating(false);
     }
   };
 
+  /* ================= EXTENDED BUTTON ================= */
   const handleUpgradeYes = async () => {
-    setPaymentLoading(true);
+    setShowUpgradePopup(false);
 
+    // Guest → Redirect to Login
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    // Logged → Payment
     try {
-      const res = await submitUserQuizApi({
-        answers,
-        dont_play: formatDontPlay(),
-        user_type: "paid",
-      });
+      setPaymentLoading(true);
 
-      window.location.href = res.data?.data?.checkoutUrl;
-    } catch {
+      const payload = {
+        answers: formatAnswers(),
+        dont_play: DontPlay(),
+        user_type: "paid",
+      };
+
+      const res = await submitUserQuizApi(payload);
+      const checkoutUrl = res?.data?.data?.checkoutUrl;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      console.error("Paid Submit Error:", err?.response || err);
+    } finally {
       setPaymentLoading(false);
     }
   };
@@ -130,17 +147,25 @@ export default function Step10_Final() {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
 
-      {step === 1 && (
-        <DoNotPlayCard
-          title="🎵 Do Not Play"
-          inputCount={3}
-          required={false}
-          onBack={handlePrevStep}
-          onNext={handleStep2Next}
-          onSkip={handleStep2Skip}
-        />
-      )}
+      <DoNotPlayCard
+        title="🎵 Do Not Play"
+        inputCount={3}
+        required={false}
+        onBack={() => navigate("/quiz/era")}
+        onNext={(values) => {
+          setDontPlaySongs(values);
+          !isAuthenticated
+            ? setShowEmailPopup(true)
+            : setShowUpgradePopup(true);
+        }}
+        onSkip={() => {
+          !isAuthenticated
+            ? setShowEmailPopup(true)
+            : setShowUpgradePopup(true);
+        }}
+      />
 
+      {/* ================= EMAIL POPUP ================= */}
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-14 text-center relative">
@@ -218,6 +243,7 @@ export default function Step10_Final() {
         </div>
       )}
 
+      {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">

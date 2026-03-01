@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PlaylistCard from "./PlaylistCard";
 
-export default function PlaylistAccordion({ playlistData }) {
+export default function PlaylistAccordion({ playlistData, showUpgradeButton }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   return (
     <div className="space-y-4">
       {playlistData &&
@@ -16,6 +16,7 @@ export default function PlaylistAccordion({ playlistData }) {
             isOpen={activeIndex === index}
             spotifyUrl={playlist.spotify_url}
             playlist_type={playlist.playlist_type}
+            showUpgradeButton={showUpgradeButton}   // 👈 added
             onToggle={() =>
               setActiveIndex(activeIndex === index ? null : index)
             }

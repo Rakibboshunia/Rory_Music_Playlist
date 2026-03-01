@@ -42,30 +42,47 @@ export default function ChangePasswordModal({ open, onClose }) {
   return (
     <Modal
       open={open}
-      title="Password Change"
+      title="Change Password"
       onClose={onClose}
       footer={
-        <div className="flex justify-end gap-3">
-          <OutlineButton onClick={onClose}>Cancel</OutlineButton>
-          <PrimaryButton onClick={handleChangePassword}>
-            {loading ? "Saving..." : "Save"}
+        <div className="flex justify-end gap-4 pt-5">
+          <OutlineButton onClick={onClose}>
+            Cancel
+          </OutlineButton>
+
+          <PrimaryButton
+            onClick={handleChangePassword}
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Save Changes"}
           </PrimaryButton>
         </div>
       }
     >
-      <FormInput
-        label="Current Password"
-        type="password"
-        value={currentPassword}
-        onChange={(e) => setCurrentPassword(e.target.value)}
-      />
+      <div className="space-y-6">
 
-      <FormInput
-        label="New Password"
-        type="password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-      />
+        {/* Description */}
+        <p className="text-sm text-gray-500">
+          Enter your current password and set a new one to secure your account.
+        </p>
+
+        {/* Current Password */}
+        <FormInput
+          label="Current Password"
+          type="password"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+
+        {/* New Password */}
+        <FormInput
+          label="New Password"
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+
+      </div>
     </Modal>
   );
 }

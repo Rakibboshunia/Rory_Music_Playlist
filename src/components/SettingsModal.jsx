@@ -114,61 +114,79 @@ export default function SettingsModal({ isOpen, onClose }) {
         </h2>
 
         {/* ================= PROFILE SECTION ================= */}
-        <div className="border border-gray-300 rounded-xl mb-4 overflow-hidden">
+
+        <div className="bg-gray-50 border border-gray-200 rounded-2xl mb-6 overflow-hidden shadow-sm">
           <button
             onClick={() => setActive(active === "profile" ? "" : "profile")}
-            className="w-full flex justify-between items-center px-5 py-4 font-semibold"
+            className="w-full flex justify-between items-center px-6 py-5 font-semibold text-lg bg-white hover:bg-gray-100 transition"
           >
-            Profile Information
+            <span className="flex items-center gap-2">
+              👤 Profile Information
+            </span>
+
             <FiChevronDown
-              className={`transition-transform ${
-                active === "profile" ? "rotate-180" : ""
+              size={20}
+              className={`transition-transform duration-300 ${
+                active === "profile" ? "rotate-180 text-purple-600" : ""
               }`}
             />
           </button>
 
           {active === "profile" && (
-            <div className="px-5 pb-6 space-y-5">
-              <div className="flex items-center gap-4">
-                <img
-                  src={
-                    user.profileImage
-                      ? `${import.meta.env.VITE_BACKEND_URL}${user.profileImage}`
-                      : "https://via.placeholder.com/100"
-                  }
-                  alt="profile"
-                  className="w-20 h-20 rounded-full object-cover"
-                />
-
-                <label className="cursor-pointer text-sm text-purple-600 font-medium border rounded-md px-3 py-1">
-                  Change Photo
-                  <input
-                    type="file"
-                    hidden
-                    accept="image/*"
-                    onChange={handleImageChange}
+            <div className="px-6 pb-8 pt-4 space-y-6 bg-gray-50">
+              {/* PROFILE IMAGE */}
+              <div className="flex items-center gap-6">
+                <div className="relative group">
+                  <img
+                    src={
+                      form.profileImage
+                        ? URL.createObjectURL(form.profileImage)
+                        : user.profileImage
+                          ? `${import.meta.env.VITE_BACKEND_URL}${user.profileImage}`
+                          : "https://via.placeholder.com/100"
+                    }
+                    alt="profile"
+                    className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                   />
-                </label>
+
+                  <label className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 cursor-pointer transition">
+                    Change
+                    <input
+                      type="file"
+                      hidden
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                </div>
+
+                <div>
+                  <p className="font-semibold text-lg">{user.name}</p>
+                  <p className="text-sm text-gray-500">{user.email}</p>
+                </div>
               </div>
 
-              <InputField
-                label="Full Name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
+              {/* INPUTS */}
+              <div className="space-y-4">
+                <InputField
+                  label="Full Name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
 
-              <InputField label="Email" value={user.email} disabled />
+                <InputField label="Email" value={user.email} disabled />
+              </div>
 
-              {/* ================= SAVE PROFILE BUTTON ================= */}
+              {/* SAVE BUTTON */}
               <button
                 onClick={handleSaveChanges}
                 disabled={loading}
-                className={`w-full mt-4 py-3 rounded-xl font-semibold transition cursor-pointer
-            ${
-              loading
-                ? "bg-gray-400 text-white"
-                : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white"
-            }`}
+                className={`w-full mt-2 py-3 rounded-2xl font-semibold text-white transition-all duration-300 cursor-pointer
+          ${
+            loading
+              ? "bg-gray-400"
+              : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
+          }`}
               >
                 {loading ? "Saving Changes..." : "Save Changes"}
               </button>
@@ -177,50 +195,70 @@ export default function SettingsModal({ isOpen, onClose }) {
         </div>
 
         {/* ================= PASSWORD SECTION ================= */}
-        <div className="border border-gray-300 rounded-xl mb-4 overflow-hidden">
+        <div className="bg-gray-50 border border-gray-200 rounded-2xl mb-6 overflow-hidden shadow-sm">
           <button
             onClick={() => setActive(active === "password" ? "" : "password")}
-            className="w-full flex justify-between items-center px-5 py-4 font-semibold"
+            className="w-full flex justify-between items-center px-6 py-5 font-semibold text-lg bg-white hover:bg-gray-100 transition"
           >
-            Change Password
+            <span className="flex items-center gap-2">🔒 Change Password</span>
+
             <FiChevronDown
-              className={`transition-transform ${
-                active === "password" ? "rotate-180" : ""
+              size={20}
+              className={`transition-transform duration-300 ${
+                active === "password" ? "rotate-180 text-purple-600" : ""
               }`}
             />
           </button>
 
           {active === "password" && (
-            <div className="px-5 pb-6 space-y-5">
-              <PasswordField
-                label="Current Password"
-                placeholder="Enter current password"
-                value={passwords.currentPassword}
-                onChange={(e) =>
-                  setPasswords({
-                    ...passwords,
-                    currentPassword: e.target.value,
-                  })
-                }
-              />
+            <div className="px-6 pb-8 pt-4 space-y-6 bg-gray-50">
+              {/* INFO TEXT */}
+              <p className="text-sm text-gray-500">
+                For security reasons, please enter your current password before
+                setting a new one.
+              </p>
 
-              <PasswordField
-                label="New Password"
-                placeholder="Enter new password"
-                value={passwords.newPassword}
-                onChange={(e) =>
-                  setPasswords({
-                    ...passwords,
-                    newPassword: e.target.value,
-                  })
-                }
-              />
+              {/* PASSWORD INPUTS */}
+              <div className="space-y-4">
+                <PasswordField
+                  label="Current Password"
+                  placeholder="Enter current password"
+                  value={passwords.currentPassword}
+                  onChange={(e) =>
+                    setPasswords({
+                      ...passwords,
+                      currentPassword: e.target.value,
+                    })
+                  }
+                />
 
+                <PasswordField
+                  label="New Password"
+                  placeholder="Enter new password"
+                  value={passwords.newPassword}
+                  onChange={(e) =>
+                    setPasswords({
+                      ...passwords,
+                      newPassword: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              {/* UPDATE BUTTON */}
               <button
                 onClick={handleChangePassword}
-                disabled={loading}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#9810FA] to-[#155DFC] text-white font-semibold cursor-pointer transition
-                disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={
+                  loading ||
+                  !passwords.currentPassword.trim() ||
+                  !passwords.newPassword.trim()
+                }
+                className={`w-full py-3 rounded-2xl font-semibold text-white transition-all duration-300 cursor-pointer
+          ${
+            loading
+              ? "bg-gray-400"
+              : "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:scale-[1.02] shadow-lg hover:shadow-xl"
+          }`}
               >
                 {loading ? "Updating..." : "Update Password"}
               </button>

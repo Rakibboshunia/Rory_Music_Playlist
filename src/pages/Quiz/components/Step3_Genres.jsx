@@ -13,7 +13,10 @@ export default function Step3_Genres() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
+  console.log("🧠 Step3 Answers:", answers);
+
   const handleNext = () => {
+    if (!answers.drinksMoment) return;
     navigate("/quiz/importance");
   };
 
@@ -28,30 +31,32 @@ export default function Step3_Genres() {
         Pick a drinks moment
       </h2>
 
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          onClick={() => updateAnswer("drinksMoment", opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
-            ${
-              answers.drinksMoment === opt.value
-                ? "bg-linear-to-r from-blue-500 to-purple-500 text-white"
-                : "bg-white border-gray-200"
-            }`}
-        >
-          {opt.label}
-        </button>
-      ))}
+      {options.map((opt) => {
+        const isSelected = answers.drinksMoment === opt.value;
 
-      {/* BACK + NEXT */}
-      <div className="flex justify-between items-center mt-4 pb-6">
+        return (
+          <button
+            key={opt.value}
+            onClick={() => updateAnswer("drinksMoment", opt.value)}
+            className={`w-full mb-3 h-13 rounded-xl border cursor-pointer transition-all duration-200
+              ${
+                isSelected
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent"
+                  : "bg-white border-gray-200 hover:bg-gray-50"
+              }`}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+
+      <div className="flex justify-between items-center mt-6">
+
         <button
           onClick={handleBack}
           className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          cursor-pointer disabled:opacity-50 text-white
-          transition-all duration-300 ease-out hover:shadow-lg
-          hover:scale-[1.03] active:scale-[0.98]"
+          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          text-white hover:shadow-lg transition-all duration-300"
         >
           ← Back
         </button>
@@ -60,13 +65,13 @@ export default function Step3_Genres() {
           disabled={!answers.drinksMoment}
           onClick={handleNext}
           className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          cursor-pointer disabled:opacity-50 text-white
-          transition-all duration-300 ease-out hover:shadow-lg
-          hover:scale-[1.03] active:scale-[0.98]"
+          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          text-white disabled:opacity-50 disabled:cursor-not-allowed
+          hover:shadow-lg transition-all duration-300"
         >
           Next →
         </button>
+
       </div>
     </div>
   );

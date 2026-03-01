@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import PlaylistToggle from "./components/PlaylistToggle";
 import AwardsSection from "../../components/AwardsSection";
@@ -9,7 +8,7 @@ import CTASection from "../../components/CTASection";
 import { getUserPlaylistsApi } from "../../api/playlistApi";
 
 export default function PlaylistResult() {
-  const [playlistData, setPlaylistData] = useState(null);
+  const [playlistData, setPlaylistData] = useState([]);
   const [playlistMode, setPlaylistMode] = useState("free");
 
   useEffect(() => {
@@ -19,11 +18,15 @@ export default function PlaylistResult() {
         const data = response.data?.data || [];
         setPlaylistData(data);
 
+        // if premium exists, default show premium
         const hasPremium = data.some(
-          (playlist) => playlist.playlist_type === "premium"
+          (playlist) =>
+            playlist.playlist_type?.toLowerCase() === "premium"
         );
 
-        setPlaylistMode(hasPremium ? "premium" : "free");
+        if (hasPremium) {
+          setPlaylistMode("premium");
+        }
       } catch (error) {
         console.error("User playlist fetch error:", error);
       }
@@ -32,8 +35,14 @@ export default function PlaylistResult() {
     fetchUserPlaylists();
   }, []);
 
-  const hasPremium = playlistData?.some(
-    (playlist) => playlist.playlist_type === "premium"
+  const hasPremium = playlistData.some(
+    (playlist) =>
+      playlist.playlist_type?.toLowerCase() === "premium"
+  );
+
+  const filteredPlaylists = playlistData.filter(
+    (playlist) =>
+      playlist.playlist_type?.toLowerCase() === playlistMode
   );
 
   return (
@@ -56,19 +65,27 @@ export default function PlaylistResult() {
               "A personalised playlist crafted just for your event."}
           </p>
 
+          {/* 🔥 TOGGLE (Design unchanged component) */}
           <PlaylistToggle
             playlistMode={playlistMode}
             setPlaylistMode={setPlaylistMode}
             hasPremium={hasPremium}
           />
 
-          <PlaylistAccordion
-            playlistData={
-              playlistData?.filter(
-                (playlist) => playlist.playlist_type === playlistMode
-              )
-            }
-          />
+          {/* 🔥 SINGLE SECTION RENDER BASED ON TOGGLE */}
+          {filteredPlaylists.length > 0 && (
+            <>
+              <h2 className="text-2xl font-semibold mt-8 mb-4 capitalize">
+                {playlistMode} Playlist
+              </h2>
+
+              <PlaylistAccordion
+                playlistData={filteredPlaylists}
+                showUpgradeButton={playlistMode === "free"}
+              />
+            </>
+          )}
+
         </div>
       </div>
 

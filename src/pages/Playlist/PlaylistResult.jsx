@@ -10,7 +10,7 @@ import CTASection from "../../components/CTASection";
 import { getGuestPlaylistApi } from "../../api/playlistApi";
 
 export default function PlaylistResult() {
-  const [playlistData, setPlaylistData] = useState(null);
+  const [playlistData, setPlaylistData] = useState([]);
   const [playlistMode, setPlaylistMode] = useState("free");
   const { id } = useParams();
 
@@ -20,8 +20,18 @@ export default function PlaylistResult() {
     const fetchPlaylistData = async () => {
       try {
         const response = await getGuestPlaylistApi(id);
-        const data = response.data?.data;
-        setPlaylistData([data]);
+        const data = response.data?.data || [];
+
+        const formattedData = Array.isArray(data) ? data : [data];
+
+        setPlaylistData(formattedData);
+
+        const hasPremium = formattedData.some(
+          (playlist) =>
+            playlist.playlist_type?.toLowerCase() === "premium"
+        );
+
+        setPlaylistMode(hasPremium ? "premium" : "free");
       } catch (error) {
         console.error("Guest playlist fetch error:", error);
       }
@@ -30,7 +40,15 @@ export default function PlaylistResult() {
     fetchPlaylistData();
   }, [id]);
 
-  const hasPremium = true;
+  const hasPremium = playlistData.some(
+    (playlist) =>
+      playlist.playlist_type?.toLowerCase() === "premium"
+  );
+
+  const filteredPlaylists = playlistData.filter(
+    (playlist) =>
+      playlist.playlist_type?.toLowerCase() === playlistMode
+  );
 
   return (
     <div>
@@ -44,11 +62,11 @@ export default function PlaylistResult() {
           </div>
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
-            {playlistData?.[0]?.title || "Your Custom Playlist"}
+            {playlistData[0]?.title || "Your Custom Playlist"}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
-            {playlistData?.[0]?.description ||
+            {playlistData[0]?.description ||
               "A personalised playlist crafted just for your event."}
           </p>
 
@@ -58,13 +76,8 @@ export default function PlaylistResult() {
             hasPremium={hasPremium}
           />
 
-          <PlaylistAccordion
-            playlistData={
-              playlistData?.filter(
-                (playlist) => playlist.playlist_type === playlistMode
-              )
-            }
-          />
+          <PlaylistAccordion playlistData={filteredPlaylists} />
+
         </div>
       </div>
 

@@ -1,26 +1,40 @@
 import { createContext, useContext, useState } from "react";
 
-const QuizContext = createContext();
+const QuizContext = createContext(null);
 
 export const QuizProvider = ({ children }) => {
-  // ✅ ONLY ANSWERS (no scores)
   const [answers, setAnswers] = useState({});
 
-  // ✅ SIMPLE ANSWER UPDATE
   const updateAnswer = (key, value) => {
-    setAnswers(prev => ({
-      ...prev,
-      [key]: value,
-    }));
+    setAnswers((prev) => {
+      const updated = {
+        ...prev,
+        [key]: value,
+      };
+
+      console.log("Updated Answers:", updated);
+      return updated;
+    });
   };
 
-  // ✅ FINAL SUBMIT (console log all answers)
+  const resetQuiz = () => {
+    setAnswers({});
+    console.log("Quiz reset");
+  };
+
   const submitQuiz = () => {
-    
+    console.log("Final Quiz Answers:", answers);
   };
 
   return (
-    <QuizContext.Provider value={{ answers, updateAnswer, submitQuiz }}>
+    <QuizContext.Provider
+      value={{
+        answers,
+        updateAnswer,
+        submitQuiz,
+        resetQuiz,
+      }}
+    >
       {children}
     </QuizContext.Provider>
   );

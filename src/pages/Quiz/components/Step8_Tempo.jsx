@@ -13,12 +13,13 @@ export default function Step8_Tempo() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
+  console.log("🧠 Step8 Answers:", answers);
+
   const selected = answers.genreLean || [];
 
   const toggle = (value) => {
     const exists = selected.includes(value);
 
-    // max 2 selection
     if (!exists && selected.length === 2) return;
 
     const updated = exists
@@ -29,6 +30,7 @@ export default function Step8_Tempo() {
   };
 
   const handleNext = () => {
+    if (!selected.length) return;
     navigate("/quiz/era");
   };
 
@@ -43,30 +45,32 @@ export default function Step8_Tempo() {
         Genre lean (choose up to 2)
       </h2>
 
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          onClick={() => toggle(opt.value)}
-          className={`w-full mb-3 h-13 rounded-xl border cursor-pointer
-            ${
-              selected.includes(opt.value)
-                ? "bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white"
-                : "bg-white border-gray-200"
-            }`}
-        >
-          {opt.label}
-        </button>
-      ))}
+      {options.map((opt) => {
+        const isSelected = selected.includes(opt.value);
 
-      {/* BACK + NEXT */}
-      <div className="flex justify-between items-center mt-4 pb-6">
+        return (
+          <button
+            key={opt.value}
+            onClick={() => toggle(opt.value)}
+            className={`w-full mb-3 h-13 rounded-xl border cursor-pointer transition-all duration-200
+              ${
+                isSelected
+                  ? "bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white border-transparent"
+                  : "bg-white border-gray-200 hover:bg-gray-50"
+              }`}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+
+      <div className="flex justify-between items-center mt-6">
+
         <button
           onClick={handleBack}
           className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          cursor-pointer disabled:opacity-50 text-white
-          transition-all duration-300 ease-out hover:shadow-lg
-          hover:scale-[1.03] active:scale-[0.98]"
+          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          text-white hover:shadow-lg transition-all duration-300"
         >
           ← Back
         </button>
@@ -75,13 +79,13 @@ export default function Step8_Tempo() {
           disabled={!selected.length}
           onClick={handleNext}
           className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          cursor-pointer disabled:opacity-50 text-white
-          transition-all duration-300 ease-out hover:shadow-lg
-          hover:scale-[1.03] active:scale-[0.98]"
+          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          text-white disabled:opacity-50 disabled:cursor-not-allowed
+          hover:shadow-lg transition-all duration-300"
         >
           Next →
         </button>
+
       </div>
     </div>
   );

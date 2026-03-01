@@ -9,27 +9,26 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
-  /* ================= RESTORE USER (RELOAD SAFE) ================= */
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const initializeAuth = async () => {
+      const token = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("authUser");
 
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
-    // 1️⃣ Instant restore from localStorage
-    const storedUser = localStorage.getItem("authUser");
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (err) {
-        console.error("Stored user parse error:", err);
+      // No token → stop loading
+      if (!token) {
+        setLoading(false);
+        return;
       }
-    }
 
-    // 2️⃣ Verify from backend
-    const verifyUser = async () => {
+      // Instantly restore user from localStorage (prevents reload logout)
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch (err) {
+          console.warn("Stored user parse failed");
+        }
+      }
+
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/me`,
@@ -51,26 +50,36 @@ export function AuthProvider({ children }) {
           localStorage.setItem("authUser", JSON.stringify(userData));
         }
       } catch (error) {
-        console.warn("Verification failed. Keeping existing session.");
+        const status = error?.response?.status;
+
+        // Only logout if token truly invalid
+        if (status === 401) {
+          console.warn("Token expired. Logging out.");
+          localStorage.clear();
+          setUser(null);
+        } else {
+          console.warn(
+            "Auth verification temporary failed. Keeping session."
+          );
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    verifyUser();
+    initializeAuth();
   }, []);
 
-  /* ================= LOGIN ================= */
+  /* LOGIN */
   const login = (userData, token) => {
     localStorage.setItem("token", token);
     localStorage.setItem("authUser", JSON.stringify(userData));
     setUser(userData);
   };
 
-  /* ================= LOGOUT ================= */
+  /* LOGOUT */
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("authUser");
+    localStorage.clear();
     setUser(null);
   };
 
