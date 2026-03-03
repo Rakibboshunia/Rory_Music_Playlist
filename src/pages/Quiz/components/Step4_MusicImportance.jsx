@@ -13,8 +13,6 @@ export default function Step4_MusicImportance() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step4 Answers:", answers);
-
   const handleBack = () => {
     navigate(-1);
   };

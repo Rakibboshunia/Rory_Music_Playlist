@@ -5,7 +5,7 @@ export default function CookiePolicy() {
         COOKIE POLICY
       </h1>
 
-      <p className="mb-6">Last updated: 6th January 2026</p>
+      <p className="mb-6">Last updated: 2rd Merch 2026</p>
 
       <p className="mb-6">
         Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a
@@ -155,10 +155,10 @@ export default function CookiePolicy() {
       {/* 8 */}
       <h2 className="font-semibold text-black mt-6 mb-2">8. CONTACT US</h2>
       <p className="mb-2">
-        If you have any questions about this Cookie Policy or our use of cookies,
+        If you have any questions about this Cookie Policy or our use of cookies,<br />
         you can contact us at:
       </p>
-      <p>Email: rory@djandsax.ie</p>
+      <p>Email: info@soundtrackmynight.com</p>
       <p>Website: www.soundtrackmynight.com</p>
     </div>
   );

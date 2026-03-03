@@ -11,10 +11,7 @@ import toast from "react-hot-toast";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import DoNotPlayCard from "../../../components/DoNotPlayCard";
 
-import {
-  submitGuestQuizApi,
-  submitUserQuizApi,
-} from "../../../api/quizApi";
+import { submitGuestQuizApi, submitUserQuizApi } from "../../../api/quizApi";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
@@ -47,16 +44,19 @@ export default function Step10_Final() {
   };
 
   const DontPlay = () => {
-    const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
+  const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
 
-    if (filled.length === 0) return {};
-    if (filled.length === 1) return { q10: filled[0] };
+  if (filled.length === 0) return {};
 
-    return {
-      q10: filled.slice(1),
-      q11: filled[0],
-    };
+  if (filled.length === 1) {
+    return { q10: filled[0] };
+  }
+
+  return {
+    q10: filled[0],
+    q11: filled.slice(1),
   };
+};
 
   /* ================= GUEST SUBMIT ================= */
   const submitGuestEmail = async (e) => {
@@ -64,9 +64,12 @@ export default function Step10_Final() {
 
     const payload = {
       email,
-      answers: formatAnswers(),
-      dont_play: DontPlay(),
+      answers: {
+        ...formatAnswers(),
+        ...DontPlay(),
+      },
     };
+    console.log(payload);
 
     try {
       setEmailLoading(true);
@@ -75,8 +78,10 @@ export default function Step10_Final() {
 
       toast.success("Playlist sent!");
       setShowEmailPopup(false);
-      setShowUpgradePopup(true);
+
       setEmail("");
+
+      navigate("/");
     } catch (err) {
       toast.error("Something went wrong");
     } finally {
@@ -99,8 +104,10 @@ export default function Step10_Final() {
       setIsGenerating(true);
 
       const payload = {
-        answers: formatAnswers(),
-        dont_play: DontPlay(),
+        answers: {
+          ...formatAnswers(),
+          ...DontPlay(),
+        },
         user_type: "free",
       };
 
@@ -128,8 +135,10 @@ export default function Step10_Final() {
       setPaymentLoading(true);
 
       const payload = {
-        answers: formatAnswers(),
-        dont_play: DontPlay(),
+        answers: {
+          ...formatAnswers(),
+          ...DontPlay(),
+        },
         user_type: "paid",
       };
 
@@ -146,7 +155,6 @@ export default function Step10_Final() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
-
       <DoNotPlayCard
         title="🎵 Do Not Play"
         inputCount={3}
@@ -169,7 +177,6 @@ export default function Step10_Final() {
       {showEmailPopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-14 text-center relative">
-
             {emailLoading ? (
               <div className="h-70 flex flex-col items-center justify-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -218,8 +225,8 @@ export default function Step10_Final() {
                     <input type="checkbox" required className="mt-1" />
                     <span>
                       I agree to receive my personalised playlist by email and
-                      to be contacted by DJ & SAX® about my wedding or event.
-                      I can unsubscribe at any time.
+                      to be contacted by DJ & SAX® about my wedding or event. I
+                      can unsubscribe at any time.
                     </span>
                   </label>
 
@@ -247,7 +254,6 @@ export default function Step10_Final() {
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">
-
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -276,31 +282,43 @@ export default function Step10_Final() {
                   Your Spotify playlist is ready 💃
                 </h2>
 
-                <p className="text-sm text-black/60">
+                <p className="text-sm text-black">
                   We’ve created your personalised Spotify playlist based on your
                   vibe. <br />
-                  You can listen now — or unlock the full 3-hour version.
+                  You can listen now — or unlock your full 3-hour sountrack.
                 </p>
 
                 <br />
 
-                <h4 className="text-md font-semibold mb-8">
-                  ✨ Upgrade to the Premium 50 track Playlist for only €9 and receive a Free Wedding Entertainment Guide.
-                </h4>
+                <div className="">
+                  <h4 className="text-md font-bold mb-6">
+                    ✨ Unlock Your Full Wedding Playlist (50 songs).
+                  </h4>
 
-                <div className="bg-[#F6F8FF] rounded-xl p-8 flex items-center justify-between mb-10">
+                  <p className="text-md mb-2">
+                    Covering three hours of your night from first <br />dance to
+                    packed dance floor.
+                  </p>
+
+                  <p className="text-md mb-4">Includes FreeWedding Entertainment Guide <span className="font-bold">(€19 value)</span>.</p>
+
+                  <h1 className="text-md font-bold mb-4">Limited Launch Price: €9</h1>
+
+                </div>
+
+                <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
                   <div>
                     <p className="text-4xl text-left font-bold pb-2">€9.00</p>
                     <p className="text-md text-blue-600">50 Track Playlist</p>
                   </div>
 
-                  <img src={upgradeImg} className="w-26" />
+                  <img src={upgradeImg} className="w-20" />
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={handleUpgradeNo}
-                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
+                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
                   >
                     <FiArrowLeft size={20} />
                     Send Free Playlist
@@ -308,9 +326,9 @@ export default function Step10_Final() {
 
                   <button
                     onClick={handleUpgradeYes}
-                    className="w-full sm:w-1/2 py-3.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
+                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
                   >
-                    Secure Extended Playlist
+                    Unlock My Full Playlist
                     <FiArrowRight size={20} />
                   </button>
                 </div>

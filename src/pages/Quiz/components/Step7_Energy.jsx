@@ -13,8 +13,6 @@ export default function Step7_Energy() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step7 Answers:", answers);
-
   const selected = answers.decades || [];
 
   const toggle = (value) => {

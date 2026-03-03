@@ -12,8 +12,6 @@ export default function Step9_Era() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step9 Answers:", answers);
-
   const handleNext = () => {
     if (!answers.lastHour) return;
     navigate("/quiz/final");

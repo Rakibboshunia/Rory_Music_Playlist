@@ -13,8 +13,6 @@ export default function Step5_Vibe() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step5 Answers:", answers);
-
   const handleNext = () => {
     if (!answers.floorfiller) return;
     navigate("/quiz/mood");

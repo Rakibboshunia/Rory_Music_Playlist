@@ -13,8 +13,6 @@ export default function Step3_Genres() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step3 Answers:", answers);
-
   const handleNext = () => {
     if (!answers.drinksMoment) return;
     navigate("/quiz/importance");

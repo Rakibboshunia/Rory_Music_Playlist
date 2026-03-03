@@ -13,8 +13,6 @@ export default function Step8_Tempo() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step8 Answers:", answers);
-
   const selected = answers.genreLean || [];
 
   const toggle = (value) => {

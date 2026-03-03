@@ -13,8 +13,6 @@ export default function Step2_EventDetails() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step2 Answers:", answers);
-
   const handleNext = () => {
     if (!answers.overallVibe) return;
     navigate("/quiz/genres");

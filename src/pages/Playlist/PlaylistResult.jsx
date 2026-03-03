@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
+// ✅ Use existing API
+import { getGuestPlaylistApi } from "../../api/playlistApi";
 
 // Global shared sections
 import PlaylistAccordion from "./components/PlaylistAccordion";
@@ -11,18 +13,15 @@ import CTASection from "../../components/CTASection";
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
   const { id } = useParams();
+
   console.log(id);
+
   useEffect(() => {
     if (!id) return;
 
     const fetchPlaylistData = async () => {
       try {
-        const response = await axios(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/playlists/guest/playlist/${id}`,
-          {
-            headers: { "Content-Type": "application/json" },
-          },
-        );
+        const response = await getGuestPlaylistApi(id);
 
         setPlaylistData([response.data?.data]);
       } catch (error) {

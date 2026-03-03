@@ -14,13 +14,11 @@ export function AuthProvider({ children }) {
       const token = localStorage.getItem("token");
       const storedUser = localStorage.getItem("authUser");
 
-      // No token → stop loading
       if (!token) {
         setLoading(false);
         return;
       }
 
-      // Instantly restore user from localStorage (prevents reload logout)
       if (storedUser) {
         try {
           setUser(JSON.parse(storedUser));
@@ -52,7 +50,6 @@ export function AuthProvider({ children }) {
       } catch (error) {
         const status = error?.response?.status;
 
-        // Only logout if token truly invalid
         if (status === 401) {
           console.warn("Token expired. Logging out.");
           localStorage.clear();
@@ -70,14 +67,12 @@ export function AuthProvider({ children }) {
     initializeAuth();
   }, []);
 
-  /* LOGIN */
   const login = (userData, token) => {
     localStorage.setItem("token", token);
     localStorage.setItem("authUser", JSON.stringify(userData));
     setUser(userData);
   };
 
-  /* LOGOUT */
   const logout = () => {
     localStorage.clear();
     setUser(null);

@@ -147,7 +147,7 @@ export default function Navbar() {
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 mt-15 w-40 bg-white rounded-xl shadow-xl border border-gray-300 py-2 animate-fadeIn">
+                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border border-gray-300 py-2 animate-fadeIn">
                     <button
                       onClick={() => {
                         setShowSettings(true);

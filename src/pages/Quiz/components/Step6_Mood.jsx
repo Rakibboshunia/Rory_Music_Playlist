@@ -11,8 +11,6 @@ export default function Step6_Mood() {
   const navigate = useNavigate();
   const { answers, updateAnswer } = useQuiz();
 
-  console.log("🧠 Step6 Answers:", answers);
-
   const handleNext = () => {
     if (!answers.sax) return;
     navigate("/quiz/energy");
