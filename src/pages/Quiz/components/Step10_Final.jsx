@@ -306,14 +306,14 @@ export default function Step10_Final() {
 
                 </div>
 
-                <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
+                {/* <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
                   <div>
                     <p className="text-4xl text-left font-bold pb-2">€9.00</p>
                     <p className="text-md text-blue-600">50 Track Playlist</p>
                   </div>
 
                   <img src={upgradeImg} className="w-20" />
-                </div>
+                </div> */}
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button

@@ -55,7 +55,7 @@ export default function DoNotPlayCard({
             placeholder={
               index === 0 && required
                 ? "Required singer..."
-                : "Enter singer..."
+                : "Enter Artist Name..."
             }
             value={val}
             onChange={(e) => handleChange(index, e.target.value)}
