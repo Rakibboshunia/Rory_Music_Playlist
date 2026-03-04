@@ -35,7 +35,6 @@ export default function Step8_Tempo() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Genre lean (choose up to 2)
       </h2>
@@ -64,7 +63,6 @@ export default function Step8_Tempo() {
         disabled={!selected.length}
         onNext={handleNext}
       />
-
     </div>
   );
 }

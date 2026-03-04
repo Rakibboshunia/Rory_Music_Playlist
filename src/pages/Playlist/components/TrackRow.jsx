@@ -8,7 +8,8 @@ export default function TrackRow({ track, spotifyUrl }) {
 
   return (
     <a href={spotifyUrl} target="_blank" rel="noopener noreferrer">
-      <div className="
+      <div
+        className="
       flex items-center 
       justify-between 
       px-4 py-3 mb-4
@@ -16,7 +17,8 @@ export default function TrackRow({ track, spotifyUrl }) {
       bg-[#F7F8FF] hover:bg-[#EEF0FF] 
       transition 
       cursor-pointer
-      ">
+      "
+      >
         <div className="min-w-0">
           <p className="text-sm font-medium truncate">{track.song}</p>
           <p className="text-xs text-gray-600 truncate">{track.artist}</p>

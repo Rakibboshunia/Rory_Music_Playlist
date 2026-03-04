@@ -19,7 +19,6 @@ export default function Step6_Mood() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Sax on the night?
       </h2>
@@ -48,7 +47,6 @@ export default function Step6_Mood() {
         disabled={!answers.sax}
         onNext={handleNext}
       />
-
     </div>
   );
 }

@@ -45,11 +45,11 @@ export default function Step1_EventType() {
       })}
 
       {/* Buttons */}
-        <BackNextButtons
-          backPath="/"
-          disabled={!answers.eventType}
-          onNext={handleSubmit}
-        />
+      <BackNextButtons
+        backPath="/"
+        disabled={!answers.eventType}
+        onNext={handleSubmit}
+      />
     </div>
   );
 }

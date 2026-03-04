@@ -45,8 +45,7 @@ export default function PlaylistCard({
       console.log("Stripe response:", res);
 
       const checkoutUrl =
-        res?.data?.data?.checkoutUrl ||
-        res?.data?.message?.checkoutUrl;
+        res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
 
       if (checkoutUrl) {
         window.location.href = checkoutUrl;

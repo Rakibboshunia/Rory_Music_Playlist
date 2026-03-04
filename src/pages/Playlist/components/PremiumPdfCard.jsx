@@ -29,7 +29,10 @@ export default function PremiumPdfCard() {
         </p>
       </div>
 
-      <Download className="border-[#9810FA] text-[#155DFC] border rounded scale-125" size={28} />
+      <Download
+        className="border-[#9810FA] text-[#155DFC] border rounded scale-125"
+        size={28}
+      />
     </a>
   );
 }

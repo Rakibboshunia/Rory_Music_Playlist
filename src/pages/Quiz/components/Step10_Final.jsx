@@ -44,19 +44,19 @@ export default function Step10_Final() {
   };
 
   const DontPlay = () => {
-  const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
+    const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
 
-  if (filled.length === 0) return {};
+    if (filled.length === 0) return {};
 
-  if (filled.length === 1) {
-    return { q10: filled[0] };
-  }
+    if (filled.length === 1) {
+      return { q10: filled[0] };
+    }
 
-  return {
-    q10: filled[0],
-    q11: filled.slice(1),
+    return {
+      q10: filled[0],
+      q11: filled.slice(1),
+    };
   };
-};
 
   /* ================= GUEST SUBMIT ================= */
   const submitGuestEmail = async (e) => {
@@ -122,7 +122,7 @@ export default function Step10_Final() {
 
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
-    setShowUpgradePopup(false);
+    //setShowUpgradePopup(false);
 
     // Guest → Redirect to Login
     if (!isAuthenticated) {
@@ -273,52 +273,46 @@ export default function Step10_Final() {
                   ✕
                 </button>
 
-                <h2 className="text-2xl font-bold inline-flex items-center">
-                  <img
-                    src={SpotifyLogo}
-                    alt="Spotify"
-                    className="h-[2.0em] w-auto"
-                  />
+                <h2 className="text-2xl font-bold flex items-center justify-center gap-2">
+                  <img src={SpotifyLogo} alt="Spotify" className="h-[2em]" />
                   Your Spotify playlist is ready 💃
                 </h2>
 
-                <p className="text-sm text-black">
-                  We’ve created your personalised Spotify playlist based on your
-                  vibe. <br />
-                  You can listen now — or unlock your full 3-hour sountrack.
+                <p className="text-sm text-gray-600 mt-2">
+                  We’ve created your personalised playlist based on your vibe.
+                  Listen now — or unlock your full 3-hour soundtrack.
                 </p>
 
-                <br />
-
-                <div className="">
-                  <h4 className="text-md font-bold mb-6">
-                    ✨ Unlock Your Full Wedding Playlist (50 songs).
+                <div className="bg-gradient-to-r from-[#F6F8FF] to-[#FDFBFF] rounded-2xl p-6 mt-8 shadow-sm border border-gray-100">
+                  <h4 className="text-md font-semibold mb-4">
+                    ✨ Unlock Your Full Wedding Playlist (50 songs)
                   </h4>
 
-                  <p className="text-md mb-4">
-                    Covering three hours of your night from first dance to{" "}
-                    <br />
+                  <p className="text-sm text-gray-600 mb-4">
+                    Covering three hours of your night — from first dance to
                     packed dance floor.
                   </p>
 
-                  <p className="text-md mb-6">
-                    Includes FreeWedding Entertainment Guide{" "}
-                    <span className="font-bold">(€19 value)</span>.
+                  <p className="text-sm mb-3">
+                    Includes Free Wedding Entertainment Guide
+                    <span className="font-bold">(€19 value)</span>
                   </p>
 
-                  <h1 className="text-md font-bold mb-8">
-                    Limited Launch Price: €9
-                  </h1>
+                  <div className="flex items-center justify-between mt-6">
+                    <div>
+                      <p className="text-3xl font-bold">€9</p>
+                      <p className="text-xs text-gray-500">
+                        Limited launch price
+                      </p>
+                    </div>
+
+                    <img src={upgradeImg} className="w-16" />
+                  </div>
                 </div>
 
-                {/* <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
-                  <div>
-                    <p className="text-4xl text-left font-bold pb-2">€9.00</p>
-                    <p className="text-md text-blue-600">50 Track Playlist</p>
-                  </div>
-
-                  <img src={upgradeImg} className="w-20" />
-                </div> */}
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mt-4 mb-5">
+                  🔒 Secure checkout powered by Stripe
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
@@ -332,12 +326,16 @@ export default function Step10_Final() {
                   <button
                     onClick={handleUpgradeYes}
                     disabled={paymentLoading}
-                    className="w-full sm:w-1/2 py-2.5 gap-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center cursor-pointer disabled:opacity-70"
+                    className="w-full sm:w-1/2 py-2.5 gap-2 rounded-full 
+  bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+  text-white hover:shadow-lg transition-all duration-300 
+  ease-out hover:scale-[1.03] active:scale-[0.98] 
+  flex items-center justify-center cursor-pointer disabled:opacity-70"
                   >
                     {paymentLoading ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Redirecting...
+                        Redirecting to secure checkout...
                       </>
                     ) : (
                       <>

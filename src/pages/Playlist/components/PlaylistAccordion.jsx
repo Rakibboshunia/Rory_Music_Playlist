@@ -12,8 +12,8 @@ export default function PlaylistAccordion({ playlistData }) {
         playlistData.map((playlist, index) => (
           <PlaylistCard
             key={playlist._id}
-            _id={playlist._id} // ✅ VERY IMPORTANT
-            quizId={playlist.quizId} // ✅ VERY IMPORTANT
+            _id={playlist._id}
+            quizId={playlist.quizId}
             title={playlist.title}
             subtitle={playlist.description}
             tracks={playlist.tracks}

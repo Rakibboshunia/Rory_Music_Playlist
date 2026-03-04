@@ -20,7 +20,6 @@ export default function Step9_Era() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         How wild should the last hour be?
       </h2>
@@ -49,7 +48,6 @@ export default function Step9_Era() {
         disabled={!answers.lastHour}
         onNext={handleNext}
       />
-
     </div>
   );
 }

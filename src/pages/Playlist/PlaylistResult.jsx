@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-// ✅ Use existing API
 import { getGuestPlaylistApi } from "../../api/playlistApi";
 
-// Global shared sections
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";

@@ -31,7 +31,6 @@ export default function Step7_Energy() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Pick a decade (Select one or more)
       </h2>
@@ -60,7 +59,6 @@ export default function Step7_Energy() {
         disabled={!selected.length}
         onNext={handleNext}
       />
-
     </div>
   );
 }

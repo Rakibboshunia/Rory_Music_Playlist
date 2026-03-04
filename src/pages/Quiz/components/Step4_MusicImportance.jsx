@@ -21,7 +21,6 @@ export default function Step4_MusicImportance() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Your crowd’s sweet spot
       </h2>
@@ -50,7 +49,6 @@ export default function Step4_MusicImportance() {
         disabled={!answers.crowdAge}
         onNext={handleNext}
       />
-
     </div>
   );
 }
