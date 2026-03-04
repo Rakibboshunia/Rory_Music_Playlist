@@ -35,7 +35,6 @@ export default function HeroSection() {
             <p>No credit card required • 100% free playlist • Instant results</p>
           </div>
 
-          {/* ✅ FIXED BUTTONS */}
           <div className="mt-2 flex gap-5 sm:gap-5 flex-wrap">
             <button
               onClick={() => navigate("/quiz")}

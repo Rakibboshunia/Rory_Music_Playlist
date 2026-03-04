@@ -8,6 +8,7 @@ import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
 import DeleteAction from "../components/common/DeleteAction";
 import FilterDropdown from "../components/common/FilterDropdown";
+import Pagination from "../components/common/Pagination";
 
 import {
   getAdminPlaylistsApi,
@@ -20,6 +21,10 @@ export default function Playlists() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [typeFilter, setTypeFilter] = useState("");
   const [loading, setLoading] = useState(true);
+
+  // pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetchPlaylists();
@@ -79,6 +84,16 @@ export default function Playlists() {
       (typeFilter === "" || p.type === typeFilter)
   );
 
+  // pagination logic
+  const totalPages = Math.ceil(filteredPlaylists.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedPlaylists = filteredPlaylists.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
     <>
       <PageHeader
@@ -89,7 +104,10 @@ export default function Playlists() {
       <div className="relative">
         <SearchBar
           placeholder="Search by email..."
-          onSearch={setSearch}
+          onSearch={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
           onFilterClick={() => setFilterOpen((prev) => !prev)}
         />
 
@@ -97,7 +115,10 @@ export default function Playlists() {
           open={filterOpen}
           onClose={() => setFilterOpen(false)}
           selected={typeFilter}
-          onChange={setTypeFilter}
+          onChange={(value) => {
+            setTypeFilter(value);
+            setCurrentPage(1);
+          }}
         />
       </div>
 
@@ -109,7 +130,7 @@ export default function Playlists() {
         ) : (
           <Table
             columns={["User", "Playlist Title", "Type", "Date", "Action"]}
-            data={filteredPlaylists}
+            data={paginatedPlaylists}
             renderRow={(p) => (
               <>
                 <td className="px-6 py-6">{p.user}</td>
@@ -126,6 +147,12 @@ export default function Playlists() {
           />
         )}
       </TableWrapper>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 }

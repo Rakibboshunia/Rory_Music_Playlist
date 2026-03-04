@@ -8,6 +8,7 @@ import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
 import DeleteAction from "../components/common/DeleteAction";
 import FilterDropdown from "../components/common/FilterDropdown";
+import Pagination from "../components/common/Pagination";
 
 import {
   getAdminUsersApi,
@@ -20,6 +21,10 @@ export default function User() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
+
+  // pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetchUsers();
@@ -81,6 +86,16 @@ export default function User() {
       (statusFilter === "" || u.status === statusFilter)
   );
 
+  // pagination logic
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedUsers = filteredUsers.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
     <>
       <PageHeader
@@ -91,7 +106,10 @@ export default function User() {
       <div className="relative">
         <SearchBar
           placeholder="Search by email..."
-          onSearch={setSearch}
+          onSearch={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
           onFilterClick={() => setFilterOpen((p) => !p)}
         />
 
@@ -99,7 +117,10 @@ export default function User() {
           open={filterOpen}
           onClose={() => setFilterOpen(false)}
           selected={statusFilter}
-          onChange={setStatusFilter}
+          onChange={(value) => {
+            setStatusFilter(value);
+            setCurrentPage(1);
+          }}
         />
       </div>
 
@@ -117,7 +138,7 @@ export default function User() {
               "Status",
               "Actions",
             ]}
-            data={filteredUsers}
+            data={paginatedUsers}
             renderRow={(u) => (
               <>
                 <td className="px-6 py-6">{u.email}</td>
@@ -134,6 +155,12 @@ export default function User() {
           />
         )}
       </TableWrapper>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 }

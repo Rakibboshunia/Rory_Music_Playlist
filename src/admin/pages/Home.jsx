@@ -6,6 +6,7 @@ import StatsCard from "../components/common/StatsCard";
 import TableWrapper from "../components/common/TableWrapper";
 import Table from "../components/common/Table";
 import Badge from "../components/common/Badge";
+import Pagination from "../components/common/Pagination";
 
 import { getAdminDashboardApi } from "../../api/adminApi";
 
@@ -15,6 +16,10 @@ export default function Home() {
   const [stats, setStats] = useState([]);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetchDashboard();
@@ -66,6 +71,16 @@ export default function Home() {
     }
   };
 
+  // pagination logic
+  const totalPages = Math.ceil(activities.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedActivities = activities.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
     <>
       <PageHeader
@@ -92,7 +107,7 @@ export default function Home() {
       >
         <Table
           columns={["User", "Playlist Title", "Type", "Date"]}
-          data={activities}
+          data={paginatedActivities}
           renderRow={(item) => (
             <>
               <td className="px-6 py-6">{item.email}</td>
@@ -105,6 +120,12 @@ export default function Home() {
           )}
         />
       </TableWrapper>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 }
