@@ -73,7 +73,7 @@ export default function PlaylistCard({
             <button
               onClick={handleUpgrade}
               disabled={upgradeLoading}
-              className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition flex items-center justify-center min-w-[170px] disabled:opacity-50"
+              className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition flex items-center justify-center min-w-[170px] disabled:opacity-50 cursor-pointer"
             >
               {upgradeLoading ? (
                 <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -85,9 +85,9 @@ export default function PlaylistCard({
 
           <button
             onClick={onToggle}
-            className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+            className={`transition-transform cursor-pointer ${isOpen ? "rotate-180" : ""}`}
           >
-            <FiChevronDown size={20} />
+            <FiChevronDown size={25} />
           </button>
         </div>
       </div>

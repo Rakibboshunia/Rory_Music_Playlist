@@ -253,7 +253,7 @@ export default function Step10_Final() {
       {/* ================= UPGRADE POPUP ================= */}
       {showUpgradePopup && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-white rounded-2xl w-full max-w-xl p-12 text-center relative">
+          <div className="bg-white rounded-2xl w-full max-w-xl px-16 py-15 text-center relative">
             {isProcessing ? (
               <div className="py-20 flex flex-col items-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
@@ -268,7 +268,7 @@ export default function Step10_Final() {
                     setShowUpgradePopup(false);
                     navigate("/quiz");
                   }}
-                  className="absolute top-6 right-6 text-gray-400 cursor-pointer"
+                  className="absolute scale-[1.6] text-black top-6 right-8 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -295,15 +295,20 @@ export default function Step10_Final() {
                     ✨ Unlock Your Full Wedding Playlist (50 songs).
                   </h4>
 
-                  <p className="text-md mb-2">
-                    Covering three hours of your night from first <br />dance to
+                  <p className="text-md mb-4">
+                    Covering three hours of your night from first dance to{" "}
+                    <br />
                     packed dance floor.
                   </p>
 
-                  <p className="text-md mb-4">Includes FreeWedding Entertainment Guide <span className="font-bold">(€19 value)</span>.</p>
+                  <p className="text-md mb-6">
+                    Includes FreeWedding Entertainment Guide{" "}
+                    <span className="font-bold">(€19 value)</span>.
+                  </p>
 
-                  <h1 className="text-md font-bold mb-4">Limited Launch Price: €9</h1>
-
+                  <h1 className="text-md font-bold mb-8">
+                    Limited Launch Price: €9
+                  </h1>
                 </div>
 
                 {/* <div className="bg-[#F6F8FF] rounded-xl p-6 flex items-center justify-between mb-10">
@@ -318,7 +323,7 @@ export default function Step10_Final() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={handleUpgradeNo}
-                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center"
+                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center cursor-pointer"
                   >
                     <FiArrowLeft size={20} />
                     Send Free Playlist
@@ -326,10 +331,20 @@ export default function Step10_Final() {
 
                   <button
                     onClick={handleUpgradeYes}
-                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center"
+                    disabled={paymentLoading}
+                    className="w-full sm:w-1/2 py-2.5 gap-2 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] flex items-center justify-center cursor-pointer disabled:opacity-70"
                   >
-                    Unlock My Full Playlist
-                    <FiArrowRight size={20} />
+                    {paymentLoading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Redirecting...
+                      </>
+                    ) : (
+                      <>
+                        Unlock My Full Playlist
+                        <FiArrowRight size={20} />
+                      </>
+                    )}
                   </button>
                 </div>
               </>

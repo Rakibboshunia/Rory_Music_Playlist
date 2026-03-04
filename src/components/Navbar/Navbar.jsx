@@ -70,12 +70,11 @@ export default function Navbar() {
         className={`fixed top-0 w-full z-50 transition-all duration-300
         ${
           solidNavbar
-            ? "bg-white/80 backdrop-blur-md shadow-md"
+            ? "bg-white/60 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-
           {/* LOGO */}
           <div
             onClick={() => navigate("/")}
@@ -135,25 +134,25 @@ export default function Navbar() {
                     )}
                   </div>
 
-                  <span className="text-sm font-medium">
+                  <span className="text-lg font-bold">
                     {user?.name?.split(" ")[0]}
                   </span>
 
                   <FiChevronDown
-                    className={`transition-transform ${
+                    className={`transition-transform text-2xl ${
                       profileOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border border-gray-300 py-2 animate-fadeIn">
+                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border border-gray-300 py-4 animate-fadeIn">
                     <button
                       onClick={() => {
                         setShowSettings(true);
                         setProfileOpen(false);
                       }}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-50 transition cursor-pointer"
+                      className="w-full px-4 py-2 text-left hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
                     >
                       <FiSettings className="inline mr-2" />
                       Settings
@@ -161,7 +160,7 @@ export default function Navbar() {
 
                     <button
                       onClick={handleLogout}
-                      className="w-full px-4 py-2 text-left text-red-500 hover:bg-gray-50 transition cursor-pointer"
+                      className="w-full px-4 py-2 text-left text-red-500 hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
                     >
                       <FiLogOut className="inline mr-2" />
                       Logout
@@ -182,52 +181,67 @@ export default function Navbar() {
 
         {/* MOBILE SLIDE MENU */}
         <div
-          className={`md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-2xl transform transition-transform duration-300 z-40
-          ${mobileMenu ? "translate-x-0" : "translate-x-full"}`}
+          className={`md:hidden absolute top-16 right-0 w-75 px-8 transition-all duration-300 z-40
+  ${mobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
         >
-          <div className="p-6 space-y-6">
-            <NavLink to="/" onClick={() => setMobileMenu(false)}>
-              Home
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-300 p-6 flex flex-col gap-4">
+            {/* Navigation */}
+            <NavLink
+              to="/"
+              onClick={() => setMobileMenu(false)}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              🏠 Home
             </NavLink>
 
-            <NavLink to="/quiz" onClick={() => setMobileMenu(false)}>
-              Quiz
+            <NavLink
+              to="/quiz"
+              onClick={() => setMobileMenu(false)}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              🎧 Quiz
             </NavLink>
 
-            <NavLink to="/playlist" onClick={() => setMobileMenu(false)}>
-              Playlist
+            <NavLink
+              to="/playlist"
+              onClick={() => setMobileMenu(false)}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              🎵 Playlist
             </NavLink>
 
-            <hr />
+            <div className="border border-gray-300  my-2"></div>
 
+            {/* User Section */}
             {!user ? (
               <button
                 onClick={() => {
                   navigate("/login");
                   setMobileMenu(false);
                 }}
-                className="bg-purple-600 text-white px-4 py-2 rounded-lg cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-lg bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white shadow-md hover:shadow-lg transition cursor-pointer"
               >
-                Login
+                🔐 Login
               </button>
             ) : (
-              <>
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => {
                     setShowSettings(true);
                     setMobileMenu(false);
                   }}
+                  className="text-left px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
                 >
-                  Settings
+                  ⚙️ Settings
                 </button>
 
                 <button
                   onClick={handleLogout}
-                  className="text-red-500"
+                  className="text-left px-3 py-2 rounded-lg text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA]  transition cursor-pointer"
                 >
-                  Logout
+                  🚪 Logout
                 </button>
-              </>
+              </div>
             )}
           </div>
         </div>

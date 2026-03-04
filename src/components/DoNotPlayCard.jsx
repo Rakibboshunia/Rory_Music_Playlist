@@ -45,7 +45,7 @@ export default function DoNotPlayCard({
   };
 
   return (
-    <div className=" rounded-2xl shadow-xl p-10 space-y-6 text-center">
+    <div className=" rounded-2xl shadow-lg p-10 space-y-6 text-center">
       <h2 className="text-2xl font-bold">{title}</h2>
 
       <div className="space-y-6">
@@ -54,7 +54,7 @@ export default function DoNotPlayCard({
             key={index}
             placeholder={
               index === 0 && required
-                ? "Required singer..."
+                ? "Required Artist..."
                 : "Enter Artist Name..."
             }
             value={val}

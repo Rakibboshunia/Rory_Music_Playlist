@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
+import BackNextButtons from "../../../components/BackNextButtons";
 
 const options = [
   { label: "Wedding (Evening party)", value: "Wedding (Evening party)" },
@@ -20,7 +21,6 @@ export default function Step1_EventType() {
 
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         What kind of event are you planning?
       </h2>
@@ -45,29 +45,11 @@ export default function Step1_EventType() {
       })}
 
       {/* Buttons */}
-      <div className="flex justify-between items-center mt-6">
-
-        <button
-          onClick={() => navigate("/")}
-          className="px-4 py-2 rounded-full text-white 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
-          hover:shadow-lg transition-all duration-300"
-        >
-          ← Back to Home
-        </button>
-
-        <button
+        <BackNextButtons
+          backPath="/"
           disabled={!answers.eventType}
-          onClick={handleSubmit}
-          className="px-8 py-2 rounded-full text-white 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
-          disabled:opacity-50 disabled:cursor-not-allowed
-          hover:shadow-lg transition-all duration-300"
-        >
-          Next →
-        </button>
-
-      </div>
+          onNext={handleSubmit}
+        />
     </div>
   );
 }

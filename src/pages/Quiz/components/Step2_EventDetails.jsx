@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
+import BackNextButtons from "../../../components/BackNextButtons";
 
 const options = [
   { label: "Elegant & modern", value: "Elegant & modern" },
@@ -18,13 +19,8 @@ export default function Step2_EventDetails() {
     navigate("/quiz/genres");
   };
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
-
       <h2 className="text-lg font-semibold text-center mb-6">
         Choose your overall vibe
       </h2>
@@ -48,29 +44,11 @@ export default function Step2_EventDetails() {
         );
       })}
 
-      <div className="flex justify-between items-center mt-6">
-
-        <button
-          onClick={handleBack}
-          className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          text-white hover:shadow-lg transition-all duration-300"
-        >
-          ← Back
-        </button>
-
-        <button
-          disabled={!answers.overallVibe}
-          onClick={handleNext}
-          className="px-8 py-2 rounded-full 
-          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
-          text-white disabled:opacity-50 disabled:cursor-not-allowed
-          hover:shadow-lg transition-all duration-300"
-        >
-          Next →
-        </button>
-
-      </div>
+      <BackNextButtons
+        backPath="/quiz"
+        disabled={!answers.overallVibe}
+        onNext={handleNext}
+      />
     </div>
   );
 }

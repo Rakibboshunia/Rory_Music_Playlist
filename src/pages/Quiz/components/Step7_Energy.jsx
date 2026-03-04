@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../../context/QuizContext";
+import BackNextButtons from "../../../components/BackNextButtons";
 
 const options = [
   { label: "70s", value: "70s" },
@@ -28,10 +29,6 @@ export default function Step7_Energy() {
     navigate("/quiz/tempo");
   };
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   return (
     <div className="max-w-xl mx-auto px-6 shadow-xl py-6 rounded-xl">
 
@@ -58,29 +55,12 @@ export default function Step7_Energy() {
         );
       })}
 
-      <div className="flex justify-between items-center mt-6">
+      <BackNextButtons
+        backPath="/quiz/energy"
+        disabled={!selected.length}
+        onNext={handleNext}
+      />
 
-        <button
-          onClick={handleBack}
-          className="px-8 py-2 rounded-full 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
-          text-white hover:shadow-lg transition-all duration-300"
-        >
-          ← Back
-        </button>
-
-        <button
-          disabled={!selected.length}
-          onClick={handleNext}
-          className="px-8 py-2 rounded-full 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
-          text-white disabled:opacity-50 disabled:cursor-not-allowed
-          hover:shadow-lg transition-all duration-300"
-        >
-          Next →
-        </button>
-
-      </div>
     </div>
   );
 }
