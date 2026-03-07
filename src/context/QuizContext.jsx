@@ -12,7 +12,6 @@ export const QuizProvider = ({ children }) => {
         [key]: value,
       };
 
-      console.log("Updated Answers:", updated);
       return updated;
     });
   };

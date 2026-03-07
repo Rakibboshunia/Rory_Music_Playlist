@@ -30,18 +30,18 @@ export default function Step10_Final() {
   const isProcessing = isGenerating || paymentLoading;
 
   const formatAnswers = () => {
-    return {
-      q1: answers.eventType,
-      q2: answers.overallVibe,
-      q3: answers.genreFlow,
-      q4: answers.decades,
-      q5: answers.crowdAge,
-      q6: answers.drinksMoment,
-      q7: answers.lastHour,
-      q8: answers.floorFiller,
-      q9: answers.sax,
-    };
+  return {
+    q1: answers.eventType,
+    q2: answers.overallVibe,
+    q3: answers.drinksMoment,
+    q4: answers.crowdAge,
+    q5: answers.floorfiller,
+    q6: answers.sax,
+    q7: answers.decades?.join(", "),
+    q8: answers.genreLean?.join(", "),
+    q9: answers.lastHour,
   };
+};
 
   const DontPlay = () => {
     const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
