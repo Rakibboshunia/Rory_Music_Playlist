@@ -21,7 +21,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
   return (
     <div className="flex items-center justify-center gap-2 mt-6">
 
-      {/* Prev */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -30,7 +29,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         <FiChevronLeft />
       </button>
 
-      {/* Page Numbers */}
       {pages.map((page) => (
         <button
           key={page}
@@ -46,7 +44,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         </button>
       ))}
 
-      {/* Next */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

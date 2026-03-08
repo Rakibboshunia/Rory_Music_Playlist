@@ -15,12 +15,11 @@ export default function ConfirmDeleteModal({
       onClose={onClose}
       footer={
         <div className="flex justify-end gap-3">
-          {/* NO */}
+
           <OutlineButton onClick={onClose}>
             No
           </OutlineButton>
 
-          {/* YES — 🔥 THIS MUST CALL onConfirm */}
           <PrimaryButton onClick={onConfirm}>
             Yes
           </PrimaryButton>

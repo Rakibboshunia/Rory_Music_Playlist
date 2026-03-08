@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 export default function BackNextButtons({
-  backPath = "/",
   nextPath,
   onNext,
   disabled = false,
@@ -25,9 +24,10 @@ export default function BackNextButtons({
 
       {showBack && (
         <button
-          onClick={() => navigate(backPath)}
+          type="button"
+          onClick={() => navigate(-1)}
           className="px-5 py-2 rounded-full text-white 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
           hover:shadow-lg transition-all duration-300 cursor-pointer"
         >
           {backText}
@@ -36,10 +36,11 @@ export default function BackNextButtons({
 
       {showNext && (
         <button
+          type="button"
           disabled={disabled}
           onClick={handleNext}
           className="px-5 py-2 rounded-full text-white 
-          bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
+          bg-linear-to-r from-[#155DFC] to-[#9810FA] 
           disabled:opacity-50 disabled:cursor-not-allowed
           hover:shadow-lg transition-all duration-300 cursor-pointer"
         >

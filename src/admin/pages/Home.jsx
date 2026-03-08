@@ -17,7 +17,6 @@ export default function Home() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -65,13 +64,12 @@ export default function Home() {
 
       setActivities(formattedActivities);
     } catch (error) {
-      console.error("Dashboard Error:", error);
+
     } finally {
       setLoading(false);
     }
   };
 
-  // pagination logic
   const totalPages = Math.ceil(activities.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;

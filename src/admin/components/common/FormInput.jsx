@@ -33,7 +33,6 @@ export default function FormInput({ label, type = "text", ...props }) {
           {...props}
         />
 
-        {/* Eye icon only for password */}
         {isPassword && (
           <button
             type="button"

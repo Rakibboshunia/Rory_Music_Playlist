@@ -61,12 +61,10 @@ export default function ChangePasswordModal({ open, onClose }) {
     >
       <div className="space-y-6">
 
-        {/* Description */}
         <p className="text-sm text-gray-500">
           Enter your current password and set a new one to secure your account.
         </p>
 
-        {/* Current Password */}
         <FormInput
           label="Current Password"
           type="password"
@@ -74,7 +72,6 @@ export default function ChangePasswordModal({ open, onClose }) {
           onChange={(e) => setCurrentPassword(e.target.value)}
         />
 
-        {/* New Password */}
         <FormInput
           label="New Password"
           type="password"

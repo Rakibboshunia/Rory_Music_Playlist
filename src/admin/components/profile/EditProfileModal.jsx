@@ -48,7 +48,6 @@ export default function EditProfileModal({
     >
       <div className="space-y-8">
 
-        {/* ================= PROFILE IMAGE ================= */}
         <div>
           <label className="block text-sm font-medium text-gray-600 mb-4">
             Profile Picture
@@ -56,7 +55,6 @@ export default function EditProfileModal({
 
           <div className="flex items-center gap-6">
 
-            {/* IMAGE PREVIEW */}
             <div className="relative group">
               <div className="h-24 w-24 rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-md">
                 {imageSrc ? (
@@ -72,7 +70,6 @@ export default function EditProfileModal({
                 )}
               </div>
 
-              {/* HOVER OVERLAY */}
               <label
                 htmlFor="avatarUpload"
                 className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition cursor-pointer"
@@ -81,7 +78,6 @@ export default function EditProfileModal({
               </label>
             </div>
 
-            {/* HIDDEN FILE INPUT */}
             <input
               id="avatarUpload"
               type="file"
@@ -90,7 +86,6 @@ export default function EditProfileModal({
               className="hidden"
             />
 
-            {/* CHANGE BUTTON */}
             <label
               htmlFor="avatarUpload"
               className="inline-block text-sm border border-gray-300 rounded-lg px-4 py-2 cursor-pointer hover:bg-gray-100 transition"
@@ -100,7 +95,6 @@ export default function EditProfileModal({
           </div>
         </div>
 
-        {/* ================= FORM INPUTS ================= */}
         <div className="space-y-5">
           <FormInput
             label="Full Name"

@@ -7,7 +7,6 @@ export default function DeleteAction({ onDelete }) {
 
   return (
     <>
-      {/* Delete Icon */}
       <button
         onClick={() => setOpen(true)}
         className="
@@ -27,12 +26,11 @@ export default function DeleteAction({ onDelete }) {
         />
       </button>
 
-      {/* Confirmation Modal */}
       <ConfirmDeleteModal
         open={open}
         onClose={() => setOpen(false)}
         onConfirm={() => {
-          onDelete();   // 🔥 actual delete
+          onDelete();  
           setOpen(false);
         }}
       />

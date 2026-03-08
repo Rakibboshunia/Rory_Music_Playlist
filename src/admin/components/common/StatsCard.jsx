@@ -15,10 +15,9 @@ export default function StatsCard({ icon, value, label, trend }) {
           border border-gray-200
         "
       >
-        {/* Top Row */}
+
         <div className=" flex items-center justify-between">
           
-          {/* Icon */}
           <div className="h-9 w-9 sm:h-11 sm:w-11 md:h-12 md:w-12 rounded-xl bg-gray-100 flex items-center justify-center">
             <Icon
               icon={icon}
@@ -26,14 +25,12 @@ export default function StatsCard({ icon, value, label, trend }) {
             />
           </div>
 
-          {/* Trend */}
           <div className="flex items-center gap-1 text-green-600 text-xs sm:text-sm font-medium">
             <Icon icon="mdi:trending-up" className="text-sm sm:text-base" />
             {trend}
           </div>
         </div>
 
-        {/* Bottom Content */}
         <div className="mt-4 sm:mt-6">
           <div className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900">
             {value}

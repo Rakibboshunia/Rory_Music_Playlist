@@ -22,7 +22,6 @@ export default function User() {
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -48,7 +47,7 @@ export default function User() {
 
       setUsers(formattedUsers);
     } catch (error) {
-      console.error("Users Fetch Error:", error);
+
       toast.error("Failed to fetch users");
     } finally {
       setLoading(false);
@@ -56,11 +55,6 @@ export default function User() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this user?"
-    );
-
-    if (!confirmDelete) return;
 
     try {
       const res = await deleteAdminUserApi(id);
@@ -73,7 +67,7 @@ export default function User() {
         toast.error(res?.data?.message || "Delete failed");
       }
     } catch (error) {
-      console.error("Delete Error:", error);
+
       toast.error(
         error?.response?.data?.message || "Delete failed"
       );
@@ -86,7 +80,6 @@ export default function User() {
       (statusFilter === "" || u.status === statusFilter)
   );
 
-  // pagination logic
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;

@@ -46,7 +46,6 @@ export default function Playlists() {
 
       setPlaylists(formatted);
     } catch (error) {
-      console.error("Playlists Fetch Error:", error);
       toast.error("Failed to fetch playlists");
     } finally {
       setLoading(false);
@@ -54,11 +53,6 @@ export default function Playlists() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this playlist?"
-    );
-
-    if (!confirmDelete) return;
 
     try {
       const res = await deleteAdminPlaylistApi(id);
@@ -71,7 +65,7 @@ export default function Playlists() {
         toast.error(res?.data?.message || "Delete failed");
       }
     } catch (error) {
-      console.error("Delete Playlist Error:", error);
+
       toast.error(
         error?.response?.data?.message || "Delete failed"
       );
@@ -84,7 +78,6 @@ export default function Playlists() {
       (typeFilter === "" || p.type === typeFilter)
   );
 
-  // pagination logic
   const totalPages = Math.ceil(filteredPlaylists.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;

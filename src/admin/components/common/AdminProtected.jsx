@@ -4,7 +4,6 @@ import { useAuth } from "../../../context/AuthContext";
 export default function AdminProtected() {
   const { user, loading } = useAuth();
 
-  /* 🔄 Wait until auth restore finishes */
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -17,16 +16,13 @@ export default function AdminProtected() {
 
   const role = user?.role || user?.userType;
 
-  /* 🚫 Not logged in */
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  /* 🚫 Not admin */
   if (role !== "admin") {
     return <Navigate to="/" replace />;
   }
 
-  /* ✅ Admin allowed */
   return <Outlet />;
 }

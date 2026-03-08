@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+
 import coverImg from "../../../assets/img/playlist.png";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
 import PremiumPdfCard from "./PremiumPdfCard";
+
 import { upgradePlaylistApi } from "../../../api/playlistApi";
 
 export default function PlaylistCard({
@@ -19,18 +22,19 @@ export default function PlaylistCard({
   _id,
 }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [upgradeLoading, setUpgradeLoading] = useState(false);
 
   const handleUpgrade = async (e) => {
     e.stopPropagation();
 
-    if (!quizId || !_id) {
-      console.error("Missing quizId or playlistId");
+    if (!user) {
+      navigate("/login");
       return;
     }
 
-    if (!user) {
-      console.error("User not authenticated");
+    if (!quizId || !_id) {
+      console.error("Missing quizId or playlistId");
       return;
     }
 
@@ -50,7 +54,7 @@ export default function PlaylistCard({
       if (checkoutUrl) {
         window.location.href = checkoutUrl;
       } else {
-        console.error("Checkout URL not found in response");
+        console.error("Checkout URL not found");
       }
     } catch (err) {
       console.error("Upgrade error:", err?.response?.data || err);
@@ -62,13 +66,15 @@ export default function PlaylistCard({
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div className="mb-4 flex items-start justify-between">
+
         <div onClick={onToggle} className="cursor-pointer flex-1">
           <p className="font-medium text-2xl">{title}</p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 
         <div className="flex items-center gap-4">
-          {user && playlist_type?.toLowerCase() !== "premium" && (
+
+          {playlist_type?.toLowerCase() !== "premium" && (
             <button
               onClick={handleUpgrade}
               disabled={upgradeLoading}
@@ -76,22 +82,26 @@ export default function PlaylistCard({
             >
               {upgradeLoading ? (
                 <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
-              ) : (
+              ) : user ? (
                 "Upgrade to Premium"
+              ) : (
+                "Login to Upgrade"
               )}
             </button>
           )}
 
           <button
             onClick={onToggle}
-            className={`transition-transform cursor-pointer ${isOpen ? "rotate-180" : ""}`}
+            className={`transition-transform cursor-pointer ${
+              isOpen ? "rotate-180" : ""
+            }`}
           >
             <FiChevronDown size={25} />
           </button>
+
         </div>
       </div>
 
-      {/* BODY */}
       {isOpen && (
         <div>
           <img
@@ -102,7 +112,6 @@ export default function PlaylistCard({
 
           <PlaylistPlayer spotifyUrl={spotifyUrl} />
 
-          {/* Premium PDF */}
           {playlist_type?.toLowerCase() === "premium" && <PremiumPdfCard />}
 
           <div className="mt-4 space-y-4">

@@ -20,7 +20,7 @@ export default function Table({ columns, data, renderRow }) {
             key={i}
             className="border-b border-gray-200 last:border-0"
           >
-            {/* enforce row height via td wrapper */}
+            
             {renderRow(item).map
               ? renderRow(item).map((cell, idx) => (
                   <td

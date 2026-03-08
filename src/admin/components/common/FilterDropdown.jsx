@@ -8,7 +8,6 @@ export default function FilterDropdown({
 }) {
   const ref = useRef(null);
 
-  // outside click close
   useEffect(() => {
     const handleClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {

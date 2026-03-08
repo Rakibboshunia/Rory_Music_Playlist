@@ -51,7 +51,7 @@ export default function Profile() {
         toast.success(res.data.message || "Profile updated successfully");
       }
     } catch (error) {
-      console.error("Profile Update Error:", error);
+
       toast.error(
         error?.response?.data?.message || "Profile update failed"
       );
