@@ -44,7 +44,6 @@ export default function Step1_EventType() {
         );
       })}
 
-      {/* Buttons */}
       <BackNextButtons
         backPath="/"
         disabled={!answers.eventType}

@@ -11,28 +11,24 @@ export default function Footer() {
   const linkClass = ({ isActive }) =>
     isActive ? "active-link active" : "hover:text-[#153DFC]";
 
-  // ✅ HERO SCROLL
   const scrollToHero = () => {
     document
       .getElementById("hero-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ TESTIMONIAL SCROLL
   const scrollToTestimonials = () => {
     document
       .getElementById("testimonials-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ QUIZ SCROLL
   const scrollToQuizPage = () => {
     document
       .getElementById("quiz-section")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ✅ HOME
   const handleHomeClick = (e) => {
     e.preventDefault();
 
@@ -44,7 +40,6 @@ export default function Footer() {
     }
   };
 
-  // ✅ TESTIMONIAL
   const handleTestimonialClick = (e) => {
     e.preventDefault();
 
@@ -56,7 +51,6 @@ export default function Footer() {
     }
   };
 
-  // ✅ QUIZ
   const handleQuizClick = (e) => {
     e.preventDefault();
 
@@ -75,7 +69,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-7 py-5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-          {/* LOGO */}
           <div
             onClick={handleHomeClick}
             className="cursor-pointer select-none flex items-center justify-center"
@@ -83,7 +76,6 @@ export default function Footer() {
             <img src={logo} alt="logo" className="w-12 h-14 scale-300 object-contain transition-all duration-300" />
           </div>
 
-          {/* MENU */}
           <div className="flex gap-6 font-medium text-gray-800">
             <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
@@ -108,7 +100,6 @@ export default function Footer() {
             </NavLink>
           </div>
 
-          {/* SOCIAL */}
           <div className="flex gap-3">
             {[
               {
@@ -138,7 +129,6 @@ export default function Footer() {
 
         <hr className="my-5" />
 
-        {/* ✅ POLICY LINKS */}
         <div className="flex justify-between text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
 

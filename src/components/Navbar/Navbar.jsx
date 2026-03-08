@@ -29,14 +29,12 @@ export default function Navbar() {
 
   if (loading) return null;
 
-  /* SCROLL EFFECT */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* OUTSIDE CLICK CLOSE */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -75,7 +73,6 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          {/* LOGO */}
           <div
             onClick={() => navigate("/")}
             className="cursor-pointer flex items-center"
@@ -87,7 +84,6 @@ export default function Navbar() {
             />
           </div>
 
-          {/* DESKTOP LINKS */}
           <div
             className={`hidden md:flex items-center gap-10 font-medium
             ${solidNavbar ? "text-gray-800" : "text-white"}`}
@@ -105,10 +101,8 @@ export default function Navbar() {
             </NavLink>
           </div>
 
-          {/* AUTH SECTION (DESKTOP) */}
           <div className="hidden md:flex relative" ref={dropdownRef}>
             {!user ? (
-              // Guest → Login Button
               <button
                 onClick={() => navigate("/login")}
                 className="px-5 py-2 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full hover:shadow-2xl border-2 border-green-300 transition-all shadow-2xl cursor-pointer"
@@ -116,7 +110,6 @@ export default function Navbar() {
                 Login
               </button>
             ) : (
-              // Logged In → Profile
               <>
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
@@ -171,7 +164,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* MOBILE BUTTON */}
           <div className="md:hidden">
             <button onClick={() => setMobileMenu(!mobileMenu)}>
               {mobileMenu ? <FiX size={26} /> : <FiMenu size={26} />}
@@ -179,13 +171,12 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE SLIDE MENU */}
         <div
           className={`md:hidden absolute top-16 right-0 w-75 px-8 transition-all duration-300 z-40
   ${mobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
         >
           <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-300 p-6 flex flex-col gap-4">
-            {/* Navigation */}
+
             <NavLink
               to="/"
               onClick={() => setMobileMenu(false)}
@@ -212,7 +203,6 @@ export default function Navbar() {
 
             <div className="border border-gray-300  my-2"></div>
 
-            {/* User Section */}
             {!user ? (
               <button
                 onClick={() => {

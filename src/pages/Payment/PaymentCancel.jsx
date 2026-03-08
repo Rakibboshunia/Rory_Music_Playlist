@@ -7,7 +7,6 @@ export default function PaymentCancel() {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-[#F3F6FF] via-[#EEF1FF] to-[#FAFBFF] px-4">
 
-      {/* FLOATING PARTICLES (same vibe as confetti) */}
       {[...Array(14)].map((_, i) => (
         <span
           key={i}
@@ -21,7 +20,6 @@ export default function PaymentCancel() {
         />
       ))}
 
-      {/* CARD */}
       <div className="
         relative
         bg-white/80
@@ -35,12 +33,10 @@ export default function PaymentCancel() {
         animate-fade-in
       ">
 
-        {/* ROTATING GRADIENT BORDER (cancel tone) */}
         <div className="absolute inset-0 rounded-[40px] p-[2px] bg-linear-to-r from-red-500 via-[#9810FA] to-red-600 animate-spin-slow -z-10">
           <div className="w-full h-full rounded-[38px] bg-white/90 backdrop-blur-xl" />
         </div>
 
-        {/* ICON */}
         <div className="flex justify-center mb-8">
           <div className="
             relative
@@ -55,7 +51,6 @@ export default function PaymentCancel() {
           </div>
         </div>
 
-        {/* TITLE */}
         <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">
           Payment Cancelled
         </h2>
@@ -66,18 +61,15 @@ export default function PaymentCancel() {
           No charges were made.
         </p>
 
-        {/* DIVIDER */}
         <div className="flex justify-center my-8">
           <div className="h-[4px] w-28 rounded-full bg-linear-to-r from-red-400 to-red-600" />
         </div>
 
-        {/* Guidance */}
         <p className="text-sm text-gray-600 leading-relaxed">
           You can return to the quiz and try again when you’re ready.
           Your preferences are still saved.
         </p>
 
-        {/* CTA */}
         <button
           onClick={() => navigate("/quiz")}
           className="
@@ -96,13 +88,11 @@ export default function PaymentCancel() {
           Return to Quiz
         </button>
 
-        {/* FOOTER */}
         <p className="text-xs text-gray-400 mt-7">
           Tip: You can retry payment anytime — it only takes a moment
         </p>
       </div>
 
-      {/* SAME ANIMATIONS AS SUCCESS */}
       <style>{`
         @keyframes confetti {
           0% { transform: translateY(0) rotate(0); }

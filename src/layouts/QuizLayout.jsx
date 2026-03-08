@@ -37,7 +37,6 @@ export default function QuizLayout() {
 
   return (
     <div id="quiz-section" className="min-h-screen">
-      {/* ===== HEADER ===== */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
         <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
           Your night. Your energy. <br /> Your soundtrack.
@@ -48,7 +47,6 @@ export default function QuizLayout() {
         </p>
       </div>
 
-      {/* ===== PROGRESS BAR ===== */}
       {currentStep > 0 && (
         <div className="max-w-xl mx-auto px-4 sm:px-6 mb-6">
           <div className="flex justify-between text-xs text-gray-500 mb-1">
@@ -65,7 +63,6 @@ export default function QuizLayout() {
         </div>
       )}
 
-      {/* ===== PAGE CONTENT ===== */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-15">
         <Outlet />
       </div>

@@ -42,12 +42,10 @@ export default function CookieBanner() {
           animate-fade-in
         "
       >
-        {/* PREMIUM GLOW FRAME */}
         <div className="absolute inset-0 rounded-4xl bg-linear-to-r from-[#155DFC]/25 via-[#9810FA]/20 to-[#155DFC]/25 blur-3xl -z-10 animate-pulse" />
 
-        {/* CONTENT */}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
-          {/* ICON */}
+
           <div className="shrink-0">
             <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-[#155DFC]/15 to-[#9810FA]/15 flex items-center justify-center shadow-inner">
               <img
@@ -58,13 +56,11 @@ export default function CookieBanner() {
             </div>
           </div>
 
-          {/* TEXT */}
           <p className="text-lg md:text-xl text-black leading-relaxed">
             We use cookies to make Soundtrack My Night work properly, understand how visitors use the site, and improve your experience. Some cookies are essential, while others help us analyse usage and personalise content.
           </p>
         </div>
 
-        {/* ACTIONS */}
         <div className="mt-8 flex flex-col-reverse md:flex-row md:items-center md:justify-end gap-4">
           <button
             onClick={handleReject}
@@ -110,7 +106,6 @@ export default function CookieBanner() {
           </button>
         </div>
 
-        {/* FOOTER */}
         <p className="mt-6 text-xs md:text-sm text-gray-600 text-center md:text-right">
           You can change or withdraw your consent at any time via the cookie
           settings link in the footer.{" "}

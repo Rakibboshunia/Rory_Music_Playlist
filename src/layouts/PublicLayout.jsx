@@ -24,7 +24,6 @@ export default function PublicLayout() {
 
       <Footer />
 
-      {/* 🍪 Cookie system */}
       <CookieBanner />
       <CookieFloatingButton />
       <CookiePreferencesModal />

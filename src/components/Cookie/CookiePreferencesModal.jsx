@@ -8,7 +8,6 @@ export default function CookiePreferencesModal() {
     acceptAll,
     rejectAll,
 
-    // 🆕 missing
     preferences,
     setPreferences,
     savePreferences,
@@ -20,7 +19,7 @@ export default function CookiePreferencesModal() {
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4">
       <div className="relative w-full max-w-5xl bg-white/85 backdrop-blur-2xl rounded-4xl p-16 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.45)] animate-fade-in">
         <div className="absolute inset-0 rounded-4xl bg-linear-to-r from-[#155DFC]/25 via-[#9810FA]/20 to-[#155DFC]/25 blur-3xl -z-10 animate-pulse" />
-        {/* Header */}
+
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-extrabold text-gray-900">
             Customize Consent Preferences
@@ -32,9 +31,9 @@ export default function CookiePreferencesModal() {
             <FiX size={26} />
           </button>
         </div>
-        {/* Preferences */}
+
         <div className="space-y-8 text-gray-700">
-          {/* Essential (locked) */}
+
           <div>
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-semibold">Essential Cookies</h3>
@@ -50,7 +49,6 @@ export default function CookiePreferencesModal() {
             </p>
           </div>
 
-          {/* Analytics */}
           <div>
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-semibold">Analytics Cookies</h3>
@@ -73,7 +71,6 @@ export default function CookiePreferencesModal() {
             </p>
           </div>
 
-          {/* Marketing */}
           <div>
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-semibold">
@@ -98,7 +95,7 @@ export default function CookiePreferencesModal() {
             </p>
           </div>
         </div>
-        {/* Actions */}
+
         <div className="flex flex-wrap justify-center gap-6 mt-10">
           <button
             onClick={() => savePreferences(preferences)}
@@ -125,7 +122,6 @@ export default function CookiePreferencesModal() {
           </button>
         </div>
 
-        {/* Footer */}
         <p className="text-xs text-gray-500 mt-8 text-center">
           You can change or withdraw your consent at any time via the cookie
           settings link in the footer

@@ -6,7 +6,6 @@ const CookieConsentContext = createContext();
 export function CookieConsentProvider({ children }) {
   const [showPreferences, setShowPreferences] = useState(false);
 
-  // ================= EXISTING (UNCHANGED) =================
   const openPreferences = () => setShowPreferences(true);
   const closePreferences = () => setShowPreferences(false);
 
@@ -16,7 +15,6 @@ export function CookieConsentProvider({ children }) {
       path: "/",
     });
 
-    // 🔹 also save preferences (new but non-breaking)
     Cookies.set(
       "cookie_preferences",
       JSON.stringify({
@@ -33,7 +31,6 @@ export function CookieConsentProvider({ children }) {
   const rejectAll = () => {
     Cookies.remove("cookie_consent", { path: "/" });
 
-    // 🔹 keep essential only
     Cookies.set(
       "cookie_preferences",
       JSON.stringify({
@@ -47,7 +44,6 @@ export function CookieConsentProvider({ children }) {
     closePreferences();
   };
 
-  // ================= 🆕 MISSING PART =================
 
   const defaultPreferences = {
     essential: true,
@@ -75,19 +71,16 @@ export function CookieConsentProvider({ children }) {
     closePreferences();
   };
 
-  // =======================================================
 
   return (
     <CookieConsentContext.Provider
       value={{
-        // existing
         showPreferences,
         openPreferences,
         closePreferences,
         acceptAll,
         rejectAll,
 
-        // 🆕 added (does not affect old code)
         preferences,
         setPreferences,
         savePreferences,

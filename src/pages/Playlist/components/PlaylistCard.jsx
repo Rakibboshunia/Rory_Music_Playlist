@@ -23,18 +23,23 @@ export default function PlaylistCard({
 }) {
   const { user } = useAuth();
   const navigate = useNavigate();
+
   const [upgradeLoading, setUpgradeLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const handleUpgrade = async (e) => {
     e.stopPropagation();
 
+    // Guest user → login
     if (!user) {
-      navigate("/login");
+      setLoginLoading(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
       return;
     }
 
     if (!quizId || !_id) {
-      console.error("Missing quizId or playlistId");
       return;
     }
 
@@ -45,8 +50,6 @@ export default function PlaylistCard({
         quizId,
         playlistId: _id,
       });
-
-      console.log("Stripe response:", res);
 
       const checkoutUrl =
         res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
@@ -77,10 +80,10 @@ export default function PlaylistCard({
           {playlist_type?.toLowerCase() !== "premium" && (
             <button
               onClick={handleUpgrade}
-              disabled={upgradeLoading}
+              disabled={upgradeLoading || loginLoading}
               className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition flex items-center justify-center min-w-[170px] disabled:opacity-50 cursor-pointer"
             >
-              {upgradeLoading ? (
+              {(upgradeLoading || loginLoading) ? (
                 <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
               ) : user ? (
                 "Upgrade to Premium"

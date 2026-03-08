@@ -17,19 +17,12 @@ export function AudioPlayerProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [activePlaylistId, setActivePlaylistId] = useState(null);
 
-  // PROGRESS
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  /* =====================
-      CORE ACTIONS
-  ===================== */
-
-  // ▶ PLAY TRACK (from main player or next/prev)
   const playTrack = (track, list = [], playlistId) => {
     if (!track) return;
 
-    // same track → just play
     if (currentTrack?.id === track.id) {
       return; 
     }
@@ -48,7 +41,6 @@ export function AudioPlayerProvider({ children }) {
     audioRef.current.play();
   };
 
-  // 🎯 SELECT ONLY (TrackRow ▶)
   const setTrackOnly = (track, list = [], playlistId) => {
     if (!track) return;
 
@@ -65,7 +57,6 @@ export function AudioPlayerProvider({ children }) {
     audioRef.current.pause();
   };
 
-  // ⏯ TOGGLE
   const togglePlay = () => {
     if (!currentTrack) return;
 
@@ -76,7 +67,6 @@ export function AudioPlayerProvider({ children }) {
     }
   };
 
-  // ⏭ NEXT
   const playNext = () => {
     if (!playlist.length) return;
 
@@ -84,7 +74,6 @@ export function AudioPlayerProvider({ children }) {
     playTrack(playlist[nextIndex], playlist, activePlaylistId);
   };
 
-  // ⏮ PREV
   const playPrev = () => {
     if (!playlist.length) return;
 
@@ -94,9 +83,6 @@ export function AudioPlayerProvider({ children }) {
     playTrack(playlist[prevIndex], playlist, activePlaylistId);
   };
 
-  /* =====================
-      AUDIO EVENTS (SOURCE OF TRUTH)
-  ===================== */
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -110,7 +96,7 @@ export function AudioPlayerProvider({ children }) {
     };
 
     const onEnded = () => {
-      playNext(); // 🔥 auto next
+      playNext();
     };
 
     audio.addEventListener("play", onPlay);

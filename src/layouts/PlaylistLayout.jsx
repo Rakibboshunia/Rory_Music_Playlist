@@ -14,7 +14,6 @@ export default function PlaylistLayout() {
         <Outlet />
       </div>
 
-      {/* 🍪 Cookie system */}
       <CookieFloatingButton />
       <CookiePreferencesModal />
     </div>

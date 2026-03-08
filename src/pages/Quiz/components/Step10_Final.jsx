@@ -122,15 +122,12 @@ export default function Step10_Final() {
 
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
-    //setShowUpgradePopup(false);
 
-    // Guest → Redirect to Login
     if (!isAuthenticated) {
       navigate("/login");
       return;
     }
 
-    // Logged → Payment
     try {
       setPaymentLoading(true);
 

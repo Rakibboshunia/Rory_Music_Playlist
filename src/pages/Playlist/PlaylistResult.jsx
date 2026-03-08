@@ -32,7 +32,6 @@ export default function PlaylistResult() {
 
   return (
     <div>
-      {/* ===== PLAYLIST AREA ===== */}
       <div className="min-h-screen pb-15">
         <div className="max-w-3xl mx-auto px-4 sm:px-4">
           <div className="flex justify-center mb-2">

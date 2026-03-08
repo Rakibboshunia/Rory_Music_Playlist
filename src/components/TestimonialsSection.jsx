@@ -3,9 +3,7 @@ import React from "react";
 export default function TestimonialsSection() {
   return (
     <section className="pt-8 pb-16 sm:pb-30 bg-white">
-      {/* ======================
-          SECTION HEADER
-      ====================== */}
+
       <div className="max-w-5xl mx-auto text-center px-4 sm:px-5">
         <h2 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#155DFC] to-[#9810FA] bg-clip-text text-transparent">
           Real Stories. Real Moments. <br />
@@ -47,9 +45,6 @@ export default function TestimonialsSection() {
   );
 }
 
-/* ======================
-   SINGLE TESTIMONIAL CARD
-====================== */
 function TestimonialCard({ text, name, role }) {
   return (
     <div
@@ -61,17 +56,14 @@ function TestimonialCard({ text, name, role }) {
         transition duration-300
       "
     >
-      {/* Stars */}
       <div className="flex text-yellow-400 mb-3 text-lg ">
         ★★★★★
       </div>
 
-      {/* Testimonial Text */}
       <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-6">
         {text}
       </p>
 
-      {/* User Info (NO IMAGE, NO ICON, NO PLACEHOLDER) */}
       <div className="flex flex-col">
         <p className="font-semibold text-gray-800 text-sm">
           {name}

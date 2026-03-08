@@ -24,7 +24,6 @@ export default function SettingsModal({ isOpen, onClose }) {
 
   if (!isOpen || !user) return null;
 
-  /* ================= IMAGE CHANGE ================= */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -35,7 +34,6 @@ export default function SettingsModal({ isOpen, onClose }) {
     });
   };
 
-  /* ================= UPDATE PROFILE ================= */
   const handleSaveChanges = async () => {
     try {
       setLoading(true);
@@ -75,7 +73,6 @@ export default function SettingsModal({ isOpen, onClose }) {
     }
   };
 
-  /* ================= CHANGE PASSWORD ================= */
   const handleChangePassword = async () => {
     try {
       setLoading(true);
@@ -113,7 +110,6 @@ export default function SettingsModal({ isOpen, onClose }) {
           Profile Settings
         </h2>
 
-        {/* ================= PROFILE SECTION ================= */}
 
         <div className="bg-gray-50 border border-gray-200 rounded-2xl mb-6 overflow-hidden shadow-sm">
           <button
@@ -134,7 +130,6 @@ export default function SettingsModal({ isOpen, onClose }) {
 
           {active === "profile" && (
             <div className="px-6 pb-8 pt-4 space-y-6 bg-gray-50">
-              {/* PROFILE IMAGE */}
               <div className="flex items-center gap-6">
                 <div className="relative group">
                   <img
@@ -166,7 +161,6 @@ export default function SettingsModal({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* INPUTS */}
               <div className="space-y-4">
                 <InputField
                   label="Full Name"
@@ -177,7 +171,6 @@ export default function SettingsModal({ isOpen, onClose }) {
                 <InputField label="Email" value={user.email} disabled />
               </div>
 
-              {/* SAVE BUTTON */}
               <button
                 onClick={handleSaveChanges}
                 disabled={loading}
@@ -194,7 +187,6 @@ export default function SettingsModal({ isOpen, onClose }) {
           )}
         </div>
 
-        {/* ================= PASSWORD SECTION ================= */}
         <div className="bg-gray-50 border border-gray-200 rounded-2xl mb-6 overflow-hidden shadow-sm">
           <button
             onClick={() => setActive(active === "password" ? "" : "password")}
@@ -212,13 +204,11 @@ export default function SettingsModal({ isOpen, onClose }) {
 
           {active === "password" && (
             <div className="px-6 pb-8 pt-4 space-y-6 bg-gray-50">
-              {/* INFO TEXT */}
               <p className="text-sm text-gray-500">
                 For security reasons, please enter your current password before
                 setting a new one.
               </p>
 
-              {/* PASSWORD INPUTS */}
               <div className="space-y-4">
                 <PasswordField
                   label="Current Password"
@@ -245,7 +235,6 @@ export default function SettingsModal({ isOpen, onClose }) {
                 />
               </div>
 
-              {/* UPDATE BUTTON */}
               <button
                 onClick={handleChangePassword}
                 disabled={
