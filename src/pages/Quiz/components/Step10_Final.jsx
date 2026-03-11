@@ -8,7 +8,7 @@ import { useAuth } from "../../../context/AuthContext";
 
 import toast from "react-hot-toast";
 
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+// import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import DoNotPlayCard from "../../../components/DoNotPlayCard";
 
 import { submitGuestQuizApi, submitUserQuizApi } from "../../../api/quizApi";
@@ -30,18 +30,18 @@ export default function Step10_Final() {
   const isProcessing = isGenerating || paymentLoading;
 
   const formatAnswers = () => {
-  return {
-    q1: answers.eventType,
-    q2: answers.overallVibe,
-    q3: answers.drinksMoment,
-    q4: answers.crowdAge,
-    q5: answers.floorfiller,
-    q6: answers.sax,
-    q7: answers.decades?.join(", "),
-    q8: answers.genreLean?.join(", "),
-    q9: answers.lastHour,
+    return {
+      q1: answers.eventType,
+      q2: answers.overallVibe,
+      q3: answers.drinksMoment,
+      q4: answers.crowdAge,
+      q5: answers.floorfiller,
+      q6: answers.sax,
+      q7: answers.decades?.join(", "),
+      q8: answers.genreLean?.join(", "),
+      q9: answers.lastHour,
+    };
   };
-};
 
   const DontPlay = () => {
     const filled = dontPlaySongs.filter((song) => song?.trim() !== "");
@@ -122,7 +122,6 @@ export default function Step10_Final() {
 
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
-
     if (!isAuthenticated) {
       navigate("/login");
       return;
@@ -316,7 +315,7 @@ export default function Step10_Final() {
                     onClick={handleUpgradeNo}
                     className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center cursor-pointer"
                   >
-                    <FiArrowLeft size={20} />
+                    {/* <FiArrowLeft size={20} /> */}
                     Send Free Playlist
                   </button>
 
@@ -337,7 +336,7 @@ export default function Step10_Final() {
                     ) : (
                       <>
                         Unlock My Full Playlist
-                        <FiArrowRight size={20} />
+                        {/* <FiArrowRight size={20} /> */}
                       </>
                     )}
                   </button>
