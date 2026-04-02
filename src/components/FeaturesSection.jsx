@@ -1,8 +1,6 @@
 import React from "react";
 import { Sparkles, ListMusic, Mic } from "lucide-react";
-import SpotifyLogo from "../assets/img/SpotifyLogo.png"
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight } from "react-icons/fi";
 
 
 export default function FeaturesSection() {
@@ -16,13 +14,9 @@ export default function FeaturesSection() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-18">
           <h2 className="text-4xl sm:text-4xl lg:text-5xl pb-2 font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
-            Your vibe. Your music.
-            <br />
-            Your Spotify playlist.
+            Your Wedding Playlist, <br />Sorted in 3 Simple Steps
           </h2>
-          <p className="mt-3 text-gray-600">
-            From vision to reality in three simple steps
-          </p>
+          
         </div>
 
         <div
@@ -33,24 +27,24 @@ export default function FeaturesSection() {
         >
           <FeatureCard
             number="1"
-            title="Discover Your Vibe"
-            desc="Tell us the energy, genres, and moments you love — and what you don’t want played."
+            title="Tell us your vibe"
+            desc=" Answer a few quick questions about your music taste, crowd, and the kind of atmosphere you want on the night."
             icon={<Sparkles size={22} />}
             bg="from-pink-500 to-purple-500"
           />
 
           <FeatureCard
             number="2"
-            title="We generate your Spotify playlist"
-            desc="Our system creates a personalised playlist using real Spotify tracks based on your answers."
+            title="Get matched with your playlist"
+            desc="We instantly generate personalised song suggestions based on your answers, so your playlist feels relevant and genuinely useful."
             icon={<ListMusic size={22} />}
             bg="from-blue-500 to-cyan-500"
           />
 
           <FeatureCard
             number="3"
-            title="Listen instantly"
-            desc="Open your playlist straight away and hear how your night could sound."
+            title=" Unlock your playlist"
+            desc="Complete the quiz, enter your email, and get your free 15-song playlist sent straight to your inbox."
             icon={<Mic size={22} />}
             bg="from-orange-500 to-yellow-500"
           />
@@ -60,8 +54,8 @@ export default function FeaturesSection() {
         <button
           onClick={() => navigate("/quiz")}
           className="
-            px-4 py-3 text-white
-            bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white
+            px-4 py-2 text-white
+            bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white border border-transparent
             font-medium rounded-full shadow-md
             transition-all duration-300 ease-out
             hover:scale-[1.03] 
@@ -70,12 +64,10 @@ export default function FeaturesSection() {
             flex items-center justify-center mx-auto"
         >
           <img 
-          src={SpotifyLogo} 
-          alt="Spotify" 
+          label="Build My Playlist"
           className="h-[2.0em] w-auto" 
           />
-          Generate my Spotify playlist
-          <FiArrowRight size={20} />
+          Build My Playlist
         </button>
       </div>
     </section>
