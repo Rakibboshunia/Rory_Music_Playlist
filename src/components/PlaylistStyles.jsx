@@ -27,12 +27,12 @@ export default function PlaylistStyles() {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-          See the Kind of{" "}
+          See the Kind of{" "} <br />
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Playlists You Can Create
           </span>
@@ -74,7 +74,7 @@ export default function PlaylistStyles() {
           <button
             onClick={() => navigate("/quiz")}
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white 
-            px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition"
+            px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Create My Playlist
           </button>

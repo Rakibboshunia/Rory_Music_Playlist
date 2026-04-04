@@ -20,12 +20,12 @@ export default function FreeVsFull() {
   ];
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-24 px-6 bg-gradient-to-b from-white to-gray-50 cursor-pointer">
       <div className="max-w-6xl mx-auto text-center">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-16">
-          Start Free, Upgrade{" "}
+          Start Free, Upgrade{" "} <br />
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             When You’re Ready
           </span>
@@ -78,7 +78,7 @@ export default function FreeVsFull() {
         <div className="mt-16">
           <button
             onClick={() => navigate("/quiz")}
-            className="bg-black text-white px-10 py-4 rounded-2xl shadow-xl 
+            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-10 py-4 rounded-2xl shadow-xl cursor-pointer
             hover:scale-105 transition"
           >
             Start With My Free Playlist

@@ -1,82 +1,90 @@
 import React from "react";
-import rsvp from "../assets/img/2023.png"
-import wedding from "../assets/img/2024.png"
-import wedding25 from "../assets/img/2025.png"
+import rsvp from "../assets/img/2023.png";
+import wedding from "../assets/img/2024.png";
+import wedding25 from "../assets/img/2025.png";
 
 export default function AwardsSection() {
   return (
-    <section className="py-5 bg-[#F4F8FE]">
-      <div className="max-w-5xl mx-auto text-center pt-8 px-6">
-        <h2 className="text-4xl sm:text-4xl lg:text-5xl font-semibold leading-tight bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
-          Award-Winning <br /> Entertainment Excellence
-        </h2>
+    <section className="relative py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
 
-        <p className="mt-3 text-gray-600">
-          Powered by DJ & SAX® — Ireland’s multi award-winning entertainment team <br />Trusted by thousands of couples and recognised by Ireland’s leading wedding platforms.
-        </p>
-      </div>
+      {/* Glow background */}
+      <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
+      <div className="absolute w-[400px] h-[400px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
-      <div
-        className="max-w-6xl mx-auto mt-12 sm:mt-16
-          px-4 sm:px-6 text-center
-          grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3
-          gap-6 sm:gap-8"
-      >
-        <AwardCard img={rsvp} title="Wedding DJ Of The Year 2023" />
+      <div className="relative z-10">
 
-        <AwardCard img={wedding} title="Wedding DJ Of The Year 2024" />
+        {/* HEADER */}
+        <div className="max-w-5xl mx-auto text-center px-6">
+          <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+            Award-Winning{" "} <br />
+            <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+              Entertainment Excellence
+            </span>
+          </h2>
 
-        <AwardCard
-          img={wedding25}
-          title="Entertainment Agency Of The Year 2025"
-        />
-      </div>
+          <p className="mt-4 text-gray-600 text-sm sm:text-base">
+            Powered by DJ & SAX® — Ireland’s multi award-winning entertainment team <br />Trusted by thousands of couples and recognised by Ireland’s leading wedding platforms.
+          </p>
+        </div>
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-          <div className="flex flex-col items-center justify-center gap-3">
-            <span className="text-3xl">🎵</span>
-            <h2 className="text-base sm:text-lg font-medium leading-snug">
-              Thousands of bespoke <br />
-              soundtracks created
-            </h2>
-          </div>
+        {/* AWARDS */}
+        <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AwardCard img={rsvp} title="Wedding DJ Of The Year 2023" />
+          <AwardCard img={wedding} title="Wedding DJ Of The Year 2024" />
+          <AwardCard img={wedding25} title="Entertainment Agency Of The Year 2025" />
+        </div>
 
-          <div className="flex flex-col items-center justify-center gap-3">
-            <span className="text-3xl">💃</span>
-            <h2 className="text-base sm:text-lg font-medium leading-snug">
-              Built on real dancefloor <br />
-              data from live celebrations
-            </h2>
-          </div>
-
-          <div className="flex flex-col items-center justify-center gap-3">
-            <span className="text-3xl">⭐</span>
-            <h2 className="text-base sm:text-lg font-medium leading-snug">
-              5.0★ average Google rating <br />
-              from DJ and SAX® clients
-            </h2>
+        {/* STATS */}
+        <div className="max-w-5xl mx-auto px-6 mt-20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            <Stat emoji="🎵" text="Thousands of bespoke soundtracks created" />
+            <Stat emoji="💃" text="Built on real dancefloor data from live events" />
+            <Stat emoji="⭐" text="5.0★ average rating from happy couples" />
           </div>
         </div>
+
       </div>
     </section>
   );
-      }
+}
 
-      function AwardCard({ img, title }) {
-        return (
-          <div className="bg-white rounded-2xl shadow-md p-10 flex flex-col items-center justify-center hover:shadow-lg transition">
-            <img src={img} alt={title} className="w-40 h-40 object-contain" />
-            <p className="mt-6 text-lg font-medium text-gray-700">{title}</p>
-          </div>
-        );
-      }
+/* ================= CARD ================= */
+function AwardCard({ img, title }) {
+  return (
+    <div
+      className="
+        group relative p-8 rounded-3xl
+        bg-white/70 backdrop-blur-md
+        border border-gray-100
+        shadow-md hover:shadow-2xl
+        transition duration-300 hover:-translate-y-2
+        text-center
+      "
+    >
+      {/* Glow */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition" />
 
-      function Stat({ number, label }) {
-        return (
-          <div>
-            <p className="text-4xl font-bold bg-linear-to-r from-[#9810FA] to-[#155DFC] text-transparent bg-clip-text items-center">{number}</p>
-            <p className="mt-2 text-gray-600">{label}</p>
-          </div>
-        );
-      }
+      <img
+        src={img}
+        alt={title}
+        className="w-32 h-32 object-contain mx-auto mb-6 relative z-10"
+      />
+
+      <p className="text-lg font-semibold text-gray-800 relative z-10">
+        {title}
+      </p>
+    </div>
+  );
+}
+
+/* ================= STAT ================= */
+function Stat({ emoji, text }) {
+  return (
+    <div className="p-6 rounded-2xl bg-white shadow-sm hover:shadow-lg transition">
+      <div className="text-3xl mb-3">{emoji}</div>
+      <p className="text-gray-700 font-medium leading-snug">
+        {text}
+      </p>
+    </div>
+  );
+}

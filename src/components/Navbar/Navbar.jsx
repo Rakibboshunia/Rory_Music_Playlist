@@ -55,6 +55,31 @@ export default function Navbar() {
     navigate("/login");
   };
 
+  const scrollToSection = (id) => {
+  if (location.pathname !== "/") {
+    navigate("/");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        const yOffset = -90;
+        const y =
+          el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 200);
+  } else {
+    const el = document.getElementById(id);
+    if (el) {
+      const yOffset = -90;
+      const y =
+        el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+};
+
   const linkClass = ({ isActive }) =>
     `transition duration-200 ${
       isActive
@@ -72,7 +97,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between cursor-pointer">
           <div
             onClick={() => navigate("/")}
             className="cursor-pointer flex items-center"
@@ -86,19 +111,50 @@ export default function Navbar() {
 
           <div
             className={`hidden md:flex items-center gap-10 font-medium
-            ${solidNavbar ? "text-gray-800" : "text-white"}`}
+  ${solidNavbar ? "text-gray-800" : "text-white"}`}
           >
-            <NavLink to="/" className={linkClass}>
-              Home
-            </NavLink>
+            {/* EXISTING */}
+            <div
+              className={`hidden md:flex items-center gap-10 font-medium
+  ${solidNavbar ? "text-gray-800" : "text-white"}`}
+            >
+              {/* HOME */}
+              <NavLink to="/" className={linkClass}>
+                Home
+              </NavLink>
 
-            <NavLink to="/quiz" className={linkClass}>
-              Quiz
-            </NavLink>
+              {/* SCROLL */}
+              <button
+                onClick={() => scrollToSection("quiz-section")}
+                className="hover:text-purple-600 transition"
+              >
+                How It Works
+              </button>
 
-            <NavLink to="/playlist" className={linkClass}>
-              Playlist
-            </NavLink>
+              {/* ROUTES */}
+              <NavLink to="/quiz" className={linkClass}>
+                Quiz
+              </NavLink>
+
+              <NavLink to="/playlist" className={linkClass}>
+                Playlist
+              </NavLink>
+
+              {/* SCROLL */}
+              <button
+                onClick={() => scrollToSection("pricing-section")}
+                className="hover:text-purple-600 transition"
+              >
+                Packages
+              </button>
+
+              <button
+                onClick={() => scrollToSection("faq-section")}
+                className="hover:text-purple-600 transition"
+              >
+                FAQ
+              </button>
+            </div>
           </div>
 
           <div className="hidden md:flex relative" ref={dropdownRef}>
@@ -176,7 +232,7 @@ export default function Navbar() {
   ${mobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
         >
           <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-300 p-6 flex flex-col gap-4">
-
+            {/* HOME */}
             <NavLink
               to="/"
               onClick={() => setMobileMenu(false)}
@@ -185,6 +241,18 @@ export default function Navbar() {
               🏠 Home
             </NavLink>
 
+            {/* HOW IT WORKS (SCROLL) */}
+            <button
+              onClick={() => {
+                scrollToSection("quiz-section");
+                setMobileMenu(false);
+              }}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              🎧 How It Works
+            </button>
+
+            {/* QUIZ */}
             <NavLink
               to="/quiz"
               onClick={() => setMobileMenu(false)}
@@ -193,6 +261,7 @@ export default function Navbar() {
               🎧 Quiz
             </NavLink>
 
+            {/* PLAYLIST */}
             <NavLink
               to="/playlist"
               onClick={() => setMobileMenu(false)}
@@ -200,6 +269,39 @@ export default function Navbar() {
             >
               🎵 Playlist
             </NavLink>
+
+            {/* PRICING */}
+            <button
+              onClick={() => {
+                scrollToSection("pricing-section");
+                setMobileMenu(false);
+              }}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              💰 Packages
+            </button>
+
+            {/* REVIEWS */}
+            <button
+              onClick={() => {
+                scrollToSection("testimonials-section");
+                setMobileMenu(false);
+              }}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              ⭐ Reviews
+            </button>
+
+            {/* FAQ */}
+            <button
+              onClick={() => {
+                scrollToSection("faq-section");
+                setMobileMenu(false);
+              }}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+            >
+              ❓ FAQ
+            </button>
 
             <div className="border border-gray-300  my-2"></div>
 

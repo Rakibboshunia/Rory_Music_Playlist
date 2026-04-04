@@ -10,27 +10,27 @@ export default function WhyLove() {
     {
       icon: Users,
       title: "Built around your crowd",
-      desc: "Whether you’ve got a mixed-age guest list or party lovers, your playlist matches your vibe.",
+      desc: "Whether you’ve got a mixed-age guest list, party people, music lovers, or all three, your playlist is shaped around the atmosphere you want to create.",
     },
     {
       icon: Sparkles,
       title: "Discover songs you might never have found",
-      desc: "Get the perfect mix of classics, modern hits, and dancefloor favourites.",
+      desc: "Get the right mix of timeless classics, modern favourites, and dancefloor fillers without it feeling random or generic.",
     },
     {
       icon: ShieldCheck,
       title: "Feel more confident about your music choices",
-      desc: "A clear starting point for your DJ, playlist, or overall wedding vibe.",
+      desc: "Whether you’re sending ideas to your DJ, building your own playlist, or just trying to define your style, this gives you a clear starting point.",
     },
   ];
 
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-white cursor-pointer">
       <div className="max-w-6xl mx-auto">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-          Why Couples Love{" "}
+          Why Couples Love{" "} <br />
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Soundtrack My Night
           </span>

@@ -19,7 +19,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="relative py-24 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
       
       {/* Background glow */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
@@ -29,7 +29,7 @@ export default function HowItWorks() {
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-          Your Wedding Playlist, Sorted in{" "}
+          Your Wedding Playlist, <br />Sorted in{" "}
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             3 Simple Steps
           </span>
@@ -66,7 +66,7 @@ export default function HowItWorks() {
           <button
             onClick={() => navigate("/quiz")}
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white 
-            px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition"
+            px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Build My Playlist
           </button>

@@ -11,22 +11,22 @@ export default function Footer() {
   const linkClass = ({ isActive }) =>
     isActive ? "active-link active" : "hover:text-[#153DFC]";
 
-  const scrollToHero = () => {
-    document
-      .getElementById("hero-section")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
+  /* 🔥 ONE GLOBAL SCROLL FUNCTION */
+  const handleScroll = (id) => (e) => {
+    e.preventDefault();
 
-  const scrollToTestimonials = () => {
-    document
-      .getElementById("testimonials-section")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToQuizPage = () => {
-    document
-      .getElementById("quiz-section")
-      ?.scrollIntoView({ behavior: "smooth" });
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById(id)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleHomeClick = (e) => {
@@ -34,31 +34,15 @@ export default function Footer() {
 
     if (location.pathname !== "/") {
       navigate("/");
-      setTimeout(scrollToHero, 300);
+      setTimeout(() => {
+        document
+          .getElementById("hero-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     } else {
-      scrollToHero();
-    }
-  };
-
-  const handleTestimonialClick = (e) => {
-    e.preventDefault();
-
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(scrollToTestimonials, 300);
-    } else {
-      scrollToTestimonials();
-    }
-  };
-
-  const handleQuizClick = (e) => {
-    e.preventDefault();
-
-    if (location.pathname !== "/quiz") {
-      navigate("/quiz");
-      setTimeout(scrollToQuizPage, 300);
-    } else {
-      scrollToQuizPage();
+      document
+        .getElementById("hero-section")
+        ?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -69,19 +53,34 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-7 py-5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
+          {/* LOGO */}
           <div
             onClick={handleHomeClick}
             className="cursor-pointer select-none flex items-center justify-center"
           >
-            <img src={logo} alt="logo" className="w-12 h-14 scale-300 object-contain transition-all duration-300" />
+            <img
+              src={logo}
+              alt="logo"
+              className="w-12 h-14 scale-300 object-contain transition-all duration-300"
+            />
           </div>
 
-          <div className="flex gap-6 font-medium text-gray-800">
+          {/* 🔥 LINKS */}
+          <div className="flex gap-6 font-medium text-gray-800 cursor-pointer">
+
             <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
             </NavLink>
 
-            <NavLink to="/quiz" onClick={handleQuizClick} className={linkClass}>
+            <NavLink
+              to="/"
+              onClick={handleScroll("quiz-section")}
+              className="hover:text-[#153DFC]"
+            >
+              How It Works
+            </NavLink>
+
+            <NavLink to="/quiz" className={linkClass}>
               Quiz
             </NavLink>
 
@@ -93,13 +92,27 @@ export default function Footer() {
 
             <NavLink
               to="/"
-              onClick={handleTestimonialClick}
+              onClick={handleScroll("pricing-section")}
               className="hover:text-[#153DFC]"
             >
-              Testimonials
+              Packages
             </NavLink>
+
+            <NavLink to="/playlist" className={linkClass}>
+                Playlist
+              </NavLink>
+
+            <NavLink
+              to="/"
+              onClick={handleScroll("faq-section")}
+              className="hover:text-[#153DFC]"
+            >
+              FAQ
+            </NavLink>
+
           </div>
 
+          {/* SOCIAL */}
           <div className="flex gap-3">
             {[
               {
@@ -129,6 +142,7 @@ export default function Footer() {
 
         <hr className="my-5" />
 
+        {/* BOTTOM */}
         <div className="flex justify-between text-xs text-gray-700">
           <p>© 2025 All rights reserved.</p>
 

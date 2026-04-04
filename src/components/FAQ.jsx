@@ -9,7 +9,7 @@ export default function FAQ() {
   const faqs = [
     {
       q: "How does the playlist generator work?",
-      a: "You answer a few quick questions about your music taste, guest mix, and the atmosphere you want, and we generate personalised song suggestions.",
+      a: "You answer a few quick questions about your music taste, guest mix, and the kind of atmosphere you want, and we generate personalised song suggestions based on your answers.",
     },
     {
       q: "Is it really free?",
@@ -25,11 +25,11 @@ export default function FAQ() {
     },
     {
       q: "Can I use this with my DJ or band?",
-      a: "Yes — many couples use it to shape their music direction and share ideas with their DJ or band.",
+      a: "Yes — many couples use it to shape their music direction and send ideas to their DJ or band.",
     },
     {
       q: "Is this just for weddings?",
-      a: "It’s built mainly for weddings, but it can also work for other celebrations.",
+      a: "It’s built primarily for couples planning wedding music, but it can also work for other celebrations.",
     },
   ];
 
@@ -43,7 +43,7 @@ export default function FAQ() {
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-          Frequently Asked{" "}
+          Frequently Asked{" "} <br />
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Questions
           </span>
@@ -84,17 +84,6 @@ export default function FAQ() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-16">
-          <button
-            onClick={() => navigate("/quiz")}
-            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white 
-            px-8 py-4 rounded-2xl shadow-lg hover:scale-105 transition"
-          >
-            Create My Playlist
-          </button>
         </div>
 
       </div>

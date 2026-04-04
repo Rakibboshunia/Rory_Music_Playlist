@@ -1,53 +1,64 @@
 import { useNavigate } from "react-router-dom";
-import SpotifyLogo from "../assets/img/SpotifyLogo.png"
+import SpotifyLogo from "../assets/img/SpotifyLogo.png";
 import { FiArrowRight } from "react-icons/fi";
 
 export default function CTASection() {
   const navigate = useNavigate();
 
   return (
-    <section className=" bg-white py-10 sm:py-0 pb-18 sm:pb-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-3xl text-center text-white py-16 px-6 sm:px-10 shadow-2xl">
-          <p className="text-sm sm:text-xl opacity-90">
-            👥 Join 2,500+ happy clients
-          </p>
+    <section className="relative py-20 px-4 bg-white overflow-hidden">
 
-          <h2 className="text-3xl sm:text-4xl font-semibold mt-4">
-            Ready to discover your perfect soundtrack?
+      {/* Background Glow */}
+      <div className="absolute w-[400px] h-[400px] bg-purple-400 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
+      <div className="absolute w-[400px] h-[400px] bg-pink-400 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl text-center text-white py-20 px-6 sm:px-12 shadow-2xl">
+
+          {/* Heading */}
+          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight">
+            Ready to Build Your{" "}
+            <span className="decoration-white/40">
+              Wedding Playlist?
+            </span>
           </h2>
 
-          <p className="mt-3 opacity-90 text-sm sm:text-base">
-            Take the quiz now and get your personalised playlist in 60 seconds
+          {/* Sub */}
+          <p className="mt-4 opacity-90 text-sm sm:text-lg">
+            Answer a few quick questions and discover song ideas tailored to your vibe, your guests, and the kind of atmosphere you want to create. 🎶
           </p>
 
-          <div className="mt-8">
+          {/* CTA BUTTON */}
+          <div className="mt-10">
             <button
               onClick={() => navigate("/quiz")}
               className="
-                px-4 py-3
-                bg-white text-blue-700
-                hover:bg-linear-to-r from-[#9810FA] to-[#155DFC] hover:text-white
-                font-medium rounded-full shadow-md
-                transition-all duration-300 ease-out
-                hover:scale-[1.03] 
-                hover:shadow-xl active:scale-[0.98]
-                cursor-pointer hover:border-white/80
-                flex items-center justify-center mx-auto
+                group flex items-center gap-3 mx-auto
+                px-6 py-4 rounded-full
+                bg-white text-purple-700 font-semibold
+                shadow-lg hover:shadow-2xl
+                transition duration-300 cursor-pointer
+                hover:scale-105 active:scale-95
               "
             >
-              <img
+              {/* <img
                 src={SpotifyLogo}
                 alt="Spotify"
-                className="h-[2.2em] w-auto"
+                className="h-7 w-auto"
+              /> */}
+
+              <span>Create My Playlist</span>
+
+              <FiArrowRight
+                size={20}
+                className="group-hover:translate-x-1 transition"
               />
-             Generate my Spotify playlist
-             <FiArrowRight size={20} />
             </button>
           </div>
 
-          <p className="mt-4 text-xs opacity-90">
-            No credit card required • 100% free playlist • Instant results
+          {/* Trust line */}
+          <p className="mt-6 text-xs sm:text-sm opacity-90">
+            No credit card required • Free 15-song playlist • Instant results
           </p>
         </div>
       </div>
