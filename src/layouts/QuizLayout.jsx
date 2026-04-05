@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import AwardsSection from "../components/AwardsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import CTASection from "../components/CTASection";
+import TrustBar from "../components/TrustBar";
+import { FaQ } from "react-icons/fa6";
+import FAQ from "../components/FAQ";
+import HowItWorks from "../components/HowItWorks";
 
 const quizSteps = [
   "/quiz",
@@ -68,11 +72,19 @@ export default function QuizLayout() {
       </div>
 
       <div>
+        <TrustBar/>
+      </div>
+
+      <div>
+        <HowItWorks />
+      </div>
+
+      <div>
         <AwardsSection />
       </div>
 
-      <div className="mt-2">
-        <TestimonialsSection />
+      <div>
+        <TestimonialsSection/>
       </div>
 
       <div>

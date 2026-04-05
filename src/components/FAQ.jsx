@@ -38,8 +38,8 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-24 px-6 bg-white">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-6 bg-white ">
+      <div className="max-w-4xl mx-auto ">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
@@ -54,12 +54,12 @@ export default function FAQ() {
           {faqs.map((item, i) => (
             <div
               key={i}
-              className="border border-gray-200 rounded-2xl overflow-hidden transition"
+              className="border border-gray-200 rounded-2xl overflow-hidden transition-shadow duration-300 hover:shadow-lg"
             >
               {/* Question */}
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex justify-between items-center p-5 text-left hover:bg-gray-50 transition"
+                className="w-full flex justify-between items-center p-5 text-left hover:bg-gray-50 transition cursor-pointer"
               >
                 <span className="font-medium text-gray-800">
                   {item.q}

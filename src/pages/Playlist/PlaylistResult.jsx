@@ -7,6 +7,9 @@ import PlaylistAccordion from "./components/PlaylistAccordion";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
+import TrustBar from "../../components/TrustBar";
+import HowItWorks from "../../components/HowItWorks";
+import FAQ from "../../components/FAQ";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
@@ -64,8 +67,10 @@ export default function PlaylistResult() {
         </div>
       </div>
 
+      <TrustBar/>
+      <HowItWorks />
       <AwardsSection />
-      <TestimonialsSection />
+      <TestimonialsSection/>
       <CTASection />
     </div>
   );

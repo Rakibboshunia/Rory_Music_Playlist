@@ -6,6 +6,9 @@ import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 
 import { getUserPlaylistsApi } from "../../api/playlistApi";
+import TrustBar from "../../components/TrustBar";
+import HowItWorks from "../../components/HowItWorks";
+import FAQ from "../../components/FAQ";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState([]);
@@ -94,8 +97,10 @@ export default function PlaylistResult() {
         </div>
       </div>
 
+      <TrustBar/>
+      <HowItWorks />
       <AwardsSection />
-      <TestimonialsSection />
+      <TestimonialsSection/>
       <CTASection />
     </div>
   );

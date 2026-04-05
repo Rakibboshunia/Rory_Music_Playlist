@@ -1,7 +1,6 @@
 import React from "react";
 
 import HeroSection from "../../components/HeroSection";
-// import FeaturesSection from "../../components/FeaturesSection";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
@@ -15,8 +14,6 @@ import FreeVsFull from "../../components/FreeVsFull";
 import FAQ from "../../components/FAQ";
 import PerfectFor from "../../components/PerfectFor";
 import Founder from "../../components/Founder";
-import FeaturesSection from "../../components/FeaturesSection";
-
 export default function Home() {
   return (
     <div className="bg-white text-gray-900">
@@ -30,11 +27,6 @@ export default function Home() {
 
       {/* SOCIAL PROOF (MOVE UP 🔥) */}
       <AwardsSection />
-
-      {/* TESTIMONIALS */}
-      <section id="testimonials-section">
-        <TestimonialsSection />
-      </section>
 
       {/* HOW IT WORKS */}
       <section id="quiz-section">
@@ -56,6 +48,11 @@ export default function Home() {
 
       {/* PERFECT FOR */}
       <PerfectFor />
+
+      {/* TESTIMONIALS */}
+      <section id="testimonials-section">
+        <TestimonialsSection />
+      </section>
 
       {/* FOUNDER (TRUST AGAIN) */}
       <Founder />

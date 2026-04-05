@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 
 import CookieFloatingButton from "../components/Cookie/CookieFloatingButton";
 import CookiePreferencesModal from "../components/Cookie/CookiePreferencesModal";
+import TrustBar from "../components/TrustBar";
 
 export default function PlaylistLayout() {
   return (
@@ -13,7 +14,7 @@ export default function PlaylistLayout() {
       <div className="w-full">
         <Outlet />
       </div>
-
+      
       <CookieFloatingButton />
       <CookiePreferencesModal />
     </div>

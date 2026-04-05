@@ -145,7 +145,7 @@ export default function Navbar() {
                 onClick={() => scrollToSection("pricing-section")}
                 className="hover:text-purple-600 transition"
               >
-                Packages
+                Plans
               </button>
 
               <button

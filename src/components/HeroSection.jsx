@@ -50,7 +50,7 @@ export default function HeroSection() {
                 group px-8 py-4 rounded-full
                 bg-white text-purple-700 font-semibold
                 shadow-2xl hover:shadow-3xl
-                transition duration-300
+                transition duration-300 cursor-pointer
                 hover:scale-105 active:scale-95
                 flex items-center justify-center gap-2
               "
@@ -63,7 +63,7 @@ export default function HeroSection() {
             <button
               onClick={handleHowItWorks}
               className="
-                px-6 py-4 rounded-full
+                px-6 py-4 rounded-full cursor-pointer
                 border border-white/60 text-white
                 hover:bg-white/10 transition
               "

@@ -16,7 +16,7 @@ export default function PerfectFor() {
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[300px] h-[300px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
-      <div className="max-w-5xl mx-auto text-center relative z-10">
+      <div className="max-w-5xl mx-auto text-center relative z-10 cursor-pointer">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-14 leading-tight">
