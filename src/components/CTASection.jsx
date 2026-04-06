@@ -32,8 +32,8 @@ export default function FinalCTA() {
             onClick={() => navigate("/quiz")}
             className="
               group inline-flex items-center gap-3
-              px-10 py-4 rounded-full
-              bg-white text-purple-700 font-semibold
+              px-8 py-4 rounded-2xl
+              bg-white text-purple-700 font-bold
               shadow-xl hover:shadow-2xl
               transition duration-300
               hover:scale-105 active:scale-95

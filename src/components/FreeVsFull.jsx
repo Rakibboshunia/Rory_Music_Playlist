@@ -91,9 +91,9 @@ export default function FreeVsFull() {
             onClick={() => navigate("/quiz")}
             className="
               group inline-flex items-center gap-3
-              px-12 py-4 rounded-full
+              px-8 py-4 rounded-2xl
               bg-gradient-to-r from-purple-600 to-pink-500
-              text-white font-semibold
+              text-white font-bold
               shadow-xl hover:shadow-2xl
               transition duration-300
               hover:scale-105 active:scale-95

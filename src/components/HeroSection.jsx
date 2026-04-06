@@ -47,8 +47,8 @@ export default function HeroSection() {
             <button
               onClick={() => navigate("/quiz")}
               className="
-                group px-8 py-4 rounded-full
-                bg-white text-purple-700 font-semibold
+                group px-8 py-4 rounded-2xl
+                bg-white text-purple-700 font-bold
                 shadow-2xl hover:shadow-3xl
                 transition duration-300 cursor-pointer
                 hover:scale-105 active:scale-95

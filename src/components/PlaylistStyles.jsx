@@ -91,18 +91,10 @@ export default function PlaylistStyles() {
         <div className="text-center mt-16">
           <button
             onClick={() => navigate("/quiz")}
-            className="
-              group inline-flex items-center gap-3
-              px-10 py-4 rounded-full
-              bg-gradient-to-r from-purple-600 to-pink-500
-              text-white font-semibold
-              shadow-xl hover:shadow-2xl
-              transition duration-300
-              hover:scale-105 active:scale-95
-            "
+            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-lg font-bold
+            px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Create My Playlist
-            <FiArrowRight className="group-hover:translate-x-1 transition" />
           </button>
         </div>
 

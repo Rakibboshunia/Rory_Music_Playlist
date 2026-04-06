@@ -141,12 +141,12 @@ export default function Navbar() {
               </NavLink>
 
               {/* SCROLL */}
-              <button
+              {/* <button
                 onClick={() => scrollToSection("pricing-section")}
                 className="hover:text-purple-600 transition"
               >
                 Plans
-              </button>
+              </button> */}
 
               <button
                 onClick={() => scrollToSection("faq-section")}

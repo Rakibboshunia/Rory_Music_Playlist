@@ -18,7 +18,7 @@ export default function AwardsSection() {
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Created by DJ & SAX® —{" "} <br />
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-              Ireland’s Most Awarded Wedding Entertainment Agency
+              Ireland’s Most Awarded <br />Wedding Entertainment Agency
             </span>
           </h2>
 

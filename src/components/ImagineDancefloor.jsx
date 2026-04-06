@@ -74,9 +74,9 @@ export default function ImagineDancefloor() {
           <button
             onClick={() => navigate("/quiz")}
             className="
-              group px-6 py-4 rounded-full
+              group px-6 py-4 rounded-2xl
               bg-gradient-to-r from-purple-600 to-pink-500
-              text-white font-semibold text-lg
+              text-white font-bold text-lg
               shadow-xl hover:shadow-2xl
               transition duration-300
               hover:scale-105 active:scale-95

@@ -43,4 +43,8 @@ body {
   animation: slideUpToCenter 0.4s ease-out forwards;
 }
 
+button{
+  cursor: pointer;
+}
+
 

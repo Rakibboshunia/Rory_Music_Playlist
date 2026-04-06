@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import PlaylistToggle from "./components/PlaylistToggle";
-// import AwardsSection from "../../components/AwardsSection";
+import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 
 import { getUserPlaylistsApi } from "../../api/playlistApi";
 import TrustBar from "../../components/TrustBar";
 import HowItWorks from "../../components/HowItWorks";
+import PlaylistVideoCTA from "./components/PlaylistVideoCTA";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState([]);
@@ -81,6 +82,19 @@ export default function PlaylistResult() {
             hasPremium={hasPremium}
           />
 
+          <div className="flex items-center justify-between mt-8 mb-4">
+            <div>
+              <h3 className="font-medium text-sm sm:text-base">
+                Your Personalised Wedding Playlist
+              </h3>
+              <p className="text-xs text-gray-500">
+                Built around your answers, this playlist is designed to match
+                your vibe, suit your guests, and help create the kind of
+                atmosphere that keeps the dance floor moving all night.
+              </p>
+            </div>
+          </div>
+
           {filteredPlaylists.length > 0 && (
             <>
               <h2 className="text-2xl font-semibold mt-8 mb-4 capitalize">
@@ -91,15 +105,16 @@ export default function PlaylistResult() {
                 playlistData={filteredPlaylists}
                 showUpgradeButton={playlistMode === "free"}
               />
+              <PlaylistVideoCTA />
             </>
           )}
         </div>
       </div>
 
-      <TrustBar/>
+      <TrustBar />
       <HowItWorks />
-      {/* <AwardsSection /> */}
-      <TestimonialsSection/>
+      <AwardsSection />
+      <TestimonialsSection />
       <CTASection />
     </div>
   );
