@@ -5,16 +5,16 @@ export default function HowItWorks() {
 
   const steps = [
     {
-      title: "Tell us your vibe",
-      desc: "Answer a few quick questions about your music taste, crowd, and the kind of atmosphere you want on the night.",
+      title: "Tell Us Your Vibe",
+      desc: "Answer a few quick questions about your music taste and the atmosphere you want to create.",
     },
     {
-      title: "Get matched with your playlist",
-      desc: "We instantly generate personalised song suggestions based on your answers, so your playlist feels relevant and genuinely useful.",
+      title: "Get Matched With Your Playlist",
+      desc: "We generate personalised song suggestions based on your answers.",
     },
     {
-      title: "Unlock your playlist",
-      desc: "Complete the quiz, enter your email, and get your free 15-song playlist sent straight to your inbox.",
+      title: "Unlock Your Playlist",
+      desc: "Enter your email and receive your free 15-song playlist instantly.",
     },
   ];
 
@@ -29,7 +29,7 @@ export default function HowItWorks() {
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-          Your Wedding Playlist, <br />Sorted in{" "}
+          Your Perfect Wedding Playlist <br /> in {" "}
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             3 Simple Steps
           </span>
@@ -68,7 +68,7 @@ export default function HowItWorks() {
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white 
             px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition cursor-pointer"
           >
-            Build My Playlist
+            Create My Playlist
           </button>
         </div>
       </div>

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import PlaylistToggle from "./components/PlaylistToggle";
-import AwardsSection from "../../components/AwardsSection";
+// import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 
 import { getUserPlaylistsApi } from "../../api/playlistApi";
 import TrustBar from "../../components/TrustBar";
 import HowItWorks from "../../components/HowItWorks";
-import FAQ from "../../components/FAQ";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState([]);
@@ -99,7 +98,7 @@ export default function PlaylistResult() {
 
       <TrustBar/>
       <HowItWorks />
-      <AwardsSection />
+      {/* <AwardsSection /> */}
       <TestimonialsSection/>
       <CTASection />
     </div>

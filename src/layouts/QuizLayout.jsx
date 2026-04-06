@@ -1,11 +1,9 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import AwardsSection from "../components/AwardsSection";
+// import AwardsSection from "../components/AwardsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import CTASection from "../components/CTASection";
 import TrustBar from "../components/TrustBar";
-import { FaQ } from "react-icons/fa6";
-import FAQ from "../components/FAQ";
 import HowItWorks from "../components/HowItWorks";
 
 const quizSteps = [
@@ -79,9 +77,9 @@ export default function QuizLayout() {
         <HowItWorks />
       </div>
 
-      <div>
+      {/* <div>
         <AwardsSection />
-      </div>
+      </div> */}
 
       <div>
         <TestimonialsSection/>

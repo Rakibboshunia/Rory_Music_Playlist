@@ -5,22 +5,22 @@ export default function WhyLove() {
     {
       icon: Clock,
       title: "No more spending hours on Spotify",
-      desc: "Get tailored wedding song ideas in minutes instead of endlessly searching playlists that don’t quite fit.",
+      desc: "Get tailored wedding song ideas in minutes.",
     },
     {
       icon: Users,
       title: "Built around your crowd",
-      desc: "Whether you’ve got a mixed-age guest list, party people, music lovers, or all three, your playlist is shaped around the atmosphere you want to create.",
+      desc: "Your playlist adapts to the atmosphere you want.",
     },
     {
       icon: Sparkles,
       title: "Discover songs you might never have found",
-      desc: "Get the right mix of timeless classics, modern favourites, and dancefloor fillers without it feeling random or generic.",
+      desc: "Get the right mix of classics and modern favourites.",
     },
     {
       icon: ShieldCheck,
       title: "Feel more confident about your music choices",
-      desc: "Whether you’re sending ideas to your DJ, building your own playlist, or just trying to define your style, this gives you a clear starting point.",
+      desc: "Use the playlist as inspiration for your DJ or band.",
     },
   ];
 
