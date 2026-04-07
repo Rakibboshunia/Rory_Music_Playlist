@@ -141,7 +141,7 @@ export default function Navbar() {
               </NavLink>
 
               {/* SCROLL */}
-              {/* <button
+              <button
                 onClick={() => scrollToSection("pricing-section")}
                 className="hover:text-purple-600 transition"
               >
@@ -278,18 +278,7 @@ export default function Navbar() {
               }}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
             >
-              💰 Packages
-            </button>
-
-            {/* REVIEWS */}
-            <button
-              onClick={() => {
-                scrollToSection("testimonials-section");
-                setMobileMenu(false);
-              }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
-            >
-              ⭐ Reviews
+              💰 Plans
             </button>
 
             {/* FAQ */}

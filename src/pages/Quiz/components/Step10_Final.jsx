@@ -247,18 +247,7 @@ export default function Step10_Final() {
                   </label>
 
                   {/* Buttons */}
-                  <div className="flex gap-3 mt-3">
-                    {/* Secondary */}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowEmailPopup(false);
-                        navigate("/quiz");
-                      }}
-                      className="w-1/2 border border-gray-300 rounded-full py-3 text-sm text-[#2B2B2B] hover:bg-gray-50 transition-all"
-                    >
-                      Skip For Now
-                    </button>
+                  <div className="flex justify-center gap-3 mt-3">
 
                     {/* Primary */}
                     <button

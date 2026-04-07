@@ -14,6 +14,7 @@ import FreeVsFull from "../../components/FreeVsFull";
 import FAQ from "../../components/FAQ";
 import PerfectFor from "../../components/PerfectFor";
 import Founder from "../../components/Founder";
+import ImagineDancefloor from "../../components/ImagineDancefloor";
 export default function Home() {
   return (
     <div className="bg-white text-gray-900">
