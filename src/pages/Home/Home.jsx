@@ -1,7 +1,6 @@
 import React from "react";
 
 import HeroSection from "../../components/HeroSection";
-// import FeaturesSection from "../../components/FeaturesSection";
 import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
@@ -15,7 +14,6 @@ import FreeVsFull from "../../components/FreeVsFull";
 import FAQ from "../../components/FAQ";
 import PerfectFor from "../../components/PerfectFor";
 import Founder from "../../components/Founder";
-import FeaturesSection from "../../components/FeaturesSection";
 
 export default function Home() {
   return (

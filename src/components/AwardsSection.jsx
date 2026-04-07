@@ -2,6 +2,7 @@ import React from "react";
 import rsvp from "../assets/img/2023.png";
 import wedding from "../assets/img/2024.png";
 import wedding25 from "../assets/img/2025.png";
+import { Badge } from "lucide-react";
 
 export default function AwardsSection() {
   return (
@@ -29,9 +30,9 @@ export default function AwardsSection() {
 
         {/* AWARDS */}
         <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AwardCard img={rsvp} title="Wedding DJ Of The Year 2023" />
-          <AwardCard img={wedding} title="Wedding DJ Of The Year 2024" />
-          <AwardCard img={wedding25} title="Entertainment Agency Of The Year 2025" />
+          <AwardCard title="Badge 1" img={rsvp}/>
+          <AwardCard title="Badge 2" img={wedding} />
+          <AwardCard title="Badge 3" img={wedding25} />
         </div>
 
         {/* STATS */}

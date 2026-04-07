@@ -182,64 +182,98 @@ export default function Step10_Final() {
               </div>
             ) : (
               <>
+                {/* Close */}
                 <button
                   onClick={() => {
                     setShowEmailPopup(false);
                     navigate("/quiz");
                   }}
-                  className="absolute top-4 right-4 text-gray-400 cursor-pointer"
+                  className="absolute top-5 right-6 text-[#8A8A8A] text-xl hover:text-[#2B2B2B] transition"
                 >
                   ✕
                 </button>
 
-                <div className="flex justify-center mb-4">
-                  <div className="w-18 h-16 rounded-xl bg-linear-to-r from-[#155DFC] to-[#9810FA] flex items-center justify-center text-white text-5xl">
-                    ✉️
-                  </div>
-                </div>
+                {/* Title */}
+                <h2 className="text-[22px] font-semibold text-center text-[#2B2B2B] mb-2">
+                  Your Personalised Playlist Is Ready
+                </h2>
 
-                <h3 className="text-2xl font-semibold mb-4">
-                  🎶 Get your personalised playlist
-                </h3>
-
-                <p className="text-md text-gray-500 mb-5">
-                  📩 Pop in your email to unlock your soundtrack. <br />
-                  We’ll send your personalised playlist straight to your inbox.
+                {/* Subtitle */}
+                <p className="text-sm text-center text-[#6B6B6B] mb-6 px-6 leading-relaxed">
+                  We’ve created a tailored wedding soundtrack based on your
+                  vibe, your guests, and the atmosphere you want for your night.
                 </p>
 
-                <form onSubmit={submitGuestEmail} className="space-y-4">
+                {/* Highlight Box */}
+                <div className="bg-[#F5EFE6] border border-[#E8DFD2] rounded-xl p-4 mb-6 shadow-sm">
+                  <p className="text-sm text-[#2B2B2B] font-medium mb-2">
+                    ✨ Unlock Your Full Personalised Playlist
+                  </p>
+
+                  <p className="text-xs text-[#6B6B6B] leading-relaxed mb-3">
+                    Get a complete soundtrack with better flow, key moments, and
+                    crowd-pleasing tracks — from your first dance to a packed
+                    dancefloor.
+                  </p>
+
+                  <p className="text-xs text-[#2B2B2B] flex justify-center items-center gap-2">
+                    🎁 Includes instant delivery straight to your inbox
+                  </p>
+                </div>
+
+                {/* Form */}
+                <form onSubmit={submitGuestEmail} className="space-y-4 mb-5">
+                  {/* Input */}
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full border rounded-full px-4 py-3"
+                    className="w-full border border-gray-300 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#7B3FF2] focus:border-transparent transition shadow-sm"
                   />
 
-                  <label className="flex items-start gap-1 text-xs text-gray-500">
-                    <input type="checkbox" required className="mt-1" />
+                  {/* Checkbox */}
+                  <label className="flex items-start gap-2 text-xs text-[#6B6B6B] leading-relaxed">
+                    <input
+                      type="checkbox"
+                      required
+                      className="mt-1 accent-[#7B3FF2]"
+                    />
                     <span>
-                      I agree to receive my personalised playlist by email and
-                      to be contacted by DJ & SAX® about my wedding or event. I
-                      can unsubscribe at any time.
+                      I agree to receive my personalised playlist and occasional
+                      updates. You can unsubscribe at any time.
                     </span>
                   </label>
 
-                  <button
-                    type="submit"
-                    className="w-full rounded-full text-white bg-linear-to-r from-[#155DFC] to-[#9810FA] cursor-pointer hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98]"
-                  >
-                    <div className="inline-flex items-center text-xl">
-                      <img
-                        src={SpotifyLogo}
-                        alt="Spotify"
-                        className="h-[2.0em] w-auto"
-                      />
+                  {/* Buttons */}
+                  <div className="flex gap-3 mt-3">
+                    {/* Secondary */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowEmailPopup(false);
+                        navigate("/quiz");
+                      }}
+                      className="w-1/2 border border-gray-300 rounded-full py-3 text-sm text-[#2B2B2B] hover:bg-gray-50 transition-all"
+                    >
+                      Skip For Now
+                    </button>
+
+                    {/* Primary */}
+                    <button
+                      type="submit"
+                      className="w-1/2 rounded-full bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white py-3 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    >
                       Reveal My Playlist
-                    </div>
-                  </button>
+                    </button>
+                  </div>
                 </form>
+
+                {/* Footer */}
+                <p className="text-center text-xs text-[#9A9A9A]">
+                  🔒 Secure checkout • No spam • Instant access
+                </p>
               </>
             )}
           </div>

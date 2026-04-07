@@ -95,7 +95,7 @@ export default function Footer() {
               onClick={handleScroll("pricing-section")}
               className="hover:text-[#153DFC]"
             >
-              Packages
+              Plans
             </NavLink>
 
             <NavLink to="/playlist" className={linkClass}>
