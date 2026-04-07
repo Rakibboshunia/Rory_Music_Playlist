@@ -4,9 +4,13 @@ import { useParams } from "react-router-dom";
 import { getGuestPlaylistApi } from "../../api/playlistApi";
 
 import PlaylistAccordion from "./components/PlaylistAccordion";
-import AwardsSection from "../../components/AwardsSection";
+// import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
+import TrustBar from "../../components/TrustBar";
+import HowItWorks from "../../components/HowItWorks";
+import AwardsSection from "../../components/AwardsSection";
+import PlaylistVideoCTA from "./components/PlaylistVideoCTA";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
@@ -52,20 +56,23 @@ export default function PlaylistResult() {
           <div className="flex items-center justify-between mt-8 mb-4">
             <div>
               <h3 className="font-medium text-sm sm:text-base">
-                Your Playlist
+                Your Personalised Wedding Playlist
               </h3>
               <p className="text-xs text-gray-500">
-                Here's the soundtrack crafted just for your event.
+                Built around your answers, this playlist is designed to match your vibe, suit your guests, and help create the kind of atmosphere that keeps the dance floor moving all night.
               </p>
             </div>
           </div>
 
           <PlaylistAccordion playlistData={playlistData} />
+          <PlaylistVideoCTA />
         </div>
       </div>
 
+      <TrustBar/>
+      <HowItWorks />
       <AwardsSection />
-      <TestimonialsSection />
+      <TestimonialsSection/>
       <CTASection />
     </div>
   );

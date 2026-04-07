@@ -27,18 +27,18 @@ export default function HeroSection() {
 
           {/* HEADLINE */}
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-            Build Your Perfect Wedding Playlist in 60 Seconds
+            What Will Your Wedding Dancefloor Sound Like?
           </h1>
 
           {/* SUB */}
           <p className="text-base sm:text-lg text-white/90">
-            Answer a few quick questions and get a personalised Spotify playlist tailored to your vibe, your guests, and the atmosphere you want to create.
+            Take our 60-second quiz and generate a personalised Spotify playlist tailored to your vibe, your guests, and the atmosphere you want to create.
           </p>
 
           {/* SUPPORT */}
-          <p className="text-sm text-white/80">
+          {/* <p className="text-sm text-white/80">
             Free 15-song playlist • Upgrade to a full 50-song soundtrack
-          </p>
+          </p> */}
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
@@ -47,10 +47,10 @@ export default function HeroSection() {
             <button
               onClick={() => navigate("/quiz")}
               className="
-                group px-8 py-4 rounded-full
-                bg-white text-purple-700 font-semibold
+                group px-8 py-4 rounded-2xl
+                bg-white text-purple-700 font-bold
                 shadow-2xl hover:shadow-3xl
-                transition duration-300
+                transition duration-300 cursor-pointer
                 hover:scale-105 active:scale-95
                 flex items-center justify-center gap-2
               "
@@ -59,26 +59,22 @@ export default function HeroSection() {
               <FiArrowRight className="group-hover:translate-x-1 transition" />
             </button>
 
-            {/* SECONDARY */}
-            <button
-              onClick={handleHowItWorks}
-              className="
-                px-6 py-4 rounded-full
-                border border-white/60 text-white
-                hover:bg-white/10 transition
-              "
-            >
-              See How It Works
-            </button>
           </div>
 
+          {/* ✅ REASSURANCE */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 text-white/90 text-sm">
+          <span>✔ Takes about 60 seconds</span>
+          <span>✔ Instant Spotify playlist</span>
+          <span>✔ Free to try</span>
+        </div>
+
           {/* TRUST LINE */}
-          <p className="text-sm text-white/80 pt-2 max-w-md mx-auto lg:mx-0">
+          {/* <p className="text-sm text-white/80 pt-2 max-w-md mx-auto lg:mx-0">
             Created by the team behind DJ & SAX®, Ireland’s multi-award-winning wedding entertainment brand.
-          </p>
+          </p> */}
 
           {/* SOCIAL PROOF */}
-          <div className="flex items-center justify-center lg:justify-start gap-3 pt-4">
+          {/* <div className="flex items-center justify-center lg:justify-start gap-3 pt-4">
             <div className="flex">
               <div className="w-9 h-9 rounded-full bg-yellow-400 border-2 border-white"></div>
               <div className="-ml-2 w-9 h-9 rounded-full bg-pink-400 border-2 border-white"></div>
@@ -87,7 +83,7 @@ export default function HeroSection() {
             <span className="text-white/80 text-sm">
               2,500+ playlists created
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* RIGHT IMAGE */}

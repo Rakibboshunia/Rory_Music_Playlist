@@ -17,8 +17,13 @@ export default function TrustBar() {
   ];
 
   return (
-    <section className="py-14 px-6 bg-white cursor-pointer">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+    <section className="relative py-12 px-6 bg-white overflow-hidden">
+
+      {/* Subtle glow */}
+      <div className="absolute w-[250px] h-[250px] bg-purple-200 opacity-20 blur-3xl rounded-full top-[-80px] left-[-80px]" />
+      <div className="absolute w-[250px] h-[250px] bg-pink-200 opacity-20 blur-3xl rounded-full bottom-[-80px] right-[-80px]" />
+
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 relative z-10">
 
         {items.map((item, i) => {
           const Icon = item.icon;
@@ -26,18 +31,28 @@ export default function TrustBar() {
           return (
             <div
               key={i}
-              className="group flex items-center gap-4 p-6 rounded-2xl border border-gray-100 
-              hover:shadow-xl hover:-translate-y-1 transition duration-300 bg-gradient-to-br from-white to-gray-50"
+              className="
+                group flex items-center gap-4 p-5 rounded-2xl
+                bg-white/70 backdrop-blur-md
+                border border-gray-100
+                shadow-sm hover:shadow-xl
+                transition duration-300 hover:-translate-y-1
+              "
             >
               {/* ICON */}
-              <div className="flex items-center justify-center w-12 h-12 rounded-xl 
-              bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md
-              group-hover:scale-110 transition">
-                <Icon size={22} />
+              <div
+                className="
+                  flex items-center justify-center w-11 h-11 rounded-xl
+                  bg-gradient-to-r from-purple-600 to-pink-500
+                  text-white shadow-md
+                  group-hover:scale-110 transition
+                "
+              >
+                <Icon size={20} />
               </div>
 
               {/* TEXT */}
-              <p className="text-gray-700 font-medium leading-snug">
+              <p className="text-gray-700 text-sm sm:text-base font-medium leading-snug">
                 {item.text}
               </p>
             </div>

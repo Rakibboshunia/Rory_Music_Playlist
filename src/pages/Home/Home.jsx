@@ -14,7 +14,6 @@ import FreeVsFull from "../../components/FreeVsFull";
 import FAQ from "../../components/FAQ";
 import PerfectFor from "../../components/PerfectFor";
 import Founder from "../../components/Founder";
-
 export default function Home() {
   return (
     <div className="bg-white text-gray-900">
@@ -28,6 +27,8 @@ export default function Home() {
 
       {/* SOCIAL PROOF (MOVE UP 🔥) */}
       <AwardsSection />
+
+      <ImagineDancefloor />
 
       {/* TESTIMONIALS */}
       <section id="testimonials-section">

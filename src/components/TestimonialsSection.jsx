@@ -2,34 +2,38 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="pt-12 pb-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="relative pt-18 pb-28 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+
+      {/* Glow */}
+      <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
+      <div className="absolute w-[300px] h-[300px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
       {/* HEADER */}
-      <div className="max-w-5xl mx-auto text-center px-4">
+      <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
         <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-          Real Stories. Real Moments.{" "} <br />
+          Real Weddings. <br />
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-            Real Magic 🎉
+            Real Dance Floors.
           </span>
         </h2>
 
         <p className="pt-4 text-gray-600 text-base">
-          🎶 Personalised playlists that shaped unforgettable celebrations.
+          🎶 Real couples. Real celebrations. Packed dance floors.
         </p>
       </div>
 
       {/* CARDS */}
-      <div className="max-w-6xl mx-auto mt-16 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto mt-16 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
         
         <TestimonialCard
-          text="Couldn’t recommend more! The dance floor at our wedding was never empty!!"
-          name="Sarah McCarthy"
+          text="The dance floor at our wedding was never empty!!"
+          name="Sarah & Matthew"
           role="Powerscourt Estate"
         />
 
         <TestimonialCard
           text="Absolutely top class, so much fun for our wedding entertainment."
-          name="Denise Callanan"
+          name="Denise & Tony"
           role="Cloughjordan House"
         />
 
@@ -48,7 +52,6 @@ function TestimonialCard({ text, name, role }) {
     <div
       className="
         group relative cursor-pointer p-8 rounded-3xl
-        p-8 rounded-3xl
         bg-white/70 backdrop-blur-md
         border border-gray-100
         shadow-md hover:shadow-2xl
@@ -56,13 +59,18 @@ function TestimonialCard({ text, name, role }) {
       "
     >
       {/* Glow */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition" />
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
+
+      {/* Quote Icon */}
+      <div className="text-3xl text-purple-500 opacity-30 mb-2">“</div>
 
       {/* Stars */}
       <div className="flex text-yellow-400 mb-4 text-lg">
-        {Array(5).fill("★").map((star, i) => (
-          <span key={i}>{star}</span>
-        ))}
+        {Array(5)
+          .fill("★")
+          .map((star, i) => (
+            <span key={i}>{star}</span>
+          ))}
       </div>
 
       {/* Text */}
@@ -71,7 +79,7 @@ function TestimonialCard({ text, name, role }) {
       </p>
 
       {/* User */}
-      <div className="flex items-center gap-4 mt-6 relative z-10">
+      <div className="flex items-center gap-3 mt-6 relative z-10">
 
         <div>
           <p className="font-semibold text-gray-800 text-sm">

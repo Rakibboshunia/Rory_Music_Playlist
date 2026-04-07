@@ -6,7 +6,7 @@ import { Badge } from "lucide-react";
 
 export default function AwardsSection() {
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
+    <section className="relative py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
 
       {/* Glow background */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
@@ -17,15 +17,16 @@ export default function AwardsSection() {
         {/* HEADER */}
         <div className="max-w-5xl mx-auto text-center px-6">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-            Award-Winning{" "} <br />
+            Created by DJ & SAX® —{" "} <br />
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-              Entertainment Excellence
+              Ireland’s Most Awarded <br />Wedding Entertainment Agency
             </span>
           </h2>
 
-          <p className="mt-4 text-gray-600 text-sm sm:text-base">
+          {/* <p className="mt-4 text-gray-600 text-sm sm:text-base">
             Powered by DJ & SAX® — Ireland’s multi award-winning entertainment team <br />Trusted by thousands of couples and recognised by Ireland’s leading wedding platforms.
-          </p>
+          </p> */}
+
         </div>
 
         {/* AWARDS */}
@@ -35,14 +36,22 @@ export default function AwardsSection() {
           <AwardCard title="Badge 3" img={wedding25} />
         </div>
 
+        {/* Credibility Stats */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-600">
+
+          <span>⭐ 280+ Five-Star Google Reviews</span>
+          <span>🎧 2,500+ Weddings Performed</span>
+
+        </div>
+
         {/* STATS */}
-        <div className="max-w-5xl mx-auto px-6 mt-20">
+        {/* <div className="max-w-5xl mx-auto px-6 mt-20">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             <Stat emoji="🎵" text="Thousands of bespoke soundtracks created" />
             <Stat emoji="💃" text="Built on real dancefloor data from live events" />
             <Stat emoji="⭐" text="5.0★ average rating from happy couples" />
           </div>
-        </div>
+        </div> */}
 
       </div>
     </section>

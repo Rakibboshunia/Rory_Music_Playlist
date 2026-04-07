@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
 
           {/* 🔥 LINKS */}
-          <div className="flex gap-6 font-medium text-gray-800 cursor-pointer">
+          {/* <div className="flex gap-6 font-medium text-gray-800 cursor-pointer">
 
             <NavLink to="/" onClick={handleHomeClick} className={linkClass}>
               Home
@@ -98,10 +98,6 @@ export default function Footer() {
               Plans
             </NavLink>
 
-            <NavLink to="/playlist" className={linkClass}>
-                Playlist
-              </NavLink>
-
             <NavLink
               to="/"
               onClick={handleScroll("faq-section")}
@@ -110,7 +106,7 @@ export default function Footer() {
               FAQ
             </NavLink>
 
-          </div>
+          </div> */}
 
           {/* SOCIAL */}
           <div className="flex gap-3">
@@ -140,7 +136,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <hr className="my-5" />
+        <hr className="my-5 text-gray-300" />
 
         {/* BOTTOM */}
         <div className="flex justify-between text-xs text-gray-700">

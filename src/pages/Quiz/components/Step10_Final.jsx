@@ -293,87 +293,105 @@ export default function Step10_Final() {
               </div>
             ) : (
               <>
+                {/* Close */}
                 <button
                   onClick={() => {
                     setShowUpgradePopup(false);
                     navigate("/quiz");
                   }}
-                  className="absolute scale-[1.6] text-black top-6 right-8 cursor-pointer"
+                  className="absolute top-5 right-6 text-[#6B6B6B] text-xl hover:scale-110 transition"
                 >
                   ✕
                 </button>
 
-                <h2 className="text-2xl font-bold flex items-center justify-center gap-2">
-                  <img src={SpotifyLogo} alt="Spotify" className="h-[2em]" />
-                  Your Spotify playlist is ready 💃
+                {/* Title */}
+                <h2 className="text-[22px] font-bold text-center text-[#2B2B2B] tracking-tight">
+                  Your Personalised Wedding Playlist Is Ready
                 </h2>
 
-                <p className="text-sm text-gray-600 mt-2">
-                  We’ve created your personalised playlist based on your vibe.
-                  Listen now — or unlock your full 3-hour soundtrack.
+                {/* Subtitle */}
+                <p className="text-sm text-[#6F6F6F] text-center mt-2 leading-relaxed px-6">
+                  We’ve created a tailored playlist based on your vibe, your
+                  guests, and the atmosphere you want for your night.
                 </p>
 
-                <div className="bg-gradient-to-r from-[#F6F8FF] to-[#FDFBFF] rounded-2xl p-6 mt-8 shadow-sm border border-gray-100">
-                  <h4 className="text-md font-semibold mb-4">
-                    ✨ Unlock Your Full Wedding Playlist (50 songs)
-                  </h4>
+                {/* Card */}
+                <div className="rounded-2xl overflow-hidden border border-[#E6DED3] shadow-md mt-5 transition hover:shadow-lg">
+                  {/* TOP */}
+                  <div className="bg-[#F5EFE6] px-4 py-4">
+                    <h4 className="text-[16px] font-bold mb-2 flex items-center gap-2 text-[#2B2B2B]">
+                      ✨ Unlock Your Full 50-Song Wedding Playlist
+                    </h4>
 
-                  <p className="text-sm text-gray-600 mb-4">
-                    Covering three hours of your night — from first dance to
-                    packed dance floor.
-                  </p>
+                    <p className="text-[13px] font-medium text-[#5F5F5F] leading-relaxed text-start">
+                      Get a fuller soundtrack for your night with more
+                      personalised recommendations, better flow, and extra
+                      crowd-pleasers from first dance through to a packed
+                      dancefloor.
+                    </p>
 
-                  <p className="text-sm mb-3">
-                    Includes Free Wedding Entertainment Guide
-                    <span className="font-bold">(€19 value)</span>
-                  </p>
+                    <p className="text-[13px] mt-3 flex items-center gap-2 text-[#4A4A4A] font-bold">
+                      🎁 Includes our Wedding Entertainment Guide free
+                    </p>
+                  </div>
 
-                  <div className="flex items-center justify-between mt-6">
+                  {/* BOTTOM */}
+                  <div className="bg-[#F8F8F8] px-4 py-3 border-t border-[#E6DED3] flex items-center justify-between">
                     <div>
-                      <p className="text-3xl font-bold">€9</p>
-                      <p className="text-xs text-gray-500">
-                        Limited launch price
-                      </p>
+                      <p className="text-[28px] font-bold text-[#1F1F1F]">€9</p>
+                      <p className="text-[16px] text-[#8A8A8A]">Launch price</p>
                     </div>
 
-                    <img src={upgradeImg} className="w-16" />
+                    <p className="text-[12px] font-bold text-[#6F6F6F] leading-relaxed whitespace-nowrap">
+                      <span className="font-semibold">Free:</span> 15 songs
+                      &nbsp;|&nbsp; Full version: 50 songs + free guide
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mt-4 mb-5">
-                  🔒 Secure checkout powered by Stripe
+                {/* Buttons */}
+                <div className="flex gap-3 mt-6 px-2">
+                  {/* Free */}
+                  <div className="w-1/2 text-center">
+                    <button
+                      onClick={handleUpgradeNo}
+                      className="w-full py-2.5 rounded-full border border-[#D4D9E1] 
+        bg-[#F3F6FB] text-[#2F5BFF] font-medium 
+        hover:bg-[#EAF0FF] hover:shadow-sm transition-all duration-200 active:scale-[0.97]"
+                    >
+                      Get My Free Playlist
+                    </button>
+                    <p className="text-[13px] text-[#9A9A9A] mt-1">
+                      Start with your free 15-song playlist
+                    </p>
+                  </div>
+
+                  {/* Paid */}
+                  <div className="w-1/2 text-center">
+                    <button
+                      onClick={handleUpgradeYes}
+                      disabled={paymentLoading}
+                      className="w-full py-2.5 rounded-full 
+        bg-gradient-to-r from-[#4C5CF0] to-[#A339F4] 
+        text-white font-medium flex items-center justify-center
+        hover:shadow-lg hover:brightness-110 transition-all duration-200 active:scale-[0.97]"
+                    >
+                      {paymentLoading ? (
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
+                        "Unlock Full Playlist for €9"
+                      )}
+                    </button>
+                    <p className="text-[13px] text-[#9A9A9A] mt-1">
+                      Unlock the full 50-song version
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={handleUpgradeNo}
-                    className="w-full sm:w-1/2 py-2.5 gap-1 rounded-full bg-linear-to-r from-[#155DFC] to-[#9810FA] text-white transition-all duration-300 ease-out hover:scale-[1.03] active:scale-[0.98] hover:shadow-lg flex items-center justify-center cursor-pointer"
-                  >
-                    {/* <FiArrowLeft size={20} /> */}
-                    Send Free Playlist
-                  </button>
-
-                  <button
-                    onClick={handleUpgradeYes}
-                    disabled={paymentLoading}
-                    className="w-full sm:w-1/2 py-2.5 gap-2 rounded-full 
-  bg-gradient-to-r from-[#155DFC] to-[#9810FA] 
-  text-white hover:shadow-lg transition-all duration-300 
-  ease-out hover:scale-[1.03] active:scale-[0.98] 
-  flex items-center justify-center cursor-pointer disabled:opacity-70"
-                  >
-                    {paymentLoading ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Redirecting to secure checkout...
-                      </>
-                    ) : (
-                      <>
-                        Unlock My Full Playlist
-                        {/* <FiArrowRight size={20} /> */}
-                      </>
-                    )}
-                  </button>
+                {/* Footer */}
+                <div className="text-center text-sm text-[#9A9A9A] mt-4 flex items-center justify-center gap-1">
+                  <span className="text-[13px]">🔒</span>
+                  Secure checkout powered by Stripe
                 </div>
               </>
             )}
