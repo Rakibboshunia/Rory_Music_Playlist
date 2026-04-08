@@ -59,7 +59,7 @@ function AwardCard({ img, title }) {
   return (
     <div
       className="
-        group relative p-8 rounded-3xl
+        group relative p-5 rounded-3xl
         bg-white/70 backdrop-blur-md
         border border-purple-300
         shadow-md hover:shadow-2xl
@@ -73,7 +73,7 @@ function AwardCard({ img, title }) {
       <img
         src={img}
         alt={title}
-        className="w-32 h-32 object-contain mx-auto mb-6 relative z-10"
+        className="w-45 h-45 object-contain mx-auto mb-6 relative z-10"
       />
 
       <p className="text-lg font-semibold text-gray-800 relative z-10">

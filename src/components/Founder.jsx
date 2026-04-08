@@ -42,7 +42,7 @@ export default function Founder() {
           <div className="relative bg-white rounded-3xl shadow-2xl p-8 text-center hover:scale-105 transition duration-300">
 
             {/* IMAGE FIXED (FULL SHOW) */}
-            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white flex items-center justify-center">
+            <div className="w-35 h-35 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white flex items-center justify-center">
               <img
                 src={roryImage}
                 alt="Founder"
