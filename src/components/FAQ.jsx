@@ -64,7 +64,7 @@ export default function FAQ() {
               <div
                 key={i}
                 className={`
-                  rounded-2xl border transition duration-300
+                  rounded-2xl border border-purple-300 transition duration-300
                   ${
                     isOpen
                       ? "bg-white shadow-xl border-purple-200"

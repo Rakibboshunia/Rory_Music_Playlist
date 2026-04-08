@@ -39,7 +39,7 @@ export default function FreeVsFull() {
         <div className="grid md:grid-cols-2 gap-10 items-stretch">
 
           {/* FREE */}
-          <div className="p-10 rounded-3xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition duration-300 text-left">
+          <div className="p-10 rounded-3xl border border-purple-300 bg-white shadow-sm hover:shadow-xl transition duration-300 text-left">
 
             <h3 className="text-2xl font-semibold mb-6 text-gray-800">
               Free Playlist

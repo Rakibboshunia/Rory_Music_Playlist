@@ -34,7 +34,7 @@ export default function TrustBar() {
               className="
                 group flex items-center gap-4 p-5 rounded-2xl
                 bg-white/70 backdrop-blur-md
-                border border-gray-100
+                border border-purple-300
                 shadow-sm hover:shadow-xl
                 transition duration-300 hover:-translate-y-1
               "

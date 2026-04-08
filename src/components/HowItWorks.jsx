@@ -49,7 +49,7 @@ export default function HowItWorks() {
                 className="
                   group relative p-8 rounded-3xl
                   bg-white/70 backdrop-blur-md
-                  border border-gray-100
+                  border border-purple-300
                   shadow-md hover:shadow-2xl
                   transition duration-300 hover:-translate-y-2
                 "

@@ -1,4 +1,4 @@
-import roryImage from "../assets/img/rory.png";
+import roryImage from "../assets/img/RoryClark.jpeg";
 
 export default function Founder() {
   return (
@@ -55,7 +55,7 @@ export default function Founder() {
               DJ & SAX®
             </p>
             <p className="text-sm text-gray-500">
-              Wedding Entertainment Brand
+              Wedding Entertainment Specialists
             </p>
 
             {/* Small divider */}

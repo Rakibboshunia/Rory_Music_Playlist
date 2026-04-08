@@ -97,9 +97,9 @@ export default function PlaylistResult() {
 
           {filteredPlaylists.length > 0 && (
             <>
-              <h2 className="text-2xl font-semibold mt-8 mb-4 capitalize">
+              {/* <h2 className="text-2xl font-semibold mt-8 mb-4 capitalize">
                 {playlistMode} Playlist
-              </h2>
+              </h2> */}
 
               <PlaylistAccordion
                 playlistData={filteredPlaylists}

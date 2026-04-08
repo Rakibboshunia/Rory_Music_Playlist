@@ -53,16 +53,13 @@ function TestimonialCard({ text, name, role }) {
       className="
         group relative cursor-pointer p-8 rounded-3xl
         bg-white/70 backdrop-blur-md
-        border border-gray-100
+        border border-purple-300
         shadow-md hover:shadow-2xl
         transition duration-300 hover:-translate-y-2
       "
     >
       {/* Glow */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
-
-      {/* Quote Icon */}
-      <div className="text-3xl text-purple-500 opacity-30 mb-2">“</div>
 
       {/* Stars */}
       <div className="flex text-yellow-400 mb-4 text-lg">

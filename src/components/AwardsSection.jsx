@@ -23,17 +23,13 @@ export default function AwardsSection() {
             </span>
           </h2>
 
-          {/* <p className="mt-4 text-gray-600 text-sm sm:text-base">
-            Powered by DJ & SAX® — Ireland’s multi award-winning entertainment team <br />Trusted by thousands of couples and recognised by Ireland’s leading wedding platforms.
-          </p> */}
-
         </div>
 
         {/* AWARDS */}
         <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AwardCard title="Badge 1" img={rsvp}/>
-          <AwardCard title="Badge 2" img={wedding} />
-          <AwardCard title="Badge 3" img={wedding25} />
+          <AwardCard img={wedding} />
+          <AwardCard img={rsvp}/>
+          <AwardCard img={wedding25} />
         </div>
 
         {/* Credibility Stats */}
@@ -65,7 +61,7 @@ function AwardCard({ img, title }) {
       className="
         group relative p-8 rounded-3xl
         bg-white/70 backdrop-blur-md
-        border border-gray-100
+        border border-purple-300
         shadow-md hover:shadow-2xl
         transition duration-300 hover:-translate-y-2
         text-center

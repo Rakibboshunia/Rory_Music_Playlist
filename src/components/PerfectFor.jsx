@@ -35,7 +35,7 @@ export default function PerfectFor() {
               className="
                 group flex items-start gap-4 p-6 rounded-2xl
                 bg-white/70 backdrop-blur-md
-                border border-gray-100
+                border border-purple-300
                 shadow-sm hover:shadow-2xl
                 transition duration-300 hover:-translate-y-1
               "

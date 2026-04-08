@@ -140,7 +140,7 @@ export default function Footer() {
 
         {/* BOTTOM */}
         <div className="flex justify-between text-xs text-gray-700">
-          <p>© 2025 All rights reserved.</p>
+          <p>© 2026 All rights reserved.</p>
 
           <div className="flex gap-4">
             <NavLink to="/terms" className={linkClass}>
