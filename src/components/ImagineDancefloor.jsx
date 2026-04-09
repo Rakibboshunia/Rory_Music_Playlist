@@ -23,7 +23,7 @@ export default function ImagineDancefloor() {
 
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-          Imagine Your {" "}
+          Imagine Your{" "}
           <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Wedding Dancefloor
           </span>
@@ -31,7 +31,7 @@ export default function ImagineDancefloor() {
           <span className="text-gray-800">Like This</span>
         </h2>
 
-        {/* Subtle supporting line */}
+        {/* Sub text */}
         <p className="mt-6 text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
           Picture the moments, the energy, and the songs that bring everyone together.
         </p>
@@ -48,11 +48,11 @@ export default function ImagineDancefloor() {
                 shadow-sm hover:shadow-2xl
                 transition duration-300
                 hover:-translate-y-2
-                flex items-start gap-4
+                flex items-center gap-4 text-left
               "
             >
               {/* Icon */}
-              <div className="w-11 h-11 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition">
+              <div className="w-11 h-11 flex-shrink-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition">
                 ✓
               </div>
 
