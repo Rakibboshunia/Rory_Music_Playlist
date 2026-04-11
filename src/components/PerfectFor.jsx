@@ -33,7 +33,7 @@ export default function PerfectFor() {
             <div
               key={i}
               className="
-                group flex items-start gap-4 p-6 rounded-2xl
+                group flex items-center gap-4 p-6 rounded-2xl
                 bg-white/70 backdrop-blur-md
                 border border-purple-300
                 shadow-sm hover:shadow-2xl

@@ -2,7 +2,6 @@ import React from "react";
 import rsvp from "../assets/img/2023.png";
 import wedding from "../assets/img/2024.png";
 import wedding25 from "../assets/img/2025.png";
-import { Badge } from "lucide-react";
 
 export default function AwardsSection() {
   return (
@@ -17,37 +16,25 @@ export default function AwardsSection() {
         {/* HEADER */}
         <div className="max-w-5xl mx-auto text-center px-6">
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-            Created by DJ & SAX® —{" "} <br />
+            Created by DJ & SAX® — <br />
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
               Ireland’s Most Awarded <br />Wedding Entertainment Agency
             </span>
           </h2>
-
         </div>
 
         {/* AWARDS */}
         <div className="max-w-6xl mx-auto mt-16 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AwardCard img={wedding} />
-          <AwardCard img={rsvp}/>
-          <AwardCard img={wedding25} />
+          <AwardCard img={wedding} title="2024 Winner" />
+          <AwardCard img={rsvp} title="2023 Winner" />
+          <AwardCard img={wedding25} title="2025 Winner" />
         </div>
 
         {/* Credibility Stats */}
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-600">
-
           <span>⭐ 280+ Five-Star Google Reviews</span>
           <span>🎧 2,500+ Weddings Performed</span>
-
         </div>
-
-        {/* STATS */}
-        {/* <div className="max-w-5xl mx-auto px-6 mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-            <Stat emoji="🎵" text="Thousands of bespoke soundtracks created" />
-            <Stat emoji="💃" text="Built on real dancefloor data from live events" />
-            <Stat emoji="⭐" text="5.0★ average rating from happy couples" />
-          </div>
-        </div> */}
 
       </div>
     </section>
@@ -59,38 +46,31 @@ function AwardCard({ img, title }) {
   return (
     <div
       className="
-        group relative p-5 rounded-3xl
+        group relative p-6 rounded-3xl
         bg-white/70 backdrop-blur-md
-        border border-purple-300
+        border border-purple-200
         shadow-md hover:shadow-2xl
         transition duration-300 hover:-translate-y-2
+        flex flex-col items-center justify-center
         text-center
       "
     >
       {/* Glow */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition" />
 
-      <img
-        src={img}
-        alt={title}
-        className="w-45 h-45 object-contain mx-auto mb-6 relative z-10"
-      />
+      {/* Image Wrapper (FIXED CENTER) */}
+      <div className="w-full h-40 flex items-center justify-center relative z-10">
+        <img
+          src={img}
+          alt={title}
+          className="max-h-full object-contain"
+        />
+      </div>
 
-      <p className="text-lg font-semibold text-gray-800 relative z-10">
+      {/* Title */}
+      {/* <p className="mt-4 text-lg font-semibold text-gray-800 relative z-10">
         {title}
-      </p>
-    </div>
-  );
-}
-
-/* ================= STAT ================= */
-function Stat({ emoji, text }) {
-  return (
-    <div className="p-6 rounded-2xl bg-white shadow-sm hover:shadow-lg transition">
-      <div className="text-3xl mb-3">{emoji}</div>
-      <p className="text-gray-700 font-medium leading-snug">
-        {text}
-      </p>
+      </p> */}
     </div>
   );
 }

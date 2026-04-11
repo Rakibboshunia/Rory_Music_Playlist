@@ -241,12 +241,7 @@ export default function Step10_Final() {
                           setIsChecked(e.target.checked);
                           if (e.target.checked) setCheckboxError("");
                         }}
-                        className={`
-    mt-[2px] w-5 h-5 rounded-md flex-shrink-0
-    border transition
-    ${checkboxError ? "border-red-500 ring-1 ring-red-500" : "border-gray-300"}
-    focus:outline-none focus:ring-2 focus:ring-blue-300
-  `}
+                        className={`mt-[2px] w-5 h-5 rounded-md flex-shrink-0 border transition ${checkboxError ? "border-red-500 ring-1 ring-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-blue-300 `}
                       />
 
                       {/* Text + Inline Error */}

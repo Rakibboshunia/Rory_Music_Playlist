@@ -7,6 +7,11 @@ import {
   FiLogOut,
   FiMenu,
   FiX,
+  FiHome,
+  FiHeadphones,
+  FiList,
+  FiDollarSign,
+  FiHelpCircle,
 } from "react-icons/fi";
 
 import SettingsModal from "../../components/SettingsModal";
@@ -43,7 +48,8 @@ export default function Navbar() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const solidNavbar = !isHome || scrolled;
@@ -56,32 +62,30 @@ export default function Navbar() {
   };
 
   const scrollToSection = (id) => {
-  if (location.pathname !== "/") {
-    navigate("/");
-    setTimeout(() => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          const yOffset = -90;
+          const y =
+            el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 200);
+    } else {
       const el = document.getElementById(id);
       if (el) {
         const yOffset = -90;
         const y =
           el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
         window.scrollTo({ top: y, behavior: "smooth" });
       }
-    }, 200);
-  } else {
-    const el = document.getElementById(id);
-    if (el) {
-      const yOffset = -90;
-      const y =
-        el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      window.scrollTo({ top: y, behavior: "smooth" });
     }
-  }
-};
+  };
 
   const linkClass = ({ isActive }) =>
-    `transition duration-200 ${
+    `flex items-center gap-2 transition duration-200 text-[15px] tracking-wide ${
       isActive
         ? "text-purple-600 font-semibold"
         : "hover:text-purple-600"
@@ -90,18 +94,15 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300
-        ${
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           solidNavbar
             ? "bg-white/60 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between cursor-pointer">
-          <div
-            onClick={() => navigate("/")}
-            className="cursor-pointer flex items-center"
-          >
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+          {/* LOGO */}
+          <div onClick={() => navigate("/")} className="cursor-pointer flex items-center">
             <img
               src={solidNavbar ? logoWhite : logoHero}
               alt="logo"
@@ -109,59 +110,54 @@ export default function Navbar() {
             />
           </div>
 
+          {/* DESKTOP MENU */}
           <div
-            className={`hidden md:flex items-center gap-10 font-medium
-  ${solidNavbar ? "text-gray-800" : "text-white"}`}
+            className={`hidden md:flex items-center gap-8 font-medium ${
+              solidNavbar ? "text-gray-800" : "text-white"
+            }`}
           >
-            {/* EXISTING */}
-            <div
-              className={`hidden md:flex items-center gap-10 font-medium
-  ${solidNavbar ? "text-gray-800" : "text-white"}`}
+            <NavLink to="/" className={linkClass}>
+              <FiHome /> Home
+            </NavLink>
+
+            <button
+              onClick={() => scrollToSection("quiz-section")}
+              className="flex items-center gap-2 hover:text-purple-600 transition"
             >
-              {/* HOME */}
-              <NavLink to="/" className={linkClass}>
-                Home
-              </NavLink>
+              <FiHeadphones /> How It Works
+            </button>
 
-              {/* SCROLL */}
-              <button
-                onClick={() => scrollToSection("quiz-section")}
-                className="hover:text-purple-600 transition"
-              >
-                How It Works
-              </button>
+            <NavLink to="/quiz" className={linkClass}>
+              <FiHeadphones /> Quiz
+            </NavLink>
 
-              {/* ROUTES */}
-              <NavLink to="/quiz" className={linkClass}>
-                Quiz
-              </NavLink>
-
+            {user && (
               <NavLink to="/playlist" className={linkClass}>
-                Playlist
+                <FiList /> Playlist
               </NavLink>
+            )}
 
-              {/* SCROLL */}
-              <button
-                onClick={() => scrollToSection("pricing-section")}
-                className="hover:text-purple-600 transition"
-              >
-                Plans
-              </button>
+            <button
+              onClick={() => scrollToSection("pricing-section")}
+              className="flex items-center gap-2 hover:text-purple-600 transition"
+            >
+              <FiDollarSign /> Plans
+            </button>
 
-              <button
-                onClick={() => scrollToSection("faq-section")}
-                className="hover:text-purple-600 transition"
-              >
-                FAQ
-              </button>
-            </div>
+            <button
+              onClick={() => scrollToSection("faq-section")}
+              className="flex items-center gap-2 hover:text-purple-600 transition"
+            >
+              <FiHelpCircle /> FAQ
+            </button>
           </div>
 
+          {/* PROFILE / LOGIN */}
           <div className="hidden md:flex relative" ref={dropdownRef}>
             {!user ? (
               <button
                 onClick={() => navigate("/login")}
-                className="px-5 py-2 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full hover:shadow-2xl border-2 border-green-300 transition-all shadow-2xl cursor-pointer"
+                className="px-5 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full hover:shadow-2xl transition-all hover:scale-[1.08] hover:opacity-95"
               >
                 Login
               </button>
@@ -169,9 +165,9 @@ export default function Navbar() {
               <>
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-gray-100 transition cursor-pointer"
+                  className="flex items-center gap-3 px-3 py-2 rounded-full hover:text-black transition"
                 >
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold shadow">
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold">
                     {user?.profileImage ? (
                       <img
                         src={`${import.meta.env.VITE_BACKEND_URL}${user.profileImage}`}
@@ -183,25 +179,25 @@ export default function Navbar() {
                     )}
                   </div>
 
-                  <span className="text-lg font-bold">
+                  <span className="font-semibold text-white">
                     {user?.name?.split(" ")[0]}
                   </span>
 
                   <FiChevronDown
-                    className={`transition-transform text-2xl ${
+                    className={`transition-transform text-white ${
                       profileOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border border-gray-300 py-4 animate-fadeIn">
+                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border py-2">
                     <button
                       onClick={() => {
                         setShowSettings(true);
                         setProfileOpen(false);
                       }}
-                      className="w-full px-4 py-2 text-left hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
+                      className="w-full px-4 py-2 text-left hover:scale-[1.05] transition duration-200"
                     >
                       <FiSettings className="inline mr-2" />
                       Settings
@@ -209,7 +205,7 @@ export default function Navbar() {
 
                     <button
                       onClick={handleLogout}
-                      className="w-full px-4 py-2 text-left text-red-500 hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
+                      className="w-full px-4 py-2 text-left text-red-500 hover:scale-[1.05] transition duration-200"
                     >
                       <FiLogOut className="inline mr-2" />
                       Logout
@@ -220,6 +216,7 @@ export default function Navbar() {
             )}
           </div>
 
+          {/* MOBILE BUTTON */}
           <div className="md:hidden">
             <button onClick={() => setMobileMenu(!mobileMenu)}>
               {mobileMenu ? <FiX size={26} /> : <FiMenu size={26} />}
@@ -227,72 +224,60 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* MOBILE MENU */}
         <div
-          className={`md:hidden absolute top-16 right-0 w-75 px-8 transition-all duration-300 z-40
-  ${mobileMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
+          className={`md:hidden absolute top-16 right-0 w-72 px-6 transition-all ${
+            mobileMenu
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-4 pointer-events-none"
+          }`}
         >
-          <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-300 p-6 flex flex-col gap-4">
-            {/* HOME */}
-            <NavLink
-              to="/"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
-            >
-              🏠 Home
+          <div className="bg-white rounded-2xl shadow-xl p-5 flex flex-col gap-3 hover:shadow-2xl transition hover:opacity-95">
+            <NavLink to="/" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
+              <FiHome /> Home
             </NavLink>
 
-            {/* HOW IT WORKS (SCROLL) */}
             <button
               onClick={() => {
                 scrollToSection("quiz-section");
                 setMobileMenu(false);
               }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+              className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              🎧 How It Works
+              <FiHeadphones /> How It Works
             </button>
 
-            {/* QUIZ */}
-            <NavLink
-              to="/quiz"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
-            >
-              🎧 Quiz
+            <NavLink to="/quiz" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
+              <FiHeadphones /> Quiz
             </NavLink>
 
-            {/* PLAYLIST */}
-            <NavLink
-              to="/playlist"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
-            >
-              🎵 Playlist
-            </NavLink>
+            {user && (
+              <NavLink to="/playlist" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
+                <FiList /> Playlist
+              </NavLink>
+            )}
 
-            {/* PRICING */}
             <button
               onClick={() => {
                 scrollToSection("pricing-section");
                 setMobileMenu(false);
               }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+              className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              💰 Plans
+              <FiDollarSign /> Plans
             </button>
 
-            {/* FAQ */}
             <button
               onClick={() => {
                 scrollToSection("faq-section");
                 setMobileMenu(false);
               }}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition"
+              className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              ❓ FAQ
+              <FiHelpCircle /> FAQ
             </button>
 
-            <div className="border border-gray-300  my-2"></div>
+            <div className="border my-2"></div>
 
             {!user ? (
               <button
@@ -300,29 +285,26 @@ export default function Navbar() {
                   navigate("/login");
                   setMobileMenu(false);
                 }}
-                className="w-full text-left px-3 py-2 rounded-lg bg-gradient-to-r from-[#155DFC] to-[#9810FA] text-white shadow-md hover:shadow-lg transition cursor-pointer"
+                className="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 rounded-lg hover:opacity-95 transition duration-200 hover:shadow-2xl w-full hover:scale-[1.05]"
               >
-                🔐 Login
+                Login
               </button>
             ) : (
-              <div className="flex flex-col gap-2">
+              <>
                 <button
                   onClick={() => {
                     setShowSettings(true);
                     setMobileMenu(false);
                   }}
-                  className="text-left px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[#155DFC]/10 hover:to-[#9810FA]/10 transition cursor-pointer"
+                  className="text-start"
                 >
                   ⚙️ Settings
                 </button>
 
-                <button
-                  onClick={handleLogout}
-                  className="text-left px-3 py-2 rounded-lg text-white bg-gradient-to-r from-[#155DFC] to-[#9810FA]  transition cursor-pointer"
-                >
+                <button onClick={handleLogout} className="text-start text-red-500 hover:scale-[1.05] transition duration-200">
                   🚪 Logout
                 </button>
-              </div>
+              </>
             )}
           </div>
         </div>
