@@ -179,12 +179,12 @@ export default function Navbar() {
                     )}
                   </div>
 
-                  <span className="font-semibold text-white">
+                  <span className="font-bold">
                     {user?.name?.split(" ")[0]}
                   </span>
 
                   <FiChevronDown
-                    className={`transition-transform text-white ${
+                    className={`transition-transform ${
                       profileOpen ? "rotate-180" : ""
                     }`}
                   />

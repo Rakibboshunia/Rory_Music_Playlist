@@ -59,7 +59,9 @@ export default function PlaylistResult() {
                 Your Personalised Wedding Playlist
               </h3>
               <p className="text-xs text-gray-500">
-                Built around your answers, this playlist is designed to match your vibe, suit your guests, and help create the kind of atmosphere that keeps the dance floor moving all night.
+                Built around your answers, this playlist is designed to match
+                your vibe, suit your guests, and help create the kind of
+                atmosphere that keeps the dance floor moving all night.
               </p>
             </div>
           </div>
@@ -69,11 +71,12 @@ export default function PlaylistResult() {
         </div>
       </div>
 
-      <TrustBar/>
-      <HowItWorks />
-      <AwardsSection />
-      <TestimonialsSection/>
+      <TrustBar />
+        <HowItWorks />
+          <AwardsSection />
+        <TestimonialsSection />
       <CTASection />
+      
     </div>
   );
 }

@@ -7,6 +7,7 @@ import coverImg from "../../../assets/img/playlist.png";
 import PlaylistPlayer from "./PlaylistPlayer";
 import TrackRow from "./TrackRow";
 import PremiumPdfCard from "./PremiumPdfCard";
+import toast from "react-hot-toast";
 
 import { upgradePlaylistApi } from "../../../api/playlistApi";
 
@@ -58,9 +59,11 @@ export default function PlaylistCard({
         window.location.href = checkoutUrl;
       } else {
         console.error("Checkout URL not found");
+        toast.error("Failed to process payment link. Please try again.");
       }
     } catch (err) {
       console.error("Upgrade error:", err?.response?.data || err);
+      toast.error(err?.response?.data?.message || "Failed to upgrade playlist.");
     } finally {
       setUpgradeLoading(false);
     }

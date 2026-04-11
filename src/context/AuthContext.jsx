@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
 const AuthContext = createContext(null);
 
@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
       const storedUser = localStorage.getItem("authUser");
 
       if (!token) {
@@ -28,14 +28,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/me`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axiosInstance.get("/api/v1/auth/me");
 
         const userData =
           res?.data?.data?.user ||

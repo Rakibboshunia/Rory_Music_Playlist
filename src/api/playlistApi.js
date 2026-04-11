@@ -16,6 +16,8 @@ export const upgradePlaylistApi = ({ quizId, playlistId }) => {
 
   return axiosInstance.post("/api/v1/playlists/upgrade", {
     quizId,   
-    playlistId, 
+    playlistId,
+    quiz_id: quizId,
+    playlist_id: playlistId
   });
 };

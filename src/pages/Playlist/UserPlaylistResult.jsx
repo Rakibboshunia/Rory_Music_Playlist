@@ -97,10 +97,6 @@ export default function PlaylistResult() {
 
           {filteredPlaylists.length > 0 && (
             <>
-              {/* <h2 className="text-2xl font-semibold mt-8 mb-4 capitalize">
-                {playlistMode} Playlist
-              </h2> */}
-
               <PlaylistAccordion
                 playlistData={filteredPlaylists}
                 showUpgradeButton={playlistMode === "free"}
@@ -112,10 +108,11 @@ export default function PlaylistResult() {
       </div>
 
       <TrustBar />
-      <HowItWorks />
-      <AwardsSection />
-      <TestimonialsSection />
+        <HowItWorks />
+          <AwardsSection />
+        <TestimonialsSection />
       <CTASection />
+
     </div>
   );
 }

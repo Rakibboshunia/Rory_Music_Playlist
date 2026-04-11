@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useQuiz } from "../../../context/QuizContext";
 import { useAuth } from "../../../context/AuthContext";
+import toast from "react-hot-toast";
 
 import DoNotPlayCard from "../../../components/DoNotPlayCard";
 
@@ -100,6 +101,8 @@ export default function Step10_Final() {
 
       navigate("/");
     } catch (err) {
+      console.error(err);
+      toast.error(err?.response?.data?.message || "Something went wrong. Please try again.");
     } finally {
       setEmailLoading(false);
     }
@@ -129,6 +132,7 @@ export default function Step10_Final() {
       navigate("/playlist");
     } catch (err) {
       console.error("Free Submit Error:", err?.response || err);
+      toast.error(err?.response?.data?.message || "Failed to generate playlist. Please try again.");
     } finally {
       setIsGenerating(false);
     }
@@ -158,6 +162,7 @@ export default function Step10_Final() {
       window.location.href = checkoutUrl;
     } catch (err) {
       console.error("Paid Submit Error:", err?.response || err);
+      toast.error(err?.response?.data?.message || "Failed to process payment. Please try again.");
     } finally {
       setPaymentLoading(false);
     }
