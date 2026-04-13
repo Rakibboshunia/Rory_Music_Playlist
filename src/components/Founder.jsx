@@ -41,23 +41,23 @@ export default function Founder() {
           <div className="absolute w-[260px] h-[260px] bg-gradient-to-r from-purple-500 to-pink-500 blur-3xl opacity-20 rounded-full" />
 
           {/* Card */}
-          <div className="relative bg-white rounded-3xl shadow-2xl p-12 text-center hover:scale-105 transition duration-300">
+          <div className="relative bg-white rounded-3xl shadow-2xl p-15 text-center hover:scale-105 transition duration-300">
             {/* IMAGE FIXED (FULL SHOW) */}
-            <div className="w-45 h-45 mx-auto mb-4 rounded-full overflow-hidden shadow-lg relative flex items-center justify-center">
-              {/* Background fill */}
-              <img
-                src={roryImage}
-                className="absolute inset-0 w-full h-full object-cover blur-md scale-135 opacity-50"
-                alt=""
-              />
+            <div className="w-50 h-60 mx-auto mb-4 overflow-hidden shadow-lg relative flex items-center justify-center">
+  {/* Background fill */}
+  <img
+    src={roryImage}
+    className="absolute inset-0 w-full h-full object-cover blur-md scale-135 opacity-50"
+    alt=""
+  />
 
-              {/* Main image */}
-              <img
-                src={roryImage}
-                alt="Founder"
-                className="relative h-full object-contain"
-              />
-            </div>
+  {/* Main image */}
+  <img
+    src={roryImage}
+    alt="Founder"
+    className="relative h-full object-contain"
+  />
+</div>
 
             {/* Name / Brand */}
             <p className="font-semibold text-lg text-gray-800">DJ & SAX®</p>
