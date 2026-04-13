@@ -14,50 +14,49 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const email = e.target.email.value.trim();
-  const password = e.target.password.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
 
-  if (!email || !password) {
-    toast.error("Please fill in all fields");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    toast.info("Logging in...");
-
-    const res = await loginApi({ email, password });
-
-    const token = res?.data?.data?.token;
-    const user = res?.data?.data?.user;
-
-    if (!token || !user) {
-      toast.error("Login failed. Invalid server response.");
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
       return;
     }
 
-    localStorage.setItem("token", token);
-    login(user, token);
-    toast.success(res?.data?.message || "Login successful!");
+    try {
+      setLoading(true);
 
-    if (user.role === "admin") {
-      navigate("/admin", { replace: true });
-    } else {
-      navigate("/", { replace: true });
+      const res = await loginApi({ email, password });
+
+      const token = res?.data?.data?.token;
+      const user = res?.data?.data?.user;
+
+      if (!token || !user) {
+        toast.error("Login failed. Invalid server response.");
+        return;
+      }
+
+      localStorage.setItem("token", token);
+      login(user, token);
+      toast.success(res?.data?.message || "Login successful!");
+
+      if (user.role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+
+    } catch (error) {
+      console.error("Login Error:", error);
+
+      toast.error(
+        error?.response?.data?.message || "Login failed"
+      );
+    } finally {
+      setLoading(false);
     }
-
-  } catch (error) {
-
-    toast.error(
-      error?.response?.data?.message || "Login failed"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div
