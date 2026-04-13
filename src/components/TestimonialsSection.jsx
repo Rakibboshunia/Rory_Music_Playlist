@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
 
         <TestimonialCard
           text="We honestly couldn’t have asked for a better atmosphere at our wedding!"
-          name="Ciara Lynch"
+          name="Ciara & Luke"
           role="The Mayson Hotel"
         />
       </div>
