@@ -6,24 +6,28 @@ export const QuizProvider = ({ children }) => {
   const [answers, setAnswers] = useState({});
 
   const updateAnswer = (key, value) => {
-    setAnswers((prev) => {
-      const updated = {
-        ...prev,
-        [key]: value,
-      };
+  setAnswers((prev) => {
+    const updated = {
+      ...prev,
+      [key]: value,
+    };
 
-      return updated;
-    });
-  };
+    return updated;
+  });
 
-  const resetQuiz = () => {
-    setAnswers({});
-    console.log("Quiz reset");
-  };
+  toast.info("Answer updated");
+};
 
-  const submitQuiz = () => {
-    console.log("Final Quiz Answers:", answers);
-  };
+const resetQuiz = () => {
+  setAnswers({});
+
+  toast.info("Quiz has been reset");
+};
+
+const submitQuiz = () => {
+
+  toast.success("Quiz submitted successfully");
+};
 
   return (
     <QuizContext.Provider

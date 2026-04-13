@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getGuestPlaylistApi } from "../../api/playlistApi";
 
 import PlaylistAccordion from "./components/PlaylistAccordion";
-// import AwardsSection from "../../components/AwardsSection";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import CTASection from "../../components/CTASection";
 import TrustBar from "../../components/TrustBar";
@@ -16,23 +15,36 @@ export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
   const { id } = useParams();
 
-  console.log(id);
-
   useEffect(() => {
-    if (!id) return;
+  if (!id) {
+    toast.error("Invalid playlist ID");
+    return;
+  }
 
-    const fetchPlaylistData = async () => {
-      try {
-        const response = await getGuestPlaylistApi(id);
+  const fetchPlaylistData = async () => {
+    try {
+      const response = await getGuestPlaylistApi(id);
 
-        setPlaylistData([response.data?.data]);
-      } catch (error) {
-        console.error("Guest playlist fetch error:", error);
+      const data = response.data?.data;
+
+      if (!data) {
+        toast.info("No playlist found");
+      } else {
+        toast.success("Playlist loaded successfully");
       }
-    };
 
-    fetchPlaylistData();
-  }, [id]);
+      setPlaylistData([data]);
+    } catch (error) {
+
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to load playlist. Please try again."
+      );
+    }
+  };
+
+  fetchPlaylistData();
+}, [id]);
 
   return (
     <div>

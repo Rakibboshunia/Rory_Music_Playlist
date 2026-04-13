@@ -26,7 +26,7 @@ export default function Home() {
       {/* TRUST */}
       <TrustBar />
 
-      {/* SOCIAL PROOF (MOVE UP 🔥) */}
+      {/* SOCIAL PROOF  */}
       <AwardsSection />
 
       <ImagineDancefloor />

@@ -10,7 +10,7 @@ export default function PerfectFor() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-24 px-6 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[350px] h-[350px] bg-purple-400 opacity-20 blur-3xl rounded-full top-[-120px] left-[-120px]" />
@@ -21,7 +21,7 @@ export default function PerfectFor() {
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-16 leading-tight">
           Perfect For Couples <br />Who{" "}
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Want…
           </span>
         </h2>
@@ -42,7 +42,7 @@ export default function PerfectFor() {
             >
               {/* Icon */}
               <div className="flex-shrink-0 mt-1">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition">
+                <div className="w-10 h-10 rounded-full bg-linear-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition">
                   <CheckCircle size={18} />
                 </div>
               </div>

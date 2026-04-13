@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative pt-18 pb-28 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative pt-18 pb-28 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
@@ -12,7 +12,7 @@ export default function TestimonialsSection() {
       <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
         <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
           Real Weddings. <br />
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Real Dance Floors.
           </span>
         </h2>
@@ -59,7 +59,7 @@ function TestimonialCard({ text, name, role }) {
       "
     >
       {/* Glow */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
+      <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
 
       {/* Stars */}
       <div className="flex text-yellow-400 mb-4 text-lg">

@@ -5,6 +5,7 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import CTASection from "../components/CTASection";
 import TrustBar from "../components/TrustBar";
 import HowItWorks from "../components/HowItWorks";
+import AwardsSection from "../components/AwardsSection";
 
 const quizSteps = [
   "/quiz",
@@ -77,9 +78,9 @@ export default function QuizLayout() {
         <HowItWorks />
       </div>
 
-      {/* <div>
+      <div>
         <AwardsSection />
-      </div> */}
+      </div>
 
       <div>
         <TestimonialsSection/>

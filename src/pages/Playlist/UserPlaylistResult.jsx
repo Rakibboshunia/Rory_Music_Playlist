@@ -20,9 +20,13 @@ export default function PlaylistResult() {
         const response = await getUserPlaylistsApi();
         const data = response?.data?.data || [];
 
-        console.log("All Playlists:", data);
-
         setPlaylistData(data);
+
+        if (!data.length) {
+        toast.info("No playlists found");
+      } else {
+        toast.success("Playlists loaded successfully");
+      }
 
         const hasPremium = data.some(
           (playlist) =>
@@ -34,7 +38,10 @@ export default function PlaylistResult() {
           setPlaylistMode("premium");
         }
       } catch (error) {
-        console.error("User playlist fetch error:", error);
+        toast.error(
+        error?.response?.data?.message ||
+          "Failed to load playlists. Please try again."
+      );
       }
     };
 

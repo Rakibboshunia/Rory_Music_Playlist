@@ -5,6 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
+import { toast } from "react-hot-toast"; // ✅ added
 
 const AudioPlayerContext = createContext(null);
 
@@ -21,12 +22,15 @@ export function AudioPlayerProvider({ children }) {
   const [duration, setDuration] = useState(0);
 
   const playTrack = (track, list = [], playlistId) => {
-    if (!track) return;
-
-    if (currentTrack?.id === track.id) {
-      return; 
+    if (!track) {
+      toast.error("Track not found");
+      return;
     }
 
+    if (currentTrack?.id === track.id) {
+      toast.info("Track already playing");
+      return;
+    }
 
     const safeList = Array.isArray(list) ? list : [];
     const index = safeList.findIndex((t) => t.id === track.id);
@@ -38,11 +42,23 @@ export function AudioPlayerProvider({ children }) {
 
     audioRef.current.src = track.src;
     audioRef.current.currentTime = 0;
-    audioRef.current.play();
+
+    audioRef.current
+      .play()
+      .then(() => {
+        toast.success("Playing track");
+      })
+      .catch(() => {
+        toast.error("Playback failed");
+      });
   };
 
+  // ✅ FIXED (missing function)
   const setTrackOnly = (track, list = [], playlistId) => {
-    if (!track) return;
+    if (!track) {
+      toast.error("Track not found");
+      return;
+    }
 
     const safeList = Array.isArray(list) ? list : [];
     const index = safeList.findIndex((t) => t.id === track.id);
@@ -58,31 +74,41 @@ export function AudioPlayerProvider({ children }) {
   };
 
   const togglePlay = () => {
-    if (!currentTrack) return;
+    if (!currentTrack) {
+      toast.error("No track selected");
+      return;
+    }
 
     if (audioRef.current.paused) {
       audioRef.current.play();
+      toast.success("Resumed");
     } else {
       audioRef.current.pause();
+      toast.info("Paused");
     }
   };
 
   const playNext = () => {
-    if (!playlist.length) return;
+    if (!playlist.length) {
+      toast.error("No playlist available");
+      return;
+    }
 
     const nextIndex = (currentIndex + 1) % playlist.length;
     playTrack(playlist[nextIndex], playlist, activePlaylistId);
   };
 
   const playPrev = () => {
-    if (!playlist.length) return;
+    if (!playlist.length) {
+      toast.error("No playlist available");
+      return;
+    }
 
     const prevIndex =
       currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
 
     playTrack(playlist[prevIndex], playlist, activePlaylistId);
   };
-
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -123,7 +149,7 @@ export function AudioPlayerProvider({ children }) {
         currentTime,
         duration,
         playTrack,
-        setTrackOnly,
+        setTrackOnly, // ✅ now defined
         togglePlay,
         playNext,
         playPrev,

@@ -23,7 +23,6 @@ export default function Step10_Final() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
-  // ✅ NEW (checkbox state)
   const [isChecked, setIsChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
 
@@ -66,6 +65,7 @@ export default function Step10_Final() {
 
     if (!isChecked) {
       setCheckboxError("You must agree");
+      toast.error("You must agree before continuing");
 
       // ✅ scroll + focus
       checkboxRef.current?.scrollIntoView({
@@ -79,7 +79,10 @@ export default function Step10_Final() {
       setCheckboxError("");
     }
 
-    if (!email) return;
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    }
 
     const payload = {
       email,
@@ -93,6 +96,7 @@ export default function Step10_Final() {
       setEmailLoading(true);
 
       await submitGuestQuizApi(payload);
+      toast.success("Playlist sent successfully");
 
       setShowEmailPopup(false);
       setEmail("");
@@ -101,8 +105,10 @@ export default function Step10_Final() {
 
       navigate("/");
     } catch (err) {
-      console.error(err);
-      toast.error(err?.response?.data?.message || "Something went wrong. Please try again.");
+      toast.error(
+        err?.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
     } finally {
       setEmailLoading(false);
     }
@@ -113,6 +119,7 @@ export default function Step10_Final() {
     setShowUpgradePopup(false);
 
     if (!isAuthenticated) {
+      toast.info("Please login first");
       navigate("/");
       return;
     }
@@ -129,10 +136,14 @@ export default function Step10_Final() {
       };
 
       await submitUserQuizApi(payload);
+      toast.success("Playlist generated successfully");
+
       navigate("/playlist");
     } catch (err) {
-      console.error("Free Submit Error:", err?.response || err);
-      toast.error(err?.response?.data?.message || "Failed to generate playlist. Please try again.");
+      toast.error(
+        err?.response?.data?.message ||
+          "Failed to generate playlist. Please try again.",
+      );
     } finally {
       setIsGenerating(false);
     }
@@ -141,6 +152,7 @@ export default function Step10_Final() {
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
     if (!isAuthenticated) {
+      toast.info("Please login first");
       navigate("/login");
       return;
     }
@@ -159,10 +171,19 @@ export default function Step10_Final() {
       const res = await submitUserQuizApi(payload);
       const checkoutUrl = res?.data?.data?.checkoutUrl;
 
+      if (!checkoutUrl) {
+        toast.error("Checkout URL not found");
+        return;
+      }
+
+      toast.success("Redirecting to payment...");
+
       window.location.href = checkoutUrl;
     } catch (err) {
-      console.error("Paid Submit Error:", err?.response || err);
-      toast.error(err?.response?.data?.message || "Failed to process payment. Please try again.");
+      toast.error(
+        err?.response?.data?.message ||
+          "Failed to process payment. Please try again.",
+      );
     } finally {
       setPaymentLoading(false);
     }
@@ -246,25 +267,29 @@ export default function Step10_Final() {
                           setIsChecked(e.target.checked);
                           if (e.target.checked) setCheckboxError("");
                         }}
-                        className={`mt-[2px] w-5 h-5 rounded-md flex-shrink-0 border transition ${checkboxError ? "border-red-500 ring-1 ring-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-blue-300 `}
+                        className={`mt-[2px] w-5 h-5 rounded-md flex-shrink-0 border transition ${
+                          checkboxError
+                            ? "border-red-500 ring-1 ring-red-500"
+                            : "border-gray-300"
+                        } focus:outline-none focus:ring-2 focus:ring-blue-300`}
                       />
 
                       {/* Text + Inline Error */}
-                      <div className="flex flex-wrap items-center gap-x-2 text-left">
+                      <div className="text-left">
                         <span
-                          className={`${checkboxError ? "text-red-600" : "text-[#6B6B6B]"}`}
+                          className={`${
+                            checkboxError ? "text-red-600" : "text-[#6B6B6B]"
+                          }`}
                         >
-                          <span className="text-black">I agree</span> to receive
-                          my personalised playlist by email and occasional
-                          updates from{" "}
-                          <span className="text-black">DJ & SAX®</span> about my
-                          wedding or event. I can unsubscribe at any time.
+                          I agree to receive my personalised playlist by email
+                          and occasional updates from DJ & SAX® about my wedding
+                          or event. I can unsubscribe at any time.
                         </span>
 
-                        {/* Inline error (same line) */}
+                        {/* ✅ SAME LINE STYLE ERROR */}
                         {checkboxError && (
-                          <span className="text-red-500 text-[12px] whitespace-nowrap">
-                            You must agree before continuing
+                          <span className="text-red-500 text-xs ml-2">
+                            ({checkboxError})
                           </span>
                         )}
                       </div>
@@ -277,10 +302,8 @@ export default function Step10_Final() {
                   <p className="text-[15px] text-gray-500 text-center leading-relaxed">
                     ⭐{" "}
                     <span className="text-black font-semibold">
-                      Over 2,500 weddings
-                    </span>{" "}
-                    performed by{" "}
-                    <span className="text-black font-semibold">DJ & SAX®</span>
+                      Over 2,500 weddings performed by DJ & SAX®
+                    </span>
                   </p>
                 </div>
 

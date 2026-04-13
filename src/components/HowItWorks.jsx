@@ -19,7 +19,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
+    <section className="relative py-24 px-6 bg-linear-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
 
       {/* Background glow */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
@@ -30,7 +30,7 @@ export default function HowItWorks() {
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
           Your Wedding Playlist, Sorted <br />
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             in 3 Simple Steps
           </span>
         </h2>
@@ -55,7 +55,7 @@ export default function HowItWorks() {
                 "
               >
                 {/* Glow hover */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition" />
+                <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition" />
 
                 {/* Step number */}
                 <div
@@ -63,7 +63,7 @@ export default function HowItWorks() {
                     absolute -top-6 left-1/2 -translate-x-1/2
                     w-14 h-14 flex items-center justify-center
                     rounded-full
-                    bg-gradient-to-r from-purple-600 to-pink-500
+                    bg-linear-to-r from-purple-600 to-pink-500
                     text-white font-bold text-lg
                     shadow-lg group-hover:scale-110 transition
                   "
@@ -91,7 +91,7 @@ export default function HowItWorks() {
             onClick={() => navigate("/quiz")}
             className="
               group px-8 py-4 rounded-2xl
-              bg-gradient-to-r from-purple-600 to-pink-500
+              bg-linear-to-r from-purple-600 to-pink-500
               text-white text-lg font-semibold
               shadow-xl hover:shadow-2xl
               transition duration-300

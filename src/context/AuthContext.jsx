@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
+import { toast } from "react-hot-toast";
 
 const AuthContext = createContext(null);
 
@@ -10,66 +11,73 @@ export function AuthProvider({ children }) {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
-      const storedUser = localStorage.getItem("authUser");
+  const initializeAuth = async () => {
+    const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+    const storedUser = localStorage.getItem("authUser");
 
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+    if (!token) {
+      setLoading(false);
+      return;
+    }
 
-      if (storedUser) {
-        try {
-          setUser(JSON.parse(storedUser));
-        } catch (err) {
-          console.warn("Stored user parse failed");
-        }
-      }
-
+    if (storedUser) {
       try {
-        const res = await axiosInstance.get("/api/v1/auth/me");
-
-        const userData =
-          res?.data?.data?.user ||
-          res?.data?.data ||
-          res?.data?.user ||
-          null;
-
-        if (userData) {
-          setUser(userData);
-          localStorage.setItem("authUser", JSON.stringify(userData));
-        }
-      } catch (error) {
-        const status = error?.response?.status;
-
-        if (status === 401) {
-          console.warn("Token expired. Logging out.");
-          localStorage.clear();
-          setUser(null);
-        } else {
-          console.warn(
-            "Auth verification temporary failed. Keeping session."
-          );
-        }
-      } finally {
-        setLoading(false);
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        toast.error("Failed to load user data"); 
       }
-    };
+    }
 
-    initializeAuth();
-  }, []);
+    try {
+      const res = await axiosInstance.get("/api/v1/auth/me");
 
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("authUser", JSON.stringify(userData));
-    setUser(userData);
+      const userData =
+        res?.data?.data?.user ||
+        res?.data?.data ||
+        res?.data?.user ||
+        null;
+
+      if (userData) {
+        setUser(userData);
+        localStorage.setItem("authUser", JSON.stringify(userData));
+        toast.success("Session restored");
+      }
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        localStorage.clear();
+        setUser(null);
+
+        toast.error("Session expired. Please login again");
+      } else {
+        console.warn(
+          "Auth verification temporary failed. Keeping session."
+        );
+        
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const logout = () => {
-    localStorage.clear();
-    setUser(null);
-  };
+  initializeAuth();
+}, []);
+
+const login = (userData, token) => {
+  localStorage.setItem("token", token);
+  localStorage.setItem("authUser", JSON.stringify(userData));
+  setUser(userData);
+
+  toast.success("Logged in successfully");
+};
+
+const logout = () => {
+  localStorage.clear();
+  setUser(null);
+
+  toast("Logged out");
+};
 
   return (
     <AuthContext.Provider

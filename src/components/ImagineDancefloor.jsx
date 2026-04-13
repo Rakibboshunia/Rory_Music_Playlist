@@ -13,7 +13,7 @@ export default function ImagineDancefloor() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-24 px-6 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* 🔥 Background Glow */}
       <div className="absolute w-[350px] h-[350px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-120px] left-[-120px]" />
@@ -24,7 +24,7 @@ export default function ImagineDancefloor() {
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold leading-tight">
           Imagine Your{" "}
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Wedding Dancefloor
           </span>
           <br />
@@ -52,7 +52,7 @@ export default function ImagineDancefloor() {
               "
             >
               {/* Icon */}
-              <div className="w-11 h-11 flex-shrink-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition">
+              <div className="w-11 h-11 flex-shrink-0 rounded-full bg-linear-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white text-sm font-bold group-hover:scale-110 transition">
                 ✓
               </div>
 
@@ -75,7 +75,7 @@ export default function ImagineDancefloor() {
             onClick={() => navigate("/quiz")}
             className="
               group px-6 py-4 rounded-2xl
-              bg-gradient-to-r from-purple-600 to-pink-500
+              bg-linear-to-r from-purple-600 to-pink-500
               text-white font-bold text-lg
               shadow-xl hover:shadow-2xl
               transition duration-300

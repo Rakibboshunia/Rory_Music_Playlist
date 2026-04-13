@@ -8,7 +8,7 @@ export default function HeroSection() {
   const navigate = useNavigate();
 
   const handleHowItWorks = () => {
-    const el = document.getElementById("quiz-section"); // ✅ fixed id
+    const el = document.getElementById("quiz-section");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -21,10 +21,8 @@ export default function HeroSection() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
         {/* LEFT */}
         <div className="text-white max-w-xl mx-auto lg:mx-0 text-center lg:text-left space-y-6">
-
           {/* HEADLINE */}
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
             What Will Your Wedding Dancefloor Sound Like?
@@ -32,17 +30,13 @@ export default function HeroSection() {
 
           {/* SUB */}
           <p className="text-base sm:text-lg text-white/90">
-            Take our 60-second quiz and generate a personalised Spotify playlist tailored to your vibe, your guests, and the atmosphere you want to create.
+            Take our 60-second quiz and generate a personalised Spotify playlist
+            tailored to your vibe, your guests, and the atmosphere you want to
+            create.
           </p>
-
-          {/* SUPPORT */}
-          {/* <p className="text-sm text-white/80">
-            Free 15-song playlist • Upgrade to a full 50-song soundtrack
-          </p> */}
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-
             {/* PRIMARY (🔥 focus) */}
             <button
               onClick={() => navigate("/quiz")}
@@ -58,32 +52,14 @@ export default function HeroSection() {
               Create My Playlist
               <FiArrowRight className="group-hover:translate-x-1 transition" />
             </button>
-
           </div>
 
           {/* ✅ REASSURANCE */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 text-white/90 text-sm">
-          <span>✔ Takes about 60 seconds</span>
-          <span>✔ Instant Spotify playlist</span>
-          <span>✔ Free to try</span>
-        </div>
-
-          {/* TRUST LINE */}
-          {/* <p className="text-sm text-white/80 pt-2 max-w-md mx-auto lg:mx-0">
-            Created by the team behind DJ & SAX®, Ireland’s multi-award-winning wedding entertainment brand.
-          </p> */}
-
-          {/* SOCIAL PROOF */}
-          {/* <div className="flex items-center justify-center lg:justify-start gap-3 pt-4">
-            <div className="flex">
-              <div className="w-9 h-9 rounded-full bg-yellow-400 border-2 border-white"></div>
-              <div className="-ml-2 w-9 h-9 rounded-full bg-pink-400 border-2 border-white"></div>
-              <div className="-ml-2 w-9 h-9 rounded-full bg-blue-400 border-2 border-white"></div>
-            </div>
-            <span className="text-white/80 text-sm">
-              2,500+ playlists created
-            </span>
-          </div> */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 text-white/90 text-sm">
+            <span>✔ Takes about 60 seconds</span>
+            <span>✔ Instant Spotify playlist</span>
+            <span>✔ Free to try</span>
+          </div>
         </div>
 
         {/* RIGHT IMAGE */}

@@ -110,7 +110,7 @@ export default function FAQ() {
             onClick={() => navigate("/quiz")}
             className="
               px-8 py-4 rounded-2xl
-              bg-gradient-to-r from-purple-600 to-pink-500
+              bg-linear-to-r from-purple-600 to-pink-500
               text-white font-bold
               shadow-lg hover:shadow-2xl
               transition duration-300

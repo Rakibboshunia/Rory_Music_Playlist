@@ -25,7 +25,7 @@ export default function WhyLove() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-24 px-6 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[350px] h-[350px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-120px] left-[-120px]" />
@@ -36,7 +36,7 @@ export default function WhyLove() {
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 leading-tight">
           Why Couples Love <br />
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Soundtrack My Night
           </span>
         </h2>
@@ -59,13 +59,13 @@ export default function WhyLove() {
                 "
               >
                 {/* Hover glow */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
+                <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition duration-300" />
 
                 {/* Icon */}
                 <div
                   className="
                     w-14 h-14 flex items-center justify-center rounded-2xl
-                    bg-gradient-to-r from-purple-600 to-pink-500
+                    bg-linear-to-r from-purple-600 to-pink-500
                     text-white shadow-md mb-6
                     group-hover:scale-110 transition
                   "

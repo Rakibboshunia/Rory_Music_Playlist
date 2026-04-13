@@ -28,7 +28,7 @@ export default function PlaylistStyles() {
   ];
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-24 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
@@ -39,7 +39,7 @@ export default function PlaylistStyles() {
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 leading-tight">
           See the Kind of <br />
-          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Playlists You Can Create
           </span>
         </h2>
@@ -56,7 +56,7 @@ export default function PlaylistStyles() {
               hover:-translate-y-2"
             >
               {/* Gradient BG */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-500 opacity-90" />
+              <div className="absolute inset-0 bg-linear-to-br from-purple-600 via-pink-500 to-indigo-500 opacity-90" />
 
               {/* Glass Overlay */}
               <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
@@ -91,7 +91,7 @@ export default function PlaylistStyles() {
         <div className="text-center mt-16">
           <button
             onClick={() => navigate("/quiz")}
-            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-lg font-bold
+            className="bg-linear-to-r from-purple-600 to-pink-500 text-white text-lg font-bold
             px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition cursor-pointer"
           >
             Create My Playlist

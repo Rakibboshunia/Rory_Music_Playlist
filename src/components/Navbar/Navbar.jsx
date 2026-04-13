@@ -7,11 +7,6 @@ import {
   FiLogOut,
   FiMenu,
   FiX,
-  FiHome,
-  FiHeadphones,
-  FiList,
-  FiDollarSign,
-  FiHelpCircle,
 } from "react-icons/fi";
 
 import SettingsModal from "../../components/SettingsModal";
@@ -117,23 +112,23 @@ export default function Navbar() {
             }`}
           >
             <NavLink to="/" className={linkClass}>
-              <FiHome /> Home
+              Home
             </NavLink>
 
             <button
               onClick={() => scrollToSection("quiz-section")}
               className="flex items-center gap-2 hover:text-purple-600 transition"
             >
-              <FiHeadphones /> How It Works
+              How It Works
             </button>
 
             <NavLink to="/quiz" className={linkClass}>
-              <FiHeadphones /> Quiz
+              Quiz
             </NavLink>
 
             {user && (
               <NavLink to="/playlist" className={linkClass}>
-                <FiList /> Playlist
+                Playlist
               </NavLink>
             )}
 
@@ -141,14 +136,14 @@ export default function Navbar() {
               onClick={() => scrollToSection("pricing-section")}
               className="flex items-center gap-2 hover:text-purple-600 transition"
             >
-              <FiDollarSign /> Plans
+              Plans
             </button>
 
             <button
               onClick={() => scrollToSection("faq-section")}
               className="flex items-center gap-2 hover:text-purple-600 transition"
             >
-              <FiHelpCircle /> FAQ
+              FAQ
             </button>
           </div>
 
@@ -234,7 +229,7 @@ export default function Navbar() {
         >
           <div className="bg-white rounded-2xl shadow-xl p-5 flex flex-col gap-3 hover:shadow-2xl transition hover:opacity-95">
             <NavLink to="/" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
-              <FiHome /> Home
+              Home
             </NavLink>
 
             <button
@@ -244,16 +239,16 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              <FiHeadphones /> How It Works
+              How It Works
             </button>
 
             <NavLink to="/quiz" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
-              <FiHeadphones /> Quiz
+              Quiz
             </NavLink>
 
             {user && (
               <NavLink to="/playlist" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl">
-                <FiList /> Playlist
+              Playlist
               </NavLink>
             )}
 
@@ -264,7 +259,7 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              <FiDollarSign /> Plans
+              Plans
             </button>
 
             <button
@@ -274,7 +269,7 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2 hover:text-purple-600 transition duration-200 hover:scale-[1.05] hover:shadow-2xl"
             >
-              <FiHelpCircle /> FAQ
+              FAQ
             </button>
 
             <div className="border my-2"></div>
@@ -298,11 +293,11 @@ export default function Navbar() {
                   }}
                   className="text-start"
                 >
-                  ⚙️ Settings
+                  Settings
                 </button>
 
                 <button onClick={handleLogout} className="text-start text-red-500 hover:scale-[1.05] transition duration-200">
-                  🚪 Logout
+                  Logout
                 </button>
               </>
             )}
