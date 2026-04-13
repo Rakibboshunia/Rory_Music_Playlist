@@ -44,20 +44,20 @@ export default function Founder() {
           <div className="relative bg-white rounded-3xl shadow-2xl p-15 text-center hover:scale-105 transition duration-300">
             {/* IMAGE FIXED (FULL SHOW) */}
             <div className="w-50 h-60 mx-auto mb-4 overflow-hidden shadow-lg relative flex items-center justify-center">
-  {/* Background fill */}
-  <img
-    src={roryImage}
-    className="absolute inset-0 w-full h-full object-cover blur-md scale-135 opacity-50"
-    alt=""
-  />
+              {/* Background fill */}
+              <img
+                src={roryImage}
+                className="absolute inset-0 w-full h-full object-cover blur-md scale-135 opacity-50"
+                alt=""
+              />
 
-  {/* Main image */}
-  <img
-    src={roryImage}
-    alt="Founder"
-    className="relative h-full object-contain"
-  />
-</div>
+              {/* Main image */}
+              <img
+                src={roryImage}
+                alt="Founder"
+                className="relative h-full object-contain rounded"
+              />
+            </div>
 
             {/* Name / Brand */}
             <p className="font-semibold text-lg text-gray-800">DJ & SAX®</p>

@@ -9,6 +9,7 @@ import { getUserPlaylistsApi } from "../../api/playlistApi";
 import TrustBar from "../../components/TrustBar";
 import HowItWorks from "../../components/HowItWorks";
 import PlaylistVideoCTA from "./components/PlaylistVideoCTA";
+import toast from "react-hot-toast";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState([]);
