@@ -10,74 +10,71 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
-  useEffect(() => {
-  const initializeAuth = async () => {
-    const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
-    const storedUser = localStorage.getItem("authUser");
+   useEffect(() => {
+    const initializeAuth = async () => {
+      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+      const storedUser = localStorage.getItem("authUser");
 
-    if (!token) {
-      setLoading(false);
-      return;
-    }
+      if (!token) {
+        setLoading(false);
+        return;
+      }
 
-    if (storedUser) {
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch (err) {
+          console.warn("Stored user parse failed");
+        }
+      }
+
       try {
-        setUser(JSON.parse(storedUser));
-      } catch (err) {
-        toast.error("Failed to load user data"); 
+        const res = await axiosInstance.get("/api/v1/auth/me");
+
+        const userData =
+          res?.data?.data?.user ||
+          res?.data?.data ||
+          res?.data?.user ||
+          null;
+
+        if (userData) {
+          setUser(userData);
+          localStorage.setItem("authUser", JSON.stringify(userData));
+        }
+      } catch (error) {
+        const status = error?.response?.status;
+
+        if (status === 401) {
+          console.warn("Token expired. Logging out.");
+          localStorage.clear();
+          setUser(null);
+        } else {
+          console.warn(
+            "Auth verification temporary failed. Keeping session."
+          );
+        }
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    try {
-      const res = await axiosInstance.get("/api/v1/auth/me");
+    initializeAuth();
+  }, []);
 
-      const userData =
-        res?.data?.data?.user ||
-        res?.data?.data ||
-        res?.data?.user ||
-        null;
-
-      if (userData) {
-        setUser(userData);
-        localStorage.setItem("authUser", JSON.stringify(userData));
-        toast.success("Session restored");
-      }
-    } catch (error) {
-      const status = error?.response?.status;
-
-      if (status === 401) {
-        localStorage.clear();
-        setUser(null);
-
-        toast.error("Session expired. Please login again");
-      } else {
-        console.warn(
-          "Auth verification temporary failed. Keeping session."
-        );
-        
-      }
-    } finally {
-      setLoading(false);
-    }
+  const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("authUser", JSON.stringify(userData));
+    setUser(userData);
+    
+    toast.success("Login successful!");
   };
 
-  initializeAuth();
-}, []);
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
 
-const login = (userData, token) => {
-  localStorage.setItem("token", token);
-  localStorage.setItem("authUser", JSON.stringify(userData));
-  setUser(userData);
-
-  toast.success("Logged in successfully");
-};
-
-const logout = () => {
-  localStorage.clear();
-  setUser(null);
-
-  toast("Logged out");
-};
+    toast.success("Logged out successfully");
+  };
 
   return (
     <AuthContext.Provider

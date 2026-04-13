@@ -29,48 +29,45 @@ export default function PlaylistCard({
   const [loginLoading, setLoginLoading] = useState(false);
 
   const handleUpgrade = async (e) => {
-  e.stopPropagation();
+    e.stopPropagation();
 
-  // Guest user → login
-  if (!user) {
-    toast.info("Please login to upgrade playlist"); 
-    setLoginLoading(true);
-    setTimeout(() => {
-      navigate("/login");
-    }, 500);
-    return;
-  }
-
-  if (!quizId || !_id) {
-    toast.error("Missing playlist information"); 
-    return;
-  }
-
-  try {
-    setUpgradeLoading(true);
-
-    const res = await upgradePlaylistApi({
-      quizId,
-      playlistId: _id,
-    });
-
-    const checkoutUrl =
-      res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
-
-    if (checkoutUrl) {
-      toast.success("Redirecting to payment...");
-      window.location.href = checkoutUrl;
-    } else {
-      toast.error("Failed to process payment link. Please try again.");
+    // Guest user → login
+    if (!user) {
+      setLoginLoading(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
+      return;
     }
-  } catch (err) {
-    toast.error(
-      err?.response?.data?.message || "Failed to upgrade playlist."
-    );
-  } finally {
-    setUpgradeLoading(false);
-  }
-};
+
+    if (!quizId || !_id) {
+      return;
+    }
+
+    try {
+      setUpgradeLoading(true);
+
+      const res = await upgradePlaylistApi({
+        quizId,
+        playlistId: _id,
+      });
+
+      const checkoutUrl =
+        res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found");
+        toast.error("Failed to process payment link. Please try again.");
+      }
+    } catch (err) {
+      console.error("Upgrade error:", err?.response?.data || err);
+      toast.error(err?.response?.data?.message || "Failed to upgrade playlist.");
+    } finally {
+      setUpgradeLoading(false);
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
