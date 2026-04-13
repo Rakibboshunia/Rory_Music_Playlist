@@ -24,39 +24,38 @@ export default function VerifyOTP() {
   }
 
   const handleVerify = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!otp.trim()) {
-    toast.error("Please enter the OTP");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    toast.info("Verifying OTP...");
-
-    const res = await verifyOtpApi({
-      email,
-      otp: otp.trim(),
-    });
-
-    if (res?.data?.success) {
-      toast.success(res.data.message || "OTP verified successfully");
-
-      navigate("/reset-password", { state: { email } });
-    } else {
-      toast.error(res?.data?.message || "Invalid OTP");
+    if (!otp.trim()) {
+      toast.error("Please enter the OTP");
+      return;
     }
-  } catch (err) {
 
-    toast.error(
-      err?.response?.data?.message || "Server error"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      setLoading(true);
+
+      const res = await verifyOtpApi({
+        email,
+        otp: otp.trim(),
+      });
+
+      if (res?.data?.success) {
+        toast.success(res.data.message || "OTP verified successfully");
+
+        navigate("/reset-password", { state: { email } });
+      } else {
+        toast.error(res?.data?.message || "Invalid OTP");
+      }
+    } catch (err) {
+      console.error("OTP Verify Error:", err);
+
+      toast.error(
+        err?.response?.data?.message || "Server error"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">

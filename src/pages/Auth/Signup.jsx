@@ -11,36 +11,35 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const name = e.target.name.value.trim();
-  const email = e.target.email.value.trim();
-  const password = e.target.password.value.trim();
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
 
-  if (!name || !email || !password) {
-    toast.error("All fields are required");
-    return;
-  }
+    if (!name || !email || !password) {
+      toast.error("All fields are required");
+      return;
+    }
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    toast.info("Creating account..."); // ✅ added
+      const res = await registerApi({ name, email, password });
 
-    const res = await registerApi({ name, email, password });
+      toast.success(res?.data?.message || "Signup successful!");
+      navigate("/login");
 
-    toast.success(res?.data?.message || "Signup successful!");
-    navigate("/login");
+    } catch (error) {
+      console.error("Signup Error:", error);
 
-  } catch (error) {
-
-    toast.error(
-      error?.response?.data?.message || "Signup failed. Please try again."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+      toast.error(
+        error?.response?.data?.message || "Signup failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div

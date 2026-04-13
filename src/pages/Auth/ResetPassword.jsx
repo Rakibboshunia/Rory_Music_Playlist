@@ -26,36 +26,35 @@ export default function ResetPassword() {
   }
 
   const handleReset = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!newPassword.trim()) {
-    return toast.error("New password is required");
-  }
-
-  try {
-    setLoading(true);
-
-    toast.info("Resetting password...");
-
-    const res = await resetPasswordApi({
-      email,
-      newPassword: newPassword.trim(),
-    });
-
-    if (res?.data?.success) {
-      toast.success(res.data.message || "Password reset successfully");
-      navigate("/login");
-    } else {
-      toast.error(res?.data?.message || "Reset failed");
+    if (!newPassword.trim()) {
+      return toast.error("New password is required");
     }
-  } catch (err) {
-    toast.error(
-      err?.response?.data?.message || "Server error"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+
+    try {
+      setLoading(true);
+
+      const res = await resetPasswordApi({
+        email,
+        newPassword: newPassword.trim(),
+      });
+
+      if (res?.data?.success) {
+        toast.success(res.data.message || "Password reset successfully");
+        navigate("/login");
+      } else {
+        toast.error(res?.data?.message || "Reset failed");
+      }
+    } catch (err) {
+      console.error("Reset Password Error:", err);
+      toast.error(
+        err?.response?.data?.message || "Server error"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
