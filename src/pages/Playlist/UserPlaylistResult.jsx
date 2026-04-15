@@ -19,6 +19,7 @@ export default function PlaylistResult() {
     const fetchUserPlaylists = async () => {
       try {
         const response = await getUserPlaylistsApi();
+
         const data = response?.data?.data || [];
 
         setPlaylistData(data);

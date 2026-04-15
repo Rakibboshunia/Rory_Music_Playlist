@@ -96,6 +96,7 @@ export default function Step10_Final() {
       setEmailLoading(true);
 
       await submitGuestQuizApi(payload);
+
       toast.success("Your free playlist has been successfully sent to your email. Please check your inbox.");
 
       setShowEmailPopup(false);
@@ -118,6 +119,8 @@ export default function Step10_Final() {
   const handleUpgradeNo = async () => {
     setShowUpgradePopup(false);
 
+    toast.info("Generating your free playlist... This may take up to 30 seconds.");
+
     if (!isAuthenticated) {
       toast.info("Please login first");
       navigate("/");
@@ -126,6 +129,8 @@ export default function Step10_Final() {
 
     try {
       setIsGenerating(true);
+
+      toast.loading("Generating your playlist...");
 
       const payload = {
         answers: {

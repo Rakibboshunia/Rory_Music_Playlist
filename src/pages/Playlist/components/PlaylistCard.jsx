@@ -48,6 +48,8 @@ export default function PlaylistCard({
     try {
       setUpgradeLoading(true);
 
+      toast.loading("Processing upgrade...");
+
       const res = await upgradePlaylistApi({
         quizId,
         playlistId: _id,
