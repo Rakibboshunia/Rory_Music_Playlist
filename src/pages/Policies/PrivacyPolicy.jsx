@@ -5,11 +5,11 @@ export default function PrivacyPolicy() {
         PRIVACY POLICY
       </h1>
 
-      <p className="mb-6">Last updated: 27th December 2025</p><br />
+      <p className="mb-6">Last updated: 15th April 2025</p><br />
 
       <p className="mb-6">
         Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a
-        digital music and playlist experience operated as part of DJ and SAX®.
+        digital music and playlist experience operated as part of DJ and SAX<sup>®</sup>.
         We are committed to protecting your privacy and processing personal
         data in accordance with the General Data Protection Regulation (EU)
         2016/679 (“GDPR”), the Data Protection Acts 1988–2018, and applicable
@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
       <h2 className="font-semibold mt-6 mb-2">1. DATA CONTROLLER</h2>
       <p className="mb-2">The data controller is:</p>
       <p className="mb-4">
-        DJ and SAX® <br />
+        DJ and SAX<sup>®</sup> <br />
         40 Rahillion Drive <br />
         Donabate, Co. Dublin, Ireland <br />
         Email: info@soundtrackmynight.com
@@ -54,18 +54,18 @@ export default function PrivacyPolicy() {
           To communicate with you in relation to Soundtrack My Night
         </li>
         <li>
-          To follow up with relevant information about DJ and SAX® services
+          To follow up with relevant information about DJ and SAX<sup>®</sup> services
           related to your interest
         </li>
         <li>To improve our services and user experience</li>
       </ul>
 
       <h2 className="font-semibold mt-6 mb-2">
-        4. RELATIONSHIP WITH DJ AND SAX®
+        4. RELATIONSHIP WITH DJ AND SAX<sup>®</sup>
       </h2>
       <p className="mb-4">
-        Soundtrack My Night is operated as part of DJ and SAX®. Your email
-        address may be used by DJ and SAX® to contact you about related music
+        Soundtrack My Night is operated as part of DJ and SAX<sup>®</sup>. Your email
+        address may be used by DJ and SAX<sup>®</sup> to contact you about related music
         and entertainment services.
       </p>
 
@@ -110,7 +110,7 @@ export default function PrivacyPolicy() {
         7. MARKETING COMMUNICATIONS
       </h2>
       <p className="mb-6">
-        You may receive emails from Soundtrack My Night or DJ and SAX® related to
+        You may receive emails from Soundtrack My Night or DJ and SAX<sup>®</sup> related to
         playlists, services, or relevant updates. You may withdraw your consent
         to receive marketing communications at any time by contacting us at
         info@soundtrackmynight.com.

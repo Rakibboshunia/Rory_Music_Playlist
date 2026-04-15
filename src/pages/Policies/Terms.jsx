@@ -5,12 +5,12 @@ export default function Terms() {
         TERMS & CONDITIONS
       </h1>
 
-      <p className="mb-6">Last updated: 27th December 2025</p><br />
+      <p className="mb-6">Last updated: 15th April 2025</p><br />
 
       <h2 className="font-semibold mt-6 mb-2">1. INTRODUCTION</h2>
       <p className="mb-6">
         Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist
-        service operated by DJ and SAX®. These Terms & Conditions govern your use
+        service operated by DJ and SAX<sup>®</sup>. These Terms & Conditions govern your use
         of soundtrackmynight.com and any content or services provided through
         the website.
       </p>
@@ -31,7 +31,7 @@ export default function Terms() {
       <p className="mb-6">
         Soundtrack My Night provides curated digital playlists and music-related
         content. No live entertainment services are provided directly through
-        this website. Live bookings are governed by separate DJ and SAX®
+        this website. Live bookings are governed by separate DJ and SAX<sup>®</sup>
         agreements.
       </p>
 
@@ -56,7 +56,7 @@ export default function Terms() {
 
       <h2 className="font-semibold mt-6 mb-2">8. INTELLECTUAL PROPERTY</h2>
       <p className="mb-6">
-        All content remains the intellectual property of DJ and SAX®. Users are
+        All content remains the intellectual property of DJ and SAX<sup>®</sup>. Users are
         granted a personal, non-commercial licence only.
       </p>
 

@@ -26,70 +26,66 @@ export default function PlaylistCard({
   const navigate = useNavigate();
 
   const [upgradeLoading, setUpgradeLoading] = useState(false);
-  const [loginLoading, setLoginLoading] = useState(false);
 
-  const handleUpgrade = async (e) => {
-  e.stopPropagation();
+  const handleUpgrade = (e) => {
+    e.stopPropagation();
 
-  // Guest user → login
-  if (!user) {
-    toast.info("Please login to upgrade playlist"); 
-    setLoginLoading(true);
-    setTimeout(() => {
+    // Guest → redirect to login
+    if (!user) {
+      toast("Please login first");
       navigate("/login");
-    }, 500);
-    return;
-  }
-
-  if (!quizId || !_id) {
-    toast.error("Missing playlist information"); 
-    return;
-  }
-
-  try {
-    setUpgradeLoading(true);
-
-    const res = await upgradePlaylistApi({
-      quizId,
-      playlistId: _id,
-    });
-
-    const checkoutUrl =
-      res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
-
-    if (checkoutUrl) {
-      toast.success("Redirecting to payment...");
-      window.location.href = checkoutUrl;
-    } else {
-      toast.error("Failed to process payment link. Please try again.");
+      return;
     }
-  } catch (err) {
-    toast.error(
-      err?.response?.data?.message || "Failed to upgrade playlist."
-    );
-  } finally {
-    setUpgradeLoading(false);
-  }
-};
+
+    if (!quizId || !_id) {
+      return;
+    }
+
+    upgradeHandler();
+  };
+
+  const upgradeHandler = async () => {
+    try {
+      setUpgradeLoading(true);
+
+      const res = await upgradePlaylistApi({
+        quizId,
+        playlistId: _id,
+      });
+
+      const checkoutUrl =
+        res?.data?.data?.checkoutUrl || res?.data?.message?.checkoutUrl;
+
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        console.error("Checkout URL not found");
+        toast.error("Failed to process payment link. Please try again.");
+      }
+    } catch (err) {
+      console.error("Upgrade error:", err?.response?.data || err);
+      toast.error(err?.response?.data?.message || "Failed to upgrade playlist.");
+    } finally {
+      setUpgradeLoading(false);
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div className="mb-4 flex items-start justify-between">
-
         <div onClick={onToggle} className="cursor-pointer flex-1">
           <p className="font-medium text-2xl">{title}</p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 
         <div className="flex items-center gap-4">
-
           {playlist_type?.toLowerCase() !== "premium" && (
             <button
               onClick={handleUpgrade}
-              disabled={upgradeLoading || loginLoading}
+              disabled={upgradeLoading}
               className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition flex items-center justify-center min-w-[170px] disabled:opacity-50 cursor-pointer"
             >
-              {(upgradeLoading || loginLoading) ? (
+              {upgradeLoading ? (
                 <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
               ) : user ? (
                 "Upgrade to Premium"
@@ -107,7 +103,6 @@ export default function PlaylistCard({
           >
             <FiChevronDown size={25} />
           </button>
-
         </div>
       </div>
 

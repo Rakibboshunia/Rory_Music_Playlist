@@ -10,7 +10,7 @@ export default function TestimonialsSection() {
 
       {/* HEADER */}
       <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
-        <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
           Real Weddings. <br />
           <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Real Dance Floors.

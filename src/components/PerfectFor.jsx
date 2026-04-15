@@ -21,8 +21,8 @@ export default function PerfectFor() {
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-16 leading-tight">
           Perfect For Couples <br />Who{" "}
-          <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-            Want…
+          <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          Want…
           </span>
         </h2>
 
@@ -40,12 +40,12 @@ export default function PerfectFor() {
                 transition duration-300 hover:-translate-y-1
               "
             >
-              {/* Icon */}
-              <div className="flex-shrink-0 mt-1">
-                <div className="w-10 h-10 rounded-full bg-linear-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition">
-                  <CheckCircle size={18} />
-                </div>
+            {/* Icon */}
+            <div className="flex-shrink-0 mt-1">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition">
+                <CheckCircle size={18} />
               </div>
+            </div>
 
               {/* Text */}
               <p className="text-gray-700 text-base leading-relaxed">

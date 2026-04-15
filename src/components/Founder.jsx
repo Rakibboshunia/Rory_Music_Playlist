@@ -18,7 +18,7 @@ export default function Founder() {
           </h2>
 
           <p className="text-gray-600 mb-5 leading-relaxed">
-            Soundtrack My Night was created by the team behind DJ & SAX®, one of
+            Soundtrack My Night was created by the team behind DJ & SAX<sup>®</sup>, one of
             Ireland’s most in-demand wedding entertainment brands.
           </p>
 
@@ -60,7 +60,7 @@ export default function Founder() {
             </div>
 
             {/* Name / Brand */}
-            <p className="font-semibold text-lg text-gray-800">DJ & SAX®</p>
+            <p className="font-semibold text-lg text-gray-800">DJ & SAX<sup>®</sup></p>
             <p className="text-sm text-gray-500">
               Wedding Entertainment Specialists
             </p>

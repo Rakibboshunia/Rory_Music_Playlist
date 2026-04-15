@@ -6,12 +6,12 @@ export default function RefundPolicy() {
       </h1>
       
 
-      <p className="mb-6">Last updated: 27th December 2025</p>
+      <p className="mb-6">Last updated: 15th April 2025</p>
       <br />
 
       <p className="mb-6">
         Soundtrack My Night (“we”, “us”, “our”) is a digital music and playlist
-        service operated as part of DJ and SAX®.
+        service operated as part of DJ and SAX<sup>®</sup>.
       </p>
 
       <h2 className="font-semibold mt-6 mb-2">1. FREE PLAYLISTS</h2>
@@ -38,7 +38,7 @@ export default function RefundPolicy() {
 
       <h2 className="font-semibold mt-6 mb-2">3. FAILURE TO DELIVER</h2>
       <p className="mb-6">
-        If Soundtrack My Night or DJ and SAX® is unable to provide the purchased
+        If Soundtrack My Night or DJ and SAX<sup>®</sup> is unable to provide the purchased
         digital content, a full refund will be issued to the original payment
         method.
       </p>

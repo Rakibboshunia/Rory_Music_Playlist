@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function FAQ() {
   const [active, setActive] = useState(null);
@@ -38,14 +39,15 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq-section" className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-
+    <section
+      id="faq-section"
+      className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
+    >
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[300px] h-[300px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 leading-tight">
           Frequently Asked <br />
@@ -56,7 +58,6 @@ export default function FAQ() {
 
         {/* Accordion */}
         <div className="space-y-5">
-
           {faqs.map((item, i) => {
             const isOpen = active === i;
 
@@ -77,9 +78,7 @@ export default function FAQ() {
                   onClick={() => toggle(i)}
                   className="w-full flex justify-between items-center p-6 text-left cursor-pointer"
                 >
-                  <span className="font-semibold text-gray-800">
-                    {item.q}
-                  </span>
+                  <span className="font-semibold text-gray-800">{item.q}</span>
 
                   <ChevronDown
                     className={`transition-transform duration-300 ${
@@ -101,26 +100,26 @@ export default function FAQ() {
               </div>
             );
           })}
-
         </div>
 
         {/* CTA (Optional but powerful) */}
-        <div className="text-center mt-16">
+        <div className="mt-14">
           <button
             onClick={() => navigate("/quiz")}
             className="
-              px-8 py-4 rounded-2xl
-              bg-linear-to-r from-purple-600 to-pink-500
-              text-white font-bold
-              shadow-lg hover:shadow-2xl
-              transition duration-300
-              hover:scale-105 active:scale-95
-            "
+                      group px-6 py-4 rounded-2xl
+                      bg-linear-to-r from-purple-600 to-pink-500
+                      text-white font-bold text-lg
+                      shadow-xl hover:shadow-2xl
+                      transition duration-300
+                      hover:scale-105 active:scale-95
+                      flex items-center gap-3 mx-auto
+                    "
           >
             Create My Playlist
+            <FiArrowRight className="group-hover:translate-x-1 transition" />
           </button>
         </div>
-
       </div>
     </section>
   );

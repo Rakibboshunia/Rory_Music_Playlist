@@ -96,7 +96,7 @@ export default function Step10_Final() {
       setEmailLoading(true);
 
       await submitGuestQuizApi(payload);
-      toast.success("Playlist sent successfully");
+      toast.success("Your free playlist has been successfully sent to your email. Please check your inbox.");
 
       setShowEmailPopup(false);
       setEmail("");
@@ -474,8 +474,7 @@ export default function Step10_Final() {
                 </p>
 
                 <p className="text-[12px] sm:text-[13px] text-center text-[#888] mt-1.5 flex items-center justify-center gap-1">
-                  <span className="text-[14px] mb-[2px]">🔒</span> Secure
-                  checkout • Powered by Stripe
+                  <span className="text-[14px] mb-[2px]">🔒</span> Secure checkout • Powered by Stripe
                 </p>
               </>
             )}

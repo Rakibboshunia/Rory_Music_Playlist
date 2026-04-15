@@ -1,3 +1,4 @@
+import { FiArrowRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 export default function HowItWorks() {
@@ -20,13 +21,11 @@ export default function HowItWorks() {
 
   return (
     <section className="relative py-24 px-6 bg-linear-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
-
       {/* Background glow */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[400px] h-[400px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
       <div className="max-w-6xl mx-auto text-center relative z-10">
-
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
           Your Wedding Playlist, Sorted <br />
@@ -37,12 +36,10 @@ export default function HowItWorks() {
 
         {/* Steps */}
         <div className="relative mt-20">
-
           {/* 🔥 Connecting line (desktop only) */}
           <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 -translate-y-1/2" />
 
           <div className="grid md:grid-cols-3 gap-10 relative">
-
             {steps.map((step, i) => (
               <div
                 key={i}
@@ -81,27 +78,27 @@ export default function HowItWorks() {
                 </p>
               </div>
             ))}
-
           </div>
         </div>
 
         {/* CTA */}
-        <div className="mt-20">
+        <div className="mt-14">
           <button
             onClick={() => navigate("/quiz")}
             className="
-              group px-8 py-4 rounded-2xl
-              bg-linear-to-r from-purple-600 to-pink-500
-              text-white text-lg font-semibold
-              shadow-xl hover:shadow-2xl
-              transition duration-300
-              hover:scale-105 active:scale-95
-            "
+                      group px-6 py-4 rounded-2xl
+                      bg-linear-to-r from-purple-600 to-pink-500
+                      text-white font-bold text-lg
+                      shadow-xl hover:shadow-2xl
+                      transition duration-300
+                      hover:scale-105 active:scale-95
+                      flex items-center gap-3 mx-auto
+                    "
           >
             Create My Playlist
+            <FiArrowRight className="group-hover:translate-x-1 transition" />
           </button>
         </div>
-
       </div>
     </section>
   );

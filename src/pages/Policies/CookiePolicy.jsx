@@ -5,11 +5,11 @@ export default function CookiePolicy() {
         COOKIE POLICY
       </h1>
 
-      <p className="mb-6">Last updated: 2rd Merch 2026</p>
+      <p className="mb-6">Last updated: 15th April 2026</p>
 
       <p className="mb-6">
         Soundtrack My Night (“Soundtrack My Night”, “we”, “us”, “our”) is a
-        digital music and playlist service operated as part of DJ and SAX®. This
+        digital music and playlist service operated as part of DJ and SAX<sup>®</sup>. This
         Cookie Policy explains how we use cookies and similar technologies <b>on
         soundtrackmynight.com in accordance with the General Data Protection
         Regulation (GDPR) and the European Communities (Electronic Communications

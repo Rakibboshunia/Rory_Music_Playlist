@@ -22,7 +22,7 @@ export default function ImagineDancefloor() {
       <div className="max-w-5xl mx-auto text-center relative z-10">
 
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
           Imagine Your{" "}
           <span className="bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Wedding Dancefloor

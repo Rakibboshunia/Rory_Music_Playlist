@@ -52,7 +52,6 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.clear();
     logout();
-    toast.success("Logged out");
     navigate("/login");
   };
 
@@ -186,7 +185,7 @@ export default function Navbar() {
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl border py-2">
+                  <div className="absolute right-0 top-full mt-3 w-40 bg-white rounded-xl shadow-xl py-2">
                     <button
                       onClick={() => {
                         setShowSettings(true);

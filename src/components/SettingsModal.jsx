@@ -26,24 +26,17 @@ export default function SettingsModal({ isOpen, onClose }) {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (!file) {
-      toast.error("No file selected");
-      return;
-    }
+    if (!file) return;
 
     setForm({
       ...form,
       profileImage: file,
     });
-
-    toast.info("Image selected");
   };
 
   const handleSaveChanges = async () => {
     try {
       setLoading(true);
-
-      toast.info("Updating profile...");
 
       const formData = new FormData();
       formData.append("name", form.name);
@@ -81,15 +74,8 @@ export default function SettingsModal({ isOpen, onClose }) {
   };
 
   const handleChangePassword = async () => {
-    if (!passwords.currentPassword || !passwords.newPassword) {
-      toast.error("Please fill all password fields");
-      return;
-    }
-
     try {
       setLoading(true);
-
-      toast.info("Changing password...");
 
       const res = await axiosInstance.patch("/api/v1/auth/change-password", {
         currentPassword: passwords.currentPassword,
