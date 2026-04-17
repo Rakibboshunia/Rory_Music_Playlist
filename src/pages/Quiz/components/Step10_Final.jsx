@@ -61,98 +61,115 @@ export default function Step10_Final() {
 
   /* ================= GUEST SUBMIT ================= */
   const submitGuestEmail = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!isChecked) {
-      setCheckboxError("You must agree");
-      toast.error("You must agree before continuing");
+  if (!isChecked) {
+    setCheckboxError("You must agree");
+    toast.error("You must agree before continuing");
 
-      // ✅ scroll + focus
-      checkboxRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-      checkboxRef.current?.focus();
+    checkboxRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    checkboxRef.current?.focus();
 
-      return;
-    } else {
-      setCheckboxError("");
-    }
+    return;
+  } else {
+    setCheckboxError("");
+  }
 
-    if (!email) {
-      toast.error("Email is required");
-      return;
-    }
+  if (!email) {
+    toast.error("Email is required");
+    return;
+  }
+
+  const payload = {
+    email,
+    answers: {
+      ...formatAnswers(),
+      ...DontPlay(),
+    },
+  };
+
+  try {
+    setEmailLoading(true);
+
+    await submitGuestQuizApi(payload);
+
+    toast.success(
+      "Your free playlist has been successfully sent to your email. Please check your inbox.",
+      {
+        duration: 5000, 
+      }
+    );
+
+    setShowEmailPopup(false);
+    setEmail("");
+    setIsChecked(false);
+    setCheckboxError("");
+
+    setTimeout(() => {
+      navigate("/");
+    }, 5000);
+
+  } catch (err) {
+    toast.error(
+      err?.response?.data?.message ||
+        "Something went wrong. Please try again."
+    );
+  } finally {
+    setEmailLoading(false);
+  }
+};
+
+  /* ================= FREE BUTTON ================= */
+  const handleUpgradeNo = async () => {
+  setShowUpgradePopup(false);
+
+  if (!isAuthenticated) {
+    toast.info("Please login first");
+    navigate("/");
+    return;
+  }
+
+  const loadingToast = toast.loading("🎵 Preparing your experience...");
+
+setTimeout(() => {
+  toast.loading("🎧 Analyzing your answers...", { id: loadingToast });
+}, 2000);
+
+setTimeout(() => {
+  toast.loading("🚀 Generating your playlist...", { id: loadingToast });
+}, 4000);
+
+  try {
+    setIsGenerating(true);
 
     const payload = {
-      email,
       answers: {
         ...formatAnswers(),
         ...DontPlay(),
       },
+      user_type: "free",
     };
 
-    try {
-      setEmailLoading(true);
+    await submitUserQuizApi(payload);
 
-      await submitGuestQuizApi(payload);
+    toast.dismiss(loadingToast);
+    toast.success("Playlist generated successfully");
 
-      toast.success("Your free playlist has been successfully sent to your email. Please check your inbox.");
+    navigate("/playlist");
+  } catch (err) {
+    toast.dismiss(loadingToast);
 
-      setShowEmailPopup(false);
-      setEmail("");
-      setIsChecked(false);
-      setCheckboxError("");
-
-      navigate("/");
-    } catch (err) {
-      toast.error(
-        err?.response?.data?.message ||
-          "Something went wrong. Please try again.",
-      );
-    } finally {
-      setEmailLoading(false);
-    }
-  };
-
-  /* ================= FREE BUTTON ================= */
-  const handleUpgradeNo = async () => {
-    setShowUpgradePopup(false);
-
-    toast.info("Generating your free playlist... This may take up to 30 seconds.");
-
-    if (!isAuthenticated) {
-      toast.info("Please login first");
-      navigate("/");
-      return;
-    }
-
-    try {
-      setIsGenerating(true);
-
-      toast.loading("Generating your playlist...");
-
-      const payload = {
-        answers: {
-          ...formatAnswers(),
-          ...DontPlay(),
-        },
-        user_type: "free",
-      };
-
-      await submitUserQuizApi(payload);
-      toast.success("Playlist generated successfully");
-
-      navigate("/playlist");
-    } catch (err) {
-      toast.error(
-        err?.response?.data?.message ||
-          "Failed to generate playlist. Please try again.",
-      );
-    } finally {
-      setIsGenerating(false);
-    }
-  };
+    toast.error(
+      err?.response?.data?.message ||
+        "Failed to generate playlist. Please try again."
+    );
+  } finally {
+    setIsGenerating(false);
+  }
+};
 
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
@@ -195,7 +212,7 @@ export default function Step10_Final() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-4 space-y-6 text-center">
+    <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 space-y-6 text-center">
       <DoNotPlayCard
         title="🎵 Do Not Play"
         inputCount={3}
@@ -216,10 +233,10 @@ export default function Step10_Final() {
 
       {/* ================= EMAIL POPUP ================= */}
       {showEmailPopup && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4">
-          <div className="bg-purple-50 rounded-2xl w-full max-w-xl p-14 text-center relative">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-3 sm:px-4">
+          <div className="bg-purple-50 rounded-2xl w-full max-w-md sm:max-w-xl p-6 sm:p-10 md:p-14 text-center relative">
             {emailLoading ? (
-              <div className="h-70 flex flex-col items-center justify-center gap-4">
+              <div className="min-h-[200px] sm:min-h-[260px] flex flex-col items-center justify-center gap-4">
                 <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
                 <p className="text-gray-600 font-medium">
                   Preparing your playlist...
@@ -238,8 +255,8 @@ export default function Step10_Final() {
                 </button>
 
                 <div className="flex justify-center mb-5">
-                  <div className="w-[60px] h-[60px] rounded-2xl bg-gradient-to-br from-[#4F8CFF] via-[#8A2BE2] to-[#FF4FD8] flex items-center justify-center">
-                    <span className="text-white text-4xl">✉️</span>
+                  <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-2xl bg-gradient-to-br from-[#4F8CFF] via-[#8A2BE2] to-[#FF4FD8] flex items-center justify-center">
+                    <span className="text-white text-3xl sm:text-4xl">✉️</span>
                   </div>
                 </div>
 
@@ -247,7 +264,7 @@ export default function Step10_Final() {
                   🎶 Your Wedding Soundtrack Is Ready
                 </h2>
 
-                <p className="text-[15px] text-center text-[#6B6B6B] mb-6 px-8 leading-relaxed">
+                <p className="text-[13px] sm:text-[14px] md:text-[15px] text-center text-[#6B6B6B] mb-6 px-2 sm:px-6 md:px-8 leading-relaxed">
                   Enter your email to unlock your personalised Spotify playlist.
                 </p>
 
@@ -257,7 +274,7 @@ export default function Step10_Final() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email to reveal your playlist"
-                    className="w-full border border-purple-200 rounded-full px-5 py-3 text-sm outline-none"
+                    className="w-full border border-purple-200 rounded-full px-4 sm:px-5 py-3 text-sm outline-none"
                   />
 
                   {/* ✅ FIXED checkbox */}
@@ -304,7 +321,7 @@ export default function Step10_Final() {
                   <div className="border-t border-purple-200 my-4"></div>
 
                   {/* ✅ FIXED bottom text */}
-                  <p className="text-[15px] text-gray-500 text-center leading-relaxed">
+                  <p className="text-[13px] sm:text-[14px] md:text-[15px] text-gray-500 text-center leading-relaxed">
                     ⭐{" "}
                     <span className="text-black font-semibold">
                       Over 2,500 weddings performed by DJ & SAX®
@@ -315,7 +332,7 @@ export default function Step10_Final() {
                 <button
                   type="submit"
                   onClick={submitGuestEmail}
-                  className="w-full rounded-full bg-gradient-to-r from-[#4F8CFF] to-[#C400FF] text-white py-3 text-[20px] font-medium transition hover:shadow-lg active:scale-95 flex items-center justify-center gap-3"
+                  className="w-full rounded-full bg-gradient-to-r from-[#4F8CFF] to-[#C400FF] text-white py-3 text-[16px] sm:text-[18px] md:text-[20px] font-medium transition hover:shadow-lg active:scale-95 flex items-center justify-center gap-3"
                 >
                   🎧 Unlock My Playlist
                 </button>
@@ -479,7 +496,8 @@ export default function Step10_Final() {
                 </p>
 
                 <p className="text-[12px] sm:text-[13px] text-center text-[#888] mt-1.5 flex items-center justify-center gap-1">
-                  <span className="text-[14px] mb-[2px]">🔒</span> Secure checkout • Powered by Stripe
+                  <span className="text-[14px] mb-[2px]">🔒</span> Secure
+                  checkout • Powered by Stripe
                 </p>
               </>
             )}
