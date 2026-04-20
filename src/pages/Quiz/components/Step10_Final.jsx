@@ -61,115 +61,114 @@ export default function Step10_Final() {
 
   /* ================= GUEST SUBMIT ================= */
   const submitGuestEmail = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!isChecked) {
-    setCheckboxError("You must agree");
-    toast.error("You must agree before continuing");
+    if (!isChecked) {
+      setCheckboxError("You must agree");
+      toast.error("You must agree before continuing");
 
-    checkboxRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-    checkboxRef.current?.focus();
+      checkboxRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      checkboxRef.current?.focus();
 
-    return;
-  } else {
-    setCheckboxError("");
-  }
+      return;
+    } else {
+      setCheckboxError("");
+    }
 
-  if (!email) {
-    toast.error("Email is required");
-    return;
-  }
-
-  const payload = {
-    email,
-    answers: {
-      ...formatAnswers(),
-      ...DontPlay(),
-    },
-  };
-
-  try {
-    setEmailLoading(true);
-
-    await submitGuestQuizApi(payload);
-
-    toast.success(
-      "Your free playlist has been successfully sent to your email. Please check your inbox.",
-      {
-        duration: 5000, 
-      }
-    );
-
-    setShowEmailPopup(false);
-    setEmail("");
-    setIsChecked(false);
-    setCheckboxError("");
-
-    setTimeout(() => {
-      navigate("/");
-    }, 5000);
-
-  } catch (err) {
-    toast.error(
-      err?.response?.data?.message ||
-        "Something went wrong. Please try again."
-    );
-  } finally {
-    setEmailLoading(false);
-  }
-};
-
-  /* ================= FREE BUTTON ================= */
-  const handleUpgradeNo = async () => {
-  setShowUpgradePopup(false);
-
-  if (!isAuthenticated) {
-    toast.info("Please login first");
-    navigate("/");
-    return;
-  }
-
-  const loadingToast = toast.loading("🎵 Preparing your experience...");
-
-setTimeout(() => {
-  toast.loading("🎧 Analyzing your answers...", { id: loadingToast });
-}, 2000);
-
-setTimeout(() => {
-  toast.loading("🚀 Generating your playlist...", { id: loadingToast });
-}, 4000);
-
-  try {
-    setIsGenerating(true);
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    }
 
     const payload = {
+      email,
       answers: {
         ...formatAnswers(),
         ...DontPlay(),
       },
-      user_type: "free",
     };
 
-    await submitUserQuizApi(payload);
+    try {
+      setEmailLoading(true);
 
-    toast.dismiss(loadingToast);
-    toast.success("Playlist generated successfully");
+      await submitGuestQuizApi(payload);
 
-    navigate("/playlist");
-  } catch (err) {
-    toast.dismiss(loadingToast);
+      toast.success(
+        "Your free playlist has been successfully sent to your email. Please check your inbox.",
+        {
+          duration: 10000,
+        },
+      );
 
-    toast.error(
-      err?.response?.data?.message ||
-        "Failed to generate playlist. Please try again."
-    );
-  } finally {
-    setIsGenerating(false);
-  }
-};
+      setShowEmailPopup(false);
+      setEmail("");
+      setIsChecked(false);
+      setCheckboxError("");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
+    } catch (err) {
+      toast.error(
+        err?.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+    } finally {
+      setEmailLoading(false);
+    }
+  };
+
+  /* ================= FREE BUTTON ================= */
+  const handleUpgradeNo = async () => {
+    setShowUpgradePopup(false);
+
+    if (!isAuthenticated) {
+      toast.info("Please login first");
+      navigate("/");
+      return;
+    }
+
+    const loadingToast = toast.loading("🎵 Preparing your experience...");
+
+    setTimeout(() => {
+      toast.loading("🎧 Analyzing your answers...", { id: loadingToast });
+    }, 4000);
+
+    setTimeout(() => {
+      toast.loading("🚀 Generating your playlist...", { id: loadingToast });
+    }, 5000);
+
+    try {
+      setIsGenerating(true);
+
+      const payload = {
+        answers: {
+          ...formatAnswers(),
+          ...DontPlay(),
+        },
+        user_type: "free",
+      };
+
+      await submitUserQuizApi(payload);
+
+      toast.dismiss(loadingToast);
+      toast.success("Playlist generated successfully");
+
+      navigate("/playlist");
+    } catch (err) {
+      toast.dismiss(loadingToast);
+
+      toast.error(
+        err?.response?.data?.message ||
+          "Failed to generate playlist. Please try again.",
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   /* ============ EXTENDED BUTTON ============ */
   const handleUpgradeYes = async () => {
