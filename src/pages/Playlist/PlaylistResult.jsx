@@ -57,8 +57,10 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
-            {playlistData?.[0]?.title || "Your Custom Playlist"}
+          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
+            {playlistData?.[0]?.name 
+              ? `${playlistData[0].name}'s euphoric anthems` 
+              : (playlistData?.[0]?.title || "Your Custom Playlist")}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">

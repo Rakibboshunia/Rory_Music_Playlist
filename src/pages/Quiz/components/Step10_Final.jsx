@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import DoNotPlayCard from "../../../components/DoNotPlayCard";
 
 import { submitGuestQuizApi, submitUserQuizApi } from "../../../api/quizApi";
+import Loader from "../../../components/Loader";
+import Spinner from "../../../components/Spinner";
 
 export default function Step10_Final() {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export default function Step10_Final() {
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [showUpgradePopup, setShowUpgradePopup] = useState(false);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
   const [emailLoading, setEmailLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -78,12 +81,18 @@ export default function Step10_Final() {
       setCheckboxError("");
     }
 
+    if (!name) {
+      toast.error("Name is required");
+      return;
+    }
+
     if (!email) {
       toast.error("Email is required");
       return;
     }
 
     const payload = {
+      name,
       email,
       answers: {
         ...formatAnswers(),
@@ -105,6 +114,7 @@ export default function Step10_Final() {
 
       setShowEmailPopup(false);
       setEmail("");
+      setName("");
       setIsChecked(false);
       setCheckboxError("");
 
@@ -211,7 +221,7 @@ export default function Step10_Final() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 space-y-6 text-center">
+    <div className="space-y-6 text-center">
       <DoNotPlayCard
         title="🎵 Do Not Play"
         inputCount={3}
@@ -236,7 +246,7 @@ export default function Step10_Final() {
           <div className="bg-purple-50 rounded-2xl w-full max-w-md sm:max-w-xl p-6 sm:p-10 md:p-14 text-center relative">
             {emailLoading ? (
               <div className="min-h-[200px] sm:min-h-[260px] flex flex-col items-center justify-center gap-4">
-                <div className="w-14 h-14 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                <Loader size="md" />
                 <p className="text-gray-600 font-medium">
                   Preparing your playlist...
                 </p>
@@ -264,17 +274,26 @@ export default function Step10_Final() {
                 </h2>
 
                 <p className="text-[13px] sm:text-[14px] md:text-[15px] text-center text-[#6B6B6B] mb-6 px-2 sm:px-6 md:px-8 leading-relaxed">
-                  Enter your email to unlock your personalised Spotify playlist.
+                  Enter your details to unlock your personalised Spotify playlist.
                 </p>
 
                 <div className="border border-purple-200 rounded-2xl p-4 mb-5">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email to reveal your playlist"
-                    className="w-full border border-purple-200 rounded-full px-4 sm:px-5 py-3 text-sm outline-none"
-                  />
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter Your Name"
+                      className="w-full border border-purple-200 rounded-full px-4 sm:px-5 py-3 text-sm outline-none"
+                    />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter Your Email "
+                      className="w-full border border-purple-200 rounded-full px-4 sm:px-5 py-3 text-sm outline-none"
+                    />
+                  </div>
 
                   {/* ✅ FIXED checkbox */}
                   <div className="mt-5">
@@ -354,7 +373,7 @@ export default function Step10_Final() {
           >
             {isProcessing ? (
               <div className="py-16 flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                <Loader size="md" />
                 <p className="text-base sm:text-lg font-semibold text-gray-700">
                   Processing...
                 </p>
@@ -482,7 +501,7 @@ export default function Step10_Final() {
                     className="w-full sm:w-[55%] py-3.5 rounded-full bg-gradient-to-r from-[#4C5CF0] to-[#A339F4] text-white text-[14px] sm:text-[15px] font-semibold flex items-center justify-center transition hover:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {paymentLoading ? (
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <Spinner size="sm" />
                     ) : (
                       "Unlock My 50-Song Soundtrack (€9)"
                     )}

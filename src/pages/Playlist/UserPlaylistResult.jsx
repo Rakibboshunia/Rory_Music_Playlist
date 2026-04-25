@@ -9,26 +9,21 @@ import { getUserPlaylistsApi } from "../../api/playlistApi";
 import TrustBar from "../../components/TrustBar";
 import HowItWorks from "../../components/HowItWorks";
 import PlaylistVideoCTA from "./components/PlaylistVideoCTA";
-import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
+import Loader from "../../components/Loader";
 
 export default function PlaylistResult() {
+  const { user, loading: authLoading } = useAuth();
   const [playlistData, setPlaylistData] = useState([]);
   const [playlistMode, setPlaylistMode] = useState("free");
 
   useEffect(() => {
+    if (authLoading) return;
     const fetchUserPlaylists = async () => {
       try {
         const response = await getUserPlaylistsApi();
-
         const data = response?.data?.data || [];
-
         setPlaylistData(data);
-
-        if (!data.length) {
-        toast.info("No playlists found");
-      } else {
-        toast.success("Playlists loaded successfully");
-      }
 
         const hasPremium = data.some(
           (playlist) =>
@@ -40,15 +35,20 @@ export default function PlaylistResult() {
           setPlaylistMode("premium");
         }
       } catch (error) {
-        toast.error(
-        error?.response?.data?.message ||
-          "Failed to load playlists. Please try again."
-      );
+        console.error("Failed to load playlists", error);
       }
     };
 
     fetchUserPlaylists();
-  }, []);
+  }, [authLoading]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader size="lg" />
+      </div>
+    );
+  }
 
   const hasPremium = playlistData.some(
     (playlist) =>
@@ -77,7 +77,9 @@ export default function PlaylistResult() {
           </div>
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
-            {filteredPlaylists?.[0]?.title || "Your Custom Playlist"}
+            {user?.name 
+              ? `${user.name.split(' ')[0]}'s euphoric anthems` 
+              : (filteredPlaylists?.[0]?.title || "Your Custom Playlist")}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">

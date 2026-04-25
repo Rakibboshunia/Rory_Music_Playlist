@@ -10,6 +10,7 @@ import PremiumPdfCard from "./PremiumPdfCard";
 import toast from "react-hot-toast";
 
 import { upgradePlaylistApi } from "../../../api/playlistApi";
+import Spinner from "../../../components/Spinner";
 
 export default function PlaylistCard({
   title,
@@ -88,7 +89,7 @@ export default function PlaylistCard({
               className="px-4 py-2 text-sm bg-white border border-purple-500 text-purple-600 rounded-full hover:bg-purple-50 transition flex items-center justify-center min-w-[170px] disabled:opacity-50 cursor-pointer"
             >
               {upgradeLoading ? (
-                <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                <Spinner size="xs" color="purple" />
               ) : user ? (
                 "Upgrade to Premium"
               ) : (

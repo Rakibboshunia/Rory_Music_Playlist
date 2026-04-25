@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import { toast } from "react-hot-toast";
+import Loader from "../components/Loader";
 
 const AuthContext = createContext(null);
 
@@ -85,7 +86,13 @@ export function AuthProvider({ children }) {
         logout,
       }}
     >
-      {!loading && children}
+      {loading ? (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <Loader size="lg" />
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }
