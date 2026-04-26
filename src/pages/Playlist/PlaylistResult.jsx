@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getGuestPlaylistApi } from "../../api/playlistApi";
+import { useAuth } from "../../context/AuthContext";
 
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import TestimonialsSection from "../../components/TestimonialsSection";
@@ -15,6 +16,7 @@ import toast from "react-hot-toast";
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
   const { id } = useParams();
+  const { user } = useAuth();
 
   useEffect(() => {
   if (!id) {
@@ -58,9 +60,10 @@ export default function PlaylistResult() {
           </div>
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
-            {playlistData?.[0]?.name 
-              ? `${playlistData[0].name.split(' ')[0]}'s ${playlistData?.[0]?.title || "playlist is ready"}` 
-              : (playlistData?.[0]?.title || "Your Custom Playlist")}
+            {(() => {
+              const name = (user?.name || playlistData?.[0]?.name)?.split(' ')?.[0];
+              return name ? `${name}'s Playlist is ready` : "Your Playlist is ready";
+            })()}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
