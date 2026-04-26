@@ -15,6 +15,7 @@ export default function PlaylistAccordion({ playlistData }) {
             _id={playlist._id}
             quizId={playlist.quizId}
             title={playlist.title}
+            name={playlist.name}
             subtitle={playlist.description}
             tracks={playlist.tracks}
             isOpen={activeIndex === index}

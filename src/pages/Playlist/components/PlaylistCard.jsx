@@ -14,6 +14,7 @@ import Spinner from "../../../components/Spinner";
 
 export default function PlaylistCard({
   title,
+  name,
   subtitle,
   tracks = [],
   isOpen,
@@ -77,7 +78,11 @@ export default function PlaylistCard({
     <div className="bg-white rounded-2xl shadow p-6">
       <div className="mb-4 flex items-start justify-between">
         <div onClick={onToggle} className="cursor-pointer flex-1">
-          <p className="font-medium text-2xl">{title}</p>
+          <p className="font-medium text-2xl">
+            {name || user?.name
+              ? `${(name || user?.name).split(" ")[0]}'s ${title}`
+              : title}
+          </p>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
 

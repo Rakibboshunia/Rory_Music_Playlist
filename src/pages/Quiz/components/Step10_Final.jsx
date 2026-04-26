@@ -109,6 +109,38 @@ export default function Step10_Final() {
         "Your free playlist has been successfully sent to your email. Please check your inbox.",
         {
           duration: 10000,
+          position: "top-center",
+          icon: (
+            <div
+              style={{
+                width: "28px",
+                height: "28px",
+                minWidth: "28px",
+                borderRadius: "50%",
+                background: "#7c3aed",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: "16px",
+                fontWeight: "bold",
+                flexShrink: 0,
+              }}
+            >
+              ✓
+            </div>
+          ),
+          style: {
+            maxWidth: "520px",
+            width: "90vw",
+            padding: "20px 24px",
+            fontSize: "20px",
+            lineHeight: "1.6",
+            borderRadius: "16px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+            textAlign: "left",
+            color: "#8A2BE2",
+          },
         },
       );
 

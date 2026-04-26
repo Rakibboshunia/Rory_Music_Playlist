@@ -59,7 +59,7 @@ export default function PlaylistResult() {
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
             {playlistData?.[0]?.name 
-              ? `${playlistData[0].name}'s euphoric anthems` 
+              ? `${playlistData[0].name.split(' ')[0]}'s ${playlistData?.[0]?.title || "playlist is ready"}` 
               : (playlistData?.[0]?.title || "Your Custom Playlist")}
           </h1>
 

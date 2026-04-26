@@ -78,7 +78,7 @@ export default function PlaylistResult() {
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
             {user?.name 
-              ? `${user.name.split(' ')[0]}'s euphoric anthems` 
+              ? `${user.name.split(' ')[0]}'s ${filteredPlaylists?.[0]?.title || "playlist is ready"}` 
               : (filteredPlaylists?.[0]?.title || "Your Custom Playlist")}
           </h1>
 
