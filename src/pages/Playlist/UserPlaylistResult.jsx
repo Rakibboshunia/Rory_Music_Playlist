@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PlaylistAccordion from "./components/PlaylistAccordion";
 import PlaylistToggle from "./components/PlaylistToggle";
 import AwardsSection from "../../components/AwardsSection";
@@ -13,9 +14,15 @@ import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
 
 export default function PlaylistResult() {
+  const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const [playlistData, setPlaylistData] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [playlistMode, setPlaylistMode] = useState("free");
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [playlistMode]);
 
   useEffect(() => {
     if (authLoading) return;
@@ -76,22 +83,29 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center">
-            {user?.name 
-              ? `${user.name.split(' ')[0]}'s Playlist is ready` 
-              : "Your Playlist is ready"}
+          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
+            {(() => {
+              const currentPlaylist = filteredPlaylists?.[activeIndex] || filteredPlaylists?.[0];
+              const name = (user?.name || currentPlaylist?.name || currentPlaylist?.user)?.split(" ")[0];
+              const title = currentPlaylist?.title;
+              if (name && title) return `${name}'s ${title}`;
+              return title || "Your Playlist is ready";
+            })()}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
-            {filteredPlaylists?.[0]?.description ||
+            {filteredPlaylists?.[activeIndex]?.description ||
+              filteredPlaylists?.[0]?.description ||
               "A personalised playlist crafted just for your event."}
           </p>
 
-          <PlaylistToggle
-            playlistMode={playlistMode}
-            setPlaylistMode={setPlaylistMode}
-            hasPremium={hasPremium}
-          />
+          {user && (
+            <PlaylistToggle
+              playlistMode={playlistMode}
+              setPlaylistMode={setPlaylistMode}
+              hasPremium={hasPremium}
+            />
+          )}
 
           <div className="flex items-center justify-between mt-8 mb-4">
             <div>
@@ -106,14 +120,31 @@ export default function PlaylistResult() {
             </div>
           </div>
 
-          {filteredPlaylists.length > 0 && (
+          {filteredPlaylists.length > 0 ? (
             <>
               <PlaylistAccordion
                 playlistData={filteredPlaylists}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
                 showUpgradeButton={playlistMode === "free"}
               />
               <PlaylistVideoCTA />
             </>
+          ) : (
+            <div className="text-center py-20">
+              <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+                No Playlists Found
+              </h2>
+              <p className="text-gray-500 mb-8">
+                Take the quiz to generate your personalised wedding soundtrack!
+              </p>
+              <button
+                onClick={() => navigate("/quiz")}
+                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium hover:shadow-lg transition-all"
+              >
+                Start Quiz
+              </button>
+            </div>
           )}
         </div>
       </div>

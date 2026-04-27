@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 
 export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const { id } = useParams();
   const { user } = useAuth();
 
@@ -61,13 +62,17 @@ export default function PlaylistResult() {
 
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
             {(() => {
-              const name = (user?.name || playlistData?.[0]?.name)?.split(' ')?.[0];
-              return name ? `${name}'s Playlist is ready` : "Your Playlist is ready";
+              const currentPlaylist = playlistData?.[activeIndex] || playlistData?.[0];
+              const name = (user?.name || currentPlaylist?.name || currentPlaylist?.user)?.split(" ")[0];
+              const title = currentPlaylist?.title;
+              if (name && title) return `${name}'s ${title}`;
+              return title || "Your Playlist is ready";
             })()}
           </h1>
 
           <p className="mt-3 text-center text-gray-500 text-sm sm:text-base">
-            {playlistData?.[0]?.description ||
+            {playlistData?.[activeIndex]?.description ||
+              playlistData?.[0]?.description ||
               "A personalised playlist crafted just for your event."}
           </p>
 
@@ -84,7 +89,11 @@ export default function PlaylistResult() {
             </div>
           </div>
 
-          <PlaylistAccordion playlistData={playlistData} />
+          <PlaylistAccordion
+            playlistData={playlistData}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+          />
           <PlaylistVideoCTA />
         </div>
       </div>

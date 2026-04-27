@@ -1,9 +1,11 @@
 import { useState } from "react";
 import PlaylistCard from "./PlaylistCard";
 
-export default function PlaylistAccordion({ playlistData }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
+export default function PlaylistAccordion({
+  playlistData,
+  activeIndex,
+  setActiveIndex,
+}) {
   console.log("all playlist", playlistData);
 
   return (
@@ -15,7 +17,7 @@ export default function PlaylistAccordion({ playlistData }) {
             _id={playlist._id}
             quizId={playlist.quizId}
             title={playlist.title}
-            name={playlist.name}
+            name={playlist.name || playlist.user}
             subtitle={playlist.description}
             tracks={playlist.tracks}
             isOpen={activeIndex === index}
