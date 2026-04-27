@@ -86,7 +86,8 @@ export default function PlaylistResult() {
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
             {(() => {
               const currentPlaylist = filteredPlaylists?.[activeIndex] || filteredPlaylists?.[0];
-              const name = (user?.name || currentPlaylist?.name || currentPlaylist?.user)?.split(" ")[0];
+              const rawName = user?.name || currentPlaylist?.name || currentPlaylist?.guestName || currentPlaylist?.quizId?.name || currentPlaylist?.userId?.name || currentPlaylist?.user_name || currentPlaylist?.user?.name || currentPlaylist?.user;
+              const name = typeof rawName === 'string' ? rawName.split(" ")[0] : null;
               const title = currentPlaylist?.title;
               if (name && title) return `${name}'s ${title}`;
               return title || "Your Playlist is ready";

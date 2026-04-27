@@ -5,6 +5,7 @@ export default function PlaylistAccordion({
   playlistData,
   activeIndex,
   setActiveIndex,
+  urlName,
 }) {
   console.log("all playlist", playlistData);
 
@@ -17,7 +18,7 @@ export default function PlaylistAccordion({
             _id={playlist._id}
             quizId={playlist.quizId}
             title={playlist.title}
-            name={playlist.name || playlist.user}
+            name={urlName || playlist.name || playlist.guestName || playlist.quizId?.name || playlist.userId?.name || playlist.user_name || playlist.user?.name || playlist.user}
             subtitle={playlist.description}
             tracks={playlist.tracks}
             isOpen={activeIndex === index}

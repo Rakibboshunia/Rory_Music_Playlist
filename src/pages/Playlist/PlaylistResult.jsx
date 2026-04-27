@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import { getGuestPlaylistApi } from "../../api/playlistApi";
 import { useAuth } from "../../context/AuthContext";
@@ -17,6 +17,7 @@ export default function PlaylistResult() {
   const [playlistData, setPlaylistData] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -63,7 +64,9 @@ export default function PlaylistResult() {
           <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
             {(() => {
               const currentPlaylist = playlistData?.[activeIndex] || playlistData?.[0];
-              const name = (user?.name || currentPlaylist?.name || currentPlaylist?.user)?.split(" ")[0];
+              const urlName = searchParams.get("name") || searchParams.get("user");
+              const rawName = urlName || user?.name || currentPlaylist?.name || currentPlaylist?.guestName || currentPlaylist?.quizId?.name || currentPlaylist?.userId?.name || currentPlaylist?.user_name || currentPlaylist?.user?.name || currentPlaylist?.user;
+              const name = typeof rawName === 'string' ? rawName.split(" ")[0] : null;
               const title = currentPlaylist?.title;
               if (name && title) return `${name}'s ${title}`;
               return title || "Your Playlist is ready";
@@ -93,6 +96,7 @@ export default function PlaylistResult() {
             playlistData={playlistData}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
+            urlName={searchParams.get("name") || searchParams.get("user")}
           />
           <PlaylistVideoCTA />
         </div>
