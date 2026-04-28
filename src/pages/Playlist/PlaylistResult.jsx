@@ -61,7 +61,7 @@ export default function PlaylistResult() {
             </span>
           </div>
 
-          <h1 className="pb-2 sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
+          <h1 className="pb-2 text-2xl sm:text-4xl lg:text-5xl font-semibold text-center capitalize">
             {(() => {
               const currentPlaylist = playlistData?.[activeIndex] || playlistData?.[0];
               const urlName = searchParams.get("name") || searchParams.get("user");

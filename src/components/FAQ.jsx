@@ -41,7 +41,7 @@ export default function FAQ() {
   return (
     <section
       id="faq-section"
-      className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
+      className="relative py-12 md:py-16 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />

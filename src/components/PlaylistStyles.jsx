@@ -28,7 +28,7 @@ export default function PlaylistStyles() {
   ];
 
   return (
-    <section className="relative py-24 bg-linear-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-12 md:py-16 bg-linear-to-b from-white to-gray-50 overflow-hidden">
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[300px] h-[300px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />

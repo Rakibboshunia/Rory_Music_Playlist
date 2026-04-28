@@ -5,7 +5,7 @@ import wedding25 from "../assets/img/2025.png";
 
 export default function AwardsSection() {
   return (
-    <section className="relative py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
+    <section className="relative py-12 md:py-16 bg-gradient-to-b from-white to-gray-50 overflow-hidden cursor-pointer">
 
       {/* Glow background */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative pt-18 pb-28 bg-linear-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-12 md:py-16 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />

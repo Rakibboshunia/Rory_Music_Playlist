@@ -13,7 +13,7 @@ export default function ImagineDancefloor() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-linear-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-12 md:py-16 px-6 bg-linear-to-b from-white to-gray-50 overflow-hidden">
 
       {/* 🔥 Background Glow */}
       <div className="absolute w-[350px] h-[350px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-120px] left-[-120px]" />

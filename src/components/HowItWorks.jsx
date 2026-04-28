@@ -20,7 +20,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-linear-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
+    <section className="relative py-12 md:py-16 px-6 bg-linear-to-b from-gray-50 to-white overflow-hidden cursor-pointer">
       {/* Background glow */}
       <div className="absolute w-[400px] h-[400px] bg-purple-300 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[400px] h-[400px] bg-pink-300 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />

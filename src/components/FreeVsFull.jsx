@@ -19,13 +19,13 @@ export default function FreeVsFull() {
   ];
 
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-12 md:py-16 px-6 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
 
       {/* Glow */}
       <div className="absolute w-[300px] h-[300px] bg-purple-400 opacity-20 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[300px] h-[300px] bg-pink-400 opacity-20 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
-      <div className="max-w-6xl mx-auto text-center relative z-10">
+      <div className="max-w-6xl mx-auto text-start relative z-10">
 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold mb-16 leading-tight">
@@ -60,7 +60,7 @@ export default function FreeVsFull() {
           {/* FULL (HIGHLIGHTED) */}
           <div className="relative p-10 rounded-3xl 
             bg-gradient-to-br from-purple-500 via-pink-400 to-indigo-500 
-            text-white shadow-2xl scale-105 hover:scale-110 transition duration-300">
+            text-white shadow-2xl scale-100 md:scale-105 hover:scale-105 md:hover:scale-110 transition duration-300">
 
             {/* Badge */}
             <div className="absolute -top-4 right-6 bg-white text-purple-600 px-4 py-1 rounded-full text-xs font-semibold shadow">
@@ -86,11 +86,11 @@ export default function FreeVsFull() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20">
+        <div className="mt-20 flex justify-center">
           <button
             onClick={() => navigate("/quiz")}
             className="
-              group inline-flex items-center gap-3
+              group inline-flex items-center justify-center gap-3
               px-8 py-4 rounded-2xl
               bg-gradient-to-r from-purple-600 to-pink-500
               text-white font-bold

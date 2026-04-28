@@ -100,7 +100,7 @@ export default function Navbar() {
             <img
               src={solidNavbar ? logoWhite : logoHero}
               alt="logo"
-              className="w-14 h-14 scale-[2.7] object-contain"
+              className="w-14 h-14 scale-[2] sm:scale-[2.7] object-contain"
             />
           </div>
 

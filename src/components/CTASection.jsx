@@ -5,7 +5,7 @@ export default function FinalCTA() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-24 px-6 overflow-hidden">
+    <section className="relative py-12 md:py-16 px-6 overflow-hidden">
 
       {/* 🔥 Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-500" />
