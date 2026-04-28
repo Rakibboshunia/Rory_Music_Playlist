@@ -40,9 +40,9 @@ export default function QuizLayout() {
 
   return (
     <div id="quiz-section" className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-4 text-center">
-        <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
-          Your night. Your energy. <br /> Your soundtrack.
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-4 text-center">
+        <h1 className="text-3xl sm:text-3xl lg:text-4xl font-semibold bg-linear-to-r from-[#9810FA] to-[#155DFC] bg-clip-text text-transparent">
+          Your night.Your energy. <br /> Your soundtrack.
         </h1>
 
         <p className="mt-4 text-gray-600">

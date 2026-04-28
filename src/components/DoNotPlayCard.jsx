@@ -33,7 +33,7 @@ export default function DoNotPlayCard({
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-md rounded-3xl p-6 sm:p-10 space-y-8 text-center border border-purple-100 shadow-xl">
+    <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-md rounded-3xl pt-4 pb-6 px-6 sm:p-10 space-y-8 text-center border border-purple-100 shadow-xl">
       {/* Icon & Header */}
       <div className="flex flex-col items-center space-y-4">
         <div className="relative">
