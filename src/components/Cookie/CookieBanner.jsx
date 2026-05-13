@@ -8,21 +8,24 @@ export default function CookieBanner() {
 
   useEffect(() => {
     const consent = Cookies.get("cookie_consent");
-    if (consent !== "accepted") {
+    if (!consent) {
       setShow(true);
     }
   }, []);
 
   const handleAccept = () => {
     Cookies.set("cookie_consent", "accepted", {
-      expires: 10,
+      expires: 30,
       path: "/",
     });
     setShow(false);
   };
 
   const handleReject = () => {
-    Cookies.remove("cookie_consent", { path: "/" });
+    Cookies.set("cookie_consent", "rejected", {
+      expires: 30,
+      path: "/",
+    });
     setShow(false);
   };
 

@@ -29,7 +29,10 @@ export function CookieConsentProvider({ children }) {
   };
 
   const rejectAll = () => {
-    Cookies.remove("cookie_consent", { path: "/" });
+    Cookies.set("cookie_consent", "rejected", {
+      expires: 30,
+      path: "/",
+    });
 
     Cookies.set(
       "cookie_preferences",
