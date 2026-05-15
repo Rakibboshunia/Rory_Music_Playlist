@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
 import cookie from "../../assets/img/cookie.png";
+import { useCookieConsent } from "../../context/CookieConsentContext";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
+  const { acceptAll, rejectAll } = useCookieConsent();
 
   useEffect(() => {
     const consent = Cookies.get("cookie_consent");
@@ -14,18 +16,12 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
-    Cookies.set("cookie_consent", "accepted", {
-      expires: 30,
-      path: "/",
-    });
+    acceptAll();
     setShow(false);
   };
 
   const handleReject = () => {
-    Cookies.set("cookie_consent", "rejected", {
-      expires: 30,
-      path: "/",
-    });
+    rejectAll();
     setShow(false);
   };
 
